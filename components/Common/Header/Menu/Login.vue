@@ -1,0 +1,154 @@
+<template>
+  <div v-click-outside="onClickOutside" class="dropdown droplogin">
+    <button
+      id="droplogin"
+      class="btn dropdown-toggle login-btn"
+      :class="{'show':show}"
+      type="button"
+      @click="show = !show"
+    >
+      {{ $t('login') }}
+    </button>
+    <transition mode="in-out" name="page-fade">
+      <div v-if="show" class="dropdown-menu show">
+        <form @submit.prevent="userLogin">
+          <div class="log-items">
+            <div class="login-form">
+              <input
+                ref="login"
+                v-model="login.phone"
+                v-mask="'+994#########'"
+                class="form-control"
+                :placeholder="$t('username')"
+                type="text"
+              />
+              <input
+                v-model="login.password"
+                class="form-control"
+                :placeholder="$t('password')"
+                type="password"
+              />
+              <a
+                class="log-fpassword"
+                href="#"
+                @click.prevent="forgotPassword"
+              >{{ $t('forget-password') }}</a>
+              <button
+                class="log-btn log_btn"
+                :disabled="loading || !(login.phone && login.password)"
+                type="submit"
+                @click.prevent="userLogin"
+              >
+                <i v-if="loading" class="fa fa-spinner fa-spin"></i> {{ $t('signin') }}
+              </button>
+            </div>
+            <div class="log-social">
+              <n-link class="btn-reg" :to="localePath('registration')">
+                {{ $t('registration') }}
+              </n-link>
+              <ul>
+                <li>
+                  <a href="#" @click.prevent="doSocial('google')">
+                    <i class="fa fa-google"></i>
+                  </a>
+                </li>
+                <li>
+                  <a href="#" @click.prevent="doSocial('facebook')">
+                    <i class="fa fa-facebook"></i>
+                  </a>
+                </li>
+                <li>
+                  <a href="#" @click.prevent="doSocial('linkedin')">
+                    <i class="fa fa-linkedin"></i>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </form>
+      </div>
+    </transition>
+  </div>
+</template>
+<script>
+
+import { useFriendlyError } from '@/utils'
+import { mapActions } from 'vuex'
+export default {
+  name: 'Login',
+  data () {
+    return {
+      show: false,
+      loading: false,
+      login: {
+        phone: '+994',
+        password: ''
+      }
+    }
+  },
+  watch: {
+    show (val) {
+      if (val) {
+        this.$nextTick(() => {
+          this.$refs.login.focus()
+        })
+      }
+    }
+  },
+  methods: {
+    ...mapActions({
+      SIGN_IN: 'User/SIGN_IN',
+      FORGOT_PASSWORD: 'User/FORGOT_PASSWORD'
+    }),
+    onClickOutside () {
+      if (this.show === true) {
+        this.show = false
+      }
+    },
+    async forgotPassword () {
+      if (this.login.phone && this.login.phone.length === 13) {
+        const message = await this.FORGOT_PASSWORD(this.login.phone)
+        this.$swal.fire({
+          position: 'center',
+          toast: false,
+          icon: 'success',
+          timer: 5000,
+          timerProgressBar: true,
+          html: message
+        })
+      } else {
+        this.$swal.fire({
+          position: 'center',
+          toast: false,
+          icon: 'error',
+          timer: 5000,
+          timerProgressBar: true,
+          html: this.$t('forgot_phone')
+        })
+      }
+    },
+    async doSocial (method) {
+      await this.$auth.loginWith(method)
+    },
+    async userLogin () {
+      try {
+        this.loading = true
+        const { data } = await this.SIGN_IN({
+          data: this.login
+        })
+        const group = data?.data?.group?.id
+        if (group !== 1) {
+          return useFriendlyError(null, 'Sistemə alıcı kimi daxil olun!')
+        }
+        if (data?.data?.token) {
+          this.$auth.setUserToken(data?.data?.token)
+        }
+      } catch (error) {
+        useFriendlyError(error)
+      } finally {
+        this.loading = false
+      }
+    }
+  }
+}
+</script>
