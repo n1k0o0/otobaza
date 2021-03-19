@@ -56,6 +56,16 @@ export default {
     ...mapActions({
       GET_CAR_ASSEMBLIES: 'Catalog/GET_CAR_ASSEMBLIES'
     })
+  },
+  head () {
+    return {
+      link: [
+        {
+          rel: 'canonical',
+          href: 'https://www.otobaza.com' + this.$route.path
+        }
+      ]
+    }
   }
 }
 </script>
