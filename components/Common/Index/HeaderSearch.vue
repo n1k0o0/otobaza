@@ -22,7 +22,7 @@
         class="form-control main_search"
         :placeholder="$t('search_placeholder')"
         type="text"
-        :value="searchTerm"
+        v-model="searchTerm"
         @focus="onFocus"
         @input="onSearch"
       />
@@ -82,8 +82,8 @@ export default {
       SHOW_SEARCH: 'UI/SHOW_SEARCH',
       REMOVE_SEARCH_TAB: 'UI/REMOVE_SEARCH_TAB'
     }),
-    onSearch: debounce(async function (e) {
-      this.searchTerm = e.target.value
+    onSearch: debounce(async function () {
+      // this.searchTerm = e.target.value
       if (this.searchTerm) {
         this.searching = true
         await this.SEARCH_ASSEMBLY({
