@@ -62,7 +62,7 @@ export default {
       link: [
         {
           rel: 'canonical',
-          href: 'https://www.otobaza.com' + this.$route.path
+          href: 'https://otobaza.com' + this.$route.path
         }
       ]
     }
