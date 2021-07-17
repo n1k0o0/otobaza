@@ -57,16 +57,6 @@ export default {
       GET_MODEL_CARS: 'Catalog/GET_MODEL_CARS'
     })
   },
-  head () {
-    return {
-      link: [
-        {
-          rel: 'canonical',
-          href: 'https://otobaza.com' + this.$route.path
-        }
-      ]
-    }
-  }
 }
 </script>
 <style lang="scss" scoped>

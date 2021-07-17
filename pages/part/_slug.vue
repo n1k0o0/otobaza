@@ -75,11 +75,6 @@ export default {
       GET_PART: 'Catalog/GET_PART'
     })
   },
-  head () {
-    return {
-      meta: Array.from(this.meta)
-    }
-  }
 }
 </script>
 <style lang="scss" scoped>

@@ -18,6 +18,16 @@ import Header from '@/components/Common/Header/index'
 import HomeSearch from '@/components/Common/Index/HeaderSearch'
 export default {
   name: 'PagesLayout',
+  head () {
+    return {
+      link: [
+        {
+          rel: 'canonical',
+          href: 'https://otobaza.com' + this.$route.path
+        }
+      ]
+    }
+  },
   components: { Footer, Header, HomeSearch }
 }
 </script>

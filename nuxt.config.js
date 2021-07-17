@@ -25,7 +25,6 @@ module.exports = {
     ],
     link: [
       { rel: 'shortcut icon', href: '/favicon.ico' },
-      { rel: 'canonical', href: 'https://otobaza.com' }
     ],
     script: [
       {
