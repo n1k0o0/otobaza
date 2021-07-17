@@ -14,6 +14,20 @@ import Header from '@/components/Common/Header/index'
 import HomeHeader from '@/components/Common/Index/HomeHeader'
 export default {
   name: 'MainLayout',
-  components: { Header, Footer, HomeHeader }
+  head () {
+    return {
+      link: [
+        {
+          rel: 'canonical',
+          href: 'https://otobaza.com' + this.$route.path
+        }
+      ]
+    }
+  },
+  components: {
+    Header,
+    Footer,
+    HomeHeader
+  }
 }
 </script>
