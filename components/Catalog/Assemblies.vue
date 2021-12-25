@@ -26,7 +26,7 @@
             n-link.ccinfoall(:to="localePath('kataloq-mashin-kataloqu')") {{ $t('see_all') }}
       .row.cclass-innertop
         .cclass_inner_cover
-          img(alt='car' src='/img/car.png')
+          //img(alt='car' src='/img/car.png')
           h5.cc_details_top
             span {{ car_assemblies_brand.CarName }}
             p.ccdetails_bottom

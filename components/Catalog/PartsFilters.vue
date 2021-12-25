@@ -18,7 +18,7 @@ export default {
   computed: {
     filter: {
       get () {
-        return this.$route?.query?.filter || 'price'
+        return this.$route?.query?.filter || 'nearest'
       },
       set (val) {
         this.$router.push({ path: this.$route.path, query: { filter: val } })
