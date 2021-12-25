@@ -32,7 +32,7 @@ export default {
         car,
         assembly,
         name,
-        filter: this.$route.query?.filter || 'price',
+        filter: this.$route.query?.filter || 'nearest',
         page
       })
     }
