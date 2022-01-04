@@ -122,7 +122,24 @@ const actions = {
     commit('SET_GEO', geo)
   },
   async GET_BLOG_ITEMS ({ commit }) {
-    return await fetch('https://blog.otobaza.com/wp-json/wp/v2/posts?categories=23&per_page=4&_embed')
+    let category = 23
+    switch (this.$i18n.locale) {
+      case 'az':
+        category = 23
+        break
+      case 'en':
+        category = 28
+        break
+      case 'ru':
+        category = 29
+        break
+      case 'tr':
+        category = 30
+        break
+      default :
+        category = 23
+    }
+    return await fetch(`https://blog.otobaza.com/wp-json/wp/v2/posts?categories=${category}&per_page=4&_embed`)
       .then(response => response.json())
       .then(data => {
         const items = data.map(blog => {
