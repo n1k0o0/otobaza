@@ -7,7 +7,10 @@ module.exports = {
   ...(!isDev && {
     modern: 'client'
   }),
-
+  env: {
+    BASE_API_URL: "https://serv1.otobaza.com",
+    CATALOG_API_URL: "https://kataloq.otobaza.com",
+  },
   head: {
     htmlAttrs: {
       lang: 'az'
@@ -76,8 +79,8 @@ module.exports = {
       'nuxt-env',
       {
         keys: [
-          'BASE_API_URL',
-          'CATALOG_API_URL'
+          /*'BASE_API_URL',
+          'CATALOG_API_URL'*/
         ]
       }
     ],
@@ -134,7 +137,7 @@ module.exports = {
     ]
   ],
   auth: {
-    // localStorage: false, TODO: productionda bagla
+    localStorage: false, /*TODO: "productionda bagla"*/
     cookie: {
       prefix: 'auth.',
       options: {

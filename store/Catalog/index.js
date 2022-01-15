@@ -1,4 +1,5 @@
 import { serialize } from '@/utils'
+import Vue from 'vue'
 
 const strict = false
 
@@ -342,8 +343,45 @@ const actions = {
     })
     return data
   },
-  async SEARCH_ASSEMBLY ({ commit }, { term }) {
+  async SEARCH_ASSEMBLY ({ commit, rootGetters }, { term }) {
     this.$axios.defaults.baseURL = this.$env.CATALOG_API_URL
+    if (term.length === 17) {
+      if (rootGetters.isAuthenticated) {
+        Vue.$swal.fire({
+          position: 'bottom-end',
+          icon: 'warning',
+          title: this.$i18n.t('vin.auth'),
+          showConfirmButton: false,
+          timer: 5000
+        })
+      } else {
+        let carByVin=[]
+        const lang=this.$i18n.locales.find(el=>el.code===this.$i18n.locale).iso.replace('-','_')
+        const { data } = await this.$axios.post(`/api/laximo/vin`,{"vin": term, "language" : lang})
+        // await this.$router.push('/car/21643-4-5-avtomobil-hisseleri');
+        carByVin['carByVin'] = {
+          name:data['@attributes'].name,
+          ssd:data['@attributes'].ssd,
+          vehicleId:data['@attributes'].vehicleid,
+          catalog:data['@attributes'].catalog,
+          brand:data['@attributes'].brand,
+        }
+        let brand=({
+          CarName:"1600-2",
+          ManuId:data['@attributes'].catalog,
+          ManuName:data['@attributes'].brand??'nese',
+          ModelId:data['@attributes'].catalog,
+          ModelName:data['@attributes'].name,
+          url:'',
+        })
+        console.log(brand,66)
+        commit('SET_CAR_ASSEMBLIES_BRAND',brand || null)
+        commit('SET_SEARCH_RESULTS', carByVin)
+        return
+      }
+
+    }
+
     const { data } = await this.$axios.get(`/api/search/${term}`)
     commit('SET_SEARCH_RESULTS', data)
   },

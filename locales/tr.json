@@ -305,5 +305,8 @@
   "system_error": "Sistem hatası oluştu Lütfen tekrar deneyin!",
   "system_error_info": "Girdiğiniz bağlantıda teknik bir hata var. Teknik yardım için \"İrtibat\" bölümünü kullanabilirsiniz.",
   "terms": "Qaydalar",
-  "privacy": "Gizlilik siyasəti"
+  "privacy": "Gizlilik siyasəti",
+  "vin": {
+    "auth": "VIN kodu ile arama yapmak için lütfen hesabınıza giriş yapın"
+  }
 }

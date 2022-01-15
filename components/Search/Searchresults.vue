@@ -9,12 +9,16 @@
           li(v-for="(product,i) in products" :key="i"  @click.prevent="goToPart(product)")
             span {{product.articleNumber}}
             em {{product.mfrName ? product.mfrName+' - ' : ''}}{{product.assemblyGroupName}}
-        template(v-if="!cars.length && !products.length")
+        template(v-if="carByVin")
+          li(@click.prevent="goToCarByVin()")
+            //nuxt-link( :to="localePath('vin-catalog')")
+            span {{carByVin.name}}
+        template(v-if="!cars.length && !products.length && !carByVin")
           span.NotFound {{ $t('no_results_found') }}
 </template>
 <script>
 import { Slugify } from '@/filters'
-import { mapGetters } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 export default {
   name: 'Searchresults',
   computed: {
@@ -26,9 +30,15 @@ export default {
     },
     products () {
       return this.search_results?.product || []
+    },
+    carByVin () {
+      return this.search_results?.carByVin || []
     }
   },
   methods: {
+    ...mapMutations({
+      ADD_SEARCH_TAB: 'UI/ADD_SEARCH_TAB'
+    }),
     goToCar (car) {
       window.location.href = this.localePath({
         name: 'model-slug',
@@ -43,6 +53,13 @@ export default {
         params: {
           slug: `p-1-${product.legacyarticleId}-${product.mfrid}-${product.assemblyGroupNodeid}`
         }
+      })
+    },
+    goToCarByVin(){
+      this.ADD_SEARCH_TAB({
+        type: 'car',
+        name: this.carByVin.name,
+        slug: `vin-${this.carByVin.catalog}`
       })
     }
   }

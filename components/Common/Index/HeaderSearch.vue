@@ -86,6 +86,7 @@ export default {
       // this.searchTerm = e.target.value
       if (this.searchTerm) {
         this.searching = true
+        console.log(this.searchTerm)
         await this.SEARCH_ASSEMBLY({
           term: this.searchTerm
         }).finally(() => {

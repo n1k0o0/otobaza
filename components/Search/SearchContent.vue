@@ -1,5 +1,6 @@
 <template>
   <div class="ms-content">
+    {{lastTab}}
     <PageCatalogLogo
       v-if="search_tabs.length === 0"
       is-search

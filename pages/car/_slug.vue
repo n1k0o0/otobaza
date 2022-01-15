@@ -39,6 +39,7 @@ export default {
     } else {
       slug = getUrlSlug(this.$route.params.slug, 'car')
     }
+    console.log(slug,555,this.slug)
     if (!slug.car) this.$nuxt.error({ statusCode: 500, message: 'ID NOT PROVIDED' })
     await this.GET_CAR_ASSEMBLIES({
       car: slug.car

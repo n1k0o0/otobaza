@@ -305,5 +305,8 @@
   "system_error": "System error occurred Please try again!",
   "system_error_info": "There is a technical error in the link you entered. You can use the \"Contact\" section for technical assistance.",
   "terms": "Terms",
-  "privacy": "Privacy"
+  "privacy": "Privacy",
+  "vin": {
+    "auth": "To search by VIN code, please log in to your account"
+  }
 }

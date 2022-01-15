@@ -305,5 +305,8 @@
   "system_error": "Sistem xətası baş verdi yenidən cəhd edin!",
   "system_error_info": "Daxil olduğunuz linkdə texniki xəta baş verib.Texniki kömək üçün \"Əlaqə\" bölməsindən istifadə edə bilərsiniz.",
   "terms": "Qaydalar",
-  "privacy": "Gizlilik siyasəti"
+  "privacy": "Gizlilik siyasəti",
+  "vin": {
+    "auth": "VIN kodla axtariş üçün, zəhət olmasa hesaba daxil olun"
+  }
 }
