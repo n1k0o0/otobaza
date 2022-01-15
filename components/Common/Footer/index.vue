@@ -20,13 +20,14 @@
     .footer-bottom
       .container
         .flex
-          p.cright {{ $t('footer-copy') }}
+          p.cright {{ $t('footer-copy',{ year:new Date().getFullYear() } ) }}
           FooterSocials
 </template>
 <script>
 import FooterMenu from '@/components/Common/FooterMenu'
 import FooterSocials from '@/components/Common/FooterSocials'
 import NewsLetter from '@/components/Common/NewsLetter'
+
 export default {
   name: 'Footer',
   components: { FooterSocials, FooterMenu, NewsLetter },
