@@ -22,7 +22,7 @@
   "username": "Kullanıcı adı",
   "password": "Parola",
   "forget-password": "Şifremi Unuttum",
-  "footer-copy": "(c) 2020 OTOBAZA MMC. Tüm hakları Saklıdır.",
+  "footer-copy": "(c) {year} OTOBAZA MMC. Tüm hakları Saklıdır.",
   "subscribe": "Abone ol",
   "subscription": "Haberlere abone olun!",
   "subscription_desc": "Sitemizdeki en son haberlerden haberdar olmak için abone olabilirsiniz.",
