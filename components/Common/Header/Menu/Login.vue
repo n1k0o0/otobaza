@@ -42,27 +42,41 @@
                 <i v-if="loading" class="fa fa-spinner fa-spin"></i> {{ $t('signin') }}
               </button>
             </div>
+            <div
+              class="divider-hr">
+              <span
+              >
+                {{ $t('registration') }} <!--Padding is optional-->
+              </span>
+            </div>
             <div class="log-social">
+
               <n-link class="btn-reg" :to="localePath('registration')">
-                {{ $t('registration') }}
+                {{ $t('driver') }}
               </n-link>
-              <ul>
-                <li>
-                  <a href="#" @click.prevent="doSocial('google')">
-                    <i class="fa fa-google"></i>
-                  </a>
-                </li>
-                <li>
-                  <a href="#" @click.prevent="doSocial('facebook')">
-                    <i class="fa fa-facebook"></i>
-                  </a>
-                </li>
-                <li>
-                  <a href="#" @click.prevent="doSocial('linkedin')">
-                    <i class="fa fa-linkedin"></i>
-                  </a>
-                </li>
-              </ul>
+
+              <a class="btn-reg" target="_blank" href="https://seller.otobaza.com/#/register">
+                {{ $t('store') }}
+              </a>
+              <!--              <a href="https://seller.otobaza.com/#/register" target="_blank">{{ $t('create_store') }}</a>-->
+
+              <!--              <ul>
+                              <li>
+                                <a href="#" @click.prevent="doSocial('google')">
+                                  <i class="fa fa-google"></i>
+                                </a>
+                              </li>
+                              <li>
+                                <a href="#" @click.prevent="doSocial('facebook')">
+                                  <i class="fa fa-facebook"></i>
+                                </a>
+                              </li>
+                              <li>
+                                <a href="#" @click.prevent="doSocial('linkedin')">
+                                  <i class="fa fa-linkedin"></i>
+                                </a>
+                              </li>
+                            </ul>-->
             </div>
           </div>
         </form>
@@ -74,6 +88,7 @@
 
 import { useFriendlyError } from '@/utils'
 import { mapActions } from 'vuex'
+
 export default {
   name: 'Login',
   data () {
