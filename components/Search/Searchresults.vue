@@ -19,6 +19,7 @@
 <script>
 import { Slugify } from '@/filters'
 import { mapGetters, mapMutations } from 'vuex'
+
 export default {
   name: 'Searchresults',
   computed: {
@@ -32,12 +33,12 @@ export default {
       return this.search_results?.product || []
     },
     carByVin () {
-      return this.search_results?.carByVin || []
+      return this.search_results?.carByVin || false
     }
   },
   methods: {
     ...mapMutations({
-      ADD_SEARCH_TAB: 'UI/ADD_SEARCH_TAB'
+      ADD_SEARCH_TAB: 'UI/ADD_SEARCH_TAB',
     }),
     goToCar (car) {
       window.location.href = this.localePath({
@@ -55,58 +56,67 @@ export default {
         }
       })
     },
-    goToCarByVin(){
+    async goToCarByVin () {
       this.ADD_SEARCH_TAB({
-        type: 'car',
+        type: 'vin',
         name: this.carByVin.name,
-        slug: `vin-${this.carByVin.catalog}`
+        slug: this.carByVin.catalog + '--__' + this.carByVin.vehicleId + '--__' + this.carByVin.ssd
       })
+      this.$emit('selectVin')
     }
   }
 }
 </script>
 <style lang="scss" scoped>
-  .ms-content {
-    padding:0;
-    background: none !important;
-    z-index: 1000;
+.ms-content {
+  padding: 0;
+  background: none !important;
+  z-index: 1000;
+}
+
+.Searchresults {
+  background: #fff;
+  border-radius: 2px;
+
+  .NotFound {
+    display: block;
+    padding: 20px 10px;
+    text-align: center;
+    color: #7f7f7f;
   }
-  .Searchresults {
-    background: #fff;
-    border-radius: 2px;
-    .NotFound {
-      display: block;
-      padding:20px 10px;
-      text-align: center;
-      color:#7f7f7f;
-    }
-    ul {
-      list-style: none;
-      padding:0;
-      margin:0;
-      li {
-        padding:10px 10px;
-        display: flex;
-        flex-direction: column;
-        border-bottom:1px solid #e7e7e7;
-        cursor: pointer;
-        &:last-child {
-          border: 0;
-        }
-        &:hover, &.selected {
-          background: #f7f7f7;
-        }
-        span {
-          font-size: 14px;
-          color:#000;
-          font-weight: bold;
-        }
-        em {
-          font-size: 14px;
-          color:#000;
-          font-style: normal;
-        }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    li {
+      padding: 10px 10px;
+      display: flex;
+      flex-direction: column;
+      border-bottom: 1px solid #e7e7e7;
+      cursor: pointer;
+
+      &:last-child {
+        border: 0;
+      }
+
+      &:hover, &.selected {
+        background: #f7f7f7;
+      }
+
+      span {
+        font-size: 14px;
+        color: #000;
+        font-weight: bold;
+      }
+
+      em {
+        font-size: 14px;
+        color: #000;
+        font-style: normal;
       }
     }
   }
+}
 </style>

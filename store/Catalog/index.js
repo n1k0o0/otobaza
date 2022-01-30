@@ -20,6 +20,27 @@ function toTree (data, pid = 0) {
   }, [])
 }
 
+function vinToTree (data) {
+  return data.reduce((r, e) => {
+    const temp = {
+      link: e['@attributes'].link,
+      name: e['@attributes'].name,
+      quickgroupid: e['@attributes'].quickgroupid,
+      children: []
+    }
+    if (e['row']) {
+      if (Array.isArray(e['row'])) {
+        temp.children = vinToTree(e['row'])
+      } else {
+        temp.children = vinToTree([e['row']])
+      }
+
+    }
+    r.push(temp)
+    return r
+  }, [])
+}
+
 const state = () => ({
   manufacturersByAlphabet: null,
   manufacturersByLogo: null,
@@ -28,6 +49,7 @@ const state = () => ({
   car_assemblies: null,
   car_assemblies_brand: null,
   car_assemblies_tree: [],
+  vin_assemblies_tree: [],
   car_assemblies_list: [],
   parts: null,
   cart: [],
@@ -48,6 +70,7 @@ const getters = {
   car_assemblies (state) { return state.car_assemblies },
   car_assemblies_brand (state) { return state.car_assemblies_brand },
   car_assemblies_tree (state) { return state.car_assemblies_tree },
+  vin_assemblies_tree (state) { return state.vin_assemblies_tree },
   car_assemblies_list (state) { return state.car_assemblies_list },
   parts (state) { return state.parts },
   cart (state) { return state.cart },
@@ -78,6 +101,9 @@ const mutations = {
   },
   SET_CAR_ASSEMBLIES_TREE (state, payload) {
     state.car_assemblies_tree = payload
+  },
+  SET_VIN_ASSEMBLIES_TREE (state, payload) {
+    state.vin_assemblies_tree = payload
   },
   SET_CAR_ASSEMBLIES_LIST (state, payload) {
     state.car_assemblies_list = payload
@@ -193,6 +219,28 @@ const actions = {
     commit('SET_CAR_ASSEMBLIES_BRAND', data?.brand?.[0] || null)
     commit('SET_CAR_ASSEMBLIES_TREE', tree)
   },
+  async GET_VIN_ASSEMBLIES ({ commit, state }, { catalog, vehicleId, ssd }) {
+    this.$axios.defaults.baseURL = this.$env.CATALOG_API_URL
+    const lang = this.$i18n.locales.find(el => el.code === this.$i18n.locale).iso.replace('-', '_')
+
+    const { data } = await this.$axios.post(`/api/laximo/catalog`, {
+      'catalog': catalog,
+      'vehicleid': vehicleId,
+      'ssd': ssd,
+      'language': lang
+    })
+    const tree = vinToTree(data['row'])
+    let brand = ({
+      CarName: data['GetVehicleInfo']['row']['@attributes'].name,
+      ManuName: data['GetVehicleInfo']['row']['@attributes'].brand,
+      catalog: data['GetVehicleInfo']['row']['@attributes'].catalog,
+      vehicleid: data['GetVehicleInfo']['row']['@attributes'].vehicleid,
+      ssd: data['GetVehicleInfo']['row']['@attributes'].ssd,
+      lang: lang,
+    })
+    commit('SET_CAR_ASSEMBLIES_BRAND', brand || null)
+    commit('SET_VIN_ASSEMBLIES_TREE', tree)
+  },
   async GET_CAR_ASSEMBLIES_LIST ({ commit }) {
     this.$axios.defaults.baseURL = this.$env.CATALOG_API_URL
     const { data } = await this.$axios.get('/api/detail_to')
@@ -232,6 +280,15 @@ const actions = {
     })
     commit('SET_PARTS', {
       parts,
+      products
+    })
+  },
+  async GET_OEM ({ commit, rootState }, data) {
+    this.$axios.defaults.baseURL = this.$env.CATALOG_API_URL
+
+    const { data: products } = await this.$axios.post(`api/laximo/oem`, data)
+    console.log(products)
+    commit('SET_PARTS', {
       products
     })
   },
@@ -355,27 +412,23 @@ const actions = {
           timer: 5000
         })
       } else {
-        let carByVin=[]
-        const lang=this.$i18n.locales.find(el=>el.code===this.$i18n.locale).iso.replace('-','_')
-        const { data } = await this.$axios.post(`/api/laximo/vin`,{"vin": term, "language" : lang})
-        // await this.$router.push('/car/21643-4-5-avtomobil-hisseleri');
-        carByVin['carByVin'] = {
-          name:data['@attributes'].name,
-          ssd:data['@attributes'].ssd,
-          vehicleId:data['@attributes'].vehicleid,
-          catalog:data['@attributes'].catalog,
-          brand:data['@attributes'].brand,
+        let carByVin = []
+        const lang = this.$i18n.locales.find(el => el.code === this.$i18n.locale).iso.replace('-', '_')
+        const { data } = await this.$axios.post(`/api/laximo/vin`, { 'vin': term, 'language': lang })
+        carByVin['cars'] = []
+        carByVin['product'] = []
+        carByVin['carByVin'] = false
+        if (data['@attributes']) {
+          carByVin['carByVin'] = {
+            name: data['@attributes'].name,
+            ssd: data['@attributes'].ssd,
+            vehicleId: data['@attributes'].vehicleid,
+            catalog: data['@attributes'].catalog,
+            brand: data['@attributes'].brand,
+            lang: lang
+          }
         }
-        let brand=({
-          CarName:"1600-2",
-          ManuId:data['@attributes'].catalog,
-          ManuName:data['@attributes'].brand??'nese',
-          ModelId:data['@attributes'].catalog,
-          ModelName:data['@attributes'].name,
-          url:'',
-        })
-        console.log(brand,66)
-        commit('SET_CAR_ASSEMBLIES_BRAND',brand || null)
+
         commit('SET_SEARCH_RESULTS', carByVin)
         return
       }

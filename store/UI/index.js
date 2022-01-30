@@ -75,8 +75,11 @@ const mutations = {
     state.search_tabs = payload
   },
   ADD_SEARCH_TAB (state, tab) {
+    if (tab.type === 'vin' && state.search_tabs.length) {
+      state.search_tabs = []
+    }
     state.search_tabs.push(tab)
-    console.log('010101',state.search_tabs)
+    console.log('010101', state.search_tabs)
     this.$auth.$storage.setUniversal('search_tabs', state.search_tabs)
   },
   REMOVE_SEARCH_TAB (state, index) {

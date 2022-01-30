@@ -1,6 +1,5 @@
 <template>
   <div class="ms-content">
-    {{lastTab}}
     <PageCatalogLogo
       v-if="search_tabs.length === 0"
       is-search
@@ -22,6 +21,11 @@
         is-search
         :slug="lastTab.slug"
       />
+      <Vin
+        v-if="lastTab.type === 'vin'"
+        is-search
+        :slug="lastTab.slug"
+      />
     </template>
   </div>
 </template>
@@ -30,11 +34,13 @@ import { Slugify } from '@/filters'
 import Manufacturer from '@/pages/brand/_slug'
 import Model from '@/pages/model/_slug'
 import Car from '@/pages/car/_slug'
+import Vin from '@/pages/vin/catalog'
 import PageCatalogLogo from '@/pages/kataloq/mashin-kataloqu-brend'
 import { mapMutations, mapGetters } from 'vuex'
+
 export default {
   name: 'SearchContent',
-  components: { Manufacturer, Model, Car, PageCatalogLogo },
+  components: { Manufacturer, Model, Car, PageCatalogLogo, Vin },
   computed: {
     ...mapGetters({
       search_tabs: 'UI/search_tabs'
@@ -58,22 +64,26 @@ export default {
 }
 </script>
 <style lang="scss">
-  .ms-content {
-    overflow: auto;
-    padding:30px 0;
-    .catalog-logo {
-      margin-top: -44px;
-    }
-    .mcontainer {
-      margin: 0;
-      padding: 0;
-      .cclass-back {
-        visibility: hidden;
-        pointer-events: none;
-      }
-    }
-    .innertop-back {
-      display: none;
+.ms-content {
+  overflow: auto;
+  padding: 30px 0;
+
+  .catalog-logo {
+    margin-top: -44px;
+  }
+
+  .mcontainer {
+    margin: 0;
+    padding: 0;
+
+    .cclass-back {
+      visibility: hidden;
+      pointer-events: none;
     }
   }
+
+  .innertop-back {
+    display: none;
+  }
+}
 </style>
