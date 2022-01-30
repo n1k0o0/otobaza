@@ -3,7 +3,6 @@
     <div class="container">
       <div class="htflex">
         <div class="htitems">
-          <a href="https://seller.otobaza.com/#/register" target="_blank">{{ $t('create_store') }}</a>
           <n-link to="/faq">
             {{ $t('faq') }}
           </n-link>
