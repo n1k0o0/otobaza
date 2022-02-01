@@ -508,6 +508,7 @@ body {
   font: 10px "Roboto-Bold";
   height: 30px;
   line-height: 27px;
+  text-align: center;
 }
 
 .log-btn:hover {
@@ -553,6 +554,7 @@ body {
   -webkit-align-items: center;
   -ms-flex-align: center;
   align-items: center;
+  gap: 10px;
 }
 
 .btn-reg {

@@ -51,11 +51,11 @@
             </div>
             <div class="log-social">
 
-              <n-link class="btn-reg" :to="localePath('registration')">
+              <n-link class="log-btn log_btn" :to="localePath('registration')">
                 {{ $t('driver') }}
               </n-link>
 
-              <a class="btn-reg" target="_blank" href="https://seller.otobaza.com/#/register">
+              <a class="log-btn log_btn" target="_blank" href="https://seller.otobaza.com/#/register">
                 {{ $t('store') }}
               </a>
               <!--              <a href="https://seller.otobaza.com/#/register" target="_blank">{{ $t('create_store') }}</a>-->
