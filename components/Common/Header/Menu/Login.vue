@@ -153,7 +153,8 @@ export default {
         })
         const group = data?.data?.group?.id
         if (group !== 1) {
-          return useFriendlyError(null, 'Sistemə alıcı kimi daxil olun!')
+          window.location.href = `https://staging-seller.otobaza.com/#/login?token=${data?.data?.token}`
+          return
         }
         if (data?.data?.token) {
           this.$auth.setUserToken(data?.data?.token)
