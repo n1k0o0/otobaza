@@ -153,7 +153,7 @@ export default {
         })
         const group = data?.data?.group?.id
         if (group !== 1) {
-          window.location.href = `https://staging-seller.otobaza.com/#/login?token=${data?.data?.token}`
+          window.location.href = `https://seller.otobaza.com/#/login?token=${data?.data?.token}`
           return
         }
         if (data?.data?.token) {
