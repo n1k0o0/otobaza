@@ -5811,3 +5811,9 @@ body::-webkit-scrollbar-thumb {
   justify-content: space-between;
   align-items: baseline;
 }
+
+.password-eye span.fa {
+  float: right;
+  margin-top: -25px;
+  margin-right: 10px;
+}

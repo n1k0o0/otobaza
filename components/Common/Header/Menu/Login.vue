@@ -22,12 +22,16 @@
                 :placeholder="$t('username')"
                 type="text"
               />
-              <input
-                v-model="login.password"
-                class="form-control"
-                :placeholder="$t('password')"
-                type="password"
-              />
+              <fieldset class="password-eye">
+                <input
+                  v-model="login.password"
+                  class="form-control"
+                  :placeholder="$t('password')"
+                  :type="passwordType"
+                />
+                <span @click="showPassword" class="fa " :class="eyeClass"></span>
+              </fieldset>
+
               <a
                 class="log-fpassword"
                 href="#"
@@ -98,7 +102,9 @@ export default {
       login: {
         phone: '+994',
         password: ''
-      }
+      },
+      passwordType: 'password',
+      eyeClass: 'fa-eye-slash'
     }
   },
   watch: {
@@ -164,6 +170,10 @@ export default {
       } finally {
         this.loading = false
       }
+    },
+    showPassword () {
+      this.passwordType = this.passwordType === 'password' ? 'text' : 'password'
+      this.eyeClass = this.passwordType === 'password' ? 'fa-eye-slash' : 'fa-eye'
     }
   }
 }
