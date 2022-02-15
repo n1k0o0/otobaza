@@ -128,14 +128,14 @@ export default {
     },
     async forgotPassword () {
       if (this.login.phone && this.login.phone.length === 13) {
-        const message = await this.FORGOT_PASSWORD(this.login.phone)
+        const data = await this.FORGOT_PASSWORD(this.login.phone)
         this.$swal.fire({
           position: 'center',
           toast: false,
-          icon: 'success',
+          icon: data.success ? 'success' : 'error',
           timer: 5000,
           timerProgressBar: true,
-          html: message
+          html: data.message
         })
       } else {
         this.$swal.fire({
