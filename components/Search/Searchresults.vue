@@ -60,7 +60,7 @@ export default {
       this.ADD_SEARCH_TAB({
         type: 'vin',
         name: this.carByVin.name,
-        slug: this.carByVin.catalog + '--__' + this.carByVin.vehicleId + '--__' + this.carByVin.ssd
+        slug: this.carByVin.catalog + '____' + this.carByVin.vehicleId + '____' + this.carByVin.ssd
       })
       this.$emit('selectVin')
     }

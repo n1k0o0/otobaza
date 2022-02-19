@@ -87,7 +87,6 @@ export default {
       // this.searchTerm = e.target.value
       if (this.searchTerm) {
         this.searching = true
-        console.log(this.searchTerm)
         await this.SEARCH_ASSEMBLY({
           term: this.searchTerm
         }).finally(() => {
@@ -111,7 +110,6 @@ export default {
     selectVin () {
       this.searchTerm = ''
       this.TOGGLE_SEARCH(true)
-      console.log(this.isSearchVisible, !this.searchTerm, 8888)
     }
   }
 }

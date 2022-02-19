@@ -14,8 +14,23 @@
     template(v-else)
       div
         .container
-          .mcontainer.mh60vh
-            h1 Azərbaycan
+          .mcontainer.mh40vh
+            .row
+              .col-12.col-md-6.justify-content-center.flex-column.text-center
+                img(:src="parts['@attributes']['imageurl'].replace('%size%','250')" style="width:300px;border: 1px solid gray;")
+                p(@click="goToImageVin(parts['@attributes'])" class="link") {{parts['@attributes']['name']}}
+
+
+              .col-12.col-md-6.d-flex.justify-content-center
+                table.table-striped.table.w-auto.table-hover.table-bordered
+                  thead
+                    tr.table-row
+                      th OEM
+                      th Name
+                  tbody
+                    tr.table-row(v-for="part in parts['Detail']")
+                      td {{part['@attributes']['oem']}}
+                      td {{part['@attributes']['name']}}
 </template>
 <script>
 import Parts from '@/components/Catalog/Parts'
@@ -35,13 +50,13 @@ export default {
       'catalog': param[1],
       'vehicleid': param[2],
       'ssd': param[3],
-      'language': param[4],
     }
     await this.GET_OEM(data)
   },
   computed: {
     ...mapGetters({
       geo: 'UI/geo',
+      parts: 'Catalog/vin_parts',
       car_assemblies_brand: 'Catalog/car_assemblies_brand'
     }),
     meta () {
@@ -81,7 +96,21 @@ export default {
   methods: {
     ...mapActions({
       GET_OEM: 'Catalog/GET_OEM'
-    })
+    }),
+    goToImageVin (attributes) {
+      let data = []
+      data['unitid'] = attributes['unitid']
+      data['ssd'] = attributes['ssd']
+      data['catalog'] = this.car_assemblies_brand['catalog']
+      console.log(22, data, `${this.car_assemblies_brand['catalog']}____${attributes['unitid']}____${attributes['ssd']}`)
+
+      window.location.href = this.localePath({
+        name: 'vin-image-slug',
+        params: {
+          slug: `${this.car_assemblies_brand['catalog']}____${attributes['unitid']}____${attributes['ssd']}`
+        }
+      })
+    }
   },
 }
 </script>

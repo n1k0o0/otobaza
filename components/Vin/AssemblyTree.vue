@@ -52,7 +52,7 @@ export default {
         window.location.href = this.localePath({
           name: 'vin-oem',
           params: {
-            oem: `${node.id}____${this.car_assemblies_brand.catalog}____${this.car_assemblies_brand.vehicleid}____${this.car_assemblies_brand.ssd}____${this.car_assemblies_brand.lang}`
+            oem: `${node.id}____${this.car_assemblies_brand.catalog}____${this.car_assemblies_brand.vehicleid}____${this.car_assemblies_brand.ssd}`
           }
         })
       }

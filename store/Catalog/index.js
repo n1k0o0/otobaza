@@ -52,6 +52,7 @@ const state = () => ({
   vin_assemblies_tree: [],
   car_assemblies_list: [],
   parts: null,
+  vin_parts: null,
   cart: [],
   motor_types: [],
   product: null,
@@ -73,6 +74,7 @@ const getters = {
   vin_assemblies_tree (state) { return state.vin_assemblies_tree },
   car_assemblies_list (state) { return state.car_assemblies_list },
   parts (state) { return state.parts },
+  vin_parts (state) { return state.vin_parts },
   cart (state) { return state.cart },
   motor_types (state) { return state.motor_types },
   product (state) { return state.product },
@@ -118,6 +120,9 @@ const mutations = {
   },
   SET_CART (state, payload) {
     state.cart = payload
+  },
+  SET_VIN_PARTS (state, payload) {
+    state.vin_parts = payload
   },
   CLEAR_CART (state) {
     state.cart = []
@@ -285,12 +290,23 @@ const actions = {
   },
   async GET_OEM ({ commit, rootState }, data) {
     this.$axios.defaults.baseURL = this.$env.CATALOG_API_URL
-
+    data['language'] = this.$i18n.locales.find(el => el.code === this.$i18n.locale).iso.replace('-', '_')
     const { data: products } = await this.$axios.post(`api/laximo/oem`, data)
+    const parts = products['Category']['Unit']
     console.log(products)
-    commit('SET_PARTS', {
-      products
-    })
+    commit('SET_VIN_PARTS', { ...parts })
+    commit('SET_CAR_ASSEMBLIES_BRAND', products['GetVehicleInfo']['row']['@attributes'])
+  },
+  async GET_OEM_BY_IMAGE ({ commit, rootState }, data) {
+    this.$axios.defaults.baseURL = this.$env.CATALOG_API_URL
+    data['language'] = this.$i18n.locales.find(el => el.code === this.$i18n.locale).iso.replace('-', '_')
+    const { data: products } = await this.$axios.post(`api/laximo/oem/image`, data)
+    const parts = []
+    parts['image'] = products['GetUnitInfo']['row']['@attributes']
+    parts['oem'] = products['ListDetailsByUnit']['row']
+    parts['codes'] = products['ListImageMapByUnit']['row']
+
+    commit('SET_VIN_PARTS', { ...parts })
   },
 
   async GET_PART ({ commit, rootState }, { article, page, manufacturer, assembly, filter }) {

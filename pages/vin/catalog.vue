@@ -83,7 +83,7 @@ export default {
   },
   async fetch () {
     let slug = this.slug
-    const data = slug.split('--__')
+    const data = slug.split('____')
     const catalog = data[0]
     const vehicleId = data[1]
     const ssd = data[2]

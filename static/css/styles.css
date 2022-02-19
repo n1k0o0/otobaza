@@ -800,6 +800,10 @@ input::-ms-input-placeholder {
   min-height: 60vh;
 }
 
+.mh40vh {
+  min-height: 40vh;
+}
+
 .about-logo {
   background-color: #4DA6FF;
   height: 211px;
@@ -5808,4 +5812,42 @@ body::-webkit-scrollbar-thumb {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
+}
+
+.link {
+  color: #4DA6FF;
+  cursor: pointer;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+.oem_table tr:hover {
+  background-color: rgb(77 165 254);
+  color: white;
+}
+
+.oem_code_image {
+  position: relative;
+  overflow-x: auto;
+  max-height: 600px;
+  cursor: grab;
+}
+
+img {
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  user-drag: none;
+}
+
+.active_oem {
+  background-color: rgb(77 165 254);
+  color: white;
+}
+
+.active_code {
+  border: 1px solid #000;
 }
