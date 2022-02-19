@@ -15,21 +15,21 @@
       div
         .container
           .mcontainer.mh40vh
-            .row
+            .row(v-for="unit in parts")
               .col-12.col-md-6.justify-content-center.flex-column.text-center
-                img(:src="parts['@attributes']['imageurl'].replace('%size%','250')" style="width:300px;border: 1px solid gray;")
-                p(@click="goToImageVin(parts['@attributes'])" class="link") {{parts['@attributes']['name']}}
+                img(:src="unit['@attributes']['imageurl'].replace('%size%','250')" style="width:300px;border: 1px solid gray;")
+                p(@click="goToImageVin(unit['@attributes'])" class="link") {{unit['@attributes']['name']}}
 
 
               .col-12.col-md-6.d-flex.justify-content-center
-                table.table-striped.table.w-auto.table-hover.table-bordered
+                table.table-striped.table.w-auto.table-hover.table-bordered.oem_table
                   thead
                     tr.table-row
                       th OEM
                       th Name
                   tbody
-                    tr.table-row(v-for="part in parts['Detail']")
-                      td {{part['@attributes']['oem']}}
+                    tr.table-row(v-for="part in unit['Detail']")
+                      td(@click="goToParts(part['@attributes']['oem'])" class="link") {{part['@attributes']['oem']}}
                       td {{part['@attributes']['name']}}
 </template>
 <script>
@@ -75,16 +75,14 @@ export default {
       ]
     }
   },
-  // async validate ({ params, error, app }) {
-  //   console.log('validate111', params)
-  //   const regex = /^([0-9]+)/
-  //   if (!(regex.test(params.oem))) {
-  //     console.log('xeta')
-  //     return error({ statusCode: 500, message: app.i18n.t('not_found') })
-  //   } else {
-  //     return true
-  //   }
-  // },
+  async validate ({ params, error, app }) {
+    const param = params.oem.split('____')
+    if (param.length !== 4) {
+      return error({ statusCode: 500, message: app.i18n.t('not_found') })
+    } else {
+      return true
+    }
+  },
   watch: {
     geo: {
       deep: true,
@@ -108,6 +106,14 @@ export default {
         name: 'vin-image-slug',
         params: {
           slug: `${this.car_assemblies_brand['catalog']}____${attributes['unitid']}____${attributes['ssd']}`
+        }
+      })
+    },
+    goToParts (oem) {
+      window.location.href = this.localePath({
+        name: 'vin-part-slug',
+        params: {
+          slug: `${oem}-1`
         }
       })
     }

@@ -1,5 +1,6 @@
 import { serialize } from '@/utils'
 import Vue from 'vue'
+import parts from '~/components/Catalog/Parts'
 
 const strict = false
 
@@ -292,8 +293,17 @@ const actions = {
     this.$axios.defaults.baseURL = this.$env.CATALOG_API_URL
     data['language'] = this.$i18n.locales.find(el => el.code === this.$i18n.locale).iso.replace('-', '_')
     const { data: products } = await this.$axios.post(`api/laximo/oem`, data)
+
+    if (!Array.isArray(products['Category']['Unit'])) {
+      products['Category']['Unit'] = [products['Category']['Unit']]
+    }
+    products['Category']['Unit'].forEach(unit => {
+      if (!Array.isArray(unit['Detail'])) {
+        unit['Detail'] = [unit['Detail']]
+      }
+    })
     const parts = products['Category']['Unit']
-    console.log(products)
+
     commit('SET_VIN_PARTS', { ...parts })
     commit('SET_CAR_ASSEMBLIES_BRAND', products['GetVehicleInfo']['row']['@attributes'])
   },
@@ -318,6 +328,37 @@ const actions = {
     const productsData = {
       oem: parts.oem,
       cross: parts.cross,
+      currency: geo.currency_name,
+      country: geo.country,
+      latitude: geo.lat,
+      longitude: geo.lng
+    }
+    if (filter === 'nearest') {
+      productsData.nearby = 1
+    }
+    if (filter === 'price') {
+      productsData.nearby = 0
+    }
+    if (filter === 'brand') {
+      productsData.orderByBrand = true
+    }
+
+    const { data: products } = await this.$axios.post(`api/products?page=${page}`, {
+      ...productsData
+    })
+    commit('SET_PARTS', {
+      parts,
+      products
+    })
+  },
+  async GET_PARTS_BY_VIN ({ commit, rootState }, { oem, page, filter }) {
+
+    this.$axios.defaults.baseURL = this.$env.BASE_API_URL
+    const parts = []
+    parts['brands'] = ''
+    const geo = rootState.UI.geo
+    const productsData = {
+      oem: [oem],
       currency: geo.currency_name,
       country: geo.country,
       latitude: geo.lat,

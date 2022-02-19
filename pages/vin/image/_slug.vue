@@ -17,7 +17,7 @@
           .mcontainer.mh40vh
             .oem_image
               .oem_code_image#codeImage
-                img(:src="parts['image']['largeimageurl'].replace('%size%','source')" style="width:500;height:500")
+                img(:src="parts['image']['largeimageurl'].replace('%size%','source')" style="cursor:move")
                 //p {{parts['image']['name']}}
 
               .oem_image_name
@@ -31,7 +31,7 @@
                       @click="selectOem(part['@attributes']['codeonimage'])"
                       @mouseover="mouseoverOem(part['@attributes']['codeonimage'])"
                       @mouseout="mouseoutOem(part['@attributes']['codeonimage'])")
-                      td {{part['@attributes']['oem']}}
+                      td(@click="goToParts(part['@attributes']['oem'])" class="link") {{part['@attributes']['oem']}}
                       td {{part['@attributes']['name']}}
 </template>
 <script>
@@ -77,16 +77,14 @@ export default {
       ]
     }
   },
-  // async validate ({ params, error, app }) {
-  //   console.log('validate111', params)
-  //   const regex = /^([0-9]+)/
-  //   if (!(regex.test(params.oem))) {
-  //     console.log('xeta')
-  //     return error({ statusCode: 500, message: app.i18n.t('not_found') })
-  //   } else {
-  //     return true
-  //   }
-  // },
+  async validate ({ params, error, app }) {
+    const param = params.slug.split('____')
+    if (param.length !== 3) {
+      return error({ statusCode: 500, message: app.i18n.t('not_found') })
+    } else {
+      return true
+    }
+  },
   watch: {
     geo: {
       deep: true,
@@ -99,14 +97,6 @@ export default {
     ...mapActions({
       GET_OEM_BY_IMAGE: 'Catalog/GET_OEM_BY_IMAGE'
     }),
-    goToOem (attributes) {
-      // window.location.href = this.localePath({
-      //   name: 'vin-image',
-      //   params: {
-      //     slug: `${car.modelId}-${Slugify(car.modelName)}`
-      //   }
-      // })
-    },
     selectOem (code) {
       this.$refs[code][0]?.classList?.toggle('active_oem')
       if (this.$refs[code][0]?.classList?.contains('active_oem')) {
@@ -122,6 +112,14 @@ export default {
       if (!this.$refs[code][0]?.classList?.contains('active_oem')) {
         document.getElementById(`${code}_code`)?.classList?.remove('active_code')
       }
+    },
+    goToParts (oem) {
+      window.location.href = this.localePath({
+        name: 'vin-part-slug',
+        params: {
+          slug: `${oem}-1`
+        }
+      })
     }
   },
   mounted () {
@@ -174,9 +172,9 @@ export default {
         slider.scrollLeft = scrollLeft - walk
         slider.scrollTop = scrollTop - walkY
       })
-    }, 1000)
+    }, 2000)
 
-  }
+  },
 }
 </script>
 <style lang="scss" scoped>
@@ -200,6 +198,10 @@ export default {
 @media screen and (max-width: 992px) {
   .oem_image {
     grid-template-columns: 1fr;
+
+    .oem_code_image {
+      justify-self: center;
+    }
   }
 }
 

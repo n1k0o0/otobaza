@@ -84,7 +84,10 @@ module.exports = {
         ]
       }
     ],
-    '@nuxtjs/axios',
+    ['@nuxtjs/axios', {
+      credentials: false,
+      proxyHeaders: false,
+    }],
     '@nuxtjs/auth',
     'nuxt-trailingslash-module',
     // '@nuxtjs/svg',

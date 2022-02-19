@@ -12,7 +12,7 @@
           .row.cclass-top
             .col-12.col-sm-12.col-md-4
               .cclass-name.cclass-flex
-                img(:alt="car_assemblies_brand && car_assemblies_brand.ManuName" :src="car_assemblies_brand && car_assemblies_brand.url")
+                //img(:alt="car_assemblies_brand && car_assemblies_brand.ManuName" :src="car_assemblies_brand && car_assemblies_brand.url")
                 h4.cclass-tt {{ car_assemblies_brand && car_assemblies_brand.ManuName }}
             .col-12.col-sm-12.col-md-8
               .cclass-right

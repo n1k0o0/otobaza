@@ -5817,13 +5817,14 @@ body::-webkit-scrollbar-thumb {
 .link {
   color: #4DA6FF;
   cursor: pointer;
-}
-
-.link:hover {
   text-decoration: underline;
 }
 
-.oem_table tr:hover {
+.oem_table {
+  height: min-content;
+}
+
+.oem_table tr:hover td {
   background-color: rgb(77 165 254);
   color: white;
 }
@@ -5831,8 +5832,9 @@ body::-webkit-scrollbar-thumb {
 .oem_code_image {
   position: relative;
   overflow-x: auto;
-  max-height: 600px;
-  cursor: grab;
+  /*max-height: 600px;*/
+  height: max-content;
+  cursor: pointer;
 }
 
 img {
@@ -5843,7 +5845,7 @@ img {
   user-drag: none;
 }
 
-.active_oem {
+.active_oem td {
   background-color: rgb(77 165 254);
   color: white;
 }
