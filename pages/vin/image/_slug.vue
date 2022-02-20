@@ -43,6 +43,7 @@ export default {
   name: 'VinOem',
   watchQuery: true,
   components: { PartsPlaceholder, Parts },
+  middleware: 'authorized',
   layout: 'pages',
   scrollToTop: true,
   async fetch () {

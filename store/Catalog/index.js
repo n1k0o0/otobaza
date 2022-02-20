@@ -460,7 +460,7 @@ const actions = {
   async SEARCH_ASSEMBLY ({ commit, rootGetters }, { term }) {
     this.$axios.defaults.baseURL = this.$env.CATALOG_API_URL
     if (term.length === 17) {
-      if (rootGetters.isAuthenticated) {
+      if (!rootGetters.isAuthenticated) {
         Vue.$swal.fire({
           position: 'bottom-end',
           icon: 'warning',
