@@ -120,10 +120,24 @@ const actions = {
   },
   async FORGOT_PASSWORD (state, phone) {
     this.$axios.defaults.baseURL = this.$env.BASE_API_URL
-    const { data } = await this.$axios.post('/api/user/forgot', {
+    let message = ''
+    let success = false
+    await this.$axios.post('/api/user/forgot', {
       phone
     })
-    return data?.message
+      .then(res => {
+        message = res.data?.message
+        success = true
+      })
+      .catch(err => {
+        console.log(err.response.status)
+        if (err.response.status === 422) {
+          message = err.response?.data?.errors?.phone[0]
+        } else {
+          message = err.response?.data?.message
+        }
+      })
+    return { message, success }
   },
   async DO_SOCIAL_LOGIN (state, { hash, type, code }) {
     this.$axios.defaults.baseURL = this.$env.BASE_API_URL

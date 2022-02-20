@@ -22,12 +22,16 @@
                 :placeholder="$t('username')"
                 type="text"
               />
-              <input
-                v-model="login.password"
-                class="form-control"
-                :placeholder="$t('password')"
-                type="password"
-              />
+              <fieldset class="password-eye">
+                <input
+                  v-model="login.password"
+                  class="form-control"
+                  :placeholder="$t('password')"
+                  :type="passwordType"
+                />
+                <span @click="showPassword" class="fa " :class="eyeClass"></span>
+              </fieldset>
+
               <a
                 class="log-fpassword"
                 href="#"
@@ -51,11 +55,11 @@
             </div>
             <div class="log-social">
 
-              <n-link class="btn-reg" :to="localePath('registration')">
+              <n-link class="log-btn log_btn" :to="localePath('registration')">
                 {{ $t('driver') }}
               </n-link>
 
-              <a class="btn-reg" target="_blank" href="https://seller.otobaza.com/#/register">
+              <a class="log-btn log_btn" target="_blank" href="https://seller.otobaza.com/#/register">
                 {{ $t('store') }}
               </a>
               <!--              <a href="https://seller.otobaza.com/#/register" target="_blank">{{ $t('create_store') }}</a>-->
@@ -98,7 +102,9 @@ export default {
       login: {
         phone: '+994',
         password: ''
-      }
+      },
+      passwordType: 'password',
+      eyeClass: 'fa-eye-slash'
     }
   },
   watch: {
@@ -122,14 +128,14 @@ export default {
     },
     async forgotPassword () {
       if (this.login.phone && this.login.phone.length === 13) {
-        const message = await this.FORGOT_PASSWORD(this.login.phone)
+        const data = await this.FORGOT_PASSWORD(this.login.phone)
         this.$swal.fire({
           position: 'center',
           toast: false,
-          icon: 'success',
+          icon: data.success ? 'success' : 'error',
           timer: 5000,
           timerProgressBar: true,
-          html: message
+          html: data.message
         })
       } else {
         this.$swal.fire({
@@ -153,7 +159,8 @@ export default {
         })
         const group = data?.data?.group?.id
         if (group !== 1) {
-          return useFriendlyError(null, 'Sistemə alıcı kimi daxil olun!')
+          window.location.href = `https://seller.otobaza.com/#/login?token=${data?.data?.token}`
+          return
         }
         if (data?.data?.token) {
           this.$auth.setUserToken(data?.data?.token)
@@ -163,6 +170,10 @@ export default {
       } finally {
         this.loading = false
       }
+    },
+    showPassword () {
+      this.passwordType = this.passwordType === 'password' ? 'text' : 'password'
+      this.eyeClass = this.passwordType === 'password' ? 'fa-eye-slash' : 'fa-eye'
     }
   }
 }

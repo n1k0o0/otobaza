@@ -508,6 +508,7 @@ body {
   font: 10px "Roboto-Bold";
   height: 30px;
   line-height: 27px;
+  text-align: center;
 }
 
 .log-btn:hover {
@@ -553,6 +554,7 @@ body {
   -webkit-align-items: center;
   -ms-flex-align: center;
   align-items: center;
+  gap: 10px;
 }
 
 .btn-reg {
@@ -5812,6 +5814,12 @@ body::-webkit-scrollbar-thumb {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
+}
+
+.password-eye span.fa {
+  float: right;
+  margin-top: -25px;
+  margin-right: 10px;
 }
 
 .link {
