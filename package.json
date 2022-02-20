@@ -7,7 +7,7 @@
     "analyze": "nuxt build --analyze",
     "build": "nuxt build",
     "buildandstart": "nuxt build && nuxt start",
-    "dev": "call mac.sh && nuxt -o",
+    "dev": "source mac.sh && nuxt -o",
     "dew": "mac.bat && nuxt -o",
     "pm2": "pm2 start ecosystem.config.js"
   },
