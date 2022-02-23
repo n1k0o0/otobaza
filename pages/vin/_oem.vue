@@ -22,7 +22,6 @@
                   img(@click="goToImageVin(unit['@attributes'])" :src="unit['@attributes']['imageurl'].replace('%size%','250')" style="width:300px;border: 1px solid gray;" class="pointer")
                   p(@click="goToImageVin(unit['@attributes'])" class="link") {{unit['@attributes']['name']}}
 
-
                 .col-12.col-md-6.d-flex.justify-content-center
                   table.table-striped.table.w-auto.table-hover.table-bordered.oem_table
                     thead
@@ -30,7 +29,7 @@
                         th OEM
                         th Name
                     tbody
-                      tr.table-row(v-for="part in unit['Detail']" @click="goToParts(part['@attributes']['oem'])" class="pointer")
+                      tr.table-row(v-for="part in unit['Detail'].filter(el => el['@attributes'].oem)" @click="goToParts(part['@attributes']['oem'])" class="pointer")
                         td(class="link") {{part['@attributes']['oem']}}
                         td {{part['@attributes']['name']}}
 </template>
@@ -48,11 +47,11 @@ export default {
   scrollToTop: true,
   async fetch () {
     const param = this.$route.params.oem.split('____')
-    let data = {
-      'QuickGroupId': param[0],
-      'catalog': param[1],
-      'vehicleid': param[2],
-      'ssd': param[3],
+    const data = {
+      QuickGroupId: param[0],
+      catalog: param[1],
+      vehicleid: param[2],
+      ssd: param[3]
     }
     await this.GET_OEM(data)
   },
@@ -99,16 +98,15 @@ export default {
       GET_OEM: 'Catalog/GET_OEM'
     }),
     goToImageVin (attributes) {
-      let data = []
-      data['unitid'] = attributes['unitid']
-      data['ssd'] = attributes['ssd']
-      data['catalog'] = this.car_assemblies_brand['catalog']
-      console.log(22, data, `${this.car_assemblies_brand['catalog']}____${attributes['unitid']}____${attributes['ssd']}`)
+      const data = []
+      data.unitid = attributes.unitid
+      data.ssd = attributes.ssd
+      data.catalog = this.car_assemblies_brand.catalog
 
       window.location.href = this.localePath({
         name: 'vin-image-slug',
         params: {
-          slug: `${this.car_assemblies_brand['catalog']}____${attributes['unitid']}____${attributes['ssd']}`
+          slug: `${this.car_assemblies_brand.catalog}____${attributes.unitid}____${attributes.ssd}`
         }
       })
     },
@@ -120,7 +118,7 @@ export default {
         }
       })
     }
-  },
+  }
 }
 </script>
 <style lang="scss" scoped>
@@ -133,5 +131,6 @@ export default {
 
 .category {
   display: grid;
+  max-width: 100%;
 }
 </style>

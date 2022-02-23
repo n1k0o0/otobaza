@@ -15,9 +15,10 @@
       div
         .container
           .mcontainer.mh40vh
-            .oem_image
+            .oem_image#oem_image
               .oem_code_image#codeImage
-                img(:src="parts['image']['largeimageurl'].replace('%size%','source')" id='imagePart' style="cursor:move;width:100%")
+                img(:src="parts['image']['largeimageurl'].replace('%size%','source')" id='imagePart' style="cursor:default;width:100%")
+                span.zoom_btn(@click="openImage")
                 //p {{parts['image']['name']}}
 
               .oem_image_name
@@ -27,7 +28,7 @@
                       th OEM
                       th Name
                   tbody
-                    tr.table-row(v-for="part in parts['oem']" :ref="part['@attributes']['codeonimage']"
+                    tr.table-row(v-for="part in parts['oem'].filter(el=>el['@attributes'].codeonimage)" :ref="part['@attributes']['codeonimage']"
                       @click="selectOem(part['@attributes']['codeonimage'])"
                       @mouseover="mouseoverOem(part['@attributes']['codeonimage'])"
                       @mouseout="mouseoutOem(part['@attributes']['codeonimage'])")
@@ -35,6 +36,7 @@
                       td {{part['@attributes']['name']}}
 </template>
 <script>
+/* eslint-disable security/detect-object-injection */
 import Parts from '~/components/Catalog/Parts'
 import PartsPlaceholder from '~/components/Placeholders/PartsPlaceholder'
 import { mapActions, mapGetters } from 'vuex'
@@ -42,17 +44,20 @@ import { mapActions, mapGetters } from 'vuex'
 export default {
   name: 'VinOem',
   watchQuery: true,
-  components: { PartsPlaceholder, Parts },
+  components: {
+    PartsPlaceholder,
+    Parts
+  },
   middleware: 'authorized',
   layout: 'pages',
   scrollToTop: true,
   async fetch () {
     const param = this.$route.params.slug.split('____')
-    let data = {
-      'catalog': param[0],
-      'UnitId': param[1],
-      'ssd': param[2],
-      'language': this.$i18n.locales.find(el => el.code === this.$i18n.locale).iso.replace('-', '_'),
+    const data = {
+      catalog: param[0],
+      UnitId: param[1],
+      ssd: param[2],
+      language: this.$i18n.locales.find(el => el.code === this.$i18n.locale).iso.replace('-', '_')
     }
     await this.GET_OEM_BY_IMAGE(data)
   },
@@ -74,14 +79,25 @@ export default {
           name: 'description',
           content: this.$store.getters['Catalog/parts']?.brand?.meta_desc || ''
         },
-        { hid: 'og:title', name: 'og:title', content: this.$store.getters['Catalog/parts']?.brand?.meta_title || '' }
+        {
+          hid: 'og:title',
+          name: 'og:title',
+          content: this.$store.getters['Catalog/parts']?.brand?.meta_title || ''
+        }
       ]
     }
   },
-  async validate ({ params, error, app }) {
+  async validate ({
+    params,
+    error,
+    app
+  }) {
     const param = params.slug.split('____')
     if (param.length !== 3) {
-      return error({ statusCode: 500, message: app.i18n.t('not_found') })
+      return error({
+        statusCode: 500,
+        message: app.i18n.t('not_found')
+      })
     } else {
       return true
     }
@@ -94,12 +110,39 @@ export default {
       }
     }
   },
+  mounted () {
+    const _this = this
+    const imgWidth = document.getElementById('imagePart').naturalWidth
+    const imgHeight = document.getElementById('imagePart').naturalHeight
+    setTimeout(() => {
+      this.parts.codes.forEach(e => {
+        const code = e['@attributes']
+        const left = (100 * code.x1) / imgWidth
+        const top = (100 * code.y1) / imgHeight
+        const width = (100 * (code.x2 - code.x1)) / imgWidth
+        const height = (100 * (code.y2 - code.y1)) / imgHeight
+        const elem = document.createElement('div')
+        elem.setAttribute('id', `${code.code}_code`)
+        elem.style.cssText = `position:absolute;left:${left}%;top:${top}%;width:${width}%;height:${height}%;z-index:100;background:transparent`
+        elem.onclick = function (e) {
+          _this.$refs[code.code].forEach(el => {
+            el.classList.toggle('active_oem')
+          })
+          e.target.classList.toggle('active_code')
+        }
+
+        document.getElementById('codeImage').appendChild(elem)
+      })
+    }, 2000)
+  },
   methods: {
     ...mapActions({
       GET_OEM_BY_IMAGE: 'Catalog/GET_OEM_BY_IMAGE'
     }),
     selectOem (code) {
-      this.$refs[code][0]?.classList?.toggle('active_oem')
+      this.$refs[code].forEach(el => {
+        el.classList.toggle('active_oem')
+      })
       if (this.$refs[code][0]?.classList?.contains('active_oem')) {
         document.getElementById(`${code}_code`)?.classList.add('active_code')
       } else {
@@ -121,65 +164,11 @@ export default {
           slug: `${oem}-1`
         }
       })
+    },
+    openImage () {
+      document.getElementById('oem_image').classList.toggle('fullscreen')
     }
-  },
-  mounted () {
-    const _this = this
-    const imgWidth = document.getElementById('imagePart').naturalWidth
-    const imgHeight = document.getElementById('imagePart').naturalHeight
-    setTimeout(() => {
-      this.parts['codes'].forEach(e => {
-        let code = e['@attributes']
-        let left = (100 * code['x1']) / imgWidth
-        let top = (100 * code['y1']) / imgHeight
-        let width = code['x2'] - code['x1']
-        let height = code['y2'] - code['y1']
-        let elem = document.createElement('div')
-        elem.setAttribute('id', `${code['code']}_code`)
-        elem.style.cssText = `position:absolute;left:${left}%;top:${top}%;width:${width}px;height:${height}px;z-index:100;background:transparent`
-        elem.onclick = function (e) {
-          _this.$refs[code['code']][0].classList.toggle('active_oem')
-          e.target.classList.toggle('active_code')
-        }
-
-        document.getElementById('codeImage').appendChild(elem)
-      })
-      const slider = document.getElementById('codeImage')
-      let isDown = false
-      let startX
-      let startY
-      let scrollLeft
-      let scrollTop
-
-      slider.addEventListener('mousedown', e => {
-        isDown = true
-        slider.classList.add('active')
-        startX = e.pageX - slider.offsetLeft
-        startY = e.pageY - slider.offsetTop
-        scrollLeft = slider.scrollLeft
-        scrollTop = slider.scrollTop
-      })
-      slider.addEventListener('mouseleave', () => {
-        isDown = false
-        slider.classList.remove('active')
-      })
-      slider.addEventListener('mouseup', () => {
-        isDown = false
-        slider.classList.remove('active')
-      })
-      slider.addEventListener('mousemove', e => {
-        if (!isDown) return
-        e.preventDefault()
-        const x = e.pageX - slider.offsetLeft
-        const y = e.pageY - slider.offsetTop
-        const walk = x - startX
-        const walkY = y - startY
-        slider.scrollLeft = scrollLeft - walk
-        slider.scrollTop = scrollTop - walkY
-      })
-    }, 2000)
-
-  },
+  }
 }
 </script>
 <style lang="scss" scoped>
@@ -194,10 +183,33 @@ export default {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 10px;
+  &.fullscreen{
+    grid-template-columns: 1fr;
+    position: absolute;
+    top: 0;
+    z-index: 99;
+    left: 0;
+    right: 0;
+    .oem_image_name{
+      display: none;
+    }
+  }
 
   &_name {
     justify-self: center;
   }
+}
+
+.zoom_btn {
+  display: block;
+  border: none;
+  background: url("data:image/svg+xml;charset=UTF-8,%3csvg width='20' height='20' fill='none' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M14.417 4.417l-2.409 2.391 1.184 1.184 2.391-2.409L17.5 7.5v-5h-5l1.917 1.917zM7.5 2.5h-5v5l1.917-1.917 2.391 2.409 1.184-1.184-2.409-2.391L7.5 2.5zm-.692 9.508l-2.391 2.409L2.5 12.5v5h5l-1.917-1.917 2.409-2.391-1.184-1.184zm6.384 0l-1.184 1.184 2.409 2.391L12.5 17.5h5v-5l-1.917 1.917-2.391-2.409z' fill='%23F2A354'/%3e%3c/svg%3e") no-repeat;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  z-index: 3;
+  right: 15px;
+  top: 15px;
 }
 
 @media screen and (max-width: 992px) {
