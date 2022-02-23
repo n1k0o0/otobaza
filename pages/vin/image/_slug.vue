@@ -185,7 +185,7 @@ export default {
   grid-gap: 10px;
   &.fullscreen{
     grid-template-columns: 1fr;
-    position: absolute;
+    //position: absolute;
     top: 0;
     z-index: 99;
     left: 0;
