@@ -190,9 +190,6 @@ export default {
     z-index: 99;
     left: 0;
     right: 0;
-    .oem_image_name{
-      display: none;
-    }
   }
 
   &_name {
