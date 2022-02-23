@@ -25,11 +25,11 @@
                 .col-12.col-md-6.d-flex.justify-content-center
                   table.table-striped.table.w-auto.table-hover.table-bordered.oem_table
                     thead
-                      tr.table-row
+                      tr
                         th OEM
                         th Name
                     tbody
-                      tr.table-row(v-for="part in unit['Detail'].filter(el => el['@attributes'].oem)" @click="goToParts(part['@attributes']['oem'])" class="pointer")
+                      tr(v-for="part in unit['Detail'].filter(el => el['@attributes'].oem)" @click="goToParts(part['@attributes']['oem'])" class="pointer")
                         td(class="link") {{part['@attributes']['oem']}}
                         td {{part['@attributes']['name']}}
 </template>

@@ -24,11 +24,11 @@
               .oem_image_name
                 table.table.w-auto.table-bordered.oem_table
                   thead
-                    tr.table-row
+                    tr
                       th OEM
                       th Name
                   tbody
-                    tr.table-row(v-for="part in parts['oem'].filter(el=>el['@attributes'].codeonimage)" :ref="part['@attributes']['codeonimage']"
+                    tr(v-for="part in parts['oem'].filter(el=>el['@attributes'].codeonimage)" :ref="part['@attributes']['codeonimage']"
                       @click="selectOem(part['@attributes']['codeonimage'])"
                       @mouseover="mouseoverOem(part['@attributes']['codeonimage'])"
                       @mouseout="mouseoutOem(part['@attributes']['codeonimage'])")
