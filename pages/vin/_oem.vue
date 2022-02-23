@@ -15,22 +15,24 @@
       div
         .container
           .mcontainer.mh40vh
-            .row(v-for="unit in parts")
-              .col-12.col-md-6.justify-content-center.flex-column.text-center
-                img(:src="unit['@attributes']['imageurl'].replace('%size%','250')" style="width:300px;border: 1px solid gray;")
-                p(@click="goToImageVin(unit['@attributes'])" class="link") {{unit['@attributes']['name']}}
+            .row(v-for="category in parts" class="category mb-4")
+              h4(class="text-center mb-4") {{category['@attributes']['name']}}
+              .row(v-for="unit in category['Unit']")
+                .col-12.col-md-6.justify-content-center.flex-column.text-center
+                  img(@click="goToImageVin(unit['@attributes'])" :src="unit['@attributes']['imageurl'].replace('%size%','250')" style="width:300px;border: 1px solid gray;" class="pointer")
+                  p(@click="goToImageVin(unit['@attributes'])" class="link") {{unit['@attributes']['name']}}
 
 
-              .col-12.col-md-6.d-flex.justify-content-center
-                table.table-striped.table.w-auto.table-hover.table-bordered.oem_table
-                  thead
-                    tr.table-row
-                      th OEM
-                      th Name
-                  tbody
-                    tr.table-row(v-for="part in unit['Detail']")
-                      td(@click="goToParts(part['@attributes']['oem'])" class="link") {{part['@attributes']['oem']}}
-                      td {{part['@attributes']['name']}}
+                .col-12.col-md-6.d-flex.justify-content-center
+                  table.table-striped.table.w-auto.table-hover.table-bordered.oem_table
+                    thead
+                      tr.table-row
+                        th OEM
+                        th Name
+                    tbody
+                      tr.table-row(v-for="part in unit['Detail']" @click="goToParts(part['@attributes']['oem'])" class="pointer")
+                        td(class="link") {{part['@attributes']['oem']}}
+                        td {{part['@attributes']['name']}}
 </template>
 <script>
 import Parts from '@/components/Catalog/Parts'
@@ -127,5 +129,9 @@ export default {
   margin-bottom: 60px;
   border-radius: 3px;
   background-color: #fff;
+}
+
+.category {
+  display: grid;
 }
 </style>

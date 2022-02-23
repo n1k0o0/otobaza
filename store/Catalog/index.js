@@ -294,15 +294,22 @@ const actions = {
     data['language'] = this.$i18n.locales.find(el => el.code === this.$i18n.locale).iso.replace('-', '_')
     const { data: products } = await this.$axios.post(`api/laximo/oem`, data)
 
-    if (!Array.isArray(products['Category']['Unit'])) {
-      products['Category']['Unit'] = [products['Category']['Unit']]
+    if (!Array.isArray(products['Category'])) {
+      products['Category'] = [products['Category']]
     }
-    products['Category']['Unit'].forEach(unit => {
-      if (!Array.isArray(unit['Detail'])) {
-        unit['Detail'] = [unit['Detail']]
+
+    products['Category'].forEach(category => {
+      if (!Array.isArray(category['Unit'])) {
+        category['Unit'] = [category['Unit']]
       }
+      category['Unit'].forEach(unit => {
+        if (!Array.isArray(unit['Detail'])) {
+          unit['Detail'] = [unit['Detail']]
+        }
+      })
     })
-    const parts = products['Category']['Unit']
+
+    const parts = products['Category']
 
     commit('SET_VIN_PARTS', { ...parts })
     commit('SET_CAR_ASSEMBLIES_BRAND', products['GetVehicleInfo']['row']['@attributes'])

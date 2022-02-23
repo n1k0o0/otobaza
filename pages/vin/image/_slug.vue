@@ -17,7 +17,7 @@
           .mcontainer.mh40vh
             .oem_image
               .oem_code_image#codeImage
-                img(:src="parts['image']['largeimageurl'].replace('%size%','source')" style="cursor:move")
+                img(:src="parts['image']['largeimageurl'].replace('%size%','source')" id='imagePart' style="cursor:move;width:100%")
                 //p {{parts['image']['name']}}
 
               .oem_image_name
@@ -125,14 +125,18 @@ export default {
   },
   mounted () {
     const _this = this
+    const imgWidth = document.getElementById('imagePart').naturalWidth
+    const imgHeight = document.getElementById('imagePart').naturalHeight
     setTimeout(() => {
       this.parts['codes'].forEach(e => {
         let code = e['@attributes']
+        let left = (100 * code['x1']) / imgWidth
+        let top = (100 * code['y1']) / imgHeight
         let width = code['x2'] - code['x1']
         let height = code['y2'] - code['y1']
         let elem = document.createElement('div')
         elem.setAttribute('id', `${code['code']}_code`)
-        elem.style.cssText = `position:absolute;left:${+code['x1']}px;top:${code['y1']}px;width:${width}px;height:${height}px;z-index:100;background:transparent`
+        elem.style.cssText = `position:absolute;left:${left}%;top:${top}%;width:${width}px;height:${height}px;z-index:100;background:transparent`
         elem.onclick = function (e) {
           _this.$refs[code['code']][0].classList.toggle('active_oem')
           e.target.classList.toggle('active_code')

@@ -5861,3 +5861,7 @@ img {
 .active_code {
   border: 1px solid #000;
 }
+
+.pointer {
+  cursor: pointer;
+}
