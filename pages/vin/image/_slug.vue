@@ -112,9 +112,9 @@ export default {
   },
   mounted () {
     const _this = this
-    const imgWidth = document.getElementById('imagePart').naturalWidth
-    const imgHeight = document.getElementById('imagePart').naturalHeight
     setTimeout(() => {
+      const imgWidth = document.getElementById('imagePart').naturalWidth
+      const imgHeight = document.getElementById('imagePart').naturalHeight
       this.parts.codes.forEach(e => {
         const code = e['@attributes']
         const left = (100 * code.x1) / imgWidth
