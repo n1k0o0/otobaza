@@ -462,8 +462,9 @@ const actions = {
     return data
   },
   async SEARCH_ASSEMBLY ({ commit, rootGetters }, { term }) {
-    this.$axios.defaults.baseURL = this.$env.BASE_API_URL
+    this.$axios.defaults.baseURL = this.$env.CATALOG_API_URL
     if (term.length === 17) {
+      this.$axios.defaults.baseURL = this.$env.BASE_API_URL
       if (!rootGetters.isAuthenticated) {
         Vue.$swal.fire({
           position: 'bottom-end',

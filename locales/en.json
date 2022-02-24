@@ -4,7 +4,7 @@
   "blog": "Blog",
   "header_top_info": "All the necessary spare parts for your car are in one address",
   "create_store": "Create a store",
-  "search_placeholder": "Car brand, model, product code",
+  "search_placeholder": "Car brand, model, product code, VIN code",
   "no_results_found": "No search results matching your query",
   "verify_otp": "Approve",
   "registration": "Registration",
