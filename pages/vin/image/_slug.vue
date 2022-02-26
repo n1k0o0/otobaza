@@ -123,7 +123,7 @@ export default {
         const height = (100 * (code.y2 - code.y1)) / imgHeight
         const elem = document.createElement('div')
         elem.setAttribute('id', `${code.code}_code`)
-        elem.style.cssText = `position:absolute;left:${left}%;top:${top}%;width:${width}%;height:${height}%;z-index:100;background:transparent`
+        elem.style.cssText = `position:absolute;left:${left}%;top:${top}%;width:${width}%;height:${height}%;z-index:100;background:transparent;border: 1px solid #ff0000;`
         elem.onclick = function (e) {
           _this.$refs[code.code].forEach(el => {
             el.classList.toggle('active_oem')

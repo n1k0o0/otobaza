@@ -467,33 +467,47 @@ const actions = {
       this.$axios.defaults.baseURL = this.$env.BASE_API_URL
       if (!rootGetters.isAuthenticated) {
         Vue.$swal.fire({
-          position: 'bottom-end',
           icon: 'warning',
+          width: 300,
           title: this.$i18n.t('vin.auth'),
           showConfirmButton: false,
-          timer: 5000
+          timer: 5000,
+          customClass: 'custom_sweetalert'
         })
       } else {
         const carByVin = []
         const lang = this.$i18n.locales.find(el => el.code === this.$i18n.locale).iso.replace('-', '_')
-        const { data } = await this.$axios.post('/api/auto/vin', { vin: term, language: lang })
-        carByVin.cars = []
-        carByVin.product = []
-        carByVin.carByVin = false
-        if (data['@attributes']) {
-          carByVin.carByVin = {
-            name: data['@attributes'].name,
-            ssd: data['@attributes'].ssd,
-            vehicleId: data['@attributes'].vehicleid,
-            catalog: data['@attributes'].catalog,
-            brand: data['@attributes'].brand,
-            lang: lang
-          }
-        }
+        await this.$axios.post('/api/auto/vin', { vin: term, language: lang })
+          .then(res => {
+            const data = res.data
+            carByVin.cars = []
+            carByVin.product = []
+            carByVin.carByVin = false
+            if (data['@attributes']) {
+              carByVin.carByVin = {
+                name: data['@attributes'].name,
+                ssd: data['@attributes'].ssd,
+                vehicleId: data['@attributes'].vehicleid,
+                catalog: data['@attributes'].catalog,
+                brand: data['@attributes'].brand,
+                lang: lang
+              }
+            }
 
-        commit('SET_SEARCH_RESULTS', carByVin)
-        return
+            commit('SET_SEARCH_RESULTS', carByVin)
+          })
+          .catch(err => {
+            Vue.$swal.fire({
+              icon: 'warning',
+              width: 300,
+              title: err?.response?.data?.error ?? this.$i18n.t('system_error'),
+              showConfirmButton: false,
+              timer: 5000,
+              customClass: 'custom_sweetalert'
+            })
+          })
       }
+      return
     }
 
     const { data } = await this.$axios.get(`/api/search/${term}`)

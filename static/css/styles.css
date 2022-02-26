@@ -5857,9 +5857,17 @@ img {
 }
 
 .active_code {
-  border: 1px solid #000;
+  background-color: rgb(76 165 252 / 30%) !important;
 }
 
 .pointer {
   cursor: pointer;
+}
+
+.custom_sweetalert .swal2-header .swal2-title {
+  font-size: 1rem;
+}
+
+.custom_sweetalert .swal2-header .swal2-icon {
+  font-size: 0.6rem;
 }
