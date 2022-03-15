@@ -72,7 +72,7 @@ export default {
       await this.USER_PHONE_EDIT({
         new_phone: this.user.phone
       }).then(response => {
-        this.registrationResponse = this.$auth.getToken('local').replace('bearer ', '')
+        this.registrationResponse = this.$auth.getToken('local').replace('Bearer ', '')
         this.$swal.fire({
           position: 'center',
           icon: 'success',

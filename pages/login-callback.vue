@@ -33,7 +33,7 @@ export default {
         })
       }
 
-      this.$auth.setToken('local', 'bearer ' + token)
+      this.$auth.setToken('local', 'Bearer ' + token)
       this.$auth.setStrategy('local').then(() => {
         this.$router.push(this.localePath('/'))
       }).catch(error => {
