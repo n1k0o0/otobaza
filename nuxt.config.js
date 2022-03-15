@@ -24,7 +24,7 @@ module.exports = {
       }
     ],
     link: [
-      { rel: 'shortcut icon', href: '/favicon.ico' },
+      { rel: 'shortcut icon', href: '/favicon.ico' }
     ],
     script: [
       {
@@ -154,7 +154,7 @@ module.exports = {
           user: { url: '/api/user/me', method: 'get', propertyName: 'data' }
         },
         tokenRequired: true,
-        tokenType: 'bearer',
+        tokenType: 'Bearer',
         autoFetchUser: true
       },
       google: {
