@@ -20,9 +20,9 @@ const actions = {
     this.$axios.defaults.baseURL = this.$env.BASE_API_URL
     return await this.$axios.post('/api/user/login', data)
   },
-  async SIGN_OUT ({ state }) {
+  async SIGN_OUT () {
     this.$axios.defaults.baseURL = this.$env.BASE_API_URL
-    return await this.$axios.get('/api/user/logout').then(() => {
+    return this.$axios.get('/api/user/logout').finally(() => {
       this.$auth.$storage.setUniversal('_token.local', null)
       this.$auth.$storage.setUniversal('strategy', 'local')
       this.$auth.$storage.setUniversal('refresh_token', null)

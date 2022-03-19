@@ -29,7 +29,11 @@
                   :placeholder="$t('password')"
                   :type="passwordType"
                 />
-                <span @click="showPassword" class="fa " :class="eyeClass"></span>
+                <span
+                  class="fa "
+                  :class="eyeClass"
+                  @click="showPassword"
+                ></span>
               </fieldset>
 
               <a
@@ -47,19 +51,22 @@
               </button>
             </div>
             <div
-              class="divider-hr">
-              <span
-              >
+              class="divider-hr"
+            >
+              <span>
                 {{ $t('registration') }} <!--Padding is optional-->
               </span>
             </div>
             <div class="log-social">
-
               <n-link class="log-btn log_btn" :to="localePath('registration')">
                 {{ $t('driver') }}
               </n-link>
 
-              <a class="log-btn log_btn" target="_blank" href="https://seller.otobaza.com/#/register">
+              <a
+                class="log-btn log_btn"
+                href="https://seller.otobaza.com/#/register"
+                target="_blank"
+              >
                 {{ $t('store') }}
               </a>
               <!--              <a href="https://seller.otobaza.com/#/register" target="_blank">{{ $t('create_store') }}</a>-->
@@ -158,12 +165,20 @@ export default {
           data: this.login
         })
         const group = data?.data?.group?.id
-        if (group !== 1) {
+
+        if (data?.data?.token && group === 1) {
+          await this.$auth.setUserToken(data?.data?.token)
+        } else if (data?.data?.token && group === 2) {
           window.location.href = `https://seller.otobaza.com/#/login?token=${data?.data?.token}`
-          return
-        }
-        if (data?.data?.token) {
-          this.$auth.setUserToken(data?.data?.token)
+        } else {
+          this.$swal.fire({
+            position: 'center',
+            toast: false,
+            icon: 'error',
+            timer: 5000,
+            timerProgressBar: true,
+            html: data?.message || this.$t('system_error')
+          })
         }
       } catch (error) {
         useFriendlyError(error)
