@@ -1,7 +1,7 @@
 <template lang="pug">
   ul.fsocials
     li
-      a(href='https://instagram.com/otobaza_com' target='_blank')
+      a(href='https://instagram.com/otobaza' target='_blank')
         i.fa.fa-instagram
     li
       a(href='https://www.facebook.com/otobazacom/' target='_blank')
