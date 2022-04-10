@@ -3106,6 +3106,10 @@ input::-ms-input-placeholder {
   background-color: #E05353;
 }
 
+.home-category2:hover .hh_dtls, .home-category1:hover .hh_dtls, .home-category3:hover .hh_dtls, .home-category4:hover .hh_dtls {
+  border-color: #fff;
+}
+
 .home-category2 {
   height: 528px;
   overflow: hidden;
