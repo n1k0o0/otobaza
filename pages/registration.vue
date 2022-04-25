@@ -68,8 +68,7 @@
                         v-model="form.email"
                         name="email"
                         type="email"
-                        rules="required|email"
-                        required
+                        rules="email"
                         :label="$t('validation.names.email')"
                       )
                     .col-12.col-sm-12
