@@ -723,7 +723,7 @@ input::-ms-input-placeholder {
 
 .main-search {
   position: relative;
-  top: 50px;
+  top: 10px;
 }
 
 .main-search i.fa-search {
@@ -2987,19 +2987,25 @@ input::-ms-input-placeholder {
 
 /* home page style */
 .home-header {
-  min-height: 310px;
-  background-image: url("../img/header-bg.png");
-  background-repeat: no-repeat;
-  background-position: center;
+  /*min-height: 310px;*/
+  /*background-image: url("../img/header-bg.png");*/
+  /*background-repeat: no-repeat;*/
+  /*background-position: center;*/
+}
+
+@media screen and (min-width: 320px) {
+  .home-header-layer {
+    height: 160px;
+  }
 }
 
 .home-header-layer {
-  min-height: 310px;
+  /*min-height: 310px;*/
   background-color: rgba(77, 166, 255, 0.97);
 }
 
 .home-header-details {
-  padding-top: 50px;
+  /*padding-top: 50px;*/
 }
 
 .home-header-details h5 {

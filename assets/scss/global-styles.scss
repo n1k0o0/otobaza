@@ -794,7 +794,7 @@ dl.pro-card__specs dd {
 
 .play-app {
   text-align: right;
-  margin-top: 8px;
+  //margin-top: 8px;
 }
 
 .play-app a {
@@ -831,7 +831,7 @@ dl.pro-card__specs dd {
 }
 
 .hhtop_play .play-app {
-  margin-bottom: 14px;
+  //margin-bottom: 14px;
 }
 
 .faq-help-icon img {
@@ -1092,7 +1092,7 @@ dl.pro-card__specs dd {
     margin-bottom: 0;
   }
   .home_head_layer {
-    min-height: 324px;
+    min-height: 205px;
   }
   .rate-buttons {
     flex-direction: row;
@@ -1244,5 +1244,11 @@ dl.pro-card__specs dd {
   .tariff-items .abitem {
     padding-left: 0;
     padding-right: 0;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .home-header-layer {
+    height: 175px;
   }
 }
