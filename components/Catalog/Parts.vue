@@ -18,7 +18,7 @@ div
               i.fa.fa-info-circle
               span {{ $t('no_parts') }}
                 .parts-play-app
-                  a.play-app1(href='https://apps.apple.com/us/app/facebook/id1528493953' target='_blank')
+                  a(href='https://apps.apple.com/us/app/facebook/id1528493953' target='_blank')
                     img(alt='' src='/css/icons/app_store_badge.svg')
                   a(:href='androidLink' target='_blank')
                     img(alt='' src='/css/icons/google_play_badge.svg')

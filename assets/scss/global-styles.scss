@@ -1256,12 +1256,18 @@ dl.pro-card__specs dd {
 .parts-play-app {
   display: inline-block;
   margin-left: 10px;
+  @media screen and (max-width: 991px) {
+    margin-top: 10px;
+  }
 
   a {
     margin-right: 10px;
 
     img {
-      height: 29px;
+      @media screen and (min-width: 768px) {
+        height: 29px;
+      }
+      height: 25px;
       opacity: 0.8;
       transition: all .4s ease;
     }
