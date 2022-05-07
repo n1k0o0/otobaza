@@ -1252,3 +1252,18 @@ dl.pro-card__specs dd {
     height: 175px;
   }
 }
+
+.parts-play-app {
+  display: inline-block;
+  margin-left: 10px;
+
+  a {
+    margin-right: 10px;
+
+    img {
+      height: 29px;
+      opacity: 0.8;
+      transition: all .4s ease;
+    }
+  }
+}
