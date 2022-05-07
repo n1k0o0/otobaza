@@ -5905,3 +5905,13 @@ img {
 .custom_sweetalert .swal2-header .swal2-icon {
   font-size: 0.6rem;
 }
+
+.car-details-text {
+  margin: 20px 0;
+  padding: 20px 30px;
+}
+
+.car-details-text p {
+  border-top: 2px solid #4da6ff;
+  padding: 20px 15px 0 15px;
+}

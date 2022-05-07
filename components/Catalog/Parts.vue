@@ -9,6 +9,8 @@ div
       template(v-if="parts.items.length")
         PartsFilters
         PartsItems(:is-part="isPart")
+        .row.car-details-text
+          p Lorem ipsum dolor sit amet, consectetur adipisicing elit. At aut autem, dolor ea enim fuga nobis perferendis similique. Ab ad aliquam amet at distinctio doloribus ea error et, expedita facere illo iste iure maiores nostrum odio, quis repellat repellendus temporibus tenetur velit? Ab, accusamus aperiam, cupiditate distinctio ducimus eligendi esse eveniet expedita id labore minima pariatur porro, possimus quae quas quasi sit suscipit veniam vero voluptatibus. Architecto autem deleniti, dolor doloribus eligendi enim harum hic, labore neque nisi numquam obcaecati placeat quam quisquam voluptatum. Accusantium aliquam corporis eos fugit id laboriosam maxime pariatur, placeat possimus quae quam quisquam rem vero?.
       template(v-else)
         .container-fluid
           .col-12.col-sm-12
