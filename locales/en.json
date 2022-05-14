@@ -309,5 +309,6 @@
   "privacy": "Privacy",
   "vin": {
     "auth": "To search by VIN code, please log in to your account"
-  }
+  },
+  "presentation": "Presentation"
 }

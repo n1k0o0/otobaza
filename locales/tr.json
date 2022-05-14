@@ -309,5 +309,6 @@
   "privacy": "Gizlilik siyasəti",
   "vin": {
     "auth": "VIN kodu ile arama yapmak için lütfen hesabınıza giriş yapın"
-  }
+  },
+  "presentation": "Sunum"
 }

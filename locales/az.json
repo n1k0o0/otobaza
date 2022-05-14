@@ -38,7 +38,9 @@
     "+994 55 123 45 66",
     "+994 55 123 45 66"
   ],
-  "contactEmails": ["office@otobaza.com"],
+  "contactEmails": [
+    "office@otobaza.com"
+  ],
   "contactForm": {
     "name": "Adınız",
     "email": "E-poçt adresiniz",
@@ -47,11 +49,11 @@
   },
   "tariffs": "Tariflər",
   "about": "Haqqımızda",
-  "about_description": "Bizimlə əlaqə yaratmaq üçün aşağldakı formadan birbaşa yaza və ya digər əlaqə vasitələrindən istifadə edə bilərsiniz.",
+  "about_description": "Biz Azərbaycanda rəqəmsal platforma və mobil tətbiq vasitəsilə ehtiyat hissələrinin satışını və nəqliyyat vasitələri üçün analitik məlumatlar bazasını təşkil edən ilk peşəkar şirkətik. Şirkətimiz Azərbaycanda Kiçik və Orta Biznesin İnkişafı Agentliyi (KOBİA) tərəfindən 3 mart 2022-ci il tarixində Startap Şəhadətnaməsi ilə təltif olunmuşdur. Fəaliyyət sahəmizə, nəqliyyat vasitələri üçün ehtiyat hissələrinin satışı ilə məşğul olan kiçik və orta biznes subyektlərini daxil etmək, avtomobil təmir avto-servislər ilə işğüzar əlaqələr qurmaq və eyni zamanda sürücülərlə əməkdaşlıq mühitini yaratmaq əlavə olunmuşdur. \nBizimlə əlaqə yaratmaq üçün aşağıdakı formadan birbaşa yaza və ya digər əlaqə vasitələrindən istifadə edə bilərsiniz.",
   "about_company": "Şirkət haqqında",
-  "about_full": "Bizim komandanın artıq 20 ildən çoxdur ki, bu sahədə peşəkar təcrübəsi var. Öncələrdə özümüz alıcı olmuşuq sonralarda isə bu sahədə satıcı kimi fəaliyyət göstərmişik. Müxtəlif marka və brendlər üzrə ehtiyat hissələri satışını təmin etmişik. Həm satıcı olduğumuzda, həm də alıcı olduğumuzda qarşımıza çıxan problemlər bizi daha bir addım irəli atmağa məcbur etdi. 2018 – ci ildə komandamızla birlikdə alıcılar və satıcılar üçün daha da rahat bir yol üzərində rəqəmsal layihə hazırlamağa başladıq və \"Otobaza\" adlı veb platforma və mobil tətbiqinin Beta versiyaları artıq fəaliyyət göstərir.",
+  "about_full": "Biz Azərbaycanda rəqəmsal platforma və mobil tətbiq vasitəsilə ehtiyat hissələrinin satışını və nəqliyyat vasitələri üçün analitik məlumatlar bazasını təşkil edən ilk peşəkar şirkətik. Şirkətimiz Azərbaycanda Kiçik və Orta Biznesin İnkişafı Agentliyi (KOBİA) tərəfindən 3 mart 2022-ci il tarixində Startap Şəhadətnaməsi ilə təltif olunmuşdur. Fəaliyyət sahəmizə, nəqliyyat vasitələri üçün ehtiyat hissələrinin satışı ilə məşğul olan kiçik və orta biznes subyektlərini daxil etmək, avtomobil təmir avto-servislər ilə işğüzar əlaqələr qurmaq və eyni zamanda sürücülərlə əməkdaşlıq mühitini yaratmaq əlavə olunmuşdur. \nBizimlə əlaqə yaratmaq üçün aşağıdakı formadan birbaşa yaza və ya digər əlaqə vasitələrindən istifadə edə bilərsiniz.",
   "project_vision": "Layihənin məqsədi",
-  "project_vision_text": "<p>Alıcıları həmişə narahat edən bir məsələ olmuşdu qiymət nə qədər doğru və niyə getmiş olduğu dükanda yoxdur və ya harda ola bilər problemləri.</p><p>Satıcıları narahat edən isə məndə ehtiyat hissəsi olduğu və qiyməti də uyğun olduğu halda niyə alıcılar müraciət etməməsidir.</p> <p>Göstərilmiş hər iki halı yaşadığımız üçün artıq bu ildən bu saytımız həm satıcılara, həm də alıcılara bir fayda verəcəyini düşünərək sizlərə bu saytı təklif edirik. Məqsədimiz alıcıların daha uyğun qiymətə, daha yaxın məsafədə və daha geniş bir listədə axtarmış olduqları ehtiyat hissələri onlara təklif etməkdir. Satıcıların isə müştəri bazasının artırılmasıdır.</p>",
+  "project_vision_text": "Saytımız və mobil tətbiqimiz həm satıcılara, həm də alıcılara fayda verəcəyini düşünərək bu məhsulu təklif edirik. Otobaza platforması alıcılar və satıcılar arasında üçüncü tərəflərin iştirakı olmadan bazar mühitini yaradır. Bu mühitdə ehtiyat hissələri üzrə Alıcılar üçün real qiymətlərin rahat seçimi, Satıcılar üçün isə müştərilərlə bir başa yaratmaq imkanlarını təmin etmişik. <br>Otobaza layihəsinin məqsədlərindən biri də Sürücü və E\\H satan Satıcılar arasında prosesləri avtomatlaşdırılması və şəfafflığı təmin etməkdir.<br>Otobaza platforması - Sürücülər üçün ehtiyyat hissələrini və aksesuarları satan mağazaları tapmağa imkan yaradır.<br>Otobaza platforması vasitəsilə Sürücülər E\\H sifariş etməklə ünvanda əldə edə bilirlər <br>Otobaza platforması vasitəsilə Sürücülər E\\H axtarış zamanı məsafəyə və ya qiymətə uyğun filtrasiya edə bilirlər.<br>Otobaza mobil tətbiqində Sürücülərə lazım olan ehtiyyat hissələrini bir sıra yollar ilə tapa bilirlər: <ul><li>Elan əlavə etmək ilə (mağazalar tez bir zaman təklif almaq üçün)</li><li>E\\H detalın kodu ilə (istehsalçı tərəfindən təyin edilən unikal kod)</li><li>Nəqliyyat vasitəsinin VİN kodu ilə axtarış imkanı (unikal kod)</li><li>Kataloq ilə axtarış imkanı (marka, model, e\\h kateqoriya və digər parametrlər üzrə)</li> </ul>\nOtobaza startup-ı yeni imkanlara, investisiyalara və digər biznes tərəfdaşlığa açıqdır.",
   "terms_conditions": "Şərtlər və Qaydalar",
   "gender": "Cins",
   "male": "Kişi",
@@ -309,5 +311,6 @@
   "privacy": "Gizlilik siyasəti",
   "vin": {
     "auth": "VIN kodla axtariş üçün, zəhmət olmasa hesaba daxil olun"
-  }
+  },
+  "presentation": "Təqdimat"
 }

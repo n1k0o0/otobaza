@@ -6,13 +6,14 @@
         .rminfo
           h2.rmtt
             | {{ $t('about') }}
-          p.rmtxt
+          p.about-txt
             | {{ $t('about_description') }}
       .about-section
         .row
-          .col-12.col-sm-12.col-md-5
+          .col-12.col-sm-12.col-md-5.text-center
             .about-logo
-              img(alt='', src='/css/icons/logo.svg')
+              img(alt='', src='/css/icons/lisence.jpg')
+            a(href="/presentation.pdf", target='_blank') {{ $t('presentation') }}
           .col-12.col-sm-12.col-md-7
             .about-info
               h3.about-tt {{ $t('about_company') }}
