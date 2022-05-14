@@ -13,7 +13,6 @@
           .col-12.col-sm-12.col-md-5.text-center
             .about-logo
               img(alt='', src='/css/icons/lisence.jpg')
-            a(href="/presentation.pdf", target='_blank') {{ $t('presentation') }}
           .col-12.col-sm-12.col-md-7
             .about-info
               h3.about-tt {{ $t('about_company') }}
@@ -22,6 +21,8 @@
         .about-info
           h3.about-tt {{ $t('project_vision') }}
           .about-txt(v-html="$t('project_vision_text')")
+          h3
+            a.about-tt.text-decoration-underline.btn-link(href="/presentation.pdf", target='_blank') {{ $t('presentation') }}
       .about-items
         .container
           .row

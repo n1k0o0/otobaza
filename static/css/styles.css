@@ -5916,3 +5916,7 @@ img {
   border-top: 2px solid #4da6ff;
   padding: 20px 15px 0 15px;
 }
+
+.text-decoration-underline {
+  text-decoration: underline
+}
