@@ -35,10 +35,10 @@
     </div>
     <div class="col-12 col-sm-12 col-md-6 home-category-item">
       <div class="home-category2">
-        <a :href="blog4.link" target="_blank">
-          <img alt="category" :src="blog4.image" />
+        <a href="https://www.youtube.com/channel/UCQq0elRmXMGc_TUVkTsTPMg" target="_blank">
+          <img alt="category" src="img/youtube_clipart.png" />
           <div class="home-ct2-txt">
-            <h4>{{ blog4.title }}</h4>
+            <h4>{{ $t('blog_youtube') }}</h4>
             <span class="hh_dtls">{{ $t('more') }}</span>
           </div>
         </a>

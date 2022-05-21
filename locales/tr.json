@@ -310,5 +310,6 @@
   "vin": {
     "auth": "VIN kodu ile arama yapmak için lütfen hesabınıza giriş yapın"
   },
-  "presentation": "Sunum"
+  "presentation": "Sunum",
+  "blog_youtube": "Otobaza hakkında daha fazla bilgiyi youtube kanalımızda bulabilirsiniz"
 }
