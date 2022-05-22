@@ -3169,7 +3169,8 @@ input::-ms-input-placeholder {
 .home-category2 img {
   position: absolute;
   top: 0;
-  right: 0;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .home-category1 {
@@ -4359,6 +4360,12 @@ input::-ms-input-placeholder {
   .home-category2 {
     height: 220px;
     margin-top: 20px;
+  }
+
+  .home-category2 img {
+    right: 0;
+    left: unset;
+    transform: translate(0);
   }
 
   .hc34 {
