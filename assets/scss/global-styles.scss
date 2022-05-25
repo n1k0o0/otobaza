@@ -595,6 +595,9 @@ a.p_code:hover {
   .mcclass-description {
     margin: 0;
   }
+  .htitems a, .hmitems a {
+    margin-right: 15px;
+  }
 }
 
 @media screen and (max-width: 992px) {
@@ -716,9 +719,6 @@ a.p_code:hover {
     font-size: 8px !important;
     padding-left: 6px;
     padding-right: 6px;
-  }
-  .htitems a, .hmitems a {
-    margin-right: 16px;
   }
 }
 

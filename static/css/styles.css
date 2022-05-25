@@ -4321,12 +4321,17 @@ input::-ms-input-placeholder {
     font-size: 26px;
   }
 
+  .home-category {
+    flex-direction: column-reverse;
+  }
+
   .home-category-item {
     -webkit-box-flex: 0;
     -webkit-flex: 0 0 100%;
     -ms-flex: 0 0 100%;
     flex: 0 0 100%;
     max-width: 100%;
+    text-align: justify;
   }
 
   .home-category3, .home-category4 {
@@ -4360,6 +4365,7 @@ input::-ms-input-placeholder {
   .home-category2 {
     height: 220px;
     margin-top: 20px;
+    margin-bottom: 20px;
   }
 
   .home-category2 img {
@@ -5390,6 +5396,10 @@ input::-ms-input-placeholder {
 
   .home-header-details h1 {
     font-size: 24px;
+  }
+
+  .home-category2 {
+    margin-bottom: 4px;
   }
 
   .home-category1, .home-category2, .home-category3, .home-category4, .mpd .home-how-to, .search-close-btn {

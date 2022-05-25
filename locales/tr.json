@@ -38,7 +38,9 @@
     "+994 55 123 45 66",
     "+994 55 123 45 66"
   ],
-  "contactEmails": ["office@otobaza.com"],
+  "contactEmails": [
+    "office@otobaza.com"
+  ],
   "contactForm": {
     "name": "İsminiz",
     "email": "E-posta adresi",
@@ -47,11 +49,11 @@
   },
   "tariffs": "Tarifeler",
   "about": "Hakkımızda",
-  "about_description": "Bizimle iletişime geçmek için doğrudan aşağıdaki formdan yazabilir veya başka iletişim araçlarını kullanabilirsiniz.",
+  "about_description": "Azerbaycan'da dijital platform, mobil uygulama üzerinden yedek parça satışı yapan ve araçlar için analitik veri tabanı oluşturan ilk profesyonel şirketiz. 3 Mart 2022 tarihinde Azerbaycan'daki Küçük ve Orta Ölçekli İşletmeleri Geliştirme Ajansı (KOBIA) şirketimize Startup Sertifikası verdi. Faaliyet alanımızın yanı sıra oto yedek parça satışı, oto tamir ve oto servisleri ile iş ilişkisi kuran küçük ve orta ölçekli işletmeler de dahil edilmiş ve aynı zamanda şoförlerle iş birliği ortamı oluşturulmuştur.",
   "about_company": "Şirket hakkında",
-  "about_full": "Ekibimiz bu alanda 20 yıldan fazla mesleki deneyime sahiptir. Eskiden alıcıydık ve daha sonra bu alanda satıcı olarak çalışıyorduk. Çeşitli marka ve brendlere yedek parça satışı yapmaktayız. Hem satıcı olduğumuzda hem de alıcı olduğumuzda karşılaştığımız sorunlar bizi bir adım daha atmaya zorladı. 2018'de ekibimizle birlikte, alıcılar ve satıcılar için daha uygun bir şekilde dijital bir proje geliştirmeye başladık ve web platformunun ve \"Otobaza\" adı verilen mobil uygulamanın Beta sürümleri zaten çalışıyor.",
-  "project_vision": "Projenin amacı",
-  "project_vision_text": "<p>Alıcılar her zaman fiyatın ne kadar doğru olduğu ve mağazanın neden gittiğinden veya nerede sorun olabileceğinden endişe duyuyorlardı.</p><p>Satıcıları endişelendiren şey, alıcılara yedek bir parçam olup olmadığını ve fiyatın doğru olup olmadığını sormama nedenidir.</p> <p>Bu iki durumu da yaşadığımızdan, bu siteyi hem satıcılara hem de alıcılara fayda sağlayacağını düşünerek bu yıl size sunuyoruz. Hedefimiz, alıcılara aradıkları yedek parçaları daha uygun bir fiyat ve daha geniş bir liste sunmaktır. Amaç, satıcıların müşteri tabanını artırmaktır.</p>",
+  "about_full": "Ekibimiz bu alanda 20 yıllık profesyonel deneyime sahiptir. Faaliyetimizin ilk yıllarında Azerbaycan'da dünyanın her yerinden çeşitli kamyon ve otomobil yedek parçalarının toptan ve perakende satışını gerçekleştirdik. Çeşitli dünya markaları ve modelleri için yedek parça satışını sağladıktan sonra, bu alanı genişletmek için modern gereksinimlere uygun yenilikçi çözümlere geçmek gerektiğini anladık. Böylece 2018 yılında ekibimizle birlikte alıcı ve satıcılar için daha uygun bir yol seçerek dijital bir proje başlattık. Sizin için \"OTOBAZA\" web platformu ve mobil uygulamanı geliştirdik.",
+  "project_vision": "Proje hedefi",
+  "project_vision_text": "Bu ürünü sunarak web sitemizin ve mobil uygulamamızın hem yedek parça satıcıları hem de alıcılar için faydalı olacağına inancımız tamdır. OTOBAZA platformu, üçüncü şahısların katılımı olmaksızın alıcılar ve satıcılar arasında bir pazar ortamı yaratır. Bu ortamda, Alıcılar için uygun yedek parça fiyatları seçimi ve Satıcılar için alıcılarla pazarlık yapma fırsatı sağladık.<br>OTOBAZA projesinin hedeflerinden biri, Sürücüler ve Parça Bayileri arasında otomasyon ve şeffaflık sağlamaktır.<br>OTOBAZA platformu, sürücülerin yedek parça ve aksesuar satan mağazaları bulmasını sağlar.<br>Sürücüler \"OTOBAZA\" platformu üzerinden yedek parça siparişi vererek adrese ulaşabilirler.<br>OTOBAZA platformu aracılığıyla sürücüler, parça aramalarını mesafeye veya fiyata göre filtreleyebilir.<br>Sürücüler, gerekli yedek parçaları OTOBAZA mobil uygulamasında birkaç şekilde bulabilir:<ul><li>Sorgu ekleyerek (mağazalardan hızlı teklif almak için)</li><li> Yedek parça kodu ile (üretici tarafından belirlenen OEM kod)</li><li>Araç VIN'ine göre yedek parça arama özelliği (benzersiz kod)</li><li>Katalog üzerinden arama yapabilme (marka, model, kategori yedek parça ve diğer parametrelere göre)</li><li>TechCard - Bu bölümde aracinizda yapilan işler ve bundan sonra yapilacak işler hakkinda bilgi alabilirsiniz.</li></ul>Startup \"OTOBAZA\" yeni fırsatlara, yatırımlara ve diğer iş ortaklıklarına açıktır.",
   "terms_conditions": "Şartlar ve Koşullar",
   "gender": "Cinsiyet",
   "male": "Erkek",

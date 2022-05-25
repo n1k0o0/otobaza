@@ -38,7 +38,9 @@
     "+994 55 123 45 66",
     "+994 55 123 45 66"
   ],
-  "contactEmails": ["office@otobaza.com"],
+  "contactEmails": [
+    "office@otobaza.com"
+  ],
   "contactForm": {
     "name": "Your name",
     "email": "Your email address",
@@ -47,11 +49,11 @@
   },
   "tariffs": "Tariffs",
   "about": "About us",
-  "about_description": "To contact us, you can write directly from the form below or use other means of communication.",
+  "about_description": "We are the first professional company in Azerbaijan that sells spare parts through a digital platform, mobile application and creates an analytical database for vehicles. On March 3, 2022, the Small and Medium Business Development Agency (KOBIA) in Azerbaijan awarded our company with a Startup Certificate. In addition to our field of activity, small and medium-sized businesses engaged in the sale of car parts, establishing business relationships with car repair and car services were included, and at the same time, a cooperation environment with drivers was created.",
   "about_company": "About the company",
-  "about_full": "Our team has more than 20 years of professional experience in this field. We used to be buyers and later we worked as sellers in this field. We provide sales of spare parts for various brands and brands. The problems we faced both when we were sellers and when we were buyers forced us to take another step forward. In 2018, together with our team, we started to develop a digital project on a more convenient way for buyers and sellers, and Beta versions of the web platform and mobile application called \"Otobaza\" are already operational.",
-  "project_vision": "The Purpose of the project",
-  "project_vision_text": "<p>Buyers have always been concerned about how accurate the price is and why not in the store he went to or problems where there may be.</p><p>What worries sellers is why buyers don't apply when I have a spare part and the price is right.</p> <p>Since we are experiencing both of these situations, we are offering this site to you this year, thinking that it will benefit both sellers and buyers. Our goal is to offer buyers the spare parts they are looking for at a more affordable price and at a wider list. The aim is to increase the customer base of sellers. </p>",
+  "about_full": "Our team has 20 years of professional experience in this field. In the first years of our activity, we carried out wholesale and retail sales of spare parts in Azerbaijan for various types of trucks and cars from all over the world. Having provided the sale of spare parts for various world brands and models, we realized that in order to expand this area, it is necessary to move on to innovative solutions in accordance with modern requirements. Thus, in 2018, together with our team, we launched a digital project, choosing a more convenient way for buyers and sellers. We have developed a web platform and a mobile application \"OTOBAZA\" for you.",
+  "project_vision": "Project goal",
+  "project_vision_text": "By offering this product, we are confident that our website and mobile application will be useful for both spare parts sellers and buyers. The OTOBAZA platform creates a market environment between buyers and sellers without the involvement of third parties. In this environment, we have provided a convenient for Buyers selection of real prices for spare parts, and for Sellers the opportunity to negotiate with buyers.<br>One of the goals of the OTOBAZA project is automation and transparency between Drivers and Parts Dealers.<br>The OTOBAZA platform allows drivers to find stores selling spare parts and accessories.<br>Drivers can reach the address by ordering a spare part through the \"OTOBAZA\" platform.<br>Through the OTOBAZA platform, drivers can filter their search for parts by distance or price.<br>Drivers can find the necessary spare parts in the OTOBAZA mobile application in several ways:<ul><li>By adding Request (to get a quick offer from stores)</li><li>With spareparts code (unique code set by the manufacturer)</li><li>Ability to search for spareparts by vehicle VIN (unique code)</li><li>Ability to search by the catalog (by brand, model, category spareparts and other parameters)</li><li>TechCard - İn this section you can get information about the work done in your transport and the next work to be done</li></ul>Startup \"OTOBAZA\" is open to new opportunities, investments and other business partnerships.",
   "terms_conditions": "Terms and Conditions",
   "gender": "Gender",
   "male": "Man",
