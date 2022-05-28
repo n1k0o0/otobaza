@@ -28,17 +28,27 @@
           </svg>
         </div>
         <div class="rminfo">
-          <h2 class="rmtt">{{ $t('contact') }}</h2>
-          <p class="rmtxt">{{ $t('contact_desc') }}</p>
+          <h2 class="rmtt">
+            {{ $t('contact') }}
+          </h2>
+          <p class="rmtxt">
+            {{ $t('contact_desc') }}
+          </p>
         </div>
       </div>
       <div class="contact-content">
-        <div id="map" lat="40.406402" lng="49.865380"></div>
+        <div
+          id="map"
+          lat="40.406402"
+          lng="49.865380"
+        ></div>
       </div>
       <div class="row">
         <div class="col-12 col-sm-12 col-md-12 contact-lr">
           <div class="contact-details">
-            <h2 class="cnt-title">{{ $t('contact_info') }}</h2>
+            <h2 class="cnt-title">
+              {{ $t('contact_info') }}
+            </h2>
             <div class="contact-items">
               <div class="contact-item contact_item">
                 <div class="contact-email">
@@ -49,7 +59,7 @@
                 </div>
                 <ul class="contact-social">
                   <li>
-                    <a href="https://instagram.com/otobaza_com" target="_blank">
+                    <a href="https://instagram.com/otobaza" target="_blank">
                       <i class="fa fa-instagram"></i>
                     </a>
                   </li>
@@ -70,7 +80,12 @@
         </div>
         <div class="col-12 col-sm-12 col-md-12 contact-lr">
           <ClientOnly>
-            <ValidationObserver ref="observer" v-slot="{ invalid,handleSubmit }" slim tag="div">
+            <ValidationObserver
+              ref="observer"
+              v-slot="{ invalid,handleSubmit }"
+              slim
+              tag="div"
+            >
               <form @submit.prevent="handleSubmit(onSubmit)">
                 <div class="container contact-form">
                   <div class="row">
@@ -126,7 +141,11 @@
                       </ValidationProvider>
                     </div>
                     <div class="col-12 col-sm-12">
-                      <ValidationProvider v-slot="{errors,failed}" name="message" rules="required">
+                      <ValidationProvider
+                        v-slot="{errors,failed}"
+                        name="message"
+                        rules="required"
+                      >
                         <FormTextarea
                           id="message"
                           v-model="contact.message"
@@ -140,7 +159,11 @@
                       </ValidationProvider>
                     </div>
                     <div class="col-12 col-sm-12 text-right">
-                      <button class="btn contact-btn" :disabled="loading" type="submit">
+                      <button
+                        class="btn contact-btn"
+                        :disabled="loading"
+                        type="submit"
+                      >
                         <i v-if="loading" class="fa fa-spinner fa-spin"></i>
                         {{ $t('contactForm.send') }}
                       </button>
