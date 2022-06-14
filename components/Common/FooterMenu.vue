@@ -10,7 +10,7 @@
       a(href="https://otobaza.com/privacy.html" target="_blank")
         | {{ $t('privacy') }}
     li.fnavitem
-      a(href="https://otobaza.com/terms.html" target="_blank")
+      a(:href="localePath('terms-and-conditions')" target="_blank")
         | {{ $t('terms') }}
     li.fnavitem
       n-link(:to="localePath('about')")
