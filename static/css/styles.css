@@ -152,6 +152,7 @@ body {
   color: #fff;
   font: 10px "Roboto-Bold";
   background-color: #2B8EF0;
+  border: 1px solid #fff;
   margin-left: 10px;
   -webkit-border-radius: 2px;
   border-radius: 2px;
@@ -175,10 +176,12 @@ body {
 .fnavitems {
   list-style-type: none;
   padding-left: 0;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
+  display: -webkit-grid;
+  display: -webkit-grid;
+  display: -ms-grid;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+
   -webkit-box-pack: center;
   -webkit-justify-content: center;
   -ms-flex-pack: center;
@@ -194,8 +197,13 @@ body {
   padding-right: 30px;
 }
 
+.footer-subscribe {
+  border-top: 1px solid #fff;
+  padding-top: 15px;
+}
+
 .fnavitem {
-  width: calc(100% / 2);
+  /*width: calc(100% / 2);*/
   text-align: center;
   margin-bottom: 16px;
 }
@@ -2996,7 +3004,7 @@ input::-ms-input-placeholder {
 
 @media screen and (min-width: 320px) {
   .home-header-layer {
-    height: 160px;
+    /*height: 160px;*/
   }
 }
 
@@ -3016,7 +3024,7 @@ input::-ms-input-placeholder {
 
 .home-header-details h1 {
   color: #fff;
-  font: 33px "Roboto-Bold";
+  font: 25px "Roboto-Bold";
 }
 
 .hh_dtls {
@@ -5864,8 +5872,9 @@ body::-webkit-scrollbar-thumb {
 
 .hhtop_flex {
   display: flex;
-  justify-content: space-between;
-  align-items: baseline;
+  align-items: center;
+  gap: 10px;
+  padding: 15px 0;
 }
 
 .password-eye span.fa {

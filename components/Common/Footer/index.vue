@@ -6,17 +6,18 @@
           .col-12.col-sm-2.mbw12
             n-link.flogo(to='/')
               img(alt='logo' src='/css/icons/logo.svg')
-          .col-12.col-sm-4.mbw12
+          .col-12.col-sm-8.mbw12
             FooterMenu
-          .col-12.col-sm-4.mbw12
-            NewsLetter
-              FooterSocials.footer-socials
           .col-12.col-sm-2.mbw12
             .play-app
               a(href="https://apps.apple.com/us/app/facebook/id1528493953" class='play-app1' target="_blank")
-                img(alt='' src='/css/icons/app_store_badge.svg')
+                img(alt='' src='img/header/ios-xl.png')
               a(:href='androidLink' target="_blank")
-                img(alt='' src='/css/icons/google_play_badge.svg')
+                img(alt='' src='img/header/android-xl.png')
+          .col-12.col-sm-12.mbw12.footer-subscribe
+            NewsLetter
+              FooterSocials.footer-socials
+
     .footer-bottom
       .container
         .flex

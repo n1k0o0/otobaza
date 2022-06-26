@@ -794,6 +794,8 @@ dl.pro-card__specs dd {
 
 .play-app {
   text-align: right;
+  display: flex;
+  gap: 10px;
   //margin-top: 8px;
 }
 
@@ -803,8 +805,6 @@ dl.pro-card__specs dd {
 }
 
 .play-app a img {
-  height: 46px;
-  width: 138px;
   opacity: 0.8;
   transition: all .4s ease;
 }
@@ -828,6 +828,16 @@ dl.pro-card__specs dd {
 
 .hhtop_play .play-app1 {
   margin-left: -6px;
+}
+
+.app {
+  border-radius: 5px;
+  padding: 10px;
+  transition: background-color 0.3s linear;
+
+  &:hover {
+    background-color: #2B8EF0;
+  }
 }
 
 .hhtop_play .play-app {
@@ -1092,7 +1102,7 @@ dl.pro-card__specs dd {
     margin-bottom: 0;
   }
   .home_head_layer {
-    min-height: 205px;
+    //min-height: 205px;
   }
   .rate-buttons {
     flex-direction: row;
@@ -1249,7 +1259,7 @@ dl.pro-card__specs dd {
 
 @media (min-width: 768px) and (max-width: 991px) {
   .home-header-layer {
-    height: 175px;
+    //height: 175px;
   }
 }
 

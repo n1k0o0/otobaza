@@ -2,7 +2,7 @@
   "home": "Ana səhifə",
   "profile": "Profil",
   "blog": "Bloq",
-  "header_top_info": "Bütün ehtiyat hissələri bir ünvanda",
+  "header_top_info": "Otobaza mobil tətbiqin burdan yüklüyə bilərsiniz.",
   "create_store": "Mağazanı yarat",
   "search_placeholder": "Avtomobil brendi, model, məhsulun kodu, VIN kod",
   "no_results_found": "Axtarışa uyğun hec bir nəticə tapılmadı",
@@ -253,6 +253,8 @@
   "manufacturer": "İstehsalçı",
   "select_manufacturer": "İstehsalçı seçin",
   "model": "Model",
+  "brand": "Marka",
+  "type": "Tipi",
   "select_model": "Model seçin",
   "select_automobile": "Avtomobil seçin",
   "save": "Yadda saxla",
@@ -314,5 +316,18 @@
     "auth": "VIN kodla axtariş üçün, zəhmət olmasa hesaba daxil olun"
   },
   "presentation": "Təqdimat",
-  "blog_youtube": "Otobaza haqqında youtube kanalımızda ətraflı məlumatlar tapa bilərsiniz"
+  "blog_youtube": "Otobaza haqqında youtube kanalımızda ətraflı məlumatlar tapa bilərsiniz",
+  "search": "Axtar",
+  "home_search": {
+    "spare-parts": "Ehtiyyat hissə",
+    "accessory": "Aksesuar",
+    "used": "İkinci əl",
+    "gasoline": "Yağ",
+    "wheel": "Təkər/Disk",
+    "battery": "Aku",
+    "windscreen": "Şüşə",
+    "radio": "Audio/Video/Gps",
+    "auto-cosmetics": "Avtokosmetika/Kimya",
+    "search_placeholder": "Ehtiyyat hissə kodu,Vin kod ilə axtar…"
+  }
 }
