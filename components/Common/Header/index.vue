@@ -1,17 +1,15 @@
 <template>
   <header>
-    <HeaderTop />
+    <div class="header-top"></div>
     <HeaderMenu :settings="settings" />
   </header>
 </template>
 <script>
-import HeaderTop from '@/components/Common/Header/Top'
 import HeaderMenu from '@/components/Common/Header/Menu'
 import { mapActions } from 'vuex'
 export default {
   name: 'Header',
   components: {
-    HeaderTop,
     HeaderMenu
   },
   computed: {
@@ -25,7 +23,7 @@ export default {
     }
   },
   async beforeMount () {
-    if (!(this.settings?.countries.length && this.settings?.currencies.length)){
+    if (!(this.settings?.countries.length && this.settings?.currencies.length)) {
       await this.GET_SETTINGS()
     }
   },

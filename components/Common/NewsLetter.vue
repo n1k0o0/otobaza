@@ -9,7 +9,7 @@
           ValidationObserver(v-slot="{ handleSubmit }" slim tag="div" ref="newsLetterForm")
             form(@submit.prevent="handleSubmit(onSubmit)")
               ValidationProvider(v-slot='{errors, failed}' name='email' rules='required|email' tag="div" class="fmflex")
-                input.form-control(
+                input.subscribe-input.form-control(
                   :placeholder="$t('email_address')"
                   type='email'
                   v-model="email"

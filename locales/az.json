@@ -328,6 +328,7 @@
     "windscreen": "Şüşə",
     "radio": "Audio/Video/Gps",
     "auto-cosmetics": "Avtokosmetika/Kimya",
-    "search_placeholder": "Ehtiyyat hissə kodu,Vin kod ilə axtar…"
+    "search_placeholder": "Ehtiyyat hissə kodu,Vin kod ilə axtar…",
+    "tooltip": "Some tooltip will be here"
   }
 }

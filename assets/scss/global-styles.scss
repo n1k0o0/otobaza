@@ -807,6 +807,7 @@ dl.pro-card__specs dd {
 .play-app a img {
   opacity: 0.8;
   transition: all .4s ease;
+  height: 42px;
 }
 
 .play-app a img:hover {
@@ -820,6 +821,7 @@ dl.pro-card__specs dd {
 
 .hhtop_play .play-app {
   text-align: left;
+  justify-content: end;
 }
 
 .hhtop_play .play-app .play-app1 img {
@@ -1009,14 +1011,14 @@ dl.pro-card__specs dd {
     max-width: 400px;
   }
   .play-app {
-    margin-top: 16px;
+    //margin-top: 16px;
   }
   .play-app1 {
     margin-right: 2px;
     margin-left: -7px;
   }
   .play-app1 img {
-    height: 42px !important;
+    //height: 42px !important;
   }
   .flogo img {
     margin-left: -7px;
@@ -1090,7 +1092,6 @@ dl.pro-card__specs dd {
 
 @media screen and (max-width: 767px) {
   .hhtop_flex {
-    flex-direction: column;
   }
   .hhtop_flex .max_670 {
     padding-right: 0;

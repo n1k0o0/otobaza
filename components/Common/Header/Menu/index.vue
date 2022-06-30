@@ -19,14 +19,39 @@
                 <i class="fa fa-close"></i>
               </div>
               <Currency :currencies="settings.currencies" />
+
               <Login v-if="!$auth.loggedIn" />
               <LoggedIn v-else />
-              <MenuItems />
+              <!--              <MenuItems />-->
             </div>
             <div class="position-relative">
               <CartLink />
             </div>
-
+            <div class="position-relative">
+              <div class="dropdown langdrop">
+                <button
+                  id="droplang"
+                  aria-expanded="false"
+                  aria-haspopup="true"
+                  class="btn dropdown-toggle"
+                  data-toggle="dropdown"
+                  type="button"
+                >
+                  <img alt="Flag" :src="`img/header/${currentLang}.png`" />{{ currentLang }}
+                </button>
+                <div aria-labelledby="dropdownlang" class="dropdown-menu">
+                  <n-link
+                    v-for="lang in langs"
+                    :key="lang"
+                    class="dropdown-item"
+                    :class="{'active':currentLang === lang}"
+                    :to="changeLanguage(lang)"
+                  >
+                    {{ lang }}
+                  </n-link>
+                </div>
+              </div>
+            </div>
             <div
               id="mobile-menu"
               class="menu-toggle1"
@@ -49,21 +74,28 @@ import CartLink from '@/components/Catalog/CartLink'
 import Currency from '@/components/Common/Header/Menu/Currency'
 import LoggedIn from '@/components/Common/Header/Menu/LoggedIn'
 import Login from '@/components/Common/Header/Menu/Login'
-import MenuItems from '@/components/Common/Header/Menu/MenuItems'
 import { mapGetters, mapMutations } from 'vuex'
 export default {
   name: 'HeaderMenu',
-  components: { CartLink, LoggedIn, MenuItems, Login, Currency },
+  components: { CartLink, LoggedIn, Login, Currency },
   props: {
     settings: {
       type: Object,
       default: () => {}
     }
   },
+  data () {
+    return {
+      langs: ['AZ', 'RU', 'EN', 'TR']
+    }
+  },
   computed: {
     ...mapGetters({
       isMobileMenuShow: 'UI/isMobileMenuShow'
-    })
+    }),
+    currentLang () {
+      return this.$i18n.locale.toUpperCase()
+    }
   },
   methods: {
     ...mapMutations({
@@ -71,6 +103,9 @@ export default {
     }),
     toggleMobileMenu () {
       this.TOGGLE_MOBILE_MENU()
+    },
+    changeLanguage (lang) {
+      return this.switchLocalePath(lang.toLowerCase())
     }
   }
 }

@@ -5,7 +5,7 @@
         <div class="home-header-details">
           <div class="hhtop_flex">
             <a
-              class="play-app1 app"
+              class="app"
               href="https://apps.apple.com/us/app/facebook/id1528493953"
               target="_blank"
             ><img alt="" src="img/header/ios.png" /></a>

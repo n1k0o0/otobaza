@@ -7,7 +7,10 @@ module.exports = {
   ...(!isDev && {
     modern: 'client'
   }),
-
+  env: {
+    BASE_API_URL: 'https://test-api.otobaza.com',
+    CATALOG_API_URL: 'https://kataloq.otobaza.com'
+  },
   head: {
     htmlAttrs: {
       lang: 'az'
@@ -60,7 +63,8 @@ module.exports = {
     { src: '~~/plugins/tree.js', mode: 'client' },
     { src: '~~/plugins/click-outside.js', mode: 'client' },
     { src: '~~/plugins/swal.js', mode: 'client' },
-    { src: '~~/plugins/inputmask.js', mode: 'client' }
+    { src: '~~/plugins/inputmask.js', mode: 'client' },
+    { src: '~~/plugins/tooltip.js', mode: 'client' }
   ],
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
@@ -76,8 +80,8 @@ module.exports = {
       'nuxt-env',
       {
         keys: [
-          'BASE_API_URL',
-          'CATALOG_API_URL'
+          /* 'BASE_API_URL',
+          'CATALOG_API_URL' */
         ]
       }
     ],

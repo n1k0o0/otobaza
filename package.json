@@ -7,7 +7,7 @@
     "analyze": "nuxt build --analyze",
     "build": "nuxt build",
     "buildandstart": "nuxt build && nuxt start",
-    "dev": "source mac.sh && nuxt -o",
+    "dev": "call mac.sh && nuxt -o",
     "dew": "mac.bat && nuxt -o",
     "pm2": "pm2 start ecosystem.config.js"
   },
@@ -19,6 +19,7 @@
     "cookie-universal-nuxt": "2.1.3",
     "cssnano": "4.1.10",
     "cssnano-preset-advanced": "4.0.7",
+    "floating-vue": "1.0.0-beta.18",
     "got": "^11.1.3",
     "imagemin-mozjpeg": "^8.0.0",
     "imagemin-webpack-plugin": "^2.4.2",
