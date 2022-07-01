@@ -57,7 +57,7 @@ body {
   margin-bottom: 0;
   color: #D5D5D5;
   font-size: 12px;
-  font-family: "Roboto-Bold";
+  font-family: "Roboto";
 }
 
 .fsocials {
@@ -312,7 +312,7 @@ body {
 
 .header-menu {
   background-color: #4DA6FF;
-  border-bottom: 1px solid #2B8EF0;
+  border-bottom: 1px solid #fff;
   padding-top: 28px;
 }
 
@@ -3042,7 +3042,7 @@ input::-ms-input-placeholder {
 
 .home-header-details h1 {
   color: #fff;
-  font: 18px "Roboto-Bold";
+  font: 18px "Roboto";
 }
 
 .hh_dtls {

@@ -119,9 +119,9 @@
   "car": {
     "transmission": {
       "0": "Robot",
-      "1" : "Avtomat",
-      "2" : "Tiptronik",
-      "3" : "Mexanika"
+      "1": "Avtomat",
+      "2": "Tiptronik",
+      "3": "Mexanika"
     }
   },
   "buyers": {
@@ -161,7 +161,7 @@
   },
   "tariffs_desc": "Sizə uyğun PAKET-i seçərək satışlarınıza davam edə bilərsiz.",
   "plans_title": "Paketlər",
-  "plans_info":"Özəllik və üstünlüklər",
+  "plans_info": "Özəllik və üstünlüklər",
   "plans": [
     {
       "title": "Gəlirlilik",
@@ -201,7 +201,7 @@
   "see_all": "Hamısına bax",
   "dismantles": "İkinci əl",
   "not_found": "Daxil olduğunuz link səhvdir",
-  "not_found_info" : "Daxil olduğunuz link səhvdir və ya istifadə müddəti bitmişdir.Texniki kömək üçün \"Əlaqə\" bölməsindən istifadə edə bilərsini",
+  "not_found_info": "Daxil olduğunuz link səhvdir və ya istifadə müddəti bitmişdir.Texniki kömək üçün \"Əlaqə\" bölməsindən istifadə edə bilərsini",
   "year": "İl",
   "total_auto": "Avtomobil hissələrinin sayı",
   "list": "Siyahı",
@@ -318,13 +318,14 @@
   "presentation": "Təqdimat",
   "blog_youtube": "Otobaza haqqında youtube kanalımızda ətraflı məlumatlar tapa bilərsiniz",
   "search": "Axtar",
+  "coming_soon": "Coming Soon",
   "home_search": {
     "spare-parts": "Ehtiyyat hissə",
     "accessory": "Aksesuar",
     "used": "İkinci əl",
     "gasoline": "Yağ",
     "wheel": "Təkər/Disk",
-    "battery": "Aku",
+    "battery": "Akkumlyator",
     "windscreen": "Şüşə",
     "radio": "Audio/Video/Gps",
     "auto-cosmetics": "Avtokosmetika/Kimya",

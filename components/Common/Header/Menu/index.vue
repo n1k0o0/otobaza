@@ -18,7 +18,6 @@
               >
                 <i class="fa fa-close"></i>
               </div>
-              <Currency :currencies="settings.currencies" />
 
               <Login v-if="!$auth.loggedIn" />
               <LoggedIn v-else />
@@ -37,7 +36,7 @@
                   data-toggle="dropdown"
                   type="button"
                 >
-                  <img alt="Flag" :src="`img/header/${currentLang}.png`" />{{ currentLang }}
+                  <img alt="Flag" :src="`img/header/${currentLang.toLowerCase()}.png`" />{{ currentLang }}
                 </button>
                 <div aria-labelledby="dropdownlang" class="dropdown-menu">
                   <n-link

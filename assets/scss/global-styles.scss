@@ -284,6 +284,33 @@ a.p_code:hover {
   }
 }
 
+.search-fade {
+  &-enter,
+  &-enter-active {
+    transition: all 0.5s cubic-bezier(0.17, 0.67, 0, 0.99);
+  }
+
+  &-enter {
+    opacity: 0.1;
+    transform: translateY(-10px);
+  }
+
+  &-leave,
+  &-leave-active {
+    transition: all 0s cubic-bezier(0.17, 0.67, 0, 0.99);
+  }
+
+  &-leave-active {
+    transition: all 0s cubic-bezier(0.17, 0.67, 0, 0.99);
+    opacity: 0.1;
+  }
+
+  &-leave-to {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
 .modal, .modal-backdrop {
   pointer-events: none;
   top: -100%
