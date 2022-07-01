@@ -245,6 +245,10 @@ export default {
       justify-items: center;
       align-items: center;
 
+      div {
+        position: relative;
+      }
+
       input {
         padding-right: 30px;
       }
