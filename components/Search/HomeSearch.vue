@@ -19,6 +19,58 @@
         <img alt="" src="img/search/spare-parts.png" />
         <h5>{{ $t('home_search.spare-parts') }}</h5>
       </div>
+      <transition mode="out-in" name="search-fade">
+        <div v-show="filterShow[1]" class="filter_search_group_wrapper">
+          <div class="filter_search_group">
+            <div class="filter_search_group_item">
+              <input
+                class="form-control"
+                :placeholder="$t('home_search.spare-parts')"
+                type="text"
+              />
+            </div>
+            <div class="filter_search_group_item">
+              <input
+                class="form-control"
+                :placeholder="$t('brand')"
+                type="text"
+              />
+            </div>
+            <div class="filter_search_group_item">
+              <input
+                class="form-control"
+                :placeholder="$t('model')"
+                type="text"
+              />
+            </div>
+            <div class="filter_search_group_item">
+              <input
+                class="form-control"
+                :placeholder="$t('type')"
+                type="text"
+              />
+            </div>
+            <div class="filter_search_group_item">
+              <button
+                class="btn"
+                type="submit"
+              >
+                {{ $t('search') }}
+              </button>
+            </div>
+          </div>
+          <div class="filter_search_group_vin">
+            <div class="w-100">
+              <input
+                class="form-control filter_search_group_search_input"
+                :placeholder="$t('home_search.search_placeholder')"
+                type="text"
+              />
+              <i aria-hidden="true" class="fa fa-search fa-lg fa-fw"></i>
+            </div>
+          </div>
+        </div>
+      </transition>
       <div
         ref="item_2"
         class="search_group_item"
@@ -27,6 +79,14 @@
         <img alt="" src="img/search/steering-wheel.png" />
         <h5>{{ $t('home_search.accessory') }}</h5>
       </div>
+      <transition mode="out-in" name="search-fade">
+        <div
+          v-show="filterShow[2]"
+          class="filter_search_group_wrapper"
+        >
+          <h2>{{ $t('coming_soon') }}</h2>
+        </div>
+      </transition>
       <div
         ref="item_3"
         class="search_group_item"
@@ -35,6 +95,14 @@
         <img alt="" src="img/search/engineering.png" />
         <h5>{{ $t('home_search.used') }}</h5>
       </div>
+      <transition mode="out-in" name="search-fade">
+        <div
+          v-show="filterShow[3]"
+          class="filter_search_group_wrapper"
+        >
+          <h2>{{ $t('coming_soon') }}</h2>
+        </div>
+      </transition>
       <div
         ref="item_4"
         class="search_group_item"
@@ -43,6 +111,14 @@
         <img alt="" src="img/search/gasoline.png" />
         <h5>{{ $t('home_search.gasoline') }}</h5>
       </div>
+      <transition mode="out-in" name="search-fade">
+        <div
+          v-show="filterShow[4]"
+          class="filter_search_group_wrapper"
+        >
+          <h2>{{ $t('coming_soon') }}</h2>
+        </div>
+      </transition>
       <div
         ref="item_5"
         class="search_group_item"
@@ -51,62 +127,18 @@
         <img alt="" src="img/search/brake.png" />
         <h5>{{ $t('home_search.wheel') }}</h5>
       </div>
+      <transition mode="out-in" name="search-fade">
+        <div
+          v-show="filterShow[5]"
+          class="filter_search_group_wrapper"
+        >
+          <h2>{{ $t('coming_soon') }}</h2>
+        </div>
+      </transition>
     </div>
     <transition mode="out-in" name="search-fade">
-      <div v-show="filterShow[1]" class="filter_search_group_wrapper">
-        <div class="filter_search_group">
-          <div>
-            <input
-              class="form-control"
-              :placeholder="$t('home_search.spare-parts')"
-              type="text"
-            />
-          </div>
-          <div>
-            <input
-              class="form-control"
-              :placeholder="$t('brand')"
-              type="text"
-            />
-          </div>
-          <div>
-            <input
-              class="form-control"
-              :placeholder="$t('model')"
-              type="text"
-            />
-          </div>
-          <div>
-            <input
-              class="form-control"
-              :placeholder="$t('type')"
-              type="text"
-            />
-          </div>
-          <div>
-            <button
-              class="btn"
-              type="submit"
-            >
-              {{ $t('search') }}
-            </button>
-          </div>
-        </div>
-        <div class="filter_search_group_vin">
-          <div class="w-100">
-            <input
-              class="form-control filter_search_group_search_input"
-              :placeholder="$t('home_search.search_placeholder')"
-              type="text"
-            />
-            <i aria-hidden="true" class="fa fa-search fa-lg fa-fw"></i>
-          </div>
-        </div>
-      </div>
-    </transition>
-    <transition mode="out-in" name="search-fade">
       <div
-        v-show="filterShow[2]||filterShow[3]||filterShow[4]||filterShow[5]||filterShow[6]||filterShow[7]||filterShow[8]||filterShow[9]"
+        v-show="filterShow[6]||filterShow[7]||filterShow[8]||filterShow[9]"
         class="filter_search_group_wrapper"
       >
         <h2>{{ $t('coming_soon') }}</h2>
@@ -197,9 +229,14 @@ export default {
     display: grid;
     grid-gap: 10px;
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    @media screen and (min-width: 1200px) {
+      grid-template-columns: repeat(5, minmax(150px, 1fr));
+    }
+    grid-auto-flow: dense;
   }
 
   .filter_search_group_wrapper {
+    grid-column: 1/-1;
     @media screen and (max-width: 576px) {
       padding: 30px 20px;
     }
@@ -213,7 +250,7 @@ export default {
     .filter_search_group {
       align-items: center;
       display: grid;
-      grid-gap: 10px;
+      grid-gap: 26px;
       justify-items: center;
       grid-template-columns: repeat(1, minmax(150px, 1fr));
       @media screen and (min-width: 577px) {
@@ -230,6 +267,25 @@ export default {
       }
       @media screen and (min-width: 993px) {
         grid-template-columns: repeat(5, minmax(150px, 1fr));
+      }
+
+      &_item {
+        width: 100%;
+        height: 100%;
+
+        button {
+          display: block;
+          width: 100%;
+          border: 1px solid #4DA6FF;
+          background-color: #4DA6FF;
+          color: #fff;
+          font: 10px "Roboto-Bold";
+          line-height: 27px;
+          text-align: center;
+          border-radius: 5px;
+          padding: 0;
+          height: 100%;
+        }
       }
     }
 
@@ -254,18 +310,6 @@ export default {
       }
     }
 
-    button {
-      display: block;
-      width: 100px;
-      border: 1px solid #4DA6FF;
-      background-color: #4DA6FF;
-      color: #fff;
-      font: 10px "Roboto-Bold";
-      line-height: 27px;
-      text-align: center;
-      border-radius: 10px;
-      padding: 0;
-    }
   }
 
   .search_group_item {

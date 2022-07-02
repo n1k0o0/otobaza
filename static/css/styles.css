@@ -305,7 +305,7 @@ body {
 
 .langdrop .dropdown-menu .dropdown-item.active, .langdrop .dropdown-menu .dropdown-item:active {
   color: #fff;
-  background-color: #2C2C39;
+  background-color: #5ca9ff;
   -webkit-border-radius: 0;
   border-radius: 0;
 }
