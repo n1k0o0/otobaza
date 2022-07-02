@@ -826,6 +826,12 @@ dl.pro-card__specs dd {
   //margin-top: 8px;
 }
 
+footer {
+  .play-app {
+    justify-content: end;
+  }
+}
+
 .play-app a {
   display: inline-block;
   margin-top: 6px;
