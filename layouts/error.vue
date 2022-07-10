@@ -1,11 +1,6 @@
 <template>
   <div>
     <Header v-if="!error.isAxiosError" />
-    <div v-if="!error.isAxiosError" class="main-header">
-      <div class="container">
-        <HomeSearch />
-      </div>
-    </div>
     <transition mode="out-in" name="page-fade">
       <component :is="errorPage" :error="error" />
     </transition>
@@ -18,6 +13,7 @@ import Header from '@/components/Common/Header/index'
 import HomeSearch from '@/components/Common/Index/HeaderSearch'
 import error404 from '@/components/Error/404.vue'
 import error500 from '@/components/Error/500.vue'
+
 export default {
   name: 'NuxtError',
   components: { Footer, Header, HomeSearch },

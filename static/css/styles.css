@@ -5964,3 +5964,17 @@ img {
 .text-decoration-underline {
   text-decoration: underline
 }
+
+img {
+  max-width: 100%;
+}
+
+.v-select .vs__dropdown-toggle {
+  /*height: inherit;*/
+  background-color: #fff;
+}
+
+.v-select .vs__dropdown-menu {
+  /*min-width: auto;*/
+}
+

@@ -59,7 +59,12 @@ const state = () => ({
   orders: null,
   search_results: null,
   dismantles: null,
-  dismantle: null
+  dismantle: null,
+  spare_parts: [],
+  brands: [],
+  models: [],
+  types: [],
+  loading: false
 })
 
 const getters = {
@@ -81,7 +86,13 @@ const getters = {
   orders (state) { return state.orders },
   search_results (state) { return state.search_results },
   dismantles (state) { return state.dismantles },
-  dismantle (state) { return state.dismantle }
+  dismantle (state) { return state.dismantle },
+  // SEARCH
+  spare_parts (state) { return state.spare_parts },
+  models (state) { return state.models },
+  brands (state) { return state.brands },
+  types (state) { return state.types },
+  loading (state) { return state.loading }
 }
 
 const mutations = {
@@ -149,6 +160,23 @@ const mutations = {
   },
   SET_DISMANTLE (state, payload) {
     state.dismantle = payload
+  },
+
+  // SEARCH - NEW DESIGN
+  SET_SPARE_PARTS (state, payload) {
+    state.spare_parts = payload
+  },
+  SET_MODELS (state, payload) {
+    state.models = payload
+  },
+  SET_BRANDS (state, payload) {
+    state.brands = payload
+  },
+  SET_TYPES (state, payload) {
+    state.types = payload
+  },
+  SET_LOADING (state, payload) {
+    state.loading = payload
   }
 }
 
@@ -522,6 +550,36 @@ const actions = {
     this.$axios.defaults.baseURL = this.$env.BASE_API_URL
     const { data } = await this.$axios.get(`api/dismantles/${id}`)
     commit('SET_DISMANTLE', data?.data || {})
+  },
+
+  // search
+  async GET_SPARE_PARTS ({ commit }) {
+    commit('SET_LOADING', true)
+    this.$axios.defaults.baseURL = this.$env.CATALOG_API_URL
+    const { data: parts } = await this.$axios.get('api/ehisse')
+    commit('SET_SPARE_PARTS', parts.filter((v, i, a) => a.findIndex(v2 => (v2.assemblyGroupNodeId === v.assemblyGroupNodeId)) === i))
+    commit('SET_LOADING', false)
+  },
+  async GET_BRANDS ({ commit }, payload) {
+    commit('SET_LOADING', true)
+    this.$axios.defaults.baseURL = this.$env.CATALOG_API_URL
+    const { data: brands } = await this.$axios.get(`api/ehisse/${payload}`)
+    commit('SET_BRANDS', brands)
+    commit('SET_LOADING', false)
+  },
+  async GET_MODELS ({ commit }, { sparePart, brand }) {
+    commit('SET_LOADING', true)
+    this.$axios.defaults.baseURL = this.$env.CATALOG_API_URL
+    const { data: models } = await this.$axios.get(`api/ehisse/${sparePart}/${brand}`)
+    commit('SET_MODELS', models)
+    commit('SET_LOADING', false)
+  },
+  async GET_TYPES ({ commit }, { sparePart, brand, model }) {
+    commit('SET_LOADING', true)
+    this.$axios.defaults.baseURL = this.$env.CATALOG_API_URL
+    const { data: types } = await this.$axios.get(`api/ehisse/${sparePart}/${brand}/${model}`)
+    commit('SET_TYPES', types)
+    commit('SET_LOADING', false)
   }
 }
 

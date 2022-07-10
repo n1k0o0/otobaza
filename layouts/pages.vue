@@ -1,11 +1,6 @@
 <template>
   <div>
     <Header />
-    <div class="main-header">
-      <div class="container">
-        <HomeSearch />
-      </div>
-    </div>
     <transition mode="out-in" name="page-fade">
       <nuxt :key="$route.fullPath" />
     </transition>
@@ -15,9 +10,10 @@
 <script>
 import Footer from '@/components/Common/Footer/index'
 import Header from '@/components/Common/Header/index'
-import HomeSearch from '@/components/Common/Index/HeaderSearch'
+
 export default {
   name: 'PagesLayout',
+  components: { Footer, Header },
   head () {
     return {
       link: [
@@ -27,7 +23,6 @@ export default {
         }
       ]
     }
-  },
-  components: { Footer, Header, HomeSearch }
+  }
 }
 </script>

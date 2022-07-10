@@ -17,6 +17,7 @@ import Assemblies from '@/components/Catalog/Assemblies'
 import AssembliesPlaceholder from '@/components/Placeholders/AssembliesPlaceholder'
 import { getUrlSlug } from '@/utils'
 import { mapActions } from 'vuex'
+
 export default {
   name: 'Car',
   components: { AssembliesPlaceholder, Assemblies },
@@ -39,7 +40,6 @@ export default {
     } else {
       slug = getUrlSlug(this.$route.params.slug, 'car')
     }
-    console.log(slug,555,this.slug)
     if (!slug.car) this.$nuxt.error({ statusCode: 500, message: 'ID NOT PROVIDED' })
     await this.GET_CAR_ASSEMBLIES({
       car: slug.car
@@ -57,7 +57,7 @@ export default {
     ...mapActions({
       GET_CAR_ASSEMBLIES: 'Catalog/GET_CAR_ASSEMBLIES'
     })
-  },
+  }
 }
 </script>
 <style lang="scss" scoped>

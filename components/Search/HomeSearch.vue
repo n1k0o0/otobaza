@@ -23,37 +23,58 @@
         <div v-show="filterShow[1]" class="filter_search_group_wrapper">
           <div class="filter_search_group">
             <div class="filter_search_group_item">
-              <input
-                class="form-control"
+              <v-select
+                v-model="search.sparePart"
+                label="assemblyGroupName"
+                :loading="loading"
+                :options="spareParts"
                 :placeholder="$t('home_search.spare-parts')"
-                type="text"
+                :reduce="part => part.assemblyGroupNodeId"
+                @input="GET_BRANDS(search.sparePart)"
               />
             </div>
             <div class="filter_search_group_item">
-              <input
-                class="form-control"
+              <v-select
+                v-model="search.brand"
+                :disabled="!search.sparePart"
+                label="manuName"
+                :loading="loading"
+                :options="brands"
                 :placeholder="$t('brand')"
-                type="text"
+                :reduce="brand => brand.manuId"
+                :reset-on-options-change="true"
+                @input="GET_MODELS(search)"
               />
             </div>
             <div class="filter_search_group_item">
-              <input
-                class="form-control"
+              <v-select
+                v-model="search.model"
+                :disabled="!search.brand"
+                label="modelName"
+                :loading="loading"
+                :options="models"
                 :placeholder="$t('model')"
-                type="text"
+                :reduce="part => part.modId"
+                :reset-on-options-change="true"
               />
             </div>
             <div class="filter_search_group_item">
-              <input
-                class="form-control"
+              <v-select
+                v-model="search.type"
+                :disabled="!search.model"
+                label="name"
+                :loading="loading"
+                :options="types"
                 :placeholder="$t('type')"
-                type="text"
+                :reduce="part => part.value"
+                :reset-on-options-change="true"
               />
             </div>
             <div class="filter_search_group_item">
               <button
                 class="btn"
                 type="submit"
+                @click="$router.push(localePath({ name: 'search', query: { sparePart: search.sparePart,brand: search.brand, model: search.model,type:search.type}}));"
               >
                 {{ $t('search') }}
               </button>
@@ -135,16 +156,6 @@
           <h2>{{ $t('coming_soon') }}</h2>
         </div>
       </transition>
-    </div>
-    <transition mode="out-in" name="search-fade">
-      <div
-        v-show="filterShow[6]||filterShow[7]||filterShow[8]||filterShow[9]"
-        class="filter_search_group_wrapper"
-      >
-        <h2>{{ $t('coming_soon') }}</h2>
-      </div>
-    </transition>
-    <div class="second_search_group">
       <div
         ref="item_6"
         class="search_group_item"
@@ -153,6 +164,14 @@
         <img alt="" src="img/search/battery.png" />
         <h5>{{ $t('home_search.battery') }}</h5>
       </div>
+      <transition mode="out-in" name="search-fade">
+        <div
+          v-show="filterShow[6]"
+          class="filter_search_group_wrapper"
+        >
+          <h2>{{ $t('coming_soon') }}</h2>
+        </div>
+      </transition>
       <div
         ref="item_7"
         class="search_group_item"
@@ -161,6 +180,14 @@
         <img alt="" src="img/search/windscreen.png" />
         <h5>{{ $t('home_search.windscreen') }}</h5>
       </div>
+      <transition mode="out-in" name="search-fade">
+        <div
+          v-show="filterShow[7]"
+          class="filter_search_group_wrapper"
+        >
+          <h2>{{ $t('coming_soon') }}</h2>
+        </div>
+      </transition>
       <div
         ref="item_8"
         class="search_group_item"
@@ -169,6 +196,14 @@
         <img alt="" src="img/search/radio.png" />
         <h5>{{ $t('home_search.radio') }}</h5>
       </div>
+      <transition mode="out-in" name="search-fade">
+        <div
+          v-show="filterShow[8]"
+          class="filter_search_group_wrapper"
+        >
+          <h2>{{ $t('coming_soon') }}</h2>
+        </div>
+      </transition>
       <div
         ref="item_9"
         class="search_group_item"
@@ -177,13 +212,26 @@
         <img alt="" src="img/search/car.png" />
         <h5>{{ $t('home_search.auto-cosmetics') }}</h5>
       </div>
+      <transition mode="out-in" name="search-fade">
+        <div
+          v-show="filterShow[9]"
+          class="filter_search_group_wrapper"
+        >
+          <h2>{{ $t('coming_soon') }}</h2>
+        </div>
+      </transition>
     </div>
   </div>
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
+
 export default {
   name: 'HomeSearch',
+  async fetch () {
+    await this.GET_SPARE_PARTS()
+  },
   data () {
     return {
       filterShow: {
@@ -196,10 +244,30 @@ export default {
         7: false,
         8: false,
         9: false
+      },
+      search: {
+        sparePart: '',
+        model: '',
+        brand: '',
+        type: ''
       }
     }
   },
+  computed: {
+    ...mapGetters({
+      spareParts: 'Catalog/spare_parts',
+      brands: 'Catalog/brands',
+      models: 'Catalog/models',
+      types: 'Catalog/types',
+      loading: 'Catalog/loading'
+    })
+  },
   methods: {
+    ...mapActions({
+      GET_SPARE_PARTS: 'Catalog/GET_SPARE_PARTS',
+      GET_BRANDS: 'Catalog/GET_BRANDS',
+      GET_MODELS: 'Catalog/GET_MODELS'
+    }),
     showFilter (a) {
       for (const item in this.filterShow) {
         if (+item === a) {
@@ -228,9 +296,9 @@ export default {
   .first_search_group {
     display: grid;
     grid-gap: 10px;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     @media screen and (min-width: 1200px) {
-      grid-template-columns: repeat(5, minmax(150px, 1fr));
+      grid-template-columns: repeat(5, minmax(180px, 1fr));
     }
     grid-auto-flow: dense;
   }
@@ -265,13 +333,13 @@ export default {
           grid-column: unset;
         }
       }
-      @media screen and (min-width: 993px) {
+      @media screen and (min-width: 1200px) {
         grid-template-columns: repeat(5, minmax(150px, 1fr));
       }
 
       &_item {
         width: 100%;
-        height: 100%;
+        //height: 100%;
 
         button {
           display: block;
@@ -328,9 +396,13 @@ export default {
   }
 
   .second_search_group {
+    grid-auto-flow: dense;
     display: grid;
     grid-gap: 10px;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    @media screen and (min-width: 1200px) {
+      grid-template-columns: repeat(4, minmax(180px, 1fr));
+    }
   }
 
   .tooltip_icon {
@@ -352,6 +424,10 @@ export default {
     right: 5px;
     color: #bababa;
     cursor: pointer;
+  }
+
+  .v-select {
+    height: 100%;
   }
 }
 
