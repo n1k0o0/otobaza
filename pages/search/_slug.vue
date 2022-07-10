@@ -176,8 +176,8 @@ export default {
         dots: false,
         infinite: false,
         speed: 500,
-        slidesToShow: 4,
-        slidesToScroll: 4,
+        slidesToShow: 5,
+        slidesToScroll: 1,
         initialSlide: 0,
         responsive: [
           {
@@ -191,7 +191,7 @@ export default {
           {
             breakpoint: 991,
             settings: {
-              slidesToShow: 5,
+              slidesToShow: 4,
               slidesToScroll: 1,
               infinite: true
             }
@@ -201,14 +201,14 @@ export default {
             settings: {
               slidesToShow: 3,
               slidesToScroll: 1
-
             }
           },
           {
             breakpoint: 576,
             settings: {
               slidesToShow: 1,
-              slidesToScroll: 1
+              slidesToScroll: 1,
+              dots: true
             }
           }
         ]
@@ -301,9 +301,17 @@ export default {
         flex-direction: column;
         &_img {
           max-width: 100% !important;
+          width: 100% !important;
 
           &_big {
-            display: none;
+            display: none !important;
+          }
+        }
+      }
+      @media screen and (max-width: 576px) {
+        &_img {
+          img {
+            height: 300px;
           }
         }
       }
