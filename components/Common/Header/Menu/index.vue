@@ -2,13 +2,13 @@
   <div class="header-menu">
     <div class="container">
       <div class="row mdetails">
-        <div class="col-3 col-sm-3">
+        <div class="col-5 col-sm-4">
           <n-link class="flogo" :to="localePath('index')">
             <img alt="logo" src="/css/icons/logo.svg" />
           </n-link>
         </div>
 
-        <div class="col-9 col-sm-9">
+        <div class="col-7 col-sm-8">
           <div class="hbflex">
             <div class="mmenu mmenu_hide" :class="{transform00:isMobileMenuShow}">
               <div
@@ -70,13 +70,14 @@
 </template>
 <script>
 import CartLink from '@/components/Catalog/CartLink'
-import Currency from '@/components/Common/Header/Menu/Currency'
+// import Currency from '@/components/Common/Header/Menu/Currency'
 import LoggedIn from '@/components/Common/Header/Menu/LoggedIn'
 import Login from '@/components/Common/Header/Menu/Login'
 import { mapGetters, mapMutations } from 'vuex'
+
 export default {
   name: 'HeaderMenu',
-  components: { CartLink, LoggedIn, Login, Currency },
+  components: { CartLink, LoggedIn, Login },
   props: {
     settings: {
       type: Object,

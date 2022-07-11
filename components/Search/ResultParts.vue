@@ -9,7 +9,7 @@
                     params: {\
                     slug: 'nissan-30005-masin-kataloqu'\
                     }\
-                    })").search_results_items_item(v-for="card in parts")
+                    })").search_results_items_item(v-for="(card,index) in parts", :key="index")
           img(src='https://www.howacarworks.com/illustration/1742/the-compression-igntion-engine.png')
           hr
           div
