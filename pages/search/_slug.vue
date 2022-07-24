@@ -1,78 +1,81 @@
 <template lang="pug">
   div
-    //template(v-if="$fetchState.pending")
-    //  PartsPlaceholder
-    //template(v-else-if="$fetchState.error")
-    //  .container
-    //    .mcontainer.mh60vh
-    //      .response-message
-    //        .mkub.mkubfail
-    //        .rminfo
-    //          h4.rmtt {{ $t('not_found') }}
-    //          p.rmtxt {{ $t('not_found_info') }}
-    //          h1 {{$fetchState}}
-    template
+    template(v-if="$fetchState.pending")
+      PartsPlaceholder
+    template(v-else-if="$fetchState.error")
+      .container
+        .mcontainer.mh60vh
+          .response-message
+            .mkub.mkubfail
+            .rminfo
+              h4.rmtt {{ $t('not_found') }}
+              p.rmtxt {{ $t('not_found_info') }}
+              h1 {{$fetchState}}
+    template(v-else)
       div
         .container
           .hr-wrap
-            h1.title.hr-text Ehtiyyat hisse
+            h1.title.hr-text {{$t('home_search.spare-part')}}
           .product
             .product_info
               .product_info_img
                 .product_info_img_big.pointer
-                  img(:src='images[imgIndex]')(@click="modalVisibility=true")
+                  img(:src='product.url[imgIndex]', :alt="product.manufacturer")(@click="modalVisibility=true")
                   .before.pointer(@click="previousImage")
                   .after.pointer(@click="nextImage")
                 .product_info_img_slider
                   VueSlickCarousel(v-bind="slideShowSettings")
-                    .product_info_img_slider_slide(v-for="(image,index) in images")
+                    .product_info_img_slider_slide(v-for="(image,index) in product.url")
                       div(:class="{'selected':imgIndex===index}")
                         img.pointer(:src='image', @click="imgIndex=index")
               .product_info_details
                 h1.product_info_details_title.font-weight-bold
-                  | BMW X5 Muherrik
+                  | {{product.description}}
                 .product_info_details_text
                   table.table.table-striped
                     tbody
                       tr
-                        td İstehsalçı
-                        td Kotramo
+                        td {{$t('manufacturer')}}
+                        td {{product.manufacturer}}
                       tr
-                        td İstehsalçı kodu
-                        td 1234
+                        td {{$t('manufacturer_code')}}
+                        td {{product.part_number}}
                       tr
-                        td OEM kodu
-                        td 5830221
+                        td {{$t('oem')}}
+                        td {{product.oem}}
                       tr
-                        td Yeni və ya ikinci əl
-                        td Yeni
+                        td {{$t('new_or_used')}}
+                        td {{product.product_type}}
                       tr
-                        td Mağaza adı
-                        td Mağaza
+                        td {{$t('store')}}
+                        td {{product.seller.store_name}}
                       tr
-                        td Nömrə
-                        td +994 55 000
+                        td {{$t('phone_number')}}
+                        td(v-show="!showPhone" @click="showPhone=true").pointer.phone {{product.seller.phone.slice(0, 9).padEnd(13,'X')}}
+                        td(v-show="showPhone").phone {{product.seller.phone}}
                       tr
-                        td Ünvan
-                        td Azərbaycan. Bakı
+                        td {{$t('address')}}
+                        td {{product.seller.address}}
                 .product_info_details_actions
                   .product_info_details_actions_wrapper
                     .product_info_details_actions_wrapper_price
-                      p.font-weight-bold.red.p-0.m-0 5000 AZN
+                      p.font-weight-bold.p-0.m-0 {{product.price.price}} {{product.price.currency_symbol}}
                     .product_info_details_actions_wrapper_cart
-                      button.btn.px-3.py-1.position-relative.w-100
-                        .fa.fa-shopping-cart.fa-lg.fa-fw
-                        | sebete elave et
+                      //button.btn.px-3.py-1.position-relative.w-100
+                      //  .fa.fa-shopping-cart.fa-lg.fa-fw
+                      //  | sebete elave et
+                      AddToCartButton(:id="product.id")
+                        | {{$t('add_to_cart')}}
                     .product_info_details_actions_wrapper_share
                       button.btn.share
                         <i class="fa fa-share-alt" aria-hidden="true"></i>
             .product_description
               .hr-wrap
-                h3.hr-text.mb-3.font-weight-bold Mezmunu
-              p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad commodi incidunt ipsum labore laboriosam minus molestiae, obcaecati pariatur sit ullam? Culpa cupiditate modi mollitia pariatur saepe voluptatem. Ab dicta dolore illo itaque officia quod ullam. Accusantium ad adipisci aperiam asperiores aspernatur assumenda atque, deserunt distinctio doloribus ea enim esse eum eveniet ex exercitationem expedita harum maiores modi molestias nesciunt nihil nostrum nulla numquam obcaecati odio omnis pariatur porro quasi quibusdam quidem quo rem repellat repellendus ut veritatis voluptate voluptatum.
+                h3.hr-text.mb-3.font-weight-bold {{$t('content')}}
+              p {{product.description_catalog}}
           .related_products
             .hr-wrap
-              h2.hr-text.mb-3.font-weight-bold Oxsar mehsullar
+              h2.hr-text.mb-3.font-weight-bold {{$t('related_products')}}
             .related_products_items
               VueSlickCarousel(v-bind="settings")
                 n-link(:to="localePath({\
@@ -80,7 +83,7 @@
                   params: {\
                   slug: 'nissan-30005-masin-kataloqu'\
                   }\
-                  })").related_products_items_item(v-for="card in 20")
+                  })").related_products_items_item(v-for="(card,index) in 20", :key="index")
                   .related_products_items_item_wrapper
                     img(src='https://www.howacarworks.com/illustration/1742/the-compression-igntion-engine.png')
                     hr
@@ -92,7 +95,7 @@
                     div
                       button.btn.px-3.py-1.mt-2.position-relative.w-100
                         .fa.fa-shopping-cart.fa-lg.fa-fw
-                        | sebete elave et
+                        | {{$t('add_to_cart')}}
           .modal-image.pointer(v-if='modalVisibility' @click="modalVisibility=false")
             .modal-image_wrap
               img(alt='', :src='images[imgIndex]')
@@ -106,24 +109,25 @@ import VueSlickCarousel from 'vue-slick-carousel'
 import 'vue-slick-carousel/dist/vue-slick-carousel.css'
 // optional style for arrows & dots
 import 'vue-slick-carousel/dist/vue-slick-carousel-theme.css'
+import PartsPlaceholder from '@/components/Placeholders/PartsPlaceholder'
+
+import AddToCartButton from '@/components/Catalog/AddToCartButton'
+
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   name: 'SearchParts',
-  components: { VueSlickCarousel },
+  components: { VueSlickCarousel, AddToCartButton, PartsPlaceholder },
   watchQuery: true,
   layout: 'pages',
   scrollToTop: true,
-  // async fetch () {
-  //   const param = this.$route.params.slug.split('-')
-  //   const data = {
-  //     car: param[0],
-  //     model: param[1]
-  //   }
-  //   await this.GET_OEM(data)
-  // },
+  async fetch () {
+    const param = this.$route.params.slug
+    await this.GET_PRODUCT(param)
+  },
   async validate ({ params, error, app }) {
-    const param = params.slug.split('-')
-    if (param.length <= 2 && isNaN(param[1])) {
+    const param = params.slug
+    if (isNaN(param)) {
       return error({ statusCode: 500, message: app.i18n.t('not_found') })
     } else {
       return true
@@ -221,15 +225,24 @@ export default {
         'https://cdn.britannica.com/73/24073-004-639E15FC/Cross-section-V-type-engine.jpg',
         'https://cdn.hswstatic.com/gif/car-engine-new1.jpg'
       ],
-      modalVisibility: false
+      modalVisibility: false,
+      showPhone: false
     }
   },
+  computed: {
+    ...mapGetters({
+      product: 'Catalog/search_part'
+    })
+  },
   methods: {
+    ...mapActions({
+      GET_PRODUCT: 'Catalog/GET_SEARCH_PRODUCT'
+    }),
     pickImage (url) {
       this.imgUrl = url
     },
     nextImage () {
-      if (this.imgIndex === this.images.length - 1) {
+      if (this.imgIndex === this.product.url.length - 1) {
         this.imgIndex = 0
       } else {
         this.imgIndex += 1
@@ -237,7 +250,7 @@ export default {
     },
     previousImage () {
       if (this.imgIndex === 0) {
-        this.imgIndex = this.images.length - 1
+        this.imgIndex = this.product.url.length - 1
       } else {
         this.imgIndex -= 1
       }
@@ -355,6 +368,9 @@ export default {
 
         &_text {
           //margin:0 50px;
+          .phone {
+            color: #5ca9ff;
+          }
         }
 
         &_actions {
@@ -373,6 +389,7 @@ export default {
 
             &_price {
               font-size: 20px;
+              color: #ff0000;
             }
           }
         }

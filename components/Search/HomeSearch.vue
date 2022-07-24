@@ -56,19 +56,26 @@
                 :placeholder="$t('model')"
                 :reduce="part => part.modId"
                 :reset-on-options-change="true"
+                @input="GET_TYPES(search)"
               />
             </div>
             <div class="filter_search_group_item">
               <v-select
                 v-model="search.type"
                 :disabled="!search.model"
-                label="name"
                 :loading="loading"
                 :options="types"
                 :placeholder="$t('type')"
-                :reduce="part => part.value"
+                :reduce="part => part.carId"
                 :reset-on-options-change="true"
-              />
+              >
+                <template slot="selected-option" slot-scope="option">
+                  {{ option.carName + '(' + option.yearOfConstrFrom + '-' + option.yearOfConstrTo + ')' }}
+                </template>
+                <template slot="option" slot-scope="option">
+                  {{ option.carName + ' (' + option.yearOfConstrFrom + '-' + option.yearOfConstrTo + ')' }}
+                </template>
+              </v-select>
             </div>
             <div class="filter_search_group_item">
               <button
@@ -266,7 +273,8 @@ export default {
     ...mapActions({
       GET_SPARE_PARTS: 'Catalog/GET_SPARE_PARTS',
       GET_BRANDS: 'Catalog/GET_BRANDS',
-      GET_MODELS: 'Catalog/GET_MODELS'
+      GET_MODELS: 'Catalog/GET_MODELS',
+      GET_TYPES: 'Catalog/GET_TYPES'
     }),
     showFilter (a) {
       for (const item in this.filterShow) {
@@ -295,12 +303,9 @@ export default {
 
   .first_search_group {
     display: grid;
-    grid-gap: 10px;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    @media screen and (min-width: 1200px) {
-      grid-template-columns: repeat(5, minmax(180px, 1fr));
-    }
     grid-auto-flow: dense;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+
   }
 
   .filter_search_group_wrapper {
@@ -381,7 +386,7 @@ export default {
   }
 
   .search_group_item {
-    grid-auto-rows: 100px 50px;
+    grid-auto-rows: 90px 60px;
     justify-content: center;
     justify-items: center;
     align-items: center;
@@ -389,9 +394,20 @@ export default {
     grid-auto-flow: row;
     border-radius: 10px;
     cursor: pointer;
+    padding: 0 10px;
 
     &:hover {
       background-color: #f8f8f8;
+    }
+
+    img {
+      width: 45px;
+    }
+
+    h5 {
+      font-size: 1rem;
+      word-break: break-word;
+      text-align: center;
     }
   }
 
@@ -429,6 +445,7 @@ export default {
   .v-select {
     height: 100%;
   }
+
 }
 
 </style>

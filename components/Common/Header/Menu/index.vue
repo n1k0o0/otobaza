@@ -36,7 +36,7 @@
                   data-toggle="dropdown"
                   type="button"
                 >
-                  <img alt="Flag" :src="`img/header/${currentLang.toLowerCase()}.png`" />{{ currentLang }}
+                  <img alt="Flag" :src="`/img/header/${currentLang.toLowerCase()}.png`" />{{ currentLang }}
                 </button>
                 <div aria-labelledby="dropdownlang" class="dropdown-menu">
                   <n-link

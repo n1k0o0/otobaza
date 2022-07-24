@@ -409,7 +409,11 @@ body {
   cursor: pointer;
 }
 
-.wishlist-btn:focus, .car-add-btn:focus, .all-add-btn:focus {
+.car-add-btn {
+  background-color: #5ca9ff;
+}
+
+.wishlist-btn:focus, .car-add-btn:focus, .all-add-btn:focus, button:focus {
   outline: none;
 }
 
@@ -2306,7 +2310,7 @@ input::-ms-input-placeholder {
 }
 
 .car-add-btn, .all-add-btn {
-  border: 1px solid #2C2C39;
+  border: 1px solid #5ca9ff;
   -webkit-transition: all .4s ease;
   -o-transition: all .4s ease;
   transition: all .4s ease;
@@ -2314,7 +2318,7 @@ input::-ms-input-placeholder {
 
 .car-add-btn:hover, .all-add-btn:hover {
   background-color: transparent;
-  color: #2C2C39;
+  color: #5ca9ff;
 }
 
 .car_details_item {

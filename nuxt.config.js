@@ -65,7 +65,8 @@ module.exports = {
     { src: '~~/plugins/swal.js', mode: 'client' },
     { src: '~~/plugins/inputmask.js', mode: 'client' },
     { src: '~~/plugins/tooltip.js', mode: 'client' },
-    { src: '~~/plugins/vue-select.js', mode: 'client' }
+    { src: '~~/plugins/vue-select.js', mode: 'client' },
+    { src: '~/plugins/lazyload', mode: 'client' }
   ],
   modules: [
     // Doc: https://axios.nuxtjs.org/usage

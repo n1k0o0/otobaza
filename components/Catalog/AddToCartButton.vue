@@ -1,11 +1,13 @@
 <template lang="pug">
-  button(type='button' :disabled="loading" @click.prevent="addToCart")
+  button(type='button' :disabled="loading" @click.prevent="addToCart").btn.px-3.py-1.position-relative.w-100
     i(:class="loading ? 'fa fa-spin fa-spinner' : 'fa fa-shopping-cart'")
-    slot
+    span.pl-2
+      slot
 </template>
 <script>
 
 import { mapActions } from 'vuex'
+
 export default {
   name: 'AddToCartButton',
   props: {

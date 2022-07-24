@@ -51,6 +51,7 @@ const state = () => ({
   vin_assemblies_tree: [],
   car_assemblies_list: [],
   parts: null,
+  search_parts: [],
   vin_parts: null,
   cart: [],
   motor_types: [],
@@ -64,7 +65,13 @@ const state = () => ({
   brands: [],
   models: [],
   types: [],
-  loading: false
+  search_part: [],
+  loading: false,
+  search_lang: '',
+  search_page: 1,
+  last_page: 1,
+  search_price_sort: 0,
+  search_new_sort: 0
 })
 
 const getters = {
@@ -92,7 +99,14 @@ const getters = {
   models (state) { return state.models },
   brands (state) { return state.brands },
   types (state) { return state.types },
-  loading (state) { return state.loading }
+  loading (state) { return state.loading },
+  search_parts (state) { return state.search_parts },
+  search_part (state) { return state.search_part },
+  search_lang (state) { return state.search_lang },
+  search_page (state) { return state.search_page },
+  last_page (state) { return state.last_page },
+  search_price_sort (state) { return state.search_price_sort },
+  search_new_sort (state) { return state.search_new_sort }
 }
 
 const mutations = {
@@ -177,6 +191,27 @@ const mutations = {
   },
   SET_LOADING (state, payload) {
     state.loading = payload
+  },
+  SET_SEARCH_PARTS (state, payload) {
+    state.search_parts = payload
+  },
+  SET_SEARCH_PART (state, payload) {
+    state.search_part = payload
+  },
+  SET_SEARCH_LANG (state, payload) {
+    state.search_lang = payload
+  },
+  SET_SEARCH_PAGE (state, payload) {
+    state.search_page = payload
+  },
+  SET_LAST_PAGE (state, payload) {
+    state.last_page = payload
+  },
+  SET_SEARCH_NEW_SORT (state, payload) {
+    state.search_new_sort = payload
+  },
+  SET_SEARCH_PRICE_SORT (state, payload) {
+    state.search_price_sort = payload
   }
 }
 
@@ -558,6 +593,7 @@ const actions = {
     this.$axios.defaults.baseURL = this.$env.CATALOG_API_URL
     const { data: parts } = await this.$axios.get('api/ehisse')
     commit('SET_SPARE_PARTS', parts.filter((v, i, a) => a.findIndex(v2 => (v2.assemblyGroupNodeId === v.assemblyGroupNodeId)) === i))
+    commit('SET_SEARCH_LANG', this.$i18n.locale)
     commit('SET_LOADING', false)
   },
   async GET_BRANDS ({ commit }, payload) {
@@ -580,6 +616,66 @@ const actions = {
     const { data: types } = await this.$axios.get(`api/ehisse/${sparePart}/${brand}/${model}`)
     commit('SET_TYPES', types)
     commit('SET_LOADING', false)
+  },
+  async GET_SEARCH_PARTS ({ commit, state }, {
+    sparePart,
+    brand = null,
+    model = null,
+    type = null,
+    priceSort = 0,
+    isNewSort = 0,
+    page = false
+  }) {
+    commit('SET_LOADING', true)
+
+    this.$axios.defaults.baseURL = this.$env.CATALOG_API_URL
+    const { data: oems } = await this.$axios.post('api/ehisse/search', {
+      assemblyGroupNodeId: sparePart,
+      manuId: brand,
+      modId: model,
+      carId: type
+    })
+
+    if (page) {
+      commit('SET_SEARCH_PAGE', ++state.search_page)
+      commit('SET_SEARCH_PRICE_SORT', priceSort)
+      commit('SET_SEARCH_NEW_SORT', isNewSort)
+    } else {
+      commit('SET_SEARCH_PAGE', 1)
+      commit('SET_SEARCH_PRICE_SORT', 0)
+      commit('SET_SEARCH_NEW_SORT', 0)
+    }
+
+    this.$axios.defaults.baseURL = this.$env.BASE_API_URL
+    // TODO: url = /api/v2/products
+    const {
+      data: {
+        data: products,
+        meta
+      }
+    } = await this.$axios.get(`https://62d45369cd960e45d456a36d.mockapi.io/api/v2/products?page=${state.search_page}`, {
+      country: 1,
+      currency: 'AZN',
+      price: priceSort || state.search_price_sort,
+      isNew: isNewSort || state.search_new_sort,
+      ...oems
+    })
+
+    commit('SET_LAST_PAGE', meta.last_page)
+
+    if (page) {
+      commit('SET_SEARCH_PARTS', [...state.search_parts, ...products])
+    } else {
+      commit('SET_SEARCH_PARTS', products)
+    }
+
+    commit('SET_LOADING', false)
+  },
+  async GET_SEARCH_PRODUCT ({ commit }, payload) {
+    this.$axios.defaults.baseURL = this.$env.CATALOG_API_URL
+    // const { data: { data: part } } = await this.$axios.get(`/api/v2/products/${payload}`)
+    const { data: { data: part } } = await this.$axios.get(`https://62d45369cd960e45d456a36d.mockapi.io/api/v2/product/${payload}`)
+    commit('SET_SEARCH_PART', part)
   }
 }
 

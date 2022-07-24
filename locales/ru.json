@@ -253,6 +253,7 @@
   "manufacturer": "Производитель",
   "select_manufacturer": "Выберите производителя",
   "model": "Модель",
+  "brand": "Марка",
   "select_model": "Выберите модель",
   "select_automobile": "Выберите автомобиля",
   "save": "Запомнить",
@@ -314,5 +315,31 @@
     "auth": "Для поиска по VIN-коду войдите в свою учетную запись"
   },
   "presentation": "Презентация",
-  "blog_youtube": "Более подробную информацию об Otobaza вы можете найти на нашем youtube канале"
+  "blog_youtube": "Более подробную информацию об Otobaza вы можете найти на нашем youtube канале",
+  "search": "Поиск",
+  "coming_soon": "Скоро",
+  "home_search": {
+    "spare-parts": "Запчасти",
+    "spare-part": "Запчасть",
+    "accessory": "Аксессуар",
+    "used": "Б/у",
+    "gasoline": "Бензин",
+    "wheel": "Колеса",
+    "battery": "Аккумулятор",
+    "windscreen": "Лобовое стекло",
+    "radio": "Аудио/Видео/GPS",
+    "auto-cosmetics": "Автокосметика",
+    "search_placeholder": "Поиск по коду запчасти,Vin коду...",
+    "tooltip": "Some tooltip will be here ..."
+  },
+  "oem": "OEM код",
+  "new_or_used": "Новый или подержанный",
+  "content": "Описание",
+  "related_products": "Похожие продукты",
+  "new": "Новый",
+  "more_products": "Больше продуктов",
+  "not_found_products": "* Напишите нам запчасть, которую вы не можете найти, мы найдем вас и свяжемся с вами...",
+  "contact_us": "Свяжитесь с нами",
+  "result_count": "Поиск дал результатов: {count}",
+  "manufacturer_code": "Код производителя"
 }

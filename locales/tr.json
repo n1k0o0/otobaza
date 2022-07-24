@@ -253,6 +253,7 @@
   "manufacturer": "Üretici",
   "select_manufacturer": "Üretici seçin",
   "model": "Model",
+  "brand": "Marka",
   "select_model": "Model seçin",
   "select_automobile": "Araba seçin",
   "save": "Hatırlamak",
@@ -314,5 +315,31 @@
     "auth": "VIN kodu ile arama yapmak için lütfen hesabınıza giriş yapın"
   },
   "presentation": "Sunum",
-  "blog_youtube": "Otobaza hakkında daha fazla bilgiyi youtube kanalımızda bulabilirsiniz"
+  "blog_youtube": "Otobaza hakkında daha fazla bilgiyi youtube kanalımızda bulabilirsiniz",
+  "search": "Ara",
+  "coming_soon": "Çok yakında",
+  "home_search": {
+    "spare-parts": "Yedek parçalar",
+    "spare-part": "Yedek parça",
+    "accessory": "Aksesuar",
+    "used": "Kullanılmış",
+    "gasoline": "Benzin",
+    "wheel": "Teker",
+    "battery": "Batarya",
+    "windscreen": "Ön cam",
+    "radio": "Audio/Video/Gps",
+    "auto-cosmetics": "Oto-kozmetik",
+    "search_placeholder": "Yedek parça kodu, Vin kodu ile arama yapın...",
+    "tooltip": "Some tooltip will be here ..."
+  },
+  "oem": "OEM kodu",
+  "new_or_used": "Yeni veya kullanılmış",
+  "content": "Tanım",
+  "related_products": "Benzer ürünler",
+  "new": "Yeni",
+  "more_products": "Daha fazla ürün",
+  "not_found_products": "* Bulamadığınız yedek parçayı bize yazın, sizi arayalım ve sizinle iletişime geçelim...",
+  "contact_us": "Bize Ulaşın",
+  "result_count": "Arama, {count} sonuç döndürdü",
+  "manufacturer_code": "Üretici kodu"
 }

@@ -320,7 +320,8 @@
   "search": "Axtar",
   "coming_soon": "Coming Soon",
   "home_search": {
-    "spare-parts": "Ehtiyyat hissə",
+    "spare-parts": "Ehtiyyat hissələr",
+    "spare-part": "Ehtiyyat hissə",
     "accessory": "Aksesuar",
     "used": "İkinci əl",
     "gasoline": "Yağ",
@@ -331,5 +332,15 @@
     "auto-cosmetics": "Avtokosmetika/Kimya",
     "search_placeholder": "Ehtiyyat hissə kodu,Vin kod ilə axtar…",
     "tooltip": "Some tooltip will be here ..."
-  }
+  },
+  "oem": "OEM kodu",
+  "new_or_used": "Yeni və ya ikinci əl",
+  "content": "Məzmunu",
+  "related_products": "Oxşar məhsullar",
+  "new": "Yeni",
+  "more_products": "Daha Çoxuna bax",
+  "not_found_products": "* Tapa bilmədiyiniz ehtiyyat hissəni bizə yazın,biz sizin əvəzinizə axtarıb sizinlə əlaqə saxlıyaq…",
+  "contact_us": "Əlaqe saxla",
+  "result_count": "Axtaris Uzre {count} netice verdi",
+  "manufacturer_code": "İstehsalçı kodu"
 }

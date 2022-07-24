@@ -253,6 +253,7 @@
   "manufacturer": "Manufacturer",
   "select_manufacturer": "Choose a manufacturer",
   "model": "Model",
+  "brand": "Brand",
   "select_model": "Choose a model",
   "select_automobile": "Choose a car",
   "save": "Remember",
@@ -314,5 +315,31 @@
     "auth": "To search by VIN code, please log in to your account"
   },
   "presentation": "Presentation",
-  "blog_youtube": "You can find more information about the Otobaza on our youtube channel"
+  "blog_youtube": "You can find more information about the Otobaza on our youtube channel",
+  "search": "Search",
+  "coming_soon": "Coming Soon",
+  "home_search": {
+    "spare-parts": "Spare parts",
+    "spare-part": "Spare part",
+    "accessory": "Accessory",
+    "used": "Used",
+    "gasoline": "Gasoline",
+    "wheel": "Wheel",
+    "battery": "Battery",
+    "windscreen": "Windscreen",
+    "radio": "Audio/Video/Gps",
+    "auto-cosmetics": "Auto-cosmetics",
+    "search_placeholder": "Search by spare part code,Vin code...",
+    "tooltip": "Some tooltip will be here ..."
+  },
+  "oem": "OEM code",
+  "new_or_used": "New or used",
+  "content": "Description",
+  "related_products": "Similar products",
+  "new": "New",
+  "more_products": "More products",
+  "not_found_products": "* Write us the spare part you can't find, we will search for you and contact you...",
+  "contact_us": "Contact us",
+  "result_count": "Search returned {count} results",
+  "manufacturer_code": "Manufacturer code"
 }
