@@ -67,8 +67,8 @@ export default {
     }
   },
   async fetch () {
-    const brand = this.$route.params.brand
-    const catalog = this.$route.params.catalog
+    const brand = +this.$route.params.brand
+    const catalog = +this.$route.params.catalog
 
     if (!this.spareParts?.length) {
       await this.GET_SPARE_PARTS()
