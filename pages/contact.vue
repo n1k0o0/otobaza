@@ -197,6 +197,12 @@ export default {
         from_name: '',
         from_email: '',
         message: ''
+      },
+      title: {
+        az: 'Otobaza.com - Əlaqə',
+        ru: 'Otobaza.com - Контакты',
+        en: 'Otobaza.com - Contact',
+        tr: 'Otobaza.com - İletişim'
       }
     }
   },
@@ -293,6 +299,13 @@ export default {
           this.$refs.observer.reset()
         })
       })
+    }
+  },
+  head () {
+    const title = this.title[this.$i18n.locale]
+
+    return {
+      title: `${title} `
     }
   }
 }
