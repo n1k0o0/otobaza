@@ -18,7 +18,7 @@
             h1.title.hr-text {{$t('home_search.spare-part')}}
           .product
             .product_info
-              .product_info_img
+              .product_info_img(v-if="product.url.length")
                 .product_info_img_big.pointer
                   img(:src='product.url[imgIndex]', :alt="product.manufacturer")(@click="modalVisibility=true")
                   .before.pointer(@click="previousImage")
@@ -98,7 +98,7 @@
                         | {{$t('add_to_cart')}}
           .modal-image.pointer(v-if='modalVisibility' @click="modalVisibility=false")
             .modal-image_wrap
-              img(alt='', :src='images[imgIndex]')
+              img(alt='action', :src='images[imgIndex]')
               .before.pointer(@click.stop="previousImage")
               .after.pointer(@click.stop="nextImage")
 

@@ -19,9 +19,9 @@ div
               span {{ $t('no_parts') }}
                 .parts-play-app
                   a(href='https://apps.apple.com/us/app/facebook/id1528493953' target='_blank')
-                    img(alt='' src='/css/icons/app_store_badge.svg')
+                    img(alt='apple' src='/css/icons/app_store_badge.svg')
                   a(:href='androidLink' target='_blank')
-                    img(alt='' src='/css/icons/google_play_badge.svg')
+                    img(alt='android' src='/css/icons/google_play_badge.svg')
 </template>
 <script>
 import PartsFilters from '@/components/Catalog/PartsFilters'

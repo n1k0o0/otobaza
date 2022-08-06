@@ -5,145 +5,145 @@
         .catalog_logo
           a(href='#')
             span.logo
-              img.cl-img(src='/img/cl2.png', alt='')
+              img.cl-img(src='/img/cl2.png', alt='catalog')
             span.cl-tt Audi
       .col-6.col-sm-4.col-md-2
         .catalog_logo
           a(href='#')
             span.logo
-              img.cl-img(src='/img/cl2.png', alt='')
+              img.cl-img(src='/img/cl2.png', alt='catalog')
             span.cl-tt Alfa-Romeo
       .col-6.col-sm-4.col-md-2
         .catalog_logo
           a(href='#')
             span.logo
-              img.cl-img(src='/img/cl2.png', alt='')
+              img.cl-img(src='/img/cl2.png', alt='catalog')
             span.cl-tt Acura
       .col-6.col-sm-4.col-md-2
         .catalog_logo
           a(href='#')
             span.logo
-              img.cl-img(src='/img/cl2.png', alt='')
+              img.cl-img(src='/img/cl2.png', alt='catalog')
             span.cl-tt Asia-motors
       .col-6.col-sm-4.col-md-2
         .catalog_logo
           a(href='#')
             span.logo
-              img.cl-img(src='/img/cl2.png', alt='')
+              img.cl-img(src='/img/cl2.png', alt='catalog')
             span.cl-tt BMW
       .col-6.col-sm-4.col-md-2
         .catalog_logo
           a(href='#')
             span.logo
-              img.cl-img(src='/img/cl2.png', alt='')
+              img.cl-img(src='/img/cl2.png', alt='catalog')
             span.cl-tt Buick
       .col-6.col-sm-4.col-md-2
         .catalog_logo
           a(href='#')
             span.logo
-              img.cl-img(src='/img/cl2.png', alt='')
+              img.cl-img(src='/img/cl2.png', alt='catalog')
             span.cl-tt Asia-motors
       .col-6.col-sm-4.col-md-2
         .catalog_logo
           a(href='#')
             span.logo
-              img.cl-img(src='/img/cl2.png', alt='')
+              img.cl-img(src='/img/cl2.png', alt='catalog')
             span.cl-tt BMW
       .col-6.col-sm-4.col-md-2
         .catalog_logo
           a(href='#')
             span.logo
-              img.cl-img(src='/img/cl2.png', alt='')
+              img.cl-img(src='/img/cl2.png', alt='catalog')
             span.cl-tt Buick
       .col-6.col-sm-4.col-md-2
         .catalog_logo
           a(href='#')
             span.logo
-              img.cl-img(src='/img/cl2.png', alt='')
+              img.cl-img(src='/img/cl2.png', alt='catalog')
             span.cl-tt Mercedes-Benz
       .col-6.col-sm-4.col-md-2
         .catalog_logo
           a(href='#')
             span.logo
-              img.cl-img(src='/img/cl2.png', alt='')
+              img.cl-img(src='/img/cl2.png', alt='catalog')
             span.cl-tt Alpha-Romeo
       .col-6.col-sm-4.col-md-2
         .catalog_logo
           a(href='#')
             span.logo
-              img.cl-img(src='/img/cl2.png', alt='')
+              img.cl-img(src='/img/cl2.png', alt='catalog')
             span.cl-tt Acura
       .col-6.col-sm-3.col-md-2
         .catalog_logo
           a(href='#')
             span.logo
-              img.cl-img(src='/img/cl2.png', alt='')
+              img.cl-img(src='/img/cl2.png', alt='catalog')
             span.cl-tt Alfa-Romeo
       .col-6.col-sm-4.col-md-2
         .catalog_logo
           a(href='#')
             span.logo
-              img.cl-img(src='/img/cl2.png', alt='')
+              img.cl-img(src='/img/cl2.png', alt='catalog')
             span.cl-tt Acura
       .col-6.col-sm-4.col-md-2
         .catalog_logo
           a(href='#')
             span.logo
-              img.cl-img(src='/img/cl2.png', alt='')
+              img.cl-img(src='/img/cl2.png', alt='catalog')
             span.cl-tt BMW
       .col-6.col-sm-4.col-md-2
         .catalog_logo
           a(href='#')
             span.logo
-              img.cl-img(src='/img/cl2.png', alt='')
+              img.cl-img(src='/img/cl2.png', alt='catalog')
             span.cl-tt Buick
       .col-6.col-sm-4.col-md-2
         .catalog_logo
           a(href='#')
             span.logo
-              img.cl-img(src='/img/cl2.png', alt='')
+              img.cl-img(src='/img/cl2.png', alt='catalog')
             span.cl-tt Asia-motors
       .col-6.col-sm-4.col-md-2
         .catalog_logo
           a(href='#')
             span.logo
-              img.cl-img(src='/img/cl2.png', alt='')
+              img.cl-img(src='/img/cl2.png', alt='catalog')
             span.cl-tt Audi
       .col-6.col-sm-4.col-md-2
         .catalog_logo
           a(href='#')
             span.logo
-              img.cl-img(src='/img/cl2.png', alt='')
+              img.cl-img(src='/img/cl2.png', alt='catalog')
             span.cl-tt Buick
       .col-6.col-sm-4.col-md-2
         .catalog_logo
           a(href='#')
             span.logo
-              img.cl-img(src='/img/cl2.png', alt='')
+              img.cl-img(src='/img/cl2.png', alt='catalog')
             span.cl-tt Mercedes-Benz
       .col-6.col-sm-4.col-md-2
         .catalog_logo
           a(href='#')
             span.logo
-              img.cl-img(src='/img/cl2.png', alt='')
+              img.cl-img(src='/img/cl2.png', alt='catalog')
             span.cl-tt Alpha-Romeo
       .col-6.col-sm-4.col-md-2
         .catalog_logo
           a(href='#')
             span.logo
-              img.cl-img(src='/img/cl2.png', alt='')
+              img.cl-img(src='/img/cl2.png', alt='catalog')
             span.cl-tt Acura
       .col-6.col-sm-3.col-md-2
         .catalog_logo
           a(href='#')
             span.logo
-              img.cl-img(src='/img/cl2.png', alt='')
+              img.cl-img(src='/img/cl2.png', alt='catalog')
             span.cl-tt Alfa-Romeo
       .col-6.col-sm-4.col-md-2
         .catalog_logo
           a(href='#')
             span.logo
-              img.cl-img(src='/img/cl2.png', alt='')
+              img.cl-img(src='/img/cl2.png', alt='catalog')
             span.cl-tt Acura
 </template>
 <script>

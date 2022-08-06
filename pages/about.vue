@@ -12,7 +12,7 @@
         .row
           .col-12.col-sm-12.col-md-5.text-center
             .about-logo.pointer(@click="modalVisibility=true")
-              img(alt='', src='/css/icons/lisence.jpg')
+              img(alt='license', src='/css/icons/lisence.jpg')
           .col-12.col-sm-12.col-md-7
             .about-info
               h3.about-tt {{ $t('about_company') }}
@@ -48,7 +48,7 @@
                   h4.about-tt {{item.title}}
                   .about-txt {{item.desc}}
       .modal-about.pointer(v-if='modalVisibility' @click="modalVisibility=false")
-        img(alt='', src='/css/icons/lisence.jpg')
+        img(alt='license', src='/css/icons/lisence.jpg')
 </template>
 <script>
 export default {

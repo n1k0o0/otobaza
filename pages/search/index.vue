@@ -69,11 +69,37 @@ export default {
     if (this.$route.query.model && (!this.models?.length || isNotCurrentLang)) {
       await this.GET_MODELS(this.$route.query)
     }
+    if (this.$route.query.type && (!this.types?.length || isNotCurrentLang)) {
+      await this.GET_TYPES(this.$route.query)
+    }
 
-    this.search.sparePart = +this.$route.query.sparePart ? +this.$route.query.sparePart : null
-    this.search.brand = +this.$route.query.brand ? +this.$route.query.brand : null
-    this.search.model = +this.$route.query.model ? +this.$route.query.model : null
-    this.search.type = +this.$route.query.type ? +this.$route.query.type : null
+    if (this.$route.query.sparePart) {
+      const sparePartSlugPart = this.spareParts.find(sparePart => sparePart.assemblyGroupNodeId === +this.$route.query.sparePart)
+      if (sparePartSlugPart) {
+        this.search.sparePart = +sparePartSlugPart.assemblyGroupNodeId
+      }
+    }
+
+    if (this.$route.query.brand) {
+      const brandSlug = this.brands.find(el => el.manuId === +this.$route.query.brand)
+      if (brandSlug) {
+        this.search.brand = +brandSlug.manuId
+      }
+    }
+
+    if (this.$route.query.model) {
+      const modelSlug = this.models.find(el => el.modId === +this.$route.query.model)
+      if (modelSlug) {
+        this.search.model = +modelSlug.modId
+      }
+    }
+    if (this.$route.query.type) {
+      const typeSlug = this.types.find(el => el.carId === +this.$route.query.type)
+      if (typeSlug) {
+        this.search.type = +typeSlug.carId
+      }
+    }
+
     if (this.search.sparePart) {
       this.GET_SEARCH_PARTS(this.search)
     }

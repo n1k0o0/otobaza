@@ -3,7 +3,7 @@
     <div class="mcontainer mh60vh">
       <div class="response-message about-title">
         <div class="mkub mkubsuccess faq-help-icon">
-            <img src="/css/icons/help_outline-24px.svg" alt="">
+          <img alt="help" src="/css/icons/help_outline-24px.svg" />
         </div>
         <div class="rminfo">
           <h2 class="rmtt">

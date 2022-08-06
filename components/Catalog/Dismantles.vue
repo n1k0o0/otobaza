@@ -5,7 +5,7 @@
         .rm_container.rm_container_mobile
           .response-message.about-title.dismantles_tt
             .mkub.mkubsuccess.kubflex
-              img(alt='' src='/img/car.svg')
+              img(alt='car' src='/img/car.svg')
             .rminfo
               h2.rmtt
                 span {{ $t('dismantles') }}
@@ -21,6 +21,7 @@
 <script>
 import Dismantle from '@/components/Catalog/Dismantle'
 import Pagination from '@/components/Catalog/Pagination'
+
 export default {
   name: 'Dismantles',
   components: { Pagination, Dismantle },

@@ -647,13 +647,12 @@ const actions = {
     }
 
     this.$axios.defaults.baseURL = this.$env.BASE_API_URL
-    // TODO: url = /api/v2/products
     const {
       data: {
         data: products,
         meta
       }
-    } = await this.$axios.get(`https://62d45369cd960e45d456a36d.mockapi.io/api/v2/products?page=${state.search_page}`, {
+    } = await this.$axios.post(`/api/v2/products?page=${state.search_page}`, {
       country: 1,
       currency: 'AZN',
       price: priceSort || state.search_price_sort,
@@ -672,9 +671,13 @@ const actions = {
     commit('SET_LOADING', false)
   },
   async GET_SEARCH_PRODUCT ({ commit }, payload) {
-    this.$axios.defaults.baseURL = this.$env.CATALOG_API_URL
-    // const { data: { data: part } } = await this.$axios.get(`/api/v2/products/${payload}`)
-    const { data: { data: part } } = await this.$axios.get(`https://62d45369cd960e45d456a36d.mockapi.io/api/v2/product/${payload}`)
+    this.$axios.defaults.baseURL = this.$env.BASE_API_URL
+    const { data: { data: part } } = await this.$axios.post('/api/v2/product',
+      {
+        id: payload,
+        currency: 'AZN'
+      })
+    // const { data: { data: part } } = await this.$axios.get(`https://62d45369cd960e45d456a36d.mockapi.io/api/v2/product/${payload}`)
     commit('SET_SEARCH_PART', part)
   }
 }

@@ -1,7 +1,7 @@
 <template lang="pug">
   .response-message.about-title
     .mkub.mkubsuccess.kubflex
-      img(alt='' src='/img/car.svg')
+      img(alt='car' src='/img/car.svg')
     .rminfo
       template(v-if="isPart")
         h2.rmtt
