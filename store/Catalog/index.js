@@ -626,8 +626,6 @@ const actions = {
     isNewSort = 0,
     page = false
   }) {
-    commit('SET_LOADING', true)
-
     this.$axios.defaults.baseURL = this.$env.CATALOG_API_URL
     const { data: oems } = await this.$axios.post('api/ehisse/search', {
       assemblyGroupNodeId: sparePart,
@@ -667,8 +665,6 @@ const actions = {
     } else {
       commit('SET_SEARCH_PARTS', products)
     }
-
-    commit('SET_LOADING', false)
   },
   async GET_SEARCH_PRODUCT ({ commit }, payload) {
     this.$axios.defaults.baseURL = this.$env.BASE_API_URL

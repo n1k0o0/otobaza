@@ -368,7 +368,7 @@ export default {
       @media screen and (min-width: 993px) {
         grid-template-columns: repeat(6, 1fr);
         div {
-          grid-column: 2/5;
+          grid-column: 2/6;
         }
       }
       justify-items: center;
