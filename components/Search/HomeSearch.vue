@@ -1,6 +1,6 @@
 <template>
   <div class="home_search">
-    <div class="tooltip_icon">
+    <!--    <div class="tooltip_icon">
       <div>
         <img
           v-tooltip="$t('home_search.tooltip')"
@@ -9,7 +9,7 @@
           src="img/search/info.png"
         />
       </div>
-    </div>
+    </div>-->
     <div class="first_search_group">
       <div
         ref="item_1"
@@ -298,7 +298,7 @@ export default {
 .home_search {
   border-radius: 5px;
   background-color: #fff;
-  padding: 35px 30px;
+  padding: 20px 20px;
   margin: 10px 0;
 
   .first_search_group {
@@ -406,7 +406,6 @@ export default {
 
     h5 {
       font-size: 1rem;
-      word-break: break-word;
       text-align: center;
     }
   }

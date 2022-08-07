@@ -254,6 +254,7 @@
   "select_manufacturer": "Choose a manufacturer",
   "model": "Model",
   "brand": "Brand",
+  "type": "Type",
   "select_model": "Choose a model",
   "select_automobile": "Choose a car",
   "save": "Remember",

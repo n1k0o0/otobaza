@@ -20,14 +20,14 @@
             .product_info
               .product_info_img(v-if="product.url.length")
                 .product_info_img_big.pointer
-                  img(:src='product.url[imgIndex]', :alt="product.manufacturer")(@click="modalVisibility=true")
+                  img(:src='product.url[imgIndex]', :alt="product.description")(@click="modalVisibility=true")
                   .before.pointer(@click="previousImage")
                   .after.pointer(@click="nextImage")
                 .product_info_img_slider
                   VueSlickCarousel(v-bind="slideShowSettings")
                     .product_info_img_slider_slide(v-for="(image,index) in product.url")
                       div(:class="{'selected':imgIndex===index}")
-                        img.pointer(:src='image', @click="imgIndex=index")
+                        img.pointer(:src='image', @click="imgIndex=index", :alt="product.description")
               .product_info_details
                 h1.product_info_details_title.font-weight-bold
                   | {{product.description}}
@@ -73,32 +73,9 @@
               .hr-wrap
                 h3.hr-text.mb-3.font-weight-bold {{$t('content')}}
               p {{product.description_catalog}}
-          .related_products
-            .hr-wrap
-              h2.hr-text.mb-3.font-weight-bold {{$t('related_products')}}
-            .related_products_items
-              VueSlickCarousel(v-bind="settings")
-                n-link(:to="localePath({\
-                  name: 'search-slug',\
-                  params: {\
-                  slug: 'nissan-30005-masin-kataloqu'\
-                  }\
-                  })").related_products_items_item(v-for="(card,index) in 20", :key="index")
-                  .related_products_items_item_wrapper
-                    img(src='https://www.howacarworks.com/illustration/1742/the-compression-igntion-engine.png')
-                    hr
-                    div
-                      h5 BMx5
-                      h6 Motor
-                    div.text-right
-                      span.font-weight-bold 500AZN
-                    div
-                      button.btn.px-3.py-1.mt-2.position-relative.w-100
-                        .fa.fa-shopping-cart.fa-lg.fa-fw
-                        | {{$t('add_to_cart')}}
           .modal-image.pointer(v-if='modalVisibility' @click="modalVisibility=false")
             .modal-image_wrap
-              img(alt='action', :src='images[imgIndex]')
+              img(alt='action', :src='product.url[imgIndex]')
               .before.pointer(@click.stop="previousImage")
               .after.pointer(@click.stop="nextImage")
 

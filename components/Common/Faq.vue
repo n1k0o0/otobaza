@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="mcontainer mt-4">
+    <div class="mcontainer mt-0">
       <div class="response-message about-title">
         <div class="mkub mkubsuccess faq-help-icon">
           <img alt="help" src="/css/icons/help_outline-24px.svg" />

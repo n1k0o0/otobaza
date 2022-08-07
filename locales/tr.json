@@ -254,6 +254,7 @@
   "select_manufacturer": "Üretici seçin",
   "model": "Model",
   "brand": "Marka",
+  "type": "Tip",
   "select_model": "Model seçin",
   "select_automobile": "Araba seçin",
   "save": "Hatırlamak",

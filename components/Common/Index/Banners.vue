@@ -90,7 +90,7 @@ export default {
 
 <style lang="scss" scoped>
 .banners {
-  margin: 20px 0;
+  margin: 10px 0 20px 0;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   grid-gap: 10px;

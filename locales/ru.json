@@ -254,6 +254,7 @@
   "select_manufacturer": "Выберите производителя",
   "model": "Модель",
   "brand": "Марка",
+  "type": "Тип",
   "select_model": "Выберите модель",
   "select_automobile": "Выберите автомобиля",
   "save": "Запомнить",

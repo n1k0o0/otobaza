@@ -1,35 +1,38 @@
 <template lang="pug">
   .search_results
     .title_wrapper.hr-wrap.my-4
-      h5.hr-text.font-weight-bold {{$t('result_count',{count:parts.length})}}
-    template(v-if="parts.length")
-      .search_results_items.d-flex.flex-raw.flex-wrap.justify-content-center
-        n-link(:to="localePath({\
-                    name: 'search-slug',\
-                    params: {\
-                    slug: card.id\
-                    }\
-                    })").search_results_items_item(v-for="(card,index) in parts", :key="index")
-          img(v-lazy="card.url[0]||'https://www.howacarworks.com/illustration/1742/the-compression-igntion-engine.png'", :alt="card.manufacturer")
-          hr
-          div
-            h5 {{card.manufacturer}}
-            h6 {{card.description}}
-          div.text-right
-            span.font-weight-bold {{card.price.price}} {{card.price.currency_symbol}}
-          div
-            button.btn.px-3.py-1.mt-2.position-relative.w-100
-              .fa.fa-shopping-cart.fa-lg.fa-fw
-              | {{$t('add_to_cart')}}
+      h5.hr-text.font-weight-bold {{ $t('result_count',{count:parts.length}) }}
+    template(v-if="loading")
+      p.search_results_loading {{ $t('loading') }} ...
+    template(v-else)
+      template(v-if="parts.length")
+        .search_results_items.d-flex.flex-raw.flex-wrap.justify-content-center
+          n-link(:to="localePath({\
+                      name: 'search-slug',\
+                      params: {\
+                      slug: card.id\
+                      }\
+                      })").search_results_items_item(v-for="(card,index) in parts", :key="index")
+            img(v-lazy="card.url[0]?card.url[0].link:'https://www.howacarworks.com/illustration/1742/the-compression-igntion-engine.png'", :alt="card.manufacturer")
+            hr
+            div
+              h5 {{card.manufacturer}}
+              h6 {{card.description}}
+            div.text-right
+              span.font-weight-bold {{card.price.price}} {{card.price.currency_symbol}}
+            div
+              button.btn.px-3.py-1.mt-2.position-relative.w-100
+                .fa.fa-shopping-cart.fa-lg.fa-fw
+                | {{$t('add_to_cart')}}
 
-      .search_results_more(v-show="search_page!==last_page" )
-        button.btn-light.px-4.py-2(@click="GET_SEARCH_PARTS({...search,page:true})") {{$t('more_products')}}
-      .search_results_top
-        button.btn(@click="scrollTop")
-          <i class="fa fa-2x fa-angle-up" aria-hidden="true"></i>
-    .search_results_not-found(v-else)
-      p {{$t('not_found_products')}}
-      button.btn.light-blue(@click="$router.push(localePath({ name: 'contact'}))") {{$t('contact_us')}}
+        .search_results_more(v-show="search_page!==last_page" )
+          button.btn-light.px-4.py-2(@click="GET_SEARCH_PARTS({...search,page:true})") {{$t('more_products')}}
+        .search_results_top
+          button.btn(@click="scrollTop")
+            <i class="fa fa-2x fa-angle-up" aria-hidden="true"></i>
+      .search_results_not-found(v-else)
+        p {{$t('not_found_products')}}
+        button.btn.light-blue(@click="$router.push(localePath({ name: 'contact'}))") {{$t('contact_us')}}
 
 </template>
 
@@ -39,6 +42,10 @@ import { mapActions, mapGetters } from 'vuex'
 export default {
   name: 'ResultParts',
   props: {
+    loading: {
+      type: Boolean,
+      default: false
+    },
     search: {
       type: Object,
       default: () => []
@@ -108,6 +115,12 @@ export default {
     font-size: 20px;
     color: #f41414;
     padding-left: 75px;
+  }
+
+  &_loading {
+    padding-left: 75px;
+    font-size: 20px;
+    font-weight: normal;
   }
 }
 

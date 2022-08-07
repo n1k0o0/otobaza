@@ -18,7 +18,7 @@
             h1.title.hr-text {{$t('home_search.spare-parts')}}
           .filter.row
             .filter_item.col-md-4.col-lg-3.col-xl-3.col-sm-12
-              v-select(v-model='search.sparePart', :loading="loading", label='assemblyGroupName', :options='spareParts', :reduce='part => part.assemblyGroupNodeId', @input='GET_BRANDS(search.sparePart)',:placeholder="$t('home_search.spare-parts')")
+              v-select(v-model='search.sparePart', :loading="loading", label='assemblyGroupName', :options='spareParts', :reduce='part => part.assemblyGroupNodeId', @input='GET_BRANDS(search.sparePart)', :placeholder="$t('home_search.spare-parts')")
             .filter_item.col-md-4.col-lg-3.col-xl-3.col-sm-12
               v-select(v-model='search.brand', :loading="loading", :disabled='!search.sparePart', label='manuName', :options='brands', :reduce='brand => brand.manuId', @input='GET_MODELS(search)', :placeholder="$t('brand')", :reset-on-options-change="true")
             .filter_item.col-md-4.col-lg-3.col-xl-3.col-sm-12
@@ -30,7 +30,7 @@
                 template(slot='option' slot-scope='option')
                   | {{ option.carName +' ('+ option.yearOfConstrFrom + '-'+option.yearOfConstrTo +')' }}
             .filter_item.col-md-4.col-lg-3.col-xl-1.w-100
-              button.btn.btn-primary.w-100(@click="GET_SEARCH_PARTS(search)") {{$t('search')}}
+              button.btn.btn-primary.w-100(@click="searchMethod") {{$t('search')}}
           .vin_search.d-flex.justify-content-center
             div.w-50.position-relative
               input.form-control(:placeholder="$t('search_placeholder')")
@@ -42,7 +42,7 @@
             span(@click.prevent="GET_SEARCH_PARTS({...search,isNewSort:1})")
               | {{$t('new')}}
               img(src="img/search/sort_arrow.svg")
-          SearchResults(:search="search")
+          SearchResults(:search="search", :loading="loadingResults")
 
 </template>
 <script>
@@ -106,6 +106,7 @@ export default {
   },
   data () {
     return {
+      loadingResults: false,
       search: {
         sparePart: '',
         model: '',
@@ -136,6 +137,11 @@ export default {
     }),
     scrollTop () {
       window.scrollTo({ top: 0, behavior: 'smooth' })
+    },
+    async searchMethod () {
+      this.loadingResults = true
+      await this.GET_SEARCH_PARTS(this.search)
+      this.loadingResults = false
     }
   }
 }
