@@ -137,7 +137,8 @@ module.exports = {
         parsePages: true,
         detectBrowserLanguage: false
       }
-    ]
+    ],
+    'vue-social-sharing/nuxt'
   ],
   auth: {
     // localStorage: false, TODO: productionda bagla

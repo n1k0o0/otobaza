@@ -67,8 +67,14 @@
                       AddToCartButton(:id="product.id")
                         | {{$t('add_to_cart')}}
                     .product_info_details_actions_wrapper_share
-                      button.btn.share
-                        <i class="fa fa-share-alt" aria-hidden="true"></i>
+                      ShareNetwork(network="facebook"
+                        :url="fullUrl",
+                        :title="product.description",
+                        :description="product.description_catalog",
+                        :quote="product.description",
+                        hashtags="otobaza.com")
+                        button.btn.share
+                          <i class="fa fa-share-alt" aria-hidden="true"></i>
             .product_description
               .hr-wrap
                 h3.hr-text.mb-3.font-weight-bold {{$t('content')}}
@@ -112,6 +118,7 @@ export default {
   },
   data () {
     return {
+      fullUrl: window.location.href,
       settings: {
         dots: false,
         infinite: false,

@@ -45,6 +45,7 @@
     "vue-portal": "^1.0.0",
     "vue-select": "^3.18.3",
     "vue-slick-carousel": "^1.0.6",
+    "vue-social-sharing": "^3.0.9",
     "vue-svg-loader": "0.16.0",
     "vue-sweetalert2": "^3.0.5"
   },
