@@ -13,7 +13,7 @@
                       slug: card.id\
                       }\
                       })").search_results_items_item(v-for="(card,index) in parts", :key="index")
-            img(v-lazy="card.url[0]?card.url[0].link:'https://www.howacarworks.com/illustration/1742/the-compression-igntion-engine.png'", :alt="card.manufacturer")
+            img(v-lazy="card.url[0]?card.url[0].link:'https://www.howacarworks.com/illustration/1742/the-compression-igntion-engine.png'", :alt="card.description")
             hr
             div
               h5 {{card.manufacturer}}

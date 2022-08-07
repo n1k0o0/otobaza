@@ -68,7 +68,7 @@
                         | {{$t('add_to_cart')}}
                     .product_info_details_actions_wrapper_share
                       ShareNetwork(network="facebook"
-                        :url="fullUrl",
+                        :url="domain+this.$route.fullPath",
                         :title="product.description",
                         :description="product.description_catalog",
                         :quote="product.description",
@@ -118,7 +118,7 @@ export default {
   },
   data () {
     return {
-      fullUrl: window.location.href,
+      domain: process.env.FRONT_URL,
       settings: {
         dots: false,
         infinite: false,
