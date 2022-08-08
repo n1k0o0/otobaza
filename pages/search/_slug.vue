@@ -72,7 +72,7 @@
                         :title="product.description",
                         :description="product.description_catalog",
                         :quote="product.description",
-                        hashtags="otobaza.com")
+                        hashtags="otobazacom")
                         button.btn.share
                           <i class="fa fa-share-alt" aria-hidden="true"></i>
             .product_description

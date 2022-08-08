@@ -233,6 +233,60 @@ export default {
             q: 'Avtomobil seçildikdə ehtiyat hissələrinin düzgünlüyü.',
             a: 'Detalın düzgünlüyü yalnız alıcı satıcı arasında və alıcının bilgilərinə görə müəyyənləşir.Bununla bağlı Otobaza heç bir məsuliyyət daşımır.'
           }
+        ],
+        tr: [
+          {
+            q: 'Nasıl kayıt olabiliriz?',
+            a: 'Kayıt bölümüne giriyorsunuz ve size uygun olan bölümü seçerek kişisel bilgilerinizi giriyorsunuz'
+          },
+          {
+            q: 'Nasıl yedek parça bulabiliriz?',
+            a: 'Kodla arama - parçanın kodunu biliyorsanız, aradığınız kodu arama bölümüne yazmanız ve aramaya girmeniz yeterlidir. Daha sonra detayın aramak istediğiniz kısımları seçilir ve sonuç olarak sistem sizi gerekli detaylara götürür.'
+          },
+          {
+            q: 'Nasıl sipariş verebiliriz?',
+            a: 'Detayları tanımladıktan sonra SEPET butonuna basarak sipariş listesi oluşturabilirsiniz. Sipariş listesini hazırladıktan sonra SEPET bölümüne girerek sipariş numarasını değiştirebilir, iptal edebilir ve sipariş verebilirsiniz. Siparişiniz tamamlandıktan sonra, siparişleriniz satıcılara (farklı satıcılar olabilir) iletilir ve satıcılar sipariş ile ilgili sizinle iletişime geçer.'
+          },
+          {
+            q: 'Teslimat hizmeti nasıl düzenlenir?',
+            a: 'Otobaza sitesi teslimattan sorumlu değildir. Teslimat her satıcı tarafından düzenlenir. Yani satıcıyla anlaşmanız gerekiyor.'
+          },
+          {
+            q: 'Alıcı ödemeyi nasıl yapabilir?',
+            a: 'Alıcı, satıcının isteğine göre ödeme yapmak için satıcıyla anlaşabilir.'
+          },
+          {
+            q: 'Bakiye artışı?',
+            a: 'Karttan karta - karttan karta ödeme.<br> Terminal - MilliÖn, ExpressPay vb. terminaller aracılığıyla<br>Golden Pay - çevrimiçi ödeme portalı aracılığıyla'
+          },
+          {
+            q: 'Yedek parçalar için garanti koşulları?',
+            a: 'Malların garanti koşulları Satıcılar tarafından belirlenir ve OTOBAZA bu konuda sorumluluk taşımaz.'
+          },
+          {
+            q: 'Duyguları geri vermek konusunda dikkatli misiniz?',
+            a: 'Azerbaycan mevzuatına göre, satın alınan mallar hasar görmemiş, kullanılmamış ve ambalajı hasar görmemişse 14 gün içinde iade edilebilir. Bu konuyu satıcılarla da konuşmalısınız.'
+          },
+          {
+            q: 'Ayrıntı kalitesiyle ilgili mi?',
+            a: 'Ürün kalitesinin tüm sorumluluğu satıcılara aittir.'
+          },
+          {
+            q: 'Satıcının adres bilgileri?',
+            a: 'Bir yedek parça farklı mağazalar tarafından satılabilir. Yedek parçanın önündeki görüntüle butonuna bastığınızda o parçanın hangi mağazada satıldığı hakkında detaylı bilgi verilmektedir. <br> Aynı zamanda inceleme bölümünde belirtilen numara ile iletişime geçerek satıcının adresi hakkında bilgi alabilirsiniz.'
+          },
+          {
+            q: 'Garaj hazırlığı ve faydaları.',
+            a: 'Her kayıtlı Alıcı kendi kişisel garajını oluşturabilir. Bunu yapmanın 2 yolu vardır. İlk sayfadan seçilen arabayı garaja ekleme ve Kişisel bilgilerdeki Garaj bölümünden ekleme. <br>ın avantajı,her yolculuktaparça parçabir arabaaramak zorundakalmamanız ihtiyacınız olanarabayı tektuşla seçmenizyeterli.'
+          },
+          {
+            q: 'Sipariş edilen malların listesi ve sipariş vermenin avantajları.',
+            a: 'Detaylar sipariş edildiğinde, Siparişlerim bölümünde bir sipariş listesi hazırlanır ve size bilgi verilir. Sitemizi tekrar ziyaret etmeniz ve hizmetlerimizden memnun kalmanız için siparişinizi tamamlamanız bizim için daha önemlidir.'
+          },
+          {
+            q: 'Araç seçildiğinde yedek parçaların doğruluğu.',
+            a: 'Ayrıntının doğruluğu alıcı ile satıcı arasında ve alıcının verdiği bilgilere göre belirlenir. Otobaza\'nın bu konuda hiçbir sorumluluğu yoktur.'
+          }
         ]
       }
     }
