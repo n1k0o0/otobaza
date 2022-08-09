@@ -31,7 +31,16 @@
                 :placeholder="$t('home_search.spare-parts')"
                 :reduce="part => part.assemblyGroupNodeId"
                 @input="GET_BRANDS(search.sparePart)"
-              />
+              >
+                <template v-slot:selected-option="option">
+                  <span :class="option.icon"></span>
+                  {{ option.assemblyGroupName.substring(0, 7) }}...
+                </template>
+                <template v-slot:option="option">
+                  <span :class="option.icon"></span>
+                  {{ option.assemblyGroupName }}...
+                </template>
+              </v-select>
             </div>
             <div class="filter_search_group_item">
               <v-select
@@ -304,7 +313,23 @@ export default {
   .first_search_group {
     display: grid;
     grid-auto-flow: dense;
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    grid-template-columns: repeat(1, minmax(100px, 1fr));
+
+    @media screen and (min-width: 576px) {
+      grid-template-columns: repeat(3, minmax(100px, 1fr));
+    }
+
+    @media screen and (min-width: 768px) {
+      grid-template-columns: repeat(4, minmax(100px, 1fr));
+    }
+
+    @media screen and (min-width: 992px) {
+      grid-template-columns: repeat(5, minmax(100px, 1fr));
+    }
+
+    @media screen and (min-width: 1200px) {
+      grid-template-columns: repeat(9, minmax(100px, 1fr));
+    }
 
   }
 
@@ -357,7 +382,7 @@ export default {
           text-align: center;
           border-radius: 5px;
           padding: 0;
-          height: 100%;
+          height: 34px;
         }
       }
     }
