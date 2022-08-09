@@ -80,7 +80,7 @@
               >
                 <template v-slot:selected-option="option">
                   <span :class="option.icon"></span>
-                  {{ option.modelName.substring(0, 10) }}...
+                  {{ option.modelName.length < 10 ? option.modelName : (option.modelName.substring(0, 7) + '...') }}
                 </template>
                 <template v-slot:option="option">
                   <span :class="option.icon"></span>
