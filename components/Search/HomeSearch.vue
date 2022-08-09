@@ -34,11 +34,13 @@
               >
                 <template v-slot:selected-option="option">
                   <span :class="option.icon"></span>
-                  {{ option.assemblyGroupName.substring(0, 7) }}...
+                  {{
+                    option.assemblyGroupName.length <= 9 ? option.assemblyGroupName : (option.assemblyGroupName.substring(0, 7) + '...')
+                  }}
                 </template>
                 <template v-slot:option="option">
                   <span :class="option.icon"></span>
-                  {{ option.assemblyGroupName }}...
+                  {{ option.assemblyGroupName }}
                 </template>
               </v-select>
             </div>
@@ -53,7 +55,16 @@
                 :reduce="brand => brand.manuId"
                 :reset-on-options-change="true"
                 @input="GET_MODELS(search)"
-              />
+              >
+                <template v-slot:selected-option="option">
+                  <span :class="option.icon"></span>
+                  {{ option.manuName.length <= 10 ? option.manuName : (option.manuName.substring(0, 7) + '...') }}
+                </template>
+                <template v-slot:option="option">
+                  <span :class="option.icon"></span>
+                  {{ option.manuName }}
+                </template>
+              </v-select>
             </div>
             <div class="filter_search_group_item">
               <v-select
@@ -66,7 +77,16 @@
                 :reduce="part => part.modId"
                 :reset-on-options-change="true"
                 @input="GET_TYPES(search)"
-              />
+              >
+                <template v-slot:selected-option="option">
+                  <span :class="option.icon"></span>
+                  {{ option.modelName.substring(0, 10) }}...
+                </template>
+                <template v-slot:option="option">
+                  <span :class="option.icon"></span>
+                  {{ option.modelName }}
+                </template>
+              </v-select>
             </div>
             <div class="filter_search_group_item">
               <v-select
@@ -79,7 +99,9 @@
                 :reset-on-options-change="true"
               >
                 <template slot="selected-option" slot-scope="option">
-                  {{ option.carName + '(' + option.yearOfConstrFrom + '-' + option.yearOfConstrTo + ')' }}
+                  {{
+                    (option.carName + '(' + option.yearOfConstrFrom + '-' + option.yearOfConstrTo + ')').substring(0, 10)
+                  }}...
                 </template>
                 <template slot="option" slot-scope="option">
                   {{ option.carName + ' (' + option.yearOfConstrFrom + '-' + option.yearOfConstrTo + ')' }}
