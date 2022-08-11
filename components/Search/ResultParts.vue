@@ -13,7 +13,7 @@
                       slug: card.id\
                       }\
                       })").search_results_items_item(v-for="(card,index) in parts", :key="index")
-            img(v-lazy="card.url[0]?card.url[0].link:'https://www.howacarworks.com/illustration/1742/the-compression-igntion-engine.png'", :alt="card.description")
+            img(v-lazy="card.url[0]?card.url[0].link:'/img/search/default-parts.png'", :alt="card.description")
             hr
             div
               h5 {{card.manufacturer}}
@@ -21,8 +21,7 @@
             div.text-right
               span.font-weight-bold {{card.price.price}} {{card.price.currency_symbol}}
             div
-              button.btn.px-3.py-1.mt-2.position-relative.w-100
-                .fa.fa-shopping-cart.fa-lg.fa-fw
+              AddToCartButton(:id="card.id")
                 | {{$t('add_to_cart')}}
 
         .search_results_more(v-show="search_page!==last_page" )
@@ -38,9 +37,12 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
+import AddToCartButton from '@/components/Catalog/AddToCartButton'
 
 export default {
   name: 'ResultParts',
+  components: { AddToCartButton },
+
   props: {
     loading: {
       type: Boolean,
@@ -86,6 +88,7 @@ export default {
       img {
         width: 130px;
         height: 130px;
+        margin: auto;
       }
 
       span {

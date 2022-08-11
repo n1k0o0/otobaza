@@ -18,12 +18,13 @@
             h1.title.hr-text {{$t('home_search.spare-part')}}
           .product
             .product_info
-              .product_info_img(v-if="product.url.length")
+              .product_info_img
                 .product_info_img_big.pointer
-                  img(:src='product.url[imgIndex]', :alt="product.description")(@click="modalVisibility=true")
-                  .before.pointer(@click="previousImage")
-                  .after.pointer(@click="nextImage")
-                .product_info_img_slider
+                  img(:src="product.url[imgIndex]?product.url[imgIndex]:'/img/search/big-part.png'", :alt="product.description")(@click="modalVisibility=true")
+                  template(v-if="product.url.length>1")
+                    .before.pointer(@click="previousImage")
+                    .after.pointer(@click="nextImage")
+                .product_info_img_slider(v-if="product.url.length")
                   VueSlickCarousel(v-bind="slideShowSettings")
                     .product_info_img_slider_slide(v-for="(image,index) in product.url")
                       div(:class="{'selected':imgIndex===index}")
@@ -81,9 +82,10 @@
               p {{product.description_catalog}}
           .modal-image.pointer(v-if='modalVisibility' @click="modalVisibility=false")
             .modal-image_wrap
-              img(alt='action', :src='product.url[imgIndex]')
-              .before.pointer(@click.stop="previousImage")
-              .after.pointer(@click.stop="nextImage")
+              img(alt='action', :src="product.url[imgIndex]?product.url[imgIndex]:'/img/search/big-part.png'")
+              template(v-if="product.url.length>1")
+                .before.pointer(@click.stop="previousImage")
+                .after.pointer(@click.stop="nextImage")
 
 </template>
 
