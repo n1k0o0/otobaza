@@ -478,8 +478,9 @@ const actions = {
 
   async ADD_TO_CART ({ dispatch }, { id }) {
     this.$axios.defaults.baseURL = this.$env.BASE_API_URL
-    await this.$axios.post('api/cart', { id })
+    const { data } = await this.$axios.post('api/cart', { id })
     await dispatch('GET_CART')
+    return data.id
   },
   async REMOVE_FROM_CART ({ dispatch }, { id }) {
     this.$axios.defaults.baseURL = this.$env.BASE_API_URL

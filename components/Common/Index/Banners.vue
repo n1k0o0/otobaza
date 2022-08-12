@@ -101,6 +101,11 @@ export default {
 
   &_banner {
     cursor: pointer;
+
+    img {
+      width: 300px;
+      height: 111px;
+    }
   }
 }
 </style>

@@ -6,7 +6,7 @@
 </template>
 <script>
 
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   name: 'AddToCartButton',
@@ -14,12 +14,21 @@ export default {
     id: {
       type: Number,
       default: 0
+    },
+    order: {
+      type: Boolean,
+      default: false
     }
   },
   data () {
     return {
       loading: false
     }
+  },
+  computed: {
+    ...mapGetters({
+      cart: 'Catalog/cart'
+    })
   },
   methods: {
     ...mapActions({
@@ -40,9 +49,23 @@ export default {
       } else {
         try {
           this.loading = true
-          await this.ADD_TO_CART({
+          const orderId = await this.ADD_TO_CART({
             id: this.id
           })
+
+          if (this.order) {
+            const newCart = this.cart.find(cart => cart.cart_id === orderId)
+
+            this.$auth.$storage.setState('order', newCart)
+            await this.$router.push(this.localePath({
+              name: 'cart-order-id',
+              params: {
+                id: newCart.cart_id,
+                item: newCart
+              }
+            }))
+          }
+
           this.$swal.fire({
             title: this.$t('added_to_cart'),
             position: 'top',
@@ -51,6 +74,7 @@ export default {
             timerProgressBar: true,
             icon: 'success'
           })
+
           this.$emit('added')
         } catch (e) {
           this.$swal.fire({

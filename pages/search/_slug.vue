@@ -62,11 +62,11 @@
                     .product_info_details_actions_wrapper_price
                       p.font-weight-bold.p-0.m-0 {{product.price.price}} {{product.price.currency_symbol}}
                     .product_info_details_actions_wrapper_cart
-                      //button.btn.px-3.py-1.position-relative.w-100
-                      //  .fa.fa-shopping-cart.fa-lg.fa-fw
-                      //  | sebete elave et
                       AddToCartButton(:id="product.id")
                         | {{$t('add_to_cart')}}
+                    .product_info_details_action_wrapper_order
+                      AddToCartButton(:id="product.id" :order="true")
+                        | {{ $t('do_order') }}
                     .product_info_details_actions_wrapper_share
                       ShareNetwork(network="facebook"
                         :url="domain+this.$route.fullPath",
