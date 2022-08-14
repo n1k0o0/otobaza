@@ -101,7 +101,9 @@ export default {
     }
 
     if (this.search.sparePart) {
-      this.GET_SEARCH_PARTS(this.search)
+      this.loadingResults = true
+      await this.GET_SEARCH_PARTS(this.search)
+      this.loadingResults = false
     }
   },
   data () {
