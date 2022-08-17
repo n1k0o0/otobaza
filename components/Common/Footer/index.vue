@@ -26,7 +26,7 @@
           FooterSocials
     .footer-bug
       n-link(:to="localePath({name: 'contact'})")
-        img(alt='ios' src='img/footer/bug.png')
+        img(alt='bug' src='img/footer/bug.png')
 </template>
 <script>
 import FooterMenu from '@/components/Common/FooterMenu'

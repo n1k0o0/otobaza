@@ -836,6 +836,7 @@ footer {
     bottom: 20px;
     left: 30px;
     cursor: pointer;
+    animation: 2s 2s ball-jump infinite ease-in-out;
   }
 }
 
@@ -1442,5 +1443,11 @@ footer {
       right: 100%;
       margin-right: 15px;
     }
+  }
+}
+
+@keyframes ball-jump {
+  50% {
+    transform: translateY(-50px)
   }
 }
