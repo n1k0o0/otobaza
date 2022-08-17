@@ -19,18 +19,36 @@
           .filter.row
             .filter_item.col-md-4.col-lg-3.col-xl-3.col-sm-12
               v-select(v-model='search.sparePart', :loading="loading", label='assemblyGroupName', :options='spareParts', :reduce='part => part.assemblyGroupNodeId', @input='GET_BRANDS(search.sparePart)', :placeholder="$t('home_search.spare-parts')")
+                template(v-slot:selected-option='option')
+                  span(:class='option.icon')
+                  | {{ option.assemblyGroupName.length < 15 ? option.assemblyGroupName : (option.assemblyGroupName.substring(0, 12) + '...') }}
+                template(v-slot:option='option')
+                  span(:class='option.icon')
+                  | {{ option.assemblyGroupName }}
             .filter_item.col-md-4.col-lg-3.col-xl-3.col-sm-12
               v-select(v-model='search.brand', :loading="loading", :disabled='!search.sparePart', label='manuName', :options='brands', :reduce='brand => brand.manuId', @input='GET_MODELS(search)', :placeholder="$t('brand')", :reset-on-options-change="true")
+                template(v-slot:selected-option='option')
+                  span(:class='option.icon')
+                  | {{ option.manuName.length < 15 ? option.manuName : (option.manuName.substring(0, 12) + '...') }}
+                template(v-slot:option='option')
+                  span(:class='option.icon')
+                  | {{ option.manuName }}
             .filter_item.col-md-4.col-lg-3.col-xl-3.col-sm-12
               v-select(v-model='search.model', :loading="loading", :disabled='!search.brand', label='modelName', :options='models', :reduce='part => part.modId', @input='GET_TYPES(search)', :placeholder="$t('model')", :reset-on-options-change="true")
+                template(v-slot:selected-option='option')
+                  span(:class='option.icon')
+                  | {{ option.modelName.length < 15 ? option.modelName : (option.modelName.substring(0, 12) + '...') }}
+                template(v-slot:option='option')
+                  span(:class='option.icon')
+                  | {{ option.modelName }}
             .filter_item.col-md-4.col-lg-3.col-xl-2
               v-select(v-model='search.type', :disabled='!search.model', :loading="loading", :options='types', :reduce='part => part.carId', :placeholder="$t('type')", :reset-on-options-change="true")
                 template(slot='selected-option' slot-scope='option')
-                  | {{ option.carName +'('+ option.yearOfConstrFrom + '-'+option.yearOfConstrTo +')' }}
+                  | {{ (option.carName + '(' + option.yearOfConstrFrom + '-' + option.yearOfConstrTo + ')').substring(0, 8) }}...
                 template(slot='option' slot-scope='option')
-                  | {{ option.carName +' ('+ option.yearOfConstrFrom + '-'+option.yearOfConstrTo +')' }}
+                  | {{ option.carName + ' (' + option.yearOfConstrFrom + '-' + option.yearOfConstrTo + ')' }}
             .filter_item.col-md-4.col-lg-3.col-xl-1.w-100
-              button.btn.btn-primary.w-100(@click="searchMethod") {{$t('search')}}
+              button.btn.btn-primary.search_parts_button(@click="searchMethod") {{$t('search')}}
           .vin_search.d-flex.justify-content-center
             div.w-50.position-relative
               input.form-control(:placeholder="$t('search_placeholder')")
@@ -194,6 +212,13 @@ export default {
     border-radius: 5px;
     background-color: #4a8ee9;
     color: #fff;
+  }
+
+  .search_parts_button {
+    @media screen and (max-width: 1200px) {
+      width: 100%;
+    }
+    padding: 4px 0.75rem !important;
   }
 }
 </style>
