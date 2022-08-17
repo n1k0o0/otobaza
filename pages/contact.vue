@@ -43,7 +43,7 @@
           lng="49.865380"
         ></div>
       </div>
-      <div class="row">
+      <div id="contact" class="row">
         <div class="col-12 col-sm-12 col-md-12 contact-lr">
           <div class="contact-details">
             <h2 class="cnt-title">
@@ -207,6 +207,10 @@ export default {
     }
   },
   async mounted () {
+    document.querySelector('#contact').scrollIntoView({
+      behavior: 'smooth'
+    })
+
     localize(this.$i18n.locale)
     let map = ''
     let marker = ''
