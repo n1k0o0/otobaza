@@ -40,10 +40,6 @@
                         :prefix.sync="prefix"
                         :prefixes="['+994']"
                         )
-                    .col-12.col-sm-12
-                      .custom-control.custom-checkbox
-                        input#subscribe.custom-control-input(type='checkbox', name='subscribe' v-model="form.is_subscribe")
-                        label.custom-control-label.subscribe(for='subscribe') {{ $t('do_subscribe') }}
                     .col-12.col-sm-6
                       FormInputElement(
                         v-model="form.password"
