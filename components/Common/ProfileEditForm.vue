@@ -30,7 +30,6 @@
                 v-model="user.address"
                 name="address"
                 rules="required"
-                required
                 :label="$t('validation.names.address')"
               )
             .col-12.col-sm-6
@@ -77,10 +76,18 @@ import FormInputGender from '@/components/Common/FormInputGender'
 import SocialAccounts from '@/components/Common/SocialAccounts'
 import { useFriendlyError } from '@/utils'
 import { localize } from 'vee-validate'
-import { mapGetters, mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
+
 export default {
   name: 'ProfileEditForm',
-  components: { FormCurrencySelect, FormCitySelect, FormCountrySelect, SocialAccounts, FormInputGender, FormInputElement },
+  components: {
+    FormCurrencySelect,
+    FormCitySelect,
+    FormCountrySelect,
+    SocialAccounts,
+    FormInputGender,
+    FormInputElement
+  },
   data () {
     return {
       loading: false,

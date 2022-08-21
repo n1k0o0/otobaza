@@ -2,8 +2,8 @@
   .container.profile-grg-cover
     .mcontainer.mh60vh
       GarageHeader
-        a.user-data-btn(href='#' @click.prevent="edit" v-if="isShowPage") {{ $t('settings') }}
-        a.add_new_car(href='#' @click.prevent="cancel" v-else) {{ $t('go_back') }}
+        //a.user-data-btn(href='#' @click.prevent="edit" v-if="isShowPage") {{ $t('settings') }}
+        //a.add_new_car(href='#' @click.prevent="cancel" v-else) {{ $t('go_back') }}
       GarageTabs(:active-tab="2")
       transition(name="page-fade" mode="out-in")
         component(:is="page" @cancel="cancel")
@@ -13,6 +13,7 @@ import GarageHeader from '@/components/Profile/GarageHeader'
 import GarageTabs from '@/components/Profile/GarageTabs'
 import GarageUserEdit from '@/components/Profile/GarageUserEdit'
 import GarageUserShow from '@/components/Profile/GarageUserShow'
+
 export default {
   name: 'Profile',
   components: { GarageUserEdit, GarageUserShow, GarageTabs, GarageHeader },
@@ -20,7 +21,7 @@ export default {
   layout: 'pages',
   data () {
     return {
-      page: 'GarageUserShow'
+      page: 'GarageUserEdit'
     }
   },
   computed: {
