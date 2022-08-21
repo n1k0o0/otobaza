@@ -40,50 +40,10 @@
                         :prefix.sync="prefix"
                         :prefixes="['+994']"
                         )
-                    .col-12.col-sm-3
-                      FormInputGender(v-model="form.gender" is-required :label="$t('gender')" title)
-                    .col-12.col-sm-3
-                      FormCurrencySelect(
-                        v-model="form.price_types.id"
-                        required
-                        rules="required"
-                      )
-                    .col-12.col-sm-6
-                      FormCountrySelect(
-                        v-model="form.country"
-                        :label="$t('validation.names.select_country')"
-                        required
-                        rules="required"
-                      )
-                    .col-12.col-sm-6
-                      FormCitySelect(
-                        v-model="form.city"
-                        :country="form.country"
-                        :label="$t('validation.names.select_city')"
-                        required
-                        rules="required"
-                      )
-                    .col-12.col-sm-12
-                      FormInputElement(
-                        v-model="form.email"
-                        name="email"
-                        type="email"
-                        rules="email"
-                        :label="$t('validation.names.email')"
-                      )
-                    .col-12.col-sm-12
-                      FormInputElement(
-                        v-model="form.address"
-                        name="address"
-                        type="address"
-                        :label="$t('validation.names.address')"
-                      )
                     .col-12.col-sm-12
                       .custom-control.custom-checkbox
                         input#subscribe.custom-control-input(type='checkbox', name='subscribe' v-model="form.is_subscribe")
                         label.custom-control-label.subscribe(for='subscribe') {{ $t('do_subscribe') }}
-                    .col-12.col-sm-12
-                      SocialAccounts(v-model='form.socials')
                     .col-12.col-sm-6
                       FormInputElement(
                         v-model="form.password"
@@ -145,10 +105,21 @@ import PhoneVerificationModal from '@/components/Common/PhoneVerificationModal'
 import SocialAccounts from '@/components/Common/SocialAccounts'
 import { useFriendlyError } from '@/utils'
 import { localize } from 'vee-validate'
-import { mapMutations, mapGetters, mapActions } from 'vuex'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
+
 export default {
   name: 'RegistrationBuyer',
-  components: { FormPhoneNumber, FormCitySelect, FormCountrySelect, FormCurrencySelect, FormInputElement, SocialAccounts, PhoneVerificationModal, FormInputGender, FormInput },
+  components: {
+    FormPhoneNumber,
+    FormCitySelect,
+    FormCountrySelect,
+    FormCurrencySelect,
+    FormInputElement,
+    SocialAccounts,
+    PhoneVerificationModal,
+    FormInputGender,
+    FormInput
+  },
   layout: 'pages',
   middleware: 'loggedin',
   data () {
@@ -166,7 +137,6 @@ export default {
         gender: 1,
         group_id: 1,
         phone: '',
-        email: '',
         password: '',
         address: '',
         is_subscribe: true,
