@@ -21,9 +21,6 @@
     li.fnavitem
       n-link(:to="localePath('faq')")
         | {{ $t('faq') }}
-    li.fnavitem
-      a(href="https://blog.otobaza.com/" target="_blank")
-        | {{ $t('blog') }}
 </template>
 <script>
 export default {
