@@ -4,11 +4,11 @@
       .container
         ul.catalog-type
           li(:class="{active: isActive(2)}")
-            n-link(:to="localePath('garage-profile')") {{ $t('my_info') }}
+            n-link(:to="localePath('garage-profile')") {{ $t('profile') }}
           li(:class="{active: isActive(1)}")
-            n-link(:to="localePath('garage-cars')") {{ $t('my_cars') }}
+            n-link(:to="localePath('garage-cars')") {{ $t('my_garage') }}
           li(:class="{active: isActive(3)}")
-            n-link(:to="localePath('garage-orders')") {{ $t('my_ordered_products') }}
+            n-link(:to="localePath('garage-orders')") {{ $t('my_orders') }}
 </template>
 <script>
 export default {
