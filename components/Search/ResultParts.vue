@@ -84,6 +84,9 @@ export default {
       display: flex;
       flex-direction: column;
       justify-content: space-around;
+      @media screen and (max-width: 480px) {
+        width: 150px;
+      }
 
       img {
         width: 130px;
