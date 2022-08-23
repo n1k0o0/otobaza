@@ -218,6 +218,7 @@
   "use_registered_info": "Kayıt bilgilerimi kullan",
   "firstname_lastname": "Adı ve Soyadı",
   "delivery_method": "Teslimat türü",
+  "delivery_address": "Teslimat adresi",
   "select_delivery_method": "Teslimat türünü seçin",
   "phone_number": "İletişim numarası",
   "product_name": "Ürünün adı",

@@ -218,6 +218,7 @@
   "use_registered_info": "Используйте мою регистрационную информацию",
   "firstname_lastname": "Имя и Фамилия",
   "delivery_method": "Тип доставки",
+  "delivery_address": "Адресс доставки",
   "select_delivery_method": "Выберите тип доставки",
   "phone_number": "Контактный телефон",
   "product_name": "Название продукта",

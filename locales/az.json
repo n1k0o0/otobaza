@@ -218,6 +218,7 @@
   "use_registered_info": "Qeydiyyat məlumatlarımı istifadə et",
   "firstname_lastname": "Ad və soyad",
   "delivery_method": "Çatdırılma növü",
+  "delivery_address": "Çatdırılma ünvanı",
   "select_delivery_method": "Çatdırılma növü seçin",
   "phone_number": "Əlaqə nömrəsi",
   "product_name": "Məhsulun adi",

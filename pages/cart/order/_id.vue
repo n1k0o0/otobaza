@@ -46,7 +46,7 @@
                           name="address"
                           rules="required"
                           required
-                          :label="$t('delivery_method')"
+                          :label="$t('delivery_address')"
                         )
                     .col-12.col-sm-12
                       .max315
@@ -66,7 +66,8 @@ import FormPhoneNumber from '@/components/Common/FormPhoneNumber'
 import FormSelectElement from '@/components/Common/FormSelectElement'
 import { useFriendlyError } from '@/utils'
 import { localize } from 'vee-validate'
-import { mapGetters, mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
+
 export default {
   name: 'Order',
   components: { FormSelectElement, FormPhoneNumber, FormInputElement, OrderHeader, OrderDetail },

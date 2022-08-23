@@ -218,6 +218,7 @@
   "use_registered_info": "Use my registration information",
   "firstname_lastname": "Name and Last name",
   "delivery_method": "Type of delivery",
+  "delivery_address": "Delivery address",
   "select_delivery_method": "Select the delivery type",
   "phone_number": "Contact number",
   "product_name": "The name of the product",
