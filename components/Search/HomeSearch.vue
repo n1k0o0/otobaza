@@ -329,8 +329,11 @@ export default {
 .home_search {
   border-radius: 5px;
   background-color: #fff;
-  padding: 20px 20px;
+  padding: 0;
   margin: 10px 0;
+  @media screen and (min-width: 576px) {
+    padding: 20px 20px;
+  }
 
   .first_search_group {
     display: grid;
@@ -358,7 +361,8 @@ export default {
   .filter_search_group_wrapper {
     grid-column: 1/-1;
     @media screen and (max-width: 576px) {
-      padding: 30px 20px;
+      padding: 20px 0;
+      margin: 10px 5px;
     }
     background-color: #f8f8f8;
     margin: 10px 30px;
