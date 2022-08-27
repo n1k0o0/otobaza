@@ -34,6 +34,12 @@
                   :class="eyeClass"
                   @click="showPassword"
                 ></span>
+                <p
+                  v-show="errorMessage"
+                  class="text-danger text-sm mb-1"
+                  v-html="errorMessage"
+                >
+                </p>
               </fieldset>
 
               <a
@@ -97,7 +103,6 @@
 </template>
 <script>
 
-import { useFriendlyError } from '@/utils'
 import { mapActions } from 'vuex'
 
 export default {
@@ -111,7 +116,8 @@ export default {
         password: ''
       },
       passwordType: 'password',
-      eyeClass: 'fa-eye-slash'
+      eyeClass: 'fa-eye-slash',
+      errorMessage: ''
     }
   },
   watch: {
@@ -180,8 +186,12 @@ export default {
             html: data?.message || this.$t('system_error')
           })
         }
+        this.errorMessage = ''
       } catch (error) {
-        useFriendlyError(error)
+        const defaultError = 'Yenidən cəhd edin!'
+        const errors = error?.response?.data?.errors || error?.response?.data?.message || [defaultError]
+        this.errorMessage = typeof errors === 'string' ? (error?.response?.data?.message || defaultError) : Object.values(errors).join('<br>')
+        // useFriendlyError(error)
       } finally {
         this.loading = false
       }

@@ -5982,6 +5982,10 @@ img {
   /*min-width: auto;*/
 }
 
+.text-sm {
+  font-size: 0.75rem;
+}
+
 @media screen and (min-width: 768px) {
   .vs__dropdown-menu {
     width: auto !important;
