@@ -24,9 +24,6 @@
         .flex
           p.cright {{ $t('footer-copy',{ year:new Date().getFullYear() } ) }}
           FooterSocials
-    .footer-bug
-      n-link(:to="localePath({name: 'contact'})")
-        img(alt='bug' src='img/footer/bug.png')
 </template>
 <script>
 import FooterMenu from '@/components/Common/FooterMenu'
