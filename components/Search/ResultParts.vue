@@ -17,7 +17,8 @@
             hr
             div
               h5 {{card.manufacturer}}
-              h6 {{card.description}}
+              h5.short_description {{card.part_number}}
+              h6.short_description {{card.description}}
             div.text-right
               span.font-weight-bold {{card.price.price}} {{card.price.currency_symbol}}
             div
@@ -101,6 +102,12 @@ export default {
 
       button {
         font-size: 14px;
+      }
+
+      .short_description {
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
       }
 
     }
