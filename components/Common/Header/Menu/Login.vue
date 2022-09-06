@@ -5,7 +5,7 @@
       class="btn dropdown-toggle login-btn"
       :class="{'show':show}"
       type="button"
-      @click="show = !show"
+      @click="TOGGLE_MOBILE_MENU(!show)"
     >
       {{ $t('login') }}
     </button>
@@ -103,13 +103,12 @@
 </template>
 <script>
 
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 
 export default {
   name: 'Login',
   data () {
     return {
-      show: false,
       loading: false,
       login: {
         phone: '+994',
@@ -119,6 +118,11 @@ export default {
       eyeClass: 'fa-eye-slash',
       errorMessage: ''
     }
+  },
+  computed: {
+    ...mapGetters({
+      show: 'User/showLogin'
+    })
   },
   watch: {
     show (val) {
@@ -134,9 +138,12 @@ export default {
       SIGN_IN: 'User/SIGN_IN',
       FORGOT_PASSWORD: 'User/FORGOT_PASSWORD'
     }),
+    ...mapMutations({
+      TOGGLE_MOBILE_MENU: 'User/TOGGLE_LOGIN'
+    }),
     onClickOutside () {
       if (this.show === true) {
-        this.show = false
+        this.TOGGLE_MOBILE_MENU(false)
       }
     },
     async forgotPassword () {

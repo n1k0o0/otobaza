@@ -1,18 +1,23 @@
 const strict = false
 
 const state = () => ({
-  my_cars: []
+  my_cars: [],
+  showLogin: false
 })
 
 const getters = {
   my_cars (state) {
     return state.my_cars
-  }
+  },
+  showLogin (state) { return state.showLogin }
 }
 
 const mutations = {
   SET_MY_CARS (state, payload) {
     state.my_cars = payload
+  },
+  TOGGLE_LOGIN (state, payload) {
+    state.showLogin = payload
   }
 }
 const actions = {

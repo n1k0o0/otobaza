@@ -6,7 +6,7 @@
 </template>
 <script>
 
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 
 export default {
   name: 'AddToCartButton',
@@ -34,17 +34,26 @@ export default {
     ...mapActions({
       ADD_TO_CART: 'Catalog/ADD_TO_CART'
     }),
+    ...mapMutations({
+      TOGGLE_MOBILE_MENU: 'User/TOGGLE_LOGIN'
+    }),
     async addToCart () {
       if (!this.id) {
         return
       }
       if (!this.$auth.loggedIn) {
+        const _this = this
+        window.scrollTo({ top: 0, behavior: 'smooth' })
+        setTimeout(() => _this.TOGGLE_MOBILE_MENU(true), 300)
+
         this.$swal.fire({
           title: '',
           icon: 'info',
           html: this.$t('for_add_to_cart_register_or_login'),
-          showCloseButton: false,
-          showCancelButton: false
+          position: 'top',
+          toast: true,
+          timer: 5000,
+          timerProgressBar: true
         })
       } else {
         try {
