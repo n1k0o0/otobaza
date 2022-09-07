@@ -830,14 +830,6 @@ footer {
   .play-app {
     justify-content: end;
   }
-
-  .footer-bug {
-    position: fixed;
-    bottom: 20px;
-    left: 30px;
-    cursor: pointer;
-    animation: 2s 2s ball-jump infinite ease-in-out;
-  }
 }
 
 .play-app a {
@@ -1446,8 +1438,8 @@ footer {
   }
 }
 
-@keyframes ball-jump {
-  50% {
-    transform: translateY(-50px)
-  }
-}
+//@keyframes ball-jump {
+//  50% {
+//    transform: translateY(-50px)
+//  }
+//}

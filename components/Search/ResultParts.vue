@@ -26,7 +26,7 @@
                 | {{$t('add_to_cart')}}
 
         .search_results_more(v-show="search_page!==last_page" )
-          button.btn-light.px-4.py-2(@click="GET_SEARCH_PARTS({...search,page:true})") {{$t('more_products')}}
+          button.btn-light.px-4.py-2(@click="GET_SEARCH_PARTS({...search,page:true})", :disabled="loadingMore") {{ loadingMore?$t('loading'): $t('more_products')}}
         .search_results_top
           button.btn(@click="scrollTop")
             <i class="fa fa-2x fa-angle-up" aria-hidden="true"></i>
@@ -58,7 +58,8 @@ export default {
     ...mapGetters({
       parts: 'Catalog/search_parts',
       search_page: 'Catalog/search_page',
-      last_page: 'Catalog/last_page'
+      last_page: 'Catalog/last_page',
+      loadingMore: 'Catalog/loading'
     })
   },
   methods: {
@@ -73,6 +74,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.btn-light:disabled {
+  background-color: #e7eef4 !important;
+  border-color: #e4eaef !important;
+
+  &:hover {
+    background-color: darken(#e7eef4, 10%) !important;
+    color: #484040;
+    cursor: not-allowed;
+  }
+}
+
 .search_results {
   &_items {
     gap: 12px;
