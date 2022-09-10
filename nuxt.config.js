@@ -197,6 +197,10 @@ module.exports = {
         scope: ['public_profile', 'email'],
         redirect_uri: 'https://otobaza.com/login-callback?type=facebook'
       }
+    },
+    redirect: {
+      logout: '/',
+      home: false
     }
   },
   styleResources: {
