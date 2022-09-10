@@ -77,52 +77,71 @@ export default {
   layout: 'pages',
   scrollToTop: true,
   async fetch () {
+    console.time('all')
+    console.time('00')
     const isNotCurrentLang = this.$i18n.locale !== this.search_lang
     if (!this.spareParts?.length || isNotCurrentLang) {
       await this.GET_SPARE_PARTS()
     }
-    if (this.$route.query.brand && (!this.brands?.length || isNotCurrentLang)) {
-      await this.GET_BRANDS(this.$route.query.sparePart)
-    }
-    if (this.$route.query.model && (!this.models?.length || isNotCurrentLang)) {
-      await this.GET_MODELS(this.$route.query)
-    }
-    if (this.$route.query.type && (!this.types?.length || isNotCurrentLang)) {
-      await this.GET_TYPES(this.$route.query)
-    }
+    console.timeEnd('00')
 
+    console.time('find sparePart')
     if (this.$route.query.sparePart) {
-      const sparePartSlugPart = this.spareParts.find(sparePart => sparePart.assemblyGroupNodeId === +this.$route.query.sparePart)
+      var sparePartSlugPart = this.spareParts.find(sparePart => sparePart.assemblyGroupNodeId === +this.$route.query.sparePart)
       if (sparePartSlugPart) {
         this.search.sparePart = +sparePartSlugPart.assemblyGroupNodeId
       }
     }
+    console.timeEnd('find sparePart')
+
+    console.time('11')
+    if (this.$route.query.brand && sparePartSlugPart && (!this.brands?.length || isNotCurrentLang)) {
+      await this.GET_BRANDS(this.$route.query.sparePart)
+    }
 
     if (this.$route.query.brand) {
-      const brandSlug = this.brands.find(el => el.manuId === +this.$route.query.brand)
+      var brandSlug = this.brands.find(el => el.manuId === +this.$route.query.brand)
       if (brandSlug) {
         this.search.brand = +brandSlug.manuId
       }
     }
+    console.timeEnd('11')
+
+    console.time('22')
+    if (this.$route.query.model && brandSlug && (!this.models?.length || isNotCurrentLang)) {
+      await this.GET_MODELS(this.$route.query)
+    }
 
     if (this.$route.query.model) {
-      const modelSlug = this.models.find(el => el.modId === +this.$route.query.model)
+      var modelSlug = this.models.find(el => el.modId === +this.$route.query.model)
       if (modelSlug) {
         this.search.model = +modelSlug.modId
       }
     }
+    console.timeEnd('11')
+
+    console.time('33')
+    if (this.$route.query.type && modelSlug && (!this.types?.length || isNotCurrentLang)) {
+      await this.GET_TYPES(this.$route.query)
+    }
+
     if (this.$route.query.type) {
       const typeSlug = this.types.find(el => el.carId === +this.$route.query.type)
       if (typeSlug) {
         this.search.type = +typeSlug.carId
       }
     }
+    console.timeEnd('33')
 
+    console.timeEnd('all')
+
+    console.time('44')
     if (this.search.sparePart) {
       this.loadingResults = true
       await this.GET_SEARCH_PARTS(this.search)
       this.loadingResults = false
     }
+    console.timeEnd('44')
   },
   data () {
     return {
