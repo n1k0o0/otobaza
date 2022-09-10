@@ -593,7 +593,7 @@ const actions = {
     commit('SET_LOADING', true)
     this.$axios.defaults.baseURL = this.$env.CATALOG_API_URL
     const { data: parts } = await this.$axios.get('api/ehisse')
-    commit('SET_SPARE_PARTS', parts.filter((v, i, a) => a.findIndex(v2 => (v2.assemblyGroupNodeId === v.assemblyGroupNodeId)) === i))
+    commit('SET_SPARE_PARTS', parts)
     commit('SET_SEARCH_LANG', this.$i18n.locale)
     commit('SET_LOADING', false)
   },
@@ -627,6 +627,7 @@ const actions = {
     isNewSort = 0,
     page = false
   }) {
+    commit('SET_LOADING', true)
     this.$axios.defaults.baseURL = this.$env.CATALOG_API_URL
     const { data: oems } = await this.$axios.post('api/ehisse/search', {
       assemblyGroupNodeId: sparePart,
@@ -666,6 +667,7 @@ const actions = {
     } else {
       commit('SET_SEARCH_PARTS', products)
     }
+    commit('SET_LOADING', false)
   },
   async GET_SEARCH_PRODUCT ({ commit }, payload) {
     this.$axios.defaults.baseURL = this.$env.BASE_API_URL
