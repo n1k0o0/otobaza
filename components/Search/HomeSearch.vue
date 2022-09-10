@@ -100,7 +100,7 @@
               >
                 <template slot="selected-option" slot-scope="option">
                   {{
-                    (option.carName + '(' + option.yearOfConstrFrom + '-' + option.yearOfConstrTo + ')').substring(0, 10)
+                    (option.carName + '(' + option.yearOfConstrFrom + '-' + option.yearOfConstrTo + ')').substring(0, 9)
                   }}...
                 </template>
                 <template slot="option" slot-scope="option">
