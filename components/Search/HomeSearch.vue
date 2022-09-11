@@ -155,7 +155,7 @@
                   <button
                     class="btn"
                     type="submit"
-                    @click="$router.push(localePath({ name: 'search'}));"
+                    @click="$router.push(localePath({ name: 'search', query: { sparePart: search.sparePart,brand: search.brand, model: search.model,type:search.type}}));"
                   >
                     {{ $t('search') }}
                     <svg

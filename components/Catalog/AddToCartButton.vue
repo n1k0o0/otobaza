@@ -1,5 +1,5 @@
 <template lang="pug">
-  button(type='button' :disabled="loading" @click.prevent="addToCart").btn.px-3.py-1.position-relative.w-100
+  button(type='button' :disabled="loading" @click.prevent="addToCart").btn-new.px-2.py-1.position-relative.w-100
     i(:class="loading ? 'fa fa-spin fa-spinner' : 'fa fa-shopping-cart'")
     span.pl-2
       slot

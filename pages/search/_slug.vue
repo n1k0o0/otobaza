@@ -74,7 +74,7 @@
                         :description="product.description_catalog",
                         :quote="product.description",
                         hashtags="otobazacom")
-                        button.btn.share
+                        button.btn-new.share
                           <i class="fa fa-share-alt" aria-hidden="true"></i>
             .product_description
               .hr-wrap
@@ -259,7 +259,7 @@ export default {
     white-space: nowrap;
 
     .title {
-      color: #2a8ef0;
+      color: #344054;
       font-size: 25px;
     }
 
@@ -355,7 +355,7 @@ export default {
         &_text {
           //margin:0 50px;
           .phone {
-            color: #5ca9ff;
+            color: #98A2B3;
           }
         }
 
@@ -411,7 +411,7 @@ export default {
 
   .btn {
     border-radius: 5px;
-    background-color: #4a8ee9;
+    background-color: #3A7299;
     color: #fff;
   }
 
