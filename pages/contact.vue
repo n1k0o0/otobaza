@@ -160,7 +160,7 @@
                     </div>
                     <div class="col-12 col-sm-12 text-right">
                       <button
-                        class="btn contact-btn"
+                        class="btn-new float-right"
                         :disabled="loading"
                         type="submit"
                       >

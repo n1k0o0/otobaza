@@ -332,7 +332,11 @@
     "radio": "Аудио/ Видео/ GPS",
     "auto-cosmetics": "Автокосметика",
     "search_placeholder": "Поиск по коду запчасти,Vin коду...",
-    "tooltip": "Some tooltip will be here ..."
+    "tooltip": "Some tooltip will be here ...",
+    "by_vin": "ВИН-код",
+    "by_detail_code": "Код детали",
+    "by_brand": "По бренду",
+    "search_type": "Выберите тип поиска"
   },
   "oem": "OEM код",
   "new_or_used": "Новый или подержанный",
@@ -343,5 +347,12 @@
   "not_found_products": "* Напишите нам запчасть, которую вы не можете найти, мы найдем вас и свяжемся с вами...",
   "contact_us": "Свяжитесь с нами",
   "result_count": "Поиск дал результатов: {count}",
-  "manufacturer_code": "Код производителя"
+  "manufacturer_code": "Код производителя",
+  "search_difficulty_question": "Проблемы с поиском?",
+  "search_difficulty_answer": "Porttitor cras augue nibh donec magna dis nam viverra a. In.",
+  "create_request": "Создать запрос",
+  "store_question": "У вас есть магазин?",
+  "store_answer": "Sit sem massa eget velit. Nisl vulputate fringilla a est id nulla vitae fermentum venenatis. Felis ac\n          fringilla suspendisse donec odio. Sit justo, quam non tellus augue id sit ac faucibus.",
+  "question_question": "Есть вопрос?",
+  "question_answer": "Sit sem massa eget velit. Nisl vulputate fringilla a est id nulla vitae fermentum venenatis. Felis ac\n          fringilla suspendisse donec odio. Sit justo, quam non tellus augue id sit ac faucibus."
 }

@@ -26,7 +26,7 @@
                 | {{$t('add_to_cart')}}
 
         .search_results_more(v-show="search_page!==last_page" )
-          button.btn-light.px-4.py-2(@click="GET_SEARCH_PARTS({...search,page:true})", :disabled="loadingMore") {{ loadingMore?$t('loading'): $t('more_products')}}
+          button.btn-new-light.px-4.py-2(@click="GET_SEARCH_PARTS({...search,page:true})", :disabled="loadingMore") {{ loadingMore?$t('loading'): $t('more_products')}}
         .search_results_top
           button.btn(@click="scrollTop")
             <i class="fa fa-2x fa-angle-up" aria-hidden="true"></i>
@@ -78,11 +78,6 @@ export default {
   background-color: #e7eef4 !important;
   border-color: #e4eaef !important;
 
-  &:hover {
-    background-color: darken(#e7eef4, 10%) !important;
-    color: #484040;
-    cursor: not-allowed;
-  }
 }
 
 .search_results {
@@ -97,6 +92,7 @@ export default {
       display: flex;
       flex-direction: column;
       justify-content: space-around;
+      color: #344054;
       @media screen and (max-width: 480px) {
         width: 150px;
       }
@@ -120,6 +116,17 @@ export default {
         text-overflow: ellipsis;
         white-space: nowrap;
         overflow: hidden;
+        color: #98A2B3;
+      }
+
+      &:hover {
+        h5, .short_description {
+          color: #344054;
+        }
+
+        .btn {
+          background-color: #498EBF;
+        }
       }
 
     }
@@ -151,7 +158,11 @@ export default {
 
 .btn {
   border-radius: 5px;
-  background-color: #4a8ee9;
+  background-color: #3A7299;
   color: #fff;
+
+  &:hover {
+    background-color: #498EBF;
+  }
 }
 </style>

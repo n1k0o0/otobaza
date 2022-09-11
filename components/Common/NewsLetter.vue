@@ -1,14 +1,14 @@
 <template lang="pug">
   .fmail
     .row
-      .col-12.col-sm-6
+      .col-12
         .fmtitle {{ $t('subscription') }}
         p.fmtxt {{ $t('subscription_desc') }}
-      .col-12.col-sm-6
+      .col-12
         ClientOnly
           ValidationObserver(v-slot="{ handleSubmit }" slim tag="div" ref="newsLetterForm")
-            form(@submit.prevent="handleSubmit(onSubmit)")
-              ValidationProvider(v-slot='{errors, failed}' name='email' rules='required|email' tag="div" class="fmflex")
+            form.subscribe_form(@submit.prevent="handleSubmit(onSubmit)")
+              ValidationProvider(v-slot='{errors, failed}' name='email' rules='required|email' tag="div")
                 input.subscribe-input.form-control(
                   :placeholder="$t('email_address')"
                   type='email'
@@ -23,6 +23,7 @@
 <script>
 import { useFriendlyError } from '@/utils'
 import { mapActions } from 'vuex'
+
 export default {
   name: 'NewsLetter',
   data () {

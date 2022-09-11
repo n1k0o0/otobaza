@@ -12,8 +12,8 @@
               p.rmtxt {{ $t('not_found_info') }}
               h1 {{$fetchState}}
     template(v-else)
-      div
-        .container.d-flex.flex-column
+      div.container
+        .search_wrap.d-flex.flex-column
           .hr-wrap
             h1.title.hr-text {{$t('home_search.spare-parts')}}
           .filter.row
@@ -186,12 +186,14 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.container {
+.search_wrap {
   background-color: #fff;
   gap: 15px;
-  margin: 10px auto;
+  margin: 20px auto;
   padding: 50px 30px;
-  min-height: calc(100vh - 20px - 62px - 95px - 241px);
+  //min-height: calc(100vh - 20px - 62px - 95px - 241px);
+  min-height: calc(100vh - 123px - 41px - 36px - 360px);
+  border-radius: 16px;
 
   .filter {
     row-gap: 10px;
@@ -206,7 +208,11 @@ export default {
   }
 
   .sort_wrap {
-    color: #4a8ee9;
+    color: #98A2B3;
+
+    &:hover {
+      color: #344054;
+    }
 
     span {
       cursor: pointer;
@@ -229,7 +235,7 @@ export default {
 
   .btn {
     border-radius: 5px;
-    background-color: #4a8ee9;
+    background-color: #3A7299;
     color: #fff;
   }
 

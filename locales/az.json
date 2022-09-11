@@ -332,7 +332,11 @@
     "radio": "Audio/ Video",
     "auto-cosmetics": "Kosmetika/ Kimya",
     "search_placeholder": "Ehtiyyat hissə kodu,Vin kod ilə axtar…",
-    "tooltip": "Some tooltip will be here ..."
+    "tooltip": "Some tooltip will be here ...",
+    "by_vin": "Ban nömrə",
+    "by_detail_code": "Detal kodu",
+    "by_brand": "Marka üzrə",
+    "search_type": "Axtarış növünü seçin"
   },
   "oem": "OEM kodu",
   "new_or_used": "Yeni və ya ikinci əl",
@@ -343,5 +347,12 @@
   "not_found_products": "* Tapa bilmədiyiniz ehtiyyat hissəni bizə yazın,biz sizin əvəzinizə axtarıb sizinlə əlaqə saxlıyaq…",
   "contact_us": "Əlaqe saxla",
   "result_count": "Axtaris Uzre {count} netice verdi",
-  "manufacturer_code": "İstehsalçı kodu"
+  "manufacturer_code": "İstehsalçı kodu",
+  "search_difficulty_question": "Axtarışda çətinlik var?",
+  "search_difficulty_answer": "Porttitor cras augue nibh donec magna dis nam viverra a. In.",
+  "create_request": "Sorğu yarat",
+  "store_question": "Mağazanız var?",
+  "store_answer": "Sit sem massa eget velit. Nisl vulputate fringilla a est id nulla vitae fermentum venenatis. Felis ac\n          fringilla suspendisse donec odio. Sit justo, quam non tellus augue id sit ac faucibus.",
+  "question_question": "Sualınız var?",
+  "question_answer": "Sit sem massa eget velit. Nisl vulputate fringilla a est id nulla vitae fermentum venenatis. Felis ac\n          fringilla suspendisse donec odio. Sit justo, quam non tellus augue id sit ac faucibus."
 }

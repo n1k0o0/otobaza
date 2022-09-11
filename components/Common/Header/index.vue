@@ -1,12 +1,12 @@
 <template>
   <header>
-    <div class="header-top"></div>
     <HeaderMenu :settings="settings" />
   </header>
 </template>
 <script>
 import HeaderMenu from '@/components/Common/Header/Menu'
 import { mapActions } from 'vuex'
+
 export default {
   name: 'Header',
   components: {

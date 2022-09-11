@@ -1,29 +1,47 @@
 <template lang="pug">
   footer
-    .footer-details
-      .container
+    .container
+      .footer-details
         .row
-          .col-6.col-sm-6.col-lg-2
-            n-link.flogo(to='/')
-              img(alt='logo' src='/css/icons/logo.svg')
-          .col-6.col-sm-6.col-lg-2.mb-4
-            .play-app
-              a(href="https://apps.apple.com/us/app/facebook/id1528493953" class='play-app1' target="_blank")
-                img(alt='ios' src='img/header/ios-xl.png')
-              a(:href='androidLink' target="_blank")
-                img(alt='android' src='img/header/android-xl.png')
-          .col-12.col-sm-8.mbw12
-            FooterMenu
+          .col-12.col-lg-7
+            .row
+              .col-12.col-md-6.text-center
+                n-link(to='/')
+                  img(alt='logo' src='/css/icons/logo-light.png')
+                .socials
+                  a(href='https://www.facebook.com/otobazacom/' target='_blank')
+                    img(alt='logo' src='/css/icons/fb.png')
+                  a(href='https://instagram.com/otobaza' target='_blank')
+                    img(alt='logo' src='/css/icons/instagram.png')
+                  a(href='https://www.linkedin.com/company/otobaza' target='_blank')
+                    img(alt='logo' src='/css/icons/linkedin.png')
+                p.phone
+                  img(alt='logo' src='/css/icons/call.png')
+                  | +994 55 677 43 23
+                p.email
+                  img(alt='logo' src='/css/icons/email.png')
+                  | info@otobaza.com
+              .col-12.col-md-6
+                FooterMenu
 
-          .col-12.col-sm-12.mbw12.footer-subscribe
+          .col-12.col-lg-5.footer_right
+            .footer_app
+              h6 Tətbiqimizi yüklə
+              p Otobaza mobil tətbiqin burdan yüklüyə bilərsiniz.
+
+              .app_icons
+                a(href="https://apps.apple.com/us/app/facebook/id1528493953" class='' target="_blank")
+                  img(alt='ios' src='/css/icons/app_store.png')
+                a(:href='androidLink' target="_blank")
+                  img(alt='android' src='/css/icons/google_play.png')
+
             NewsLetter
-              FooterSocials.footer-socials
 
+    hr.footer_hr
     .footer-bottom
       .container
         .flex
           p.cright {{ $t('footer-copy',{ year:new Date().getFullYear() } ) }}
-          FooterSocials
 </template>
 <script>
 import FooterMenu from '@/components/Common/FooterMenu'
@@ -40,3 +58,87 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+
+.footer-details {
+  background-color: #2C5573;
+  padding: 40px 10px;
+  border-radius: 16px;
+  margin-bottom: 24px;
+}
+
+.footer_right {
+  @media screen and (max-width: 992px) {
+    text-align: center;
+  }
+}
+
+.socials {
+  margin-top: 34px;
+  display: flex;
+  gap: 45px;
+  justify-content: center;
+}
+
+p.phone, p.email {
+  margin-top: 35px;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 28px;
+
+  color: #FFFFFF;
+
+  img {
+    margin-right: 15px;
+  }
+}
+
+.footer_app {
+  margin-bottom: 40px;
+
+  h6 {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 28px;
+    color: #FFFFFF;
+  }
+
+  p {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+
+    color: #98A2B3;
+  }
+
+  .app_icons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+    @media screen and (max-width: 992px) {
+      justify-content: center;
+    }
+  }
+}
+
+@media screen and (min-width: 576px) {
+  .footer-details {
+    padding: 40px 20px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .footer-details {
+    padding: 40px 50px;
+  }
+  padding: 40px 50px;
+}
+
+@media screen and (min-width: 992px) {
+  .footer-details {
+    padding: 40px 100px;
+  }
+}
+
+</style>

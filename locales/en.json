@@ -332,7 +332,11 @@
     "radio": "Audio/ Video/ Gps",
     "auto-cosmetics": "Auto-cosmetics",
     "search_placeholder": "Search by spare part code,Vin code...",
-    "tooltip": "Some tooltip will be here ..."
+    "tooltip": "Some tooltip will be here ...",
+    "by_vin": "VIN code",
+    "by_detail_code": "Detail code",
+    "by_brand": "By brand",
+    "search_type": "Select a search type"
   },
   "oem": "OEM code",
   "new_or_used": "New or used",
@@ -343,5 +347,12 @@
   "not_found_products": "* Write us the spare part you can't find, we will search for you and contact you...",
   "contact_us": "Contact us",
   "result_count": "Search returned {count} results",
-  "manufacturer_code": "Manufacturer code"
+  "manufacturer_code": "Manufacturer code",
+  "search_difficulty_question": "Having trouble searching?",
+  "search_difficulty_answer": "Porttitor cras augue nibh donec magna dis nam viverra a. In.",
+  "create_request": "Create a request",
+  "store_question": "Do you have a store?",
+  "store_answer": "Sit sem massa eget velit. Nisl vulputate fringilla a est id nulla vitae fermentum venenatis. Felis ac\n          fringilla suspendisse donec odio. Sit justo, quam non tellus augue id sit ac faucibus.",
+  "question_question": "Have a question?",
+  "question_answer": "Sit sem massa eget velit. Nisl vulputate fringilla a est id nulla vitae fermentum venenatis. Felis ac\n          fringilla suspendisse donec odio. Sit justo, quam non tellus augue id sit ac faucibus."
 }

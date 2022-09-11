@@ -332,7 +332,11 @@
     "radio": "Audio/ Video/ Gps",
     "auto-cosmetics": "Oto-kozmetik",
     "search_placeholder": "Yedek parça kodu, Vin kodu ile arama yapın...",
-    "tooltip": "Some tooltip will be here ..."
+    "tooltip": "Some tooltip will be here ...",
+    "by_vin": "VIN kodu",
+    "by_detail_code": "Parça kodu",
+    "by_brand": "Markaya göre",
+    "search_type": "Bir arama türü seçin"
   },
   "oem": "OEM kodu",
   "new_or_used": "Yeni veya kullanılmış",
@@ -343,5 +347,12 @@
   "not_found_products": "* Bulamadığınız yedek parçayı bize yazın, sizi arayalım ve sizinle iletişime geçelim...",
   "contact_us": "Bize Ulaşın",
   "result_count": "Arama, {count} sonuç döndürdü",
-  "manufacturer_code": "Üretici kodu"
+  "manufacturer_code": "Üretici kodu",
+  "search_difficulty_question": "Aramada sorun mu yaşıyorsunuz?",
+  "search_difficulty_answer": "Porttitor cras augue nibh donec magna dis nam viverra a. In.",
+  "create_request": "İstek oluştur",
+  "store_question": "Bir dükkanınız var mı?",
+  "store_answer": "Sit sem massa eget velit. Nisl vulputate fringilla a est id nulla vitae fermentum venenatis. Felis ac\n          fringilla suspendisse donec odio. Sit justo, quam non tellus augue id sit ac faucibus.",
+  "question_question": "Bir sorunuz mu var?",
+  "question_answer": "Sit sem massa eget velit. Nisl vulputate fringilla a est id nulla vitae fermentum venenatis. Felis ac\n          fringilla suspendisse donec odio. Sit justo, quam non tellus augue id sit ac faucibus."
 }

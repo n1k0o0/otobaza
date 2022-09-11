@@ -2,30 +2,14 @@
   <div class="header-menu">
     <div class="container">
       <div class="row mdetails">
-        <div class="col-5 col-sm-4">
+        <div class="col-5 col-sm-4 align-self-center">
           <n-link class="flogo" :to="localePath('index')">
             <img alt="logo" src="/css/icons/logo.svg" />
           </n-link>
         </div>
 
-        <div class="col-7 col-sm-8">
+        <div class="col-7 col-sm-8 pl-0">
           <div class="hbflex">
-            <div class="mmenu mmenu_hide" :class="{transform00:isMobileMenuShow}">
-              <div
-                class="menu-toggle2 open-open"
-                :class="{'open': isMobileMenuShow}"
-                @click.prevent="toggleMobileMenu"
-              >
-                <i class="fa fa-close"></i>
-              </div>
-
-              <Login v-if="!$auth.loggedIn" />
-              <LoggedIn v-else />
-              <!--              <MenuItems />-->
-            </div>
-            <div class="position-relative">
-              <CartLink />
-            </div>
             <div class="position-relative">
               <div class="dropdown langdrop">
                 <button
@@ -36,7 +20,7 @@
                   data-toggle="dropdown"
                   type="button"
                 >
-                  <img alt="Flag" :src="`/img/header/${currentLang.toLowerCase()}.png`" />{{ currentLang }}
+                  <img alt="Flag" src="css/icons/lang.png" />{{ currentLang }}
                 </button>
                 <div aria-labelledby="dropdownlang" class="dropdown-menu">
                   <n-link
@@ -51,6 +35,25 @@
                 </div>
               </div>
             </div>
+
+            <div class="position-relative mr-4">
+              <CartLink />
+            </div>
+
+            <div class="mmenu mmenu_hide" :class="{transform00:isMobileMenuShow}">
+              <div
+                class="menu-toggle2 open-open"
+                :class="{'open': isMobileMenuShow}"
+                @click.prevent="toggleMobileMenu"
+              >
+                <i class="fa fa-close"></i>
+              </div>
+
+              <Login v-if="!$auth.loggedIn" />
+              <LoggedIn v-else />
+              <!--              <MenuItems />-->
+            </div>
+
             <div
               id="mobile-menu"
               class="menu-toggle1"

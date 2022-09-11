@@ -6,12 +6,12 @@
 .buy_now_check label small {
   position: relative;
   top: 5px;
-  color: #4DA6FF;
+  color: #344054;
   font-size: 12px;
 }
 
 .buy_now_check .custom-control-label::before {
-  border-color: #4DA6FF;
+  border-color: #344054;
 }
 
 .buy_now_cover label span {
@@ -28,7 +28,7 @@
 }
 
 .buy-now-details {
-  border: 1px solid #4DA6FF;
+  border: 1px solid #344054;
   min-height: 276px;
   border-radius: 3px;
   margin-top: 72px;
@@ -47,7 +47,7 @@
 }
 
 .buy_p_name {
-  color: #4DA6FF;
+  color: #344054;
   font-weight: 600;
   font-size: 13px;
   margin-bottom: 0;
@@ -67,7 +67,7 @@
 
 .p_code_tt {
   font-size: 12px;
-  color: #4DA6FF;
+  color: #344054;
   margin-bottom: 0;
 }
 
@@ -90,12 +90,12 @@ a.p_code {
 }
 
 a.p_code:hover {
-  color: #4DA6FF;
+  color: #344054;
 }
 
 .buy_now_top {
   margin-bottom: 26px;
-  border-bottom: 1px solid #4DA6FF;
+  border-bottom: 1px solid #344054;
 }
 
 .mt36 {
@@ -363,8 +363,8 @@ a.p_code:hover {
 }
 
 .catalog-type li a.nuxt-link-exact-active {
-  color: #4DA6FF;
-  border-color: #4DA6FF;
+  color: #344054;
+  border-color: #344054;
 }
 
 .cclass-tree {
@@ -391,7 +391,7 @@ a.p_code:hover {
   width: 22px;
   height: 30px;
   margin: 0;
-  background: #4DA6FF;
+  background: #344054;
   text-decoration: none;
   text-align: center;
   line-height: 31px;
@@ -416,9 +416,9 @@ a.p_code:hover {
   margin: 0;
   padding: 0;
   text-align: center;
-  border: 2px solid #4DA6FF;
+  border: 2px solid #344054;
   background: #fff;
-  color: #4DA6FF;
+  color: #344054;
   font: 12px "Roboto-Bold";
   padding-top: 2px;
 }
@@ -755,13 +755,13 @@ a.p_code:hover {
 }
 
 .confirm-order {
-  background-color: #4DA6FF;
+  background-color: #344054;
   color: #fff;
   font: 10px "Roboto-Regular";
   min-width: 100px;
   height: 31px;
   border-radius: 3px;
-  border: 1px solid #4DA6FF;
+  border: 1px solid #344054;
   cursor: pointer;
 }
 
@@ -1041,7 +1041,7 @@ footer {
     text-align: left !important;
   }
   .fmail {
-    max-width: 400px;
+    //max-width: 400px;
   }
   .play-app {
     //margin-top: 16px;
@@ -1399,7 +1399,7 @@ footer {
 
 .light-blue {
   @extend .btn !optional;
-  background-color: #4da6ff !important;
+  background-color: #344054 !important;
 }
 
 .hr-wrap {
@@ -1409,7 +1409,7 @@ footer {
   white-space: nowrap;
 
   .title {
-    color: #2a8ef0;
+    color: #344054;
     font-size: 25px;
   }
 

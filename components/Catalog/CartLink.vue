@@ -1,11 +1,13 @@
 <template lang="pug">
   span(@click="cartLink").wishlist-btn
-    i.fa.fa-shopping-cart
+    i
+      img(src="/css/icons/cart.png")
     sup(v-show="cart.length") {{cart.length}}
 </template>
 <script>
 
-import { mapGetters, mapActions, mapMutations } from 'vuex'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
+
 export default {
   name: 'CartLink',
   computed: {

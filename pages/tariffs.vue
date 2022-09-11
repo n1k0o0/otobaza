@@ -49,7 +49,7 @@
                   <button
                     v-for="(p,i) in packages"
                     :key="i"
-                    class="rb-green"
+                    class="bg-new-light"
                     type="button"
                     @click.prevent="setPackage(i)"
                   >
@@ -101,7 +101,8 @@
 </template>
 <script>
 import { useFriendlyError } from '@/utils'
-import { mapGetters, mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
+
 export default {
   name: 'Tariffs',
   layout: 'pages',
@@ -125,7 +126,7 @@ export default {
     price () {
       const price = this?.packages[this.val - 1]?.price
       const currency = this?.packages[this.val - 1]?.currency_code
-      return price === 0 ? this.$t('free') : `${price} ${currency}` + ' / '+ this.$t('month')
+      return price === 0 ? this.$t('free') : `${price} ${currency}` + ' / ' + this.$t('month')
     },
     limit () {
       return this?.packages[this.val - 1]?.limit
