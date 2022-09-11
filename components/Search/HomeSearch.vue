@@ -474,6 +474,7 @@ export default {
     display: flex;
     gap: 50px;
     margin: 15px 30px;
+    flex-wrap: wrap;
 
     h5 {
       color: #98A2B3;

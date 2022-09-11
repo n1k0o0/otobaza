@@ -1,14 +1,14 @@
 <template>
   <div class="header-menu">
     <div class="container">
-      <div class="row mdetails">
-        <div class="col-5 col-sm-4 align-self-center">
-          <n-link class="flogo" :to="localePath('index')">
+      <div class="row ">
+        <div class="col-4 col-sm-4 pr-0">
+          <n-link class="" :to="localePath('index')">
             <img alt="logo" src="/css/icons/logo.svg" />
           </n-link>
         </div>
 
-        <div class="col-7 col-sm-8 pl-0">
+        <div class="col-8 col-sm-8 pl-0">
           <div class="hbflex">
             <div class="position-relative">
               <div class="dropdown langdrop">
