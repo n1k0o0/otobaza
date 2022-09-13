@@ -26,8 +26,8 @@
 
           .col-12.col-lg-5.footer_right
             .footer_app
-              h6 Tətbiqimizi yüklə
-              p Otobaza mobil tətbiqin burdan yüklüyə bilərsiniz.
+              h6 {{$t('download_app')}}
+              p {{$t('header_top_info')}}.
 
               .app_icons
                 a(href="https://apps.apple.com/us/app/facebook/id1528493953" class='' target="_blank")

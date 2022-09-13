@@ -9,43 +9,43 @@
             </h5>
           </swiper-slide>
           <swiper-slide>
-            <h5 class="pointer" @click="showFilter(2)">
+            <h5 class="pointer disabled" @click="showFilter(2)">
               {{ $t('home_search.accessory') }}
             </h5>
           </swiper-slide>
           <swiper-slide>
-            <h5 class="pointer" @click="showFilter(3)">
+            <h5 class="pointer disabled" @click="showFilter(3)">
               {{ $t('home_search.used') }}
             </h5>
           </swiper-slide>
           <swiper-slide>
-            <h5 class="pointer" @click="showFilter(3)">
+            <h5 class="pointer disabled" @click="showFilter(3)">
               {{ $t('home_search.gasoline') }}
             </h5>
           </swiper-slide>
 
           <swiper-slide>
-            <h5 class="pointer" @click="showFilter(3)">
+            <h5 class="pointer disabled" @click="showFilter(3)">
               {{ $t('home_search.wheel') }}
             </h5>
           </swiper-slide>
           <swiper-slide>
-            <h5 class="pointer" @click="showFilter(3)">
+            <h5 class="pointer disabled" @click="showFilter(3)">
               {{ $t('home_search.battery') }}
             </h5>
           </swiper-slide>
           <swiper-slide>
-            <h5 class="pointer" @click="showFilter(3)">
+            <h5 class="pointer disabled" @click="showFilter(3)">
               {{ $t('home_search.windscreen') }}
             </h5>
           </swiper-slide>
           <swiper-slide>
-            <h5 class="pointer" @click="showFilter(3)">
+            <h5 class="pointer disabled" @click="showFilter(3)">
               {{ $t('home_search.radio') }}
             </h5>
           </swiper-slide>
           <swiper-slide>
-            <h5 class="pointer" @click="showFilter(3)">
+            <h5 class="pointer disabled" @click="showFilter(3)">
               {{ $t('home_search.auto-cosmetics') }}
             </h5>
           </swiper-slide>
@@ -54,7 +54,7 @@
       <div class="search_body">
         <div class="search_tab">
           <div>
-            <h5>Axtarış növünü seçin:</h5>
+            <h5>{{ $t('home_search.search_type') }}:</h5>
           </div>
           <div class="search_tab_menus">
             <h6
