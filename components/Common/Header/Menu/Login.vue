@@ -2,7 +2,7 @@
   <div v-click-outside="onClickOutside" class="dropdown droplogin">
     <button
       id="droplogin"
-      class="btn dropdown-toggle login-btn"
+      class="btn-new-light dropdown-toggle login-btn"
       :class="{'show':show}"
       type="button"
       @click="TOGGLE_MOBILE_MENU(!show)"

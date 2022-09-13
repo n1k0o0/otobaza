@@ -1,249 +1,281 @@
 <template>
-  <div class="home_search">
-    <div class="search_menu">
-      <h5 class="active_menu pointer" @click="showFilter(1)">
-        {{ $t('home_search.spare-parts') }}
-      </h5>
-      <h5 class="pointer" @click="showFilter(2)">
-        {{ $t('home_search.accessory') }}
-      </h5>
-      <h5 class="pointer" @click="showFilter(3)">
-        {{ $t('home_search.used') }}
-      </h5>
-      <h5 class="pointer" @click="showFilter(3)">
-        {{ $t('home_search.gasoline') }}
-      </h5>
-      <h5 class="pointer" @click="showFilter(3)">
-        {{ $t('home_search.wheel') }}
-      </h5>
-      <h5 class="pointer" @click="showFilter(3)">
-        {{ $t('home_search.battery') }}
-      </h5>
-      <h5 class="pointer" @click="showFilter(3)">
-        {{ $t('home_search.windscreen') }}
-      </h5>
-      <h5 class="pointer" @click="showFilter(3)">
-        {{ $t('home_search.radio') }}
-      </h5>
-      <h5 class="pointer" @click="showFilter(3)">
-        {{ $t('home_search.auto-cosmetics') }}
-      </h5>
-    </div>
-    <div class="search_body">
-      <div class="search_tab">
-        <div>
-          <h5>Axtarış növünü seçin:</h5>
-        </div>
-        <div class="search_tab_menus">
-          <h6
-            class="pointer"
-            :class="{'tab_active':filterType===1}"
-            @click="chooseFilterType(1)"
-          >
-            {{ $t('home_search.by_brand') }}
-          </h6>
-          <h6
-            class="pointer disabled"
-            :class="{'tab_active':filterType===2}"
-          >
-            {{ $t('home_search.by_vin') }}
-          </h6>
-          <h6
-            class="pointer disabled"
-            :class="{'tab_active':filterType===3}"
-          >
-            {{ $t('home_search.by_detail_code') }}
-          </h6>
-        </div>
-      </div>
+  <div class="container home_search_wrapper">
+    <div class="home_search">
+      <div class="search_menu">
+        <swiper class="swiper" :options="swiperOption">
+          <swiper-slide>
+            <h5 class="active_menu pointer" @click="showFilter(1)">
+              {{ $t('home_search.spare-parts') }}
+            </h5>
+          </swiper-slide>
+          <swiper-slide>
+            <h5 class="pointer" @click="showFilter(2)">
+              {{ $t('home_search.accessory') }}
+            </h5>
+          </swiper-slide>
+          <swiper-slide>
+            <h5 class="pointer" @click="showFilter(3)">
+              {{ $t('home_search.used') }}
+            </h5>
+          </swiper-slide>
+          <swiper-slide>
+            <h5 class="pointer" @click="showFilter(3)">
+              {{ $t('home_search.gasoline') }}
+            </h5>
+          </swiper-slide>
 
-      <div class="first_search_group">
-        <transition
-          mode="out-in"
-          name="search-fade"
-        >
-          <template v-if="filterType===1">
-            <div class="filter_search_group_wrapper">
-              <div class="filter_search_group">
-                <div class="filter_search_group_item">
-                  <v-select
-                    v-model="search.sparePart"
-                    label="assemblyGroupName"
-                    :loading="loading"
-                    :options="spareParts"
-                    :placeholder="$t('home_search.spare-parts')"
-                    :reduce="part => part.assemblyGroupNodeId"
-                    @input="GET_BRANDS(search.sparePart)"
-                  >
-                    <template v-slot:selected-option="option">
-                      <span :class="option.icon"></span>
-                      {{
-                        option.assemblyGroupName.length <= 9 ? option.assemblyGroupName : (option.assemblyGroupName.substring(0, 7) + '...')
-                      }}
-                    </template>
-                    <template v-slot:option="option">
-                      <span :class="option.icon"></span>
-                      {{ option.assemblyGroupName }}
-                    </template>
-                  </v-select>
-                </div>
-                <div class="filter_search_group_item">
-                  <v-select
-                    v-model="search.brand"
-                    :disabled="!search.sparePart"
-                    label="manuName"
-                    :loading="loading"
-                    :options="brands"
-                    :placeholder="$t('brand')"
-                    :reduce="brand => brand.manuId"
-                    :reset-on-options-change="true"
-                    @input="GET_MODELS(search)"
-                  >
-                    <template v-slot:selected-option="option">
-                      <span :class="option.icon"></span>
-                      {{ option.manuName.length <= 10 ? option.manuName : (option.manuName.substring(0, 7) + '...') }}
-                    </template>
-                    <template v-slot:option="option">
-                      <span :class="option.icon"></span>
-                      {{ option.manuName }}
-                    </template>
-                  </v-select>
-                </div>
-                <div class="filter_search_group_item">
-                  <v-select
-                    v-model="search.model"
-                    :disabled="!search.brand"
-                    label="modelName"
-                    :loading="loading"
-                    :options="models"
-                    :placeholder="$t('model')"
-                    :reduce="part => part.modId"
-                    :reset-on-options-change="true"
-                    @input="GET_TYPES(search)"
-                  >
-                    <template v-slot:selected-option="option">
-                      <span :class="option.icon"></span>
-                      {{ option.modelName.length < 10 ? option.modelName : (option.modelName.substring(0, 7) + '...') }}
-                    </template>
-                    <template v-slot:option="option">
-                      <span :class="option.icon"></span>
-                      {{ option.modelName }}
-                    </template>
-                  </v-select>
-                </div>
-                <div class="filter_search_group_item">
-                  <v-select
-                    v-model="search.type"
-                    :disabled="!search.model"
-                    :loading="loading"
-                    :options="types"
-                    :placeholder="$t('type')"
-                    :reduce="part => part.carId"
-                    :reset-on-options-change="true"
-                  >
-                    <template slot="selected-option" slot-scope="option">
-                      {{
-                        (option.carName + '(' + option.yearOfConstrFrom + '-' + option.yearOfConstrTo + ')').substring(0, 9)
-                      }}...
-                    </template>
-                    <template slot="option" slot-scope="option">
-                      {{ option.carName + ' (' + option.yearOfConstrFrom + '-' + option.yearOfConstrTo + ')' }}
-                    </template>
-                  </v-select>
-                </div>
-                <div class="filter_search_group_item">
-                  <button
-                    class="btn"
-                    type="submit"
-                    @click="$router.push(localePath({ name: 'search', query: { sparePart: search.sparePart,brand: search.brand, model: search.model,type:search.type}}));"
-                  >
-                    {{ $t('search') }}
-                    <svg
-                      fill="none"
-                      height="20"
-                      viewBox="0 0 21 20"
-                      width="21"
-                      xmlns="http://www.w3.org/2000/svg"
+          <swiper-slide>
+            <h5 class="pointer" @click="showFilter(3)">
+              {{ $t('home_search.wheel') }}
+            </h5>
+          </swiper-slide>
+          <swiper-slide>
+            <h5 class="pointer" @click="showFilter(3)">
+              {{ $t('home_search.battery') }}
+            </h5>
+          </swiper-slide>
+          <swiper-slide>
+            <h5 class="pointer" @click="showFilter(3)">
+              {{ $t('home_search.windscreen') }}
+            </h5>
+          </swiper-slide>
+          <swiper-slide>
+            <h5 class="pointer" @click="showFilter(3)">
+              {{ $t('home_search.radio') }}
+            </h5>
+          </swiper-slide>
+          <swiper-slide>
+            <h5 class="pointer" @click="showFilter(3)">
+              {{ $t('home_search.auto-cosmetics') }}
+            </h5>
+          </swiper-slide>
+        </swiper>
+      </div>
+      <div class="search_body">
+        <div class="search_tab">
+          <div>
+            <h5>Axtarış növünü seçin:</h5>
+          </div>
+          <div class="search_tab_menus">
+            <h6
+              class="pointer"
+              :class="{'tab_active':filterType===1}"
+              @click="chooseFilterType(1)"
+            >
+              {{ $t('home_search.by_brand') }}
+            </h6>
+            <h6
+              class="pointer disabled"
+              :class="{'tab_active':filterType===2}"
+            >
+              {{ $t('home_search.by_vin') }}
+            </h6>
+            <h6
+              class="pointer disabled"
+              :class="{'tab_active':filterType===3}"
+            >
+              {{ $t('home_search.by_detail_code') }}
+            </h6>
+          </div>
+        </div>
+
+        <div class="first_search_group">
+          <transition
+            mode="out-in"
+            name="search-fade"
+          >
+            <template v-if="filterType===1">
+              <div class="filter_search_group_wrapper">
+                <div class="filter_search_group">
+                  <div class="filter_search_group_item">
+                    <v-select
+                      v-model="search.sparePart"
+                      label="assemblyGroupName"
+                      :loading="loading"
+                      :options="spareParts"
+                      :placeholder="$t('home_search.spare-parts')"
+                      :reduce="part => part.assemblyGroupNodeId"
+                      @input="GET_BRANDS(search.sparePart)"
                     >
-                      <path
-                        d="M10.0834 17.4998C14.4557 17.4998 18.0001 13.9554 18.0001 9.58317C18.0001 5.21092 14.4557 1.6665 10.0834 1.6665C5.71116 1.6665 2.16675 5.21092 2.16675 9.58317C2.16675 13.9554 5.71116 17.4998 10.0834 17.4998Z"
-                        stroke="#2C5573"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="1.5"
-                      />
-                      <path
-                        d="M18.8334 18.3332L17.1667 16.6665"
-                        stroke="#2C5573"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="1.5"
-                      />
-                    </svg>
-                  </button>
+                      <template v-slot:selected-option="option">
+                        <span :class="option.icon"></span>
+                        {{
+                          option.assemblyGroupName.length <= 9 ? option.assemblyGroupName : (option.assemblyGroupName.substring(0, 7) + '...')
+                        }}
+                      </template>
+                      <template v-slot:option="option">
+                        <span :class="option.icon"></span>
+                        {{ option.assemblyGroupName }}
+                      </template>
+                    </v-select>
+                  </div>
+                  <div class="filter_search_group_item">
+                    <v-select
+                      v-model="search.brand"
+                      :disabled="!search.sparePart"
+                      label="manuName"
+                      :loading="loading"
+                      :options="brands"
+                      :placeholder="$t('brand')"
+                      :reduce="brand => brand.manuId"
+                      :reset-on-options-change="true"
+                      @input="GET_MODELS(search)"
+                    >
+                      <template v-slot:selected-option="option">
+                        <span :class="option.icon"></span>
+                        {{ option.manuName.length <= 10 ? option.manuName : (option.manuName.substring(0, 7) + '...') }}
+                      </template>
+                      <template v-slot:option="option">
+                        <span :class="option.icon"></span>
+                        {{ option.manuName }}
+                      </template>
+                    </v-select>
+                  </div>
+                  <div class="filter_search_group_item">
+                    <v-select
+                      v-model="search.model"
+                      :disabled="!search.brand"
+                      label="modelName"
+                      :loading="loading"
+                      :options="models"
+                      :placeholder="$t('model')"
+                      :reduce="part => part.modId"
+                      :reset-on-options-change="true"
+                      @input="GET_TYPES(search)"
+                    >
+                      <template v-slot:selected-option="option">
+                        <span :class="option.icon"></span>
+                        {{
+                          option.modelName.length < 10 ? option.modelName : (option.modelName.substring(0, 7) + '...')
+                        }}
+                      </template>
+                      <template v-slot:option="option">
+                        <span :class="option.icon"></span>
+                        {{ option.modelName }}
+                      </template>
+                    </v-select>
+                  </div>
+                  <div class="filter_search_group_item">
+                    <v-select
+                      v-model="search.type"
+                      :disabled="!search.model"
+                      :loading="loading"
+                      :options="types"
+                      :placeholder="$t('type')"
+                      :reduce="part => part.carId"
+                      :reset-on-options-change="true"
+                    >
+                      <template slot="selected-option" slot-scope="option">
+                        {{
+                          (option.carName + '(' + option.yearOfConstrFrom + '-' + option.yearOfConstrTo + ')').substring(0, 9)
+                        }}...
+                      </template>
+                      <template slot="option" slot-scope="option">
+                        {{ option.carName + ' (' + option.yearOfConstrFrom + '-' + option.yearOfConstrTo + ')' }}
+                      </template>
+                    </v-select>
+                  </div>
+                  <div class="filter_search_group_item">
+                    <button
+                      class="btn"
+                      type="submit"
+                      @click="$router.push(localePath({ name: 'search', query: { sparePart: search.sparePart,brand: search.brand, model: search.model,type:search.type}}));"
+                    >
+                      {{ $t('search') }}
+                      <svg
+                        fill="none"
+                        height="20"
+                        viewBox="0 0 21 20"
+                        width="21"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M10.0834 17.4998C14.4557 17.4998 18.0001 13.9554 18.0001 9.58317C18.0001 5.21092 14.4557 1.6665 10.0834 1.6665C5.71116 1.6665 2.16675 5.21092 2.16675 9.58317C2.16675 13.9554 5.71116 17.4998 10.0834 17.4998Z"
+                          stroke="#2C5573"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="1.5"
+                        />
+                        <path
+                          d="M18.8334 18.3332L17.1667 16.6665"
+                          stroke="#2C5573"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="1.5"
+                        />
+                      </svg>
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
-          </template>
-        </transition>
+            </template>
+          </transition>
 
-        <transition
-          mode="out-in"
-          name="search-fade"
-        >
-          <template v-if="filterType===2">
-            <div class="filter_search_group_wrapper">
-              <div class="filter_search_group_vin">
-                <div class="w-100">
-                  <input
-                    class="form-control filter_search_group_search_input"
-                    :placeholder="$t('home_search.search_placeholder')"
-                    type="text"
-                  />
-                  <i aria-hidden="true" class="fa fa-search fa-lg fa-fw"></i>
+          <transition
+            mode="out-in"
+            name="search-fade"
+          >
+            <template v-if="filterType===2">
+              <div class="filter_search_group_wrapper">
+                <div class="filter_search_group_vin">
+                  <div class="w-100">
+                    <input
+                      class="form-control filter_search_group_search_input"
+                      :placeholder="$t('home_search.search_placeholder')"
+                      type="text"
+                    />
+                    <i aria-hidden="true" class="fa fa-search fa-lg fa-fw"></i>
+                  </div>
                 </div>
               </div>
-            </div>
-          </template>
-        </transition>
-      </div>
+            </template>
+          </transition>
+        </div>
 
-      <div class="search_banner">
-        <Banners />
-      </div>
+        <div class="search_banner">
+          <Banners />
+        </div>
 
-      <div class="search_tooltip">
-        <svg
-          fill="none"
-          height="22"
-          viewBox="0 0 22 22"
-          width="22"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M11 15V11M11 7H11.01M21 11C21 16.5228 16.5228 21 11 21C5.47715 21 1 16.5228 1 11C1 5.47715 5.47715 1 11 1C16.5228 1 21 5.47715 21 11Z"
-            stroke="#E4E7EC"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-          />
-        </svg>
+        <div class="search_tooltip">
+          <svg
+            fill="none"
+            height="22"
+            viewBox="0 0 22 22"
+            width="22"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M11 15V11M11 7H11.01M21 11C21 16.5228 16.5228 21 11 21C5.47715 21 1 16.5228 1 11C1 5.47715 5.47715 1 11 1C16.5228 1 21 5.47715 21 11Z"
+              stroke="#E4E7EC"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+            />
+          </svg>
 
-        <p>
-          {{ $t('home_search.tooltip') }}
-        </p>
+          <p>
+            {{ $t('home_search.tooltip') }}
+          </p>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
+import 'swiper/css/swiper.css'
+
 import { mapActions, mapGetters } from 'vuex'
 import Banners from '@/components/Common/Index/Banners'
 
 export default {
   name: 'HomeSearch',
-  components: { Banners },
+  components: {
+    Banners,
+    Swiper,
+    SwiperSlide
+  },
   async fetch () {
     await this.GET_SPARE_PARTS()
   },
@@ -266,7 +298,16 @@ export default {
         brand: '',
         type: ''
       },
-      filterType: 1
+      filterType: 1,
+      swiperOption: {
+        slidesPerView: 'auto',
+        spaceBetween: 60,
+        freeMode: true,
+        pagination: {
+          el: '.swiper-pagination',
+          clickable: true
+        }
+      }
     }
   },
   computed: {
@@ -308,9 +349,9 @@ export default {
 
 <style scoped lang="scss">
 .home_search {
-  border-radius: 5px;
   padding: 0;
   margin: 30px 0;
+  overflow: hidden;
 
   .first_search_group {
     display: grid;
@@ -471,10 +512,9 @@ export default {
   }
 
   .search_menu {
-    display: flex;
-    gap: 50px;
+    width: 100%;
     margin: 15px 30px;
-    flex-wrap: wrap;
+    border-radius: 5px;
 
     h5 {
       color: #98A2B3;
@@ -485,6 +525,7 @@ export default {
       line-height: 20px;
       letter-spacing: 0em;
       text-align: left;
+
     }
 
     h5.active_menu {
@@ -568,4 +609,47 @@ export default {
   }
 }
 
+.swiper-slide {
+  width: auto !important;
+}
+
+.swiper-container {
+  margin: 0 !important;
+  width: 100%;
+}
+
+.swiper-container, .swiper-wrapper, .swiper-slide {
+  height: auto !important;
+}
+
+@media screen and (max-width: 768px) {
+  .home_search {
+    .search_menu {
+      margin: 15px 10px;
+    }
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .home_search_wrapper {
+    padding: 0;
+
+    .home_search {
+      .search_menu {
+        h5 {
+          padding-bottom: 5px;
+
+          &.active_menu {
+            border-bottom: 2px solid #498EBF;
+          }
+        }
+      }
+
+      .search_body {
+        border-radius: 0;
+      }
+    }
+  }
+
+}
 </style>

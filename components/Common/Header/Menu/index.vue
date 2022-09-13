@@ -49,7 +49,15 @@
                 <i class="fa fa-close"></i>
               </div>
 
+              <button
+                v-if="!$auth.loggedIn"
+                class="btn-new login-btn ml-md-2"
+                @click.prevent="$router.push(localePath({ name: 'registration'}))"
+              >
+                {{ $t('registration') }}
+              </button>
               <Login v-if="!$auth.loggedIn" />
+
               <LoggedIn v-else />
               <!--              <MenuItems />-->
             </div>

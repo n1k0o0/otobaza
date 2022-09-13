@@ -1,93 +1,96 @@
 <template>
-  <div class="container mh60vh">
+  <div>
     <HomeSearch />
-    <div class="home_blocks">
-      <div class="home_blocks_text">
-        <h5>{{ $t('search_difficulty_question') }}</h5>
-        <p>
-          {{ $t('search_difficulty_answer') }}
-        </p>
-      </div>
-      <div class="home_blocks_img">
-        <button class="btn-new" @click="$router.push(localePath({ name: 'search'}))">
-          {{ $t('create_request') }}
-          <svg
-            fill="none"
-            height="24"
-            viewBox="0 0 24 24"
-            width="24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M6 12H18"
-              stroke="white"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="1.5"
-            />
-            <path
-              d="M12 18V6"
-              stroke="white"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="1.5"
-            />
-          </svg>
-        </button>
-      </div>
-    </div>
-    <div class="home_blocks">
-      <div class="home_blocks_img">
-        <img alt="register" src="/img/home/register.png" />
-      </div>
-      <div class="home_blocks_text">
-        <h5>{{ $t('store_question') }}</h5>
-        <p>
-          {{ $t('store_answer') }}
-        </p>
-        <button class="btn-new" @click="$router.push(localePath({ name: 'registration'}))">
-          {{ $t('registration') }}
-          <svg
-            fill="none"
-            height="24"
-            viewBox="0 0 24 24"
-            width="24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M6 12H18"
-              stroke="white"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="1.5"
-            />
-            <path
-              d="M12 18V6"
-              stroke="white"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="1.5"
-            />
-          </svg>
-        </button>
-      </div>
-    </div>
-    <div class="home_blocks">
-      <div class="home_blocks_img">
-        <img alt="contact" src="/img/home/contact_us.png" />
-      </div>
-      <div class="">
-        <h5>{{ $t('question_question') }}</h5>
-        <p>
-          {{ $t('question_answer') }}
-        </p>
-        <div class="home_blocks_buttons">
-          <button class="btn-new-light" @click="$router.push(localePath({ name: 'faq'}))">
-            {{ $t('faq') }}
+
+    <div class="container mh60vh">
+      <div class="home_blocks">
+        <div class="home_blocks_text">
+          <h5>{{ $t('search_difficulty_question') }}</h5>
+          <p>
+            {{ $t('search_difficulty_answer') }}
+          </p>
+        </div>
+        <div class="home_blocks_img">
+          <button class="btn-new" @click="$router.push(localePath({ name: 'search'}))">
+            {{ $t('create_request') }}
+            <svg
+              fill="none"
+              height="24"
+              viewBox="0 0 24 24"
+              width="24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M6 12H18"
+                stroke="white"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1.5"
+              />
+              <path
+                d="M12 18V6"
+                stroke="white"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1.5"
+              />
+            </svg>
           </button>
-          <button class="btn-new" @click="$router.push(localePath({ name: 'contact'}))">
-            {{ $t('contact_us') }}
+        </div>
+      </div>
+      <div class="home_blocks">
+        <div class="home_blocks_img">
+          <img alt="register" src="/img/home/register.png" />
+        </div>
+        <div class="home_blocks_text">
+          <h5>{{ $t('store_question') }}</h5>
+          <p>
+            {{ $t('store_answer') }}
+          </p>
+          <button class="btn-new" @click="$router.push(localePath({ name: 'registration'}))">
+            {{ $t('registration') }}
+            <svg
+              fill="none"
+              height="24"
+              viewBox="0 0 24 24"
+              width="24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M6 12H18"
+                stroke="white"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1.5"
+              />
+              <path
+                d="M12 18V6"
+                stroke="white"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1.5"
+              />
+            </svg>
           </button>
+        </div>
+      </div>
+      <div class="home_blocks">
+        <div class="home_blocks_img">
+          <img alt="contact" src="/img/home/contact_us.png" />
+        </div>
+        <div class="">
+          <h5>{{ $t('question_question') }}</h5>
+          <p>
+            {{ $t('question_answer') }}
+          </p>
+          <div class="home_blocks_buttons">
+            <button class="btn-new-light" @click="$router.push(localePath({ name: 'faq'}))">
+              {{ $t('faq') }}
+            </button>
+            <button class="btn-new" @click="$router.push(localePath({ name: 'contact'}))">
+              {{ $t('contact_us') }}
+            </button>
+          </div>
         </div>
       </div>
     </div>

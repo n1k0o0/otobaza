@@ -110,7 +110,7 @@ export default {
   grid-gap: 10px;
   border-radius: 5px;
   justify-items: center;
-  padding: 20px 10px;
+  padding: 20px 0;
 
   &_banner {
     display: flex;
