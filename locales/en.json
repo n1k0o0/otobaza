@@ -15,7 +15,7 @@
   "registration_2": "Make a proposal that suits the country!",
   "registration_3": "To keep in touch with you when ordering!",
   "registration_4": "After registration to give you the closest and most suitable offers!",
-  "registration_desc": "To contact us, you can write directly from the form below",
+  "registration_desc": "Register as a driver",
   "registration_required": "The fields marked with * must be filled.",
   "login": "Log in",
   "signin": "Enter",
@@ -120,9 +120,9 @@
   "car": {
     "transmission": {
       "0": "Robot",
-      "1" : "Automatic",
-      "2" : "Tiptronic",
-      "3" : "Mechanic"
+      "1": "Automatic",
+      "2": "Tiptronic",
+      "3": "Mechanic"
     }
   },
   "buyers": {
@@ -162,7 +162,7 @@
   },
   "tariffs_desc": "You can continue your sales by choosing the PACKAGE that suits you.",
   "plans_title": "Packages",
-  "plans_info":"Features and Advantages",
+  "plans_info": "Features and Advantages",
   "plans": [
     {
       "title": "Profitability",
@@ -202,7 +202,7 @@
   "see_all": "See them all",
   "dismantles": "Second-hand",
   "not_found": "The link you entered is incorrect",
-  "not_found_info" : "The link you entered is incorrect or has expired. You can use the \"Contact\" section for technical assistance.",
+  "not_found_info": "The link you entered is incorrect or has expired. You can use the \"Contact\" section for technical assistance.",
   "year": "Year",
   "total_auto": "Spare parts count",
   "list": "List",

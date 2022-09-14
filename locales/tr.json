@@ -15,7 +15,7 @@
   "registration_2": "Ülkeye uygun bir teklif yap!",
   "registration_3": "Sipariş verirken sizinle iletişim halinde olmak için!",
   "registration_4": "Kayıttan sonra size en yakın ve en uygun teklifleri vermek için!",
-  "registration_desc": "Bizimle iletişime geçmek için aşağıdaki formdan yazabilirsiniz",
+  "registration_desc": "Sürücü olarak kaydolun",
   "registration_required": "* İle işaretli alanların doldurulması zorunludur.",
   "login": "Giriş",
   "signin": "Giriş",
@@ -120,9 +120,9 @@
   "car": {
     "transmission": {
       "0": "Robot",
-      "1" : "Otomatik",
-      "2" : "Tiptronic",
-      "3" : "Mekanik"
+      "1": "Otomatik",
+      "2": "Tiptronic",
+      "3": "Mekanik"
     }
   },
   "buyers": {
@@ -162,7 +162,7 @@
   },
   "tariffs_desc": "Size uygun PAKETİ seçerek satışlarınıza devam edebilirsiniz.",
   "plans_title": "Paketlər",
-  "plans_info":"Özellikler ve Faydalar",
+  "plans_info": "Özellikler ve Faydalar",
   "plans": [
     {
       "title": "Karlılık",
@@ -202,7 +202,7 @@
   "see_all": "Hepsini gör",
   "dismantles": "İkinci el",
   "not_found": "Girdiğiniz bağlantı yanlış",
-  "not_found_info" : "Girdiğiniz bağlantı yanlış veya süresi dolmuş. Teknik yardım için \"İrtibat\" bölümünü kullanabilirsiniz.",
+  "not_found_info": "Girdiğiniz bağlantı yanlış veya süresi dolmuş. Teknik yardım için \"İrtibat\" bölümünü kullanabilirsiniz.",
   "year": "Yıl",
   "total_auto": "Araba parçaları sayısı",
   "list": "Liste",

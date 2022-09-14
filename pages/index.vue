@@ -47,31 +47,33 @@
           <p>
             {{ $t('store_answer') }}
           </p>
-          <button class="btn-new" @click="$router.push(localePath({ name: 'registration'}))">
-            {{ $t('registration') }}
-            <svg
-              fill="none"
-              height="24"
-              viewBox="0 0 24 24"
-              width="24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M6 12H18"
-                stroke="white"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="1.5"
-              />
-              <path
-                d="M12 18V6"
-                stroke="white"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="1.5"
-              />
-            </svg>
-          </button>
+          <a href="https://staging-seller.otobaza.com/#/login" target="_blank">
+            <button class="btn-new">
+              {{ $t('registration') }}
+              <svg
+                fill="none"
+                height="24"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M6 12H18"
+                  stroke="white"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1.5"
+                />
+                <path
+                  d="M12 18V6"
+                  stroke="white"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1.5"
+                />
+              </svg>
+            </button>
+          </a>
         </div>
       </div>
       <div class="home_blocks">
@@ -105,7 +107,11 @@ import Faq from '@/components/Common/Faq'
 export default {
   layout: 'main',
   name: 'Home',
-  components: { HomeSearch, Banners, Faq },
+  components: {
+    HomeSearch,
+    Banners,
+    Faq
+  },
   data () {
     return {
       title: {
