@@ -183,6 +183,7 @@
                     >
                       {{ $t('search') }}
                       <svg
+                        class="ml-2"
                         fill="none"
                         height="20"
                         viewBox="0 0 21 20"
