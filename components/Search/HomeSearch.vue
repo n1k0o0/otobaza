@@ -377,7 +377,7 @@ export default {
   }
 
   .filter_search_group_wrapper {
-    margin-top: 50px;
+    margin-top: 52px;
     grid-column: 1/-1;
     @media screen and (max-width: 576px) {
       padding: 20px 0;
@@ -544,7 +544,7 @@ export default {
     background-color: #498EBF;
     padding: 40px 100px 10px 100px;
     color: #FFFFFF;
-    border-radius: 25px;
+    border-radius: 24px;
 
     @media screen and (max-width: 1200px) {
       padding: 40px 50px 20px 50px;
@@ -594,7 +594,7 @@ export default {
   }
 
   .search_tooltip {
-    margin-top: 25px;
+    margin-top: 28px;
     display: inline-flex;
 
     p {

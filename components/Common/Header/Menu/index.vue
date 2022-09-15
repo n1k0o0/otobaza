@@ -10,7 +10,7 @@
 
         <div class="col-8 col-sm-8 pl-0">
           <div class="hbflex">
-            <div class="position-relative">
+            <div class="position-relative mr-2">
               <div class="dropdown langdrop">
                 <button
                   id="droplang"
@@ -51,7 +51,7 @@
 
               <button
                 v-if="!$auth.loggedIn"
-                class="btn-new login-btn ml-md-2"
+                class="btn-new login-btn ml-md-3"
                 @click.prevent="$router.push(localePath({ name: 'registration'}))"
               >
                 {{ $t('registration') }}

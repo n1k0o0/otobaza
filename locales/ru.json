@@ -23,7 +23,7 @@
   "username": "Имя пользователя",
   "password": "Пароль",
   "forget-password": "Забыл свой пароль",
-  "footer-copy": "(c) {year} OTOBAZA MMC. Все права защищены.",
+  "footer-copy": "© {year} OTOBAZA MMC. Все права защищены.",
   "subscribe": "Подписывайся",
   "subscription": "Подпишись на новости!",
   "subscription_desc": "Вы можете подписаться, чтобы быть в курсе последних новостей на нашем сайте..",

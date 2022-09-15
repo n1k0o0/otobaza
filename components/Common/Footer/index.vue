@@ -3,12 +3,12 @@
     .container
       .footer-details
         .row
-          .col-12.col-lg-7
+          .col-12.col-lg-6
             .row
-              .col-12.col-md-6.text-center
+              .col-12.col-md-6.text-center.text-lg-left
                 n-link(to='/')
                   img(alt='logo' src='/css/icons/logo-light.png')
-                .socials
+                .socials.justify-content-center.justify-content-lg-start
                   a(href='https://www.facebook.com/otobazacom/' target='_blank')
                     img(alt='logo' src='/css/icons/fb.png')
                   a(href='https://instagram.com/otobaza' target='_blank')
@@ -24,7 +24,7 @@
               .col-12.col-md-6
                 FooterMenu
 
-          .col-12.col-lg-5.footer_right
+          .col-12.col-lg-6.footer_right
             .footer_app
               h6 {{$t('download_app')}}
               p {{$t('header_top_info')}}.
@@ -78,7 +78,6 @@ export default {
   margin-top: 34px;
   display: flex;
   gap: 45px;
-  justify-content: center;
 }
 
 p.phone, p.email {

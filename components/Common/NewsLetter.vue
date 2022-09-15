@@ -15,7 +15,7 @@
                   v-model="email"
                   :class="{'is-invalid': failed, 'is-valid': !failed && email}"
                 )
-                button.btn(type='submit' :disabled="loading")
+                button.btn-new(type='submit' :disabled="loading")
                   i.fa.fa-spinner.fa-spin(v-if='loading')
                   |
                   | {{ $t('subscribe') }}

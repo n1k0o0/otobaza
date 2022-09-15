@@ -85,7 +85,7 @@ export default {
 
 <style lang="scss" scoped>
 .banners {
-  margin: 10px 0 20px 0;
+  margin: 10px 0 0;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(215px, 300fr));
   @media screen and (max-width: 768px) {
@@ -110,7 +110,7 @@ export default {
   grid-gap: 10px;
   border-radius: 5px;
   justify-items: center;
-  padding: 20px 0;
+  padding: 20px 0 0;
 
   &_banner {
     display: flex;

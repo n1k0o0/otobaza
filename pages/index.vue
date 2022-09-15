@@ -6,7 +6,7 @@
       <div class="home_blocks">
         <div class="home_blocks_text">
           <h5>{{ $t('search_difficulty_question') }}</h5>
-          <p>
+          <p class="m-0">
             {{ $t('search_difficulty_answer') }}
           </p>
         </div>
@@ -42,11 +42,13 @@
         <div class="home_blocks_img">
           <img alt="register" src="/img/home/register.png" />
         </div>
-        <div class="home_blocks_text">
-          <h5>{{ $t('store_question') }}</h5>
-          <p>
-            {{ $t('store_answer') }}
-          </p>
+        <div class="home_blocks_desc">
+          <div>
+            <h5>{{ $t('store_question') }}</h5>
+            <p>
+              {{ $t('store_answer') }}
+            </p>
+          </div>
           <a href="https://staging-seller.otobaza.com/#/login" target="_blank">
             <button class="btn-new">
               {{ $t('registration') }}
@@ -80,11 +82,13 @@
         <div class="home_blocks_img">
           <img alt="contact" src="/img/home/contact_us.png" />
         </div>
-        <div class="">
-          <h5>{{ $t('question_question') }}</h5>
-          <p>
-            {{ $t('question_answer') }}
-          </p>
+        <div class="home_blocks_desc">
+          <div>
+            <h5>{{ $t('question_question') }}</h5>
+            <p>
+              {{ $t('question_answer') }}
+            </p>
+          </div>
           <div class="home_blocks_buttons">
             <button class="btn-new-light" @click="$router.push(localePath({ name: 'faq'}))">
               {{ $t('faq') }}
@@ -202,6 +206,12 @@ export default {
   &_img {
     flex-shrink: 0;
     align-self: center;
+  }
+
+  &_desc {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
   }
 }
 </style>
