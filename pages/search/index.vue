@@ -190,7 +190,7 @@ export default {
   background-color: #fff;
   gap: 15px;
   margin: 20px auto;
-  padding: 50px 30px;
+  padding: 50px 0;
   //min-height: calc(100vh - 20px - 62px - 95px - 241px);
   min-height: calc(100vh - 123px - 41px - 36px - 360px);
   border-radius: 16px;
@@ -244,6 +244,12 @@ export default {
       width: 100%;
     }
     padding: 4px 0.75rem !important;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .search_wrap {
+    padding: 50px 30px;
   }
 }
 </style>

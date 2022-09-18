@@ -94,7 +94,17 @@ export default {
       justify-content: space-around;
       color: #344054;
       @media screen and (max-width: 480px) {
-        width: 150px;
+        width: 48%;
+        padding: 10px;
+        h5 {
+          font-size: 1rem;
+        }
+        h6 {
+          font-size: 0.725rem;
+        }
+      }
+      @media screen and (max-width: 329px) {
+        width: 47%;
       }
 
       img {
