@@ -627,14 +627,27 @@ a.p_code:hover {
   }
 }
 
-@media screen and (max-width: 992px) {
+.mobile_menu {
+  display: flex;
+  gap: 16px;
+  flex-direction: row-reverse;
+}
+
+@media screen and (max-width: 991px) {
   .header-top .dropdown-menu {
     z-index: 99999 !important;
   }
   .menu-toggle2 {
-    top: 20px;
-    right: 20px;
+    position: absolute;
+    top: 0;
+    right: 0;
     float: right;
+  }
+  .mobile_menu {
+    display: grid;
+    justify-content: center;
+    justify-items: center;
+    margin-top: 100px;
   }
   .droplogin .dropdown-menu {
     top: 56px !important;
