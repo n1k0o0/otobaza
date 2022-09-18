@@ -350,9 +350,9 @@ export default {
 
 <style scoped lang="scss">
 .home_search {
+  display: grid;
   padding: 0;
   margin: 30px 0;
-  overflow: hidden;
 
   .first_search_group {
     display: grid;
@@ -516,6 +516,7 @@ export default {
     width: 100%;
     margin: 15px 30px;
     border-radius: 5px;
+    overflow: hidden;
 
     h5 {
       color: #98A2B3;
