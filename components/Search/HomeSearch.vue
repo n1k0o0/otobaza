@@ -164,9 +164,13 @@
                       <el-option
                         v-for="item in types"
                         :key="item.carId"
-                        :label="item.modelName"
-                        :value="item.carName"
-                      />
+                        :label="item.carName +' ('+ item.yearOfConstrFrom +'-'+item.yearOfConstrTo+')'"
+                        :value="item.carId"
+                      >
+                        <span style="float: left">{{ item.carName }} ({{ item.yearOfConstrFrom }}-{{
+                          item.yearOfConstrTo
+                        }})</span>
+                      </el-option>
                     </el-select>
                   </div>
                   <div class="filter_search_group_item">

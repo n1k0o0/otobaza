@@ -31,7 +31,8 @@
 
             .filter_item.col-md-4.col-lg-3.col-xl-2
               el-select(v-model='search.type', :disabled='!search.model', filterable='', :loading='loading', :loading-text="$t('loading')", :no-data-text="$t('no_results_found')", :no-match-text="$t('no_results_found')", :placeholder="$t('type')", @input='GET_TYPES(search)', clearable)
-                el-option(v-for='item in types', :key='item.carId', :label='item.modelName', :value='item.carName')
+                el-option(v-for='item in types', :key='item.carId', :label="item.carName +' ('+ item.yearOfConstrFrom +'-'+item.yearOfConstrTo+')'", :value='item.carId')
+                  span(style='float: left') {{ item.carName }} ({{ item.yearOfConstrFrom }}-{{ item.yearOfConstrTo }})
 
             .filter_item.col-md-4.col-lg-3.col-xl-1.w-100.h-100
               button.btn-new.btn-primary.search_parts_button.h-100(@click="searchMethod") {{$t('search')}}
