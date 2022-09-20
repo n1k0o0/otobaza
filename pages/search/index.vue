@@ -18,41 +18,24 @@
             h1.title.hr-text {{$t('home_search.spare-parts')}}
           .filter.row
             .filter_item.col-md-4.col-lg-3.col-xl-3.col-sm-12
-              v-select(v-model='search.sparePart', :loading="loading", label='assemblyGroupName', :options='spareParts', :reduce='part => part.assemblyGroupNodeId', @input='GET_BRANDS(search.sparePart)', :placeholder="$t('home_search.spare-parts')")
-                template(v-slot:selected-option='option')
-                  span(:class='option.icon')
-                  | {{ option.assemblyGroupName.length < 15 ? option.assemblyGroupName : (option.assemblyGroupName.substring(0, 12) + '...') }}
-                template(v-slot:option='option')
-                  span(:class='option.icon')
-                  | {{ option.assemblyGroupName }}
+              el-select(v-model='search.sparePart', filterable='', :loading='loading && !spareParts.length', :loading-text="$t('loading')", :no-data-text="$t('no_results_found')", :no-match-text="$t('no_results_found')", :placeholder="$t('home_search.spare-parts')", @change="search.brand='';search.model='';search.type=''", @input='GET_BRANDS(search.sparePart)', clearable)
+                el-option(v-for='item in spareParts', :key='item.assemblyGroupNodeId', :label='item.assemblyGroupName', :value='item.assemblyGroupNodeId')
+
             .filter_item.col-md-4.col-lg-3.col-xl-3.col-sm-12
-              v-select(v-model='search.brand', :loading="loading", :disabled='!search.sparePart', label='manuName', :options='brands', :reduce='brand => brand.manuId', @input='GET_MODELS(search)', :placeholder="$t('brand')", :reset-on-options-change="true")
-                template(v-slot:selected-option='option')
-                  span(:class='option.icon')
-                  | {{ option.manuName.length < 15 ? option.manuName : (option.manuName.substring(0, 12) + '...') }}
-                template(v-slot:option='option')
-                  span(:class='option.icon')
-                  | {{ option.manuName }}
+              el-select(v-model='search.brand', :disabled='!search.sparePart', filterable='', :loading='loading && !brands.length', :loading-text="$t('loading')", :no-data-text="$t('no_results_found')", :no-match-text="$t('no_results_found')", :placeholder="$t('brand')", @change="search.model='';search.type=''", @input='GET_MODELS(search)', clearable)
+                el-option(v-for='item in brands', :key='item.manuId', :label='item.manuName', :value='item.manuId')
+
             .filter_item.col-md-4.col-lg-3.col-xl-3.col-sm-12
-              v-select(v-model='search.model', :loading="loading", :disabled='!search.brand', label='modelName', :options='models', :reduce='part => part.modId', @input='GET_TYPES(search)', :placeholder="$t('model')", :reset-on-options-change="true")
-                template(v-slot:selected-option='option')
-                  span(:class='option.icon')
-                  | {{ option.modelName.length < 15 ? option.modelName : (option.modelName.substring(0, 12) + '...') }}
-                template(v-slot:option='option')
-                  span(:class='option.icon')
-                  | {{ option.modelName }}
+              el-select(v-model='search.model', :disabled='!search.brand && !models.length', filterable='', :loading='loading', :loading-text="$t('loading')", :no-data-text="$t('no_results_found')", :no-match-text="$t('no_results_found')", :placeholder="$t('model')", @change="search.type=''", @input='GET_TYPES(search)', clearable)
+                el-option(v-for='item in models', :key='item.modId', :label='item.modelName', :value='item.modId')
+
             .filter_item.col-md-4.col-lg-3.col-xl-2
-              v-select(v-model='search.type', :disabled='!search.model', :loading="loading", :options='types', :reduce='part => part.carId', :placeholder="$t('type')", :reset-on-options-change="true")
-                template(slot='selected-option' slot-scope='option')
-                  | {{ (option.carName + '(' + option.yearOfConstrFrom + '-' + option.yearOfConstrTo + ')').substring(0, 8) }}...
-                template(slot='option' slot-scope='option')
-                  | {{ option.carName + ' (' + option.yearOfConstrFrom + '-' + option.yearOfConstrTo + ')' }}
-            .filter_item.col-md-4.col-lg-3.col-xl-1.w-100
-              button.btn.btn-primary.search_parts_button(@click="searchMethod") {{$t('search')}}
-          .vin_search.d-flex.justify-content-center
-            div.w-50.position-relative
-              input.form-control(:placeholder="$t('search_placeholder')")
-              .fa.fa-search.fa-lg.fa-fw
+              el-select(v-model='search.type', :disabled='!search.model', filterable='', :loading='loading', :loading-text="$t('loading')", :no-data-text="$t('no_results_found')", :no-match-text="$t('no_results_found')", :placeholder="$t('type')", @input='GET_TYPES(search)', clearable)
+                el-option(v-for='item in types', :key='item.carId', :label='item.modelName', :value='item.carName')
+
+            .filter_item.col-md-4.col-lg-3.col-xl-1.w-100.h-100
+              button.btn-new.btn-primary.search_parts_button.h-100(@click="searchMethod") {{$t('search')}}
+
           .sort_wrap.text-right(v-show="search.sparePart")
             span(@click.prevent="GET_SEARCH_PARTS({...search,priceSort:1})")
               | {{$t('price')}}
@@ -63,7 +46,10 @@
           SearchResults(:search="search", :loading="loadingResults")
 
 </template>
+
 <script>
+import { Option, Select } from 'element-ui'
+
 import Parts from '@/components/Catalog/Parts'
 import SearchPlaceholder from '@/components/Search/SearchPlaceholder'
 import SearchResults from '@/components/Search/ResultParts'
@@ -73,7 +59,13 @@ import { mapActions, mapGetters } from 'vuex'
 export default {
   name: 'Search',
   watchQuery: true,
-  components: { SearchPlaceholder, Parts, SearchResults },
+  components: {
+    SearchPlaceholder,
+    Parts,
+    SearchResults,
+    'el-select': Select,
+    'el-option': Option
+  },
   layout: 'pages',
   scrollToTop: true,
   async fetch () {
@@ -185,12 +177,13 @@ export default {
   }
 }
 </script>
+
 <style lang="scss" scoped>
 .search_wrap {
   background-color: #fff;
   gap: 15px;
   margin: 20px auto;
-  padding: 50px 0;
+  padding: 20px 0;
   //min-height: calc(100vh - 20px - 62px - 95px - 241px);
   min-height: calc(100vh - 123px - 41px - 36px - 360px);
   border-radius: 16px;
@@ -233,10 +226,8 @@ export default {
     cursor: pointer;
   }
 
-  .btn {
-    border-radius: 5px;
-    background-color: #3A7299;
-    color: #fff;
+  .btn-new {
+    height: 40px;
   }
 
   .search_parts_button {
@@ -244,6 +235,12 @@ export default {
       width: 100%;
     }
     padding: 4px 0.75rem !important;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .search_wrap {
+    padding: 50px 20px;
   }
 }
 

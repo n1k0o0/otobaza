@@ -81,7 +81,6 @@ export default {
 }
 
 p.phone, p.email {
-  margin-top: 35px;
   font-weight: 500;
   font-size: 18px;
   line-height: 28px;
@@ -91,6 +90,15 @@ p.phone, p.email {
   img {
     margin-right: 15px;
   }
+}
+
+p.phone {
+  margin-top: 35px;
+}
+
+p.email {
+  margin-top: 24px;
+  margin-bottom: 32px;
 }
 
 .footer_app {

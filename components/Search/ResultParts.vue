@@ -154,9 +154,9 @@ export default {
   }
 
   &_not-found {
-    font-size: 20px;
+    font-size: 18px;
     color: #f41414;
-    padding-left: 75px;
+    padding-left: 25px;
   }
 
   &_loading {
@@ -173,6 +173,15 @@ export default {
 
   &:hover {
     background-color: #498EBF;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .search_results {
+    &_not-found {
+      font-size: 20px;
+      padding-left: 75px;
+    }
   }
 }
 </style>

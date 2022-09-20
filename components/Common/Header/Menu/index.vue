@@ -36,7 +36,7 @@
               </div>
             </div>
 
-            <div class="position-relative mr-4">
+            <div class="position-relative mr-2 mr-md-4">
               <CartLink />
             </div>
 
