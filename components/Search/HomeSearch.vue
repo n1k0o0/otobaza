@@ -234,28 +234,6 @@
         <div class="search_banner">
           <Banners />
         </div>
-
-        <div class="search_tooltip">
-          <svg
-            fill="none"
-            height="22"
-            viewBox="0 0 22 22"
-            width="22"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M11 15V11M11 7H11.01M21 11C21 16.5228 16.5228 21 11 21C5.47715 21 1 16.5228 1 11C1 5.47715 5.47715 1 11 1C16.5228 1 21 5.47715 21 11Z"
-              stroke="#E4E7EC"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-            />
-          </svg>
-
-          <p>
-            {{ $t('home_search.tooltip') }}
-          </p>
-        </div>
       </div>
     </div>
   </div>
@@ -545,16 +523,16 @@ export default {
 
   .search_body {
     background-color: #498EBF;
-    padding: 40px 100px 10px 100px;
+    padding: 40px 100px 40px 100px;
     color: #FFFFFF;
     border-radius: 24px;
 
     @media screen and (max-width: 1200px) {
-      padding: 40px 50px 20px 50px;
+      padding: 40px 50px 40px 50px;
     }
 
     @media screen and (max-width: 768px) {
-      padding: 20px 20px 10px 20px;
+      padding: 20px 20px 20px 20px;
     }
 
   }

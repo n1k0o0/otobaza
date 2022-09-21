@@ -66,6 +66,7 @@ const state = () => ({
   models: [],
   types: [],
   search_part: [],
+  search_oems: [],
   loading: false,
   search_lang: '',
   search_page: 1,
@@ -102,6 +103,7 @@ const getters = {
   loading (state) { return state.loading },
   search_parts (state) { return state.search_parts },
   search_part (state) { return state.search_part },
+  search_oems (state) { return state.search_oems },
   search_lang (state) { return state.search_lang },
   search_page (state) { return state.search_page },
   last_page (state) { return state.last_page },
@@ -197,6 +199,9 @@ const mutations = {
   },
   SET_SEARCH_PART (state, payload) {
     state.search_part = payload
+  },
+  SET_SEARCH_OEMS (state, payload) {
+    state.search_oems = payload
   },
   SET_SEARCH_LANG (state, payload) {
     state.search_lang = payload
@@ -632,19 +637,21 @@ const actions = {
     page = false
   }) {
     commit('SET_LOADING', true)
-    this.$axios.defaults.baseURL = this.$env.CATALOG_API_URL
-    const { data: oems } = await this.$axios.post('api/ehisse/search', {
-      assemblyGroupNodeId: sparePart,
-      manuId: brand,
-      modId: model,
-      carId: type
-    })
 
     if (page) {
       commit('SET_SEARCH_PAGE', ++state.search_page)
       commit('SET_SEARCH_PRICE_SORT', priceSort)
       commit('SET_SEARCH_NEW_SORT', isNewSort)
     } else {
+      this.$axios.defaults.baseURL = this.$env.CATALOG_API_URL
+      const { data: oems } = await this.$axios.post('api/ehisse/search', {
+        assemblyGroupNodeId: sparePart,
+        manuId: brand,
+        modId: model,
+        carId: type
+      })
+      commit('SET_SEARCH_OEMS', oems)
+
       commit('SET_SEARCH_PAGE', 1)
       commit('SET_SEARCH_PRICE_SORT', 0)
       commit('SET_SEARCH_NEW_SORT', 0)
@@ -661,7 +668,7 @@ const actions = {
       currency: 'AZN',
       price: priceSort || state.search_price_sort,
       isNew: isNewSort || state.search_new_sort,
-      ...oems
+      ...state.search_oems
     })
 
     commit('SET_LAST_PAGE', meta.last_page)
