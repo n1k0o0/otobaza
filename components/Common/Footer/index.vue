@@ -15,9 +15,7 @@
                     img(alt='logo' src='/css/icons/instagram.png')
                   a(href='https://www.linkedin.com/company/otobaza' target='_blank')
                     img(alt='logo' src='/css/icons/linkedin.png')
-                p.phone
-                  img(alt='logo' src='/css/icons/call.png')
-                  | +994 55 677 43 23
+
                 p.email
                   img(alt='logo' src='/css/icons/email.png')
                   | info@otobaza.com
