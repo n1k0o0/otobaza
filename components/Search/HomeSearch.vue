@@ -65,14 +65,16 @@
               {{ $t('home_search.by_brand') }}
             </h6>
             <h6
-              class="pointer disabled"
+              class="pointer"
               :class="{'tab_active':filterType===2}"
+              @click="chooseFilterType(2)"
             >
               {{ $t('home_search.by_vin') }}
             </h6>
             <h6
-              class="pointer disabled"
+              class="pointer"
               :class="{'tab_active':filterType===3}"
+              @click="chooseFilterType(3)"
             >
               {{ $t('home_search.by_detail_code') }}
             </h6>
@@ -90,14 +92,14 @@
                   <div class="filter_search_group_item">
                     <el-select
                       v-model="search.sparePart"
+                      clearable
                       filterable
                       :loading="loading && !spareParts.length"
                       :loading-text="$t('loading')"
                       :no-data-text="$t('no_results_found')"
                       :no-match-text="$t('no_results_found')"
                       :placeholder="$t('home_search.spare-parts')"
-                      @change="search.brand='';search.model='';search.type=''"
-                      @input="GET_BRANDS(search.sparePart)"
+                      @change="search.brand='';search.model='';search.type='';search.sparePart?GET_BRANDS(search.sparePart):false"
                     >
                       <el-option
                         v-for="item in spareParts"
@@ -110,6 +112,7 @@
                   <div class="filter_search_group_item">
                     <el-select
                       v-model="search.brand"
+                      clearable
                       :disabled="!search.sparePart"
                       filterable
                       :loading="loading && !brands.length"
@@ -117,8 +120,7 @@
                       :no-data-text="$t('no_results_found')"
                       :no-match-text="$t('no_results_found')"
                       :placeholder="$t('brand')"
-                      @change="search.model='';search.type=''"
-                      @input="GET_MODELS(search)"
+                      @change="search.model='';search.type='';search.brand?GET_MODELS(search):false"
                     >
                       <el-option
                         v-for="item in brands"
@@ -131,15 +133,15 @@
                   <div class="filter_search_group_item">
                     <el-select
                       v-model="search.model"
-                      :disabled="!search.brand && !models.length"
+                      clearable
+                      :disabled="!search.brand"
                       filterable
                       :loading="loading"
                       :loading-text="$t('loading')"
                       :no-data-text="$t('no_results_found')"
                       :no-match-text="$t('no_results_found')"
                       :placeholder="$t('model')"
-                      @change="search.type=''"
-                      @input="GET_TYPES(search)"
+                      @change="search.type='';search.brand?GET_TYPES(search):false"
                     >
                       <el-option
                         v-for="item in models"
@@ -159,7 +161,6 @@
                       :no-data-text="$t('no_results_found')"
                       :no-match-text="$t('no_results_found')"
                       :placeholder="$t('type')"
-                      @input="GET_TYPES(search)"
                     >
                       <el-option
                         v-for="item in types"
@@ -176,6 +177,7 @@
                   <div class="filter_search_group_item">
                     <button
                       class="btn h-100"
+                      :disabled="!search.brand"
                       type="submit"
                       @click="$router.push(localePath({ name: 'search', query: { sparePart: search.sparePart,brand: search.brand, model: search.model,type:search.type}}));"
                     >
@@ -216,16 +218,18 @@
           >
             <template v-if="filterType===2">
               <div class="filter_search_group_wrapper">
-                <div class="filter_search_group_vin">
-                  <div class="w-100">
-                    <input
-                      class="form-control filter_search_group_search_input"
-                      :placeholder="$t('home_search.search_placeholder')"
-                      type="text"
-                    />
-                    <i aria-hidden="true" class="fa fa-search fa-lg fa-fw"></i>
-                  </div>
-                </div>
+                <SearchVin :vin="true" />
+              </div>
+            </template>
+          </transition>
+
+          <transition
+            mode="out-in"
+            name="search-fade"
+          >
+            <template v-if="filterType===3">
+              <div class="filter_search_group_wrapper">
+                <SearchVin />
               </div>
             </template>
           </transition>
@@ -246,6 +250,7 @@ import 'swiper/css/swiper.css'
 
 import { mapActions, mapGetters } from 'vuex'
 import Banners from '@/components/Common/Index/Banners'
+import SearchVin from '@/components/Common/Index/HeaderSearch'
 
 export default {
   name: 'HomeSearch',
@@ -254,7 +259,8 @@ export default {
     Swiper,
     SwiperSlide,
     'el-select': Select,
-    'el-option': Option
+    'el-option': Option,
+    SearchVin
   },
   async fetch () {
     await this.GET_SPARE_PARTS()

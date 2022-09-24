@@ -13,8 +13,8 @@
               span.cl-tt {{ manufacture.manuName }}
 </template>
 <script>
-import { Slugify } from '@/filters'
 import { setNuxtLink } from '@/utils'
+
 export default {
   name: 'CatalogLogo',
   props: {
@@ -32,7 +32,7 @@ export default {
       return url
     },
     link (model) {
-      return setNuxtLink(this, 'brand', model)
+      return setNuxtLink(this, 'lp-brand-slug', model)
     },
     onClick (manufacture) {
       this.$emit('selected', manufacture)

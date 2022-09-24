@@ -8,6 +8,7 @@
 </template>
 <script>
 import { setNuxtLink } from '@/utils'
+
 export default {
   name: 'CatalogAlphabet',
   props: {
@@ -18,7 +19,7 @@ export default {
   },
   methods: {
     link (model) {
-      return setNuxtLink(this, 'brand', model)
+      return setNuxtLink(this, 'lp-brand-slug', model)
     }
   }
 }

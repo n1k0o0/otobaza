@@ -10,6 +10,7 @@
             .rminfo
               h4.rmtt {{ $t('not_found') }}
               p.rmtxt {{ $t('not_found_info') }}
+              p.rmtxt {{ $fetchState.error }}
     template(v-else)
       .container
         .search_wrap.d-flex.flex-column
@@ -24,23 +25,15 @@ import SearchVin from '@/components/Common/Index/HeaderSearch'
 import { mapActions, mapGetters } from 'vuex'
 
 export default {
-  name: 'SearchPart',
+  name: 'LpBrand',
   watchQuery: true,
   components: { PartsPlaceholder, Parts, SearchResults, SearchPlaceholder, SearchVin },
   layout: 'pages',
   scrollToTop: true,
   async fetch () {
-    const slug = this.$route.params.slug
-    const matches = slug.match(/^(p)-([0-9]+)-([0-9]+)-([0-9]+)-([a-zA-Z0-9]+)/)
-    if (matches?.[0] && matches?.[1] && matches?.[2] && matches?.[3]) {
-      await this.GET_PART({
-        article: matches?.[3],
-        page: matches?.[2] || 1,
-        manufacturer: matches?.[4],
-        assembly: matches?.[5],
-        filter: this.$route?.query?.filter
-      })
-    }
+    const brand = this.$route.params.brand
+    console.log(4444, this.$route.params)
+    await this.GET_PART_BY_BRAND({ brand })
   },
   computed: {
     ...mapGetters({
@@ -54,14 +47,18 @@ export default {
           name: 'viewport',
           content: 'width=device-width, initial-scale=1, maximum-scale=1 shrink-to-fit=no'
         },
-        { hid: 'description', name: 'description', content: this.$store.getters['Catalog/parts']?.brand?.meta_desc || '' },
+        {
+          hid: 'description',
+          name: 'description',
+          content: this.$store.getters['Catalog/parts']?.brand?.meta_desc || ''
+        },
         { hid: 'og:title', name: 'og:title', content: this.$store.getters['Catalog/parts']?.brand?.meta_title || '' }
       ]
     }
   },
   async validate ({ params, error, app }) {
-    const regex = /^(p)-([0-9]+)-([0-9]+)-([0-9]+)-([a-zA-Z0-9]+)/
-    if (!(regex.test(params.slug))) {
+    const regex = /^\d+$/
+    if (!(regex.test(params.brand))) {
       return error({ statusCode: 500, message: app.i18n.t('not_found') })
     } else {
       return true
@@ -77,7 +74,7 @@ export default {
   },
   methods: {
     ...mapActions({
-      GET_PART: 'Catalog/GET_PART'
+      GET_PART_BY_BRAND: 'Catalog/GET_PART_BY_BRAND'
     })
   }
 }

@@ -38,7 +38,7 @@ export default {
   },
   methods: {
     ...mapMutations({
-      ADD_SEARCH_TAB: 'UI/ADD_SEARCH_TAB',
+      ADD_SEARCH_TAB: 'UI/ADD_SEARCH_TAB'
     }),
     goToCar (car) {
       window.location.href = this.localePath({

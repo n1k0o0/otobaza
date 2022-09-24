@@ -6,7 +6,7 @@
       @selected="onLogoSelected"
     />
     <template v-else>
-      <Manufacturer
+      <!--      <Manufacturer
         v-if="lastTab.type === 'manufacturer'"
         is-search
         :slug="lastTab.slug"
@@ -15,7 +15,7 @@
         v-if="lastTab.type === 'model'"
         is-search
         :slug="lastTab.slug"
-      />
+      />-->
       <Car
         v-if="lastTab.type === 'car'"
         is-search
@@ -36,7 +36,7 @@ import Model from '@/pages/model/_slug'
 import Car from '@/pages/car/_slug'
 import Vin from '@/pages/vin/catalog'
 import PageCatalogLogo from '@/pages/kataloq/mashin-kataloqu-brend'
-import { mapMutations, mapGetters } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 
 export default {
   name: 'SearchContent',

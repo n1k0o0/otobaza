@@ -67,6 +67,7 @@ const mutations = {
   },
   SHOW_SEARCH (state) {
     state.isSearchVisible = true
+    state.search_tabs = []
   },
   CLOSE_SEARCH (state) {
     state.isSearchVisible = false

@@ -392,67 +392,84 @@ const actions = {
     commit('SET_VIN_PARTS', { ...parts })
   },
 
-  async GET_PART ({ commit, rootState }, { article, page, manufacturer, assembly, filter }) {
+  async GET_PART ({ commit, rootState, state }, { article, page, manufacturer, assembly, filter }) {
     this.$axios.defaults.baseURL = this.$env.CATALOG_API_URL
-    const { data: parts } = await this.$axios.get(`api/search/articlenumber/${article}/${manufacturer}/${assembly}`)
+    const url = `api/search/articlenumber/${article}/${manufacturer}/${assembly}`
+
+    const { data: oems } = await this.$axios.get(url)
+    commit('SET_SEARCH_OEMS', oems)
+
     this.$axios.defaults.baseURL = this.$env.BASE_API_URL
-
-    const geo = rootState.UI.geo
-    const productsData = {
-      oem: parts.oem,
-      cross: parts.cross,
-      currency: geo.currency_name,
-      country: geo.country,
-      latitude: geo.lat,
-      longitude: geo.lng
-    }
-    if (filter === 'nearest') {
-      productsData.nearby = 1
-    }
-    if (filter === 'price') {
-      productsData.nearby = 0
-    }
-    if (filter === 'brand') {
-      productsData.orderByBrand = true
-    }
-
-    const { data: products } = await this.$axios.post(`api/products?page=${page}`, {
-      ...productsData
+    const {
+      data: {
+        data: products,
+        meta
+      }
+    } = await this.$axios.post(`/api/v2/products?page=${state.search_page}`, {
+      country: 1,
+      currency: 'AZN',
+      ...state.search_oems
     })
-    commit('SET_PARTS', {
-      parts,
-      products
-    })
+
+    commit('SET_LAST_PAGE', meta.last_page)
+
+    if (page > 1) {
+      commit('SET_SEARCH_PARTS', [...state.search_parts, ...products])
+    } else {
+      commit('SET_SEARCH_PARTS', products)
+    }
+    commit('SET_LOADING', false)
   },
-  async GET_PARTS_BY_VIN ({ commit, rootState }, { oem, page, filter }) {
-    this.$axios.defaults.baseURL = this.$env.BASE_API_URL
-    const parts = []
-    parts.brands = ''
-    const geo = rootState.UI.geo
-    const productsData = {
-      oem: [oem],
-      currency: geo.currency_name,
-      country: geo.country,
-      latitude: geo.lat,
-      longitude: geo.lng
-    }
-    if (filter === 'nearest') {
-      productsData.nearby = 1
-    }
-    if (filter === 'price') {
-      productsData.nearby = 0
-    }
-    if (filter === 'brand') {
-      productsData.orderByBrand = true
-    }
+  async GET_PARTS_BY_VIN ({ commit, rootState }, { oem, page, priceSort, isNewSort }) {
+    this.$axios.defaults.baseURL = this.$env.CATALOG_API_URL
 
-    const { data: products } = await this.$axios.post(`api/products?page=${page}`, {
-      ...productsData
+    const { data: oems } = await this.$axios.get(`api/laximooem/${oem}`)
+    commit('SET_SEARCH_OEMS', oems)
+
+    this.$axios.defaults.baseURL = this.$env.BASE_API_URL
+    const {
+      data: {
+        data: products,
+        meta
+      }
+    } = await this.$axios.post(`/api/v2/products?page=${state.search_page}`, {
+      country: 1,
+      currency: 'AZN',
+      ...state.search_oems
     })
-    commit('SET_PARTS', {
-      parts,
-      products
+
+    commit('SET_LAST_PAGE', meta.last_page)
+
+    if (page > 1) {
+      commit('SET_SEARCH_PARTS', [...state.search_parts, ...products])
+    } else {
+      commit('SET_SEARCH_PARTS', products)
+    }
+    commit('SET_LOADING', false)
+  },
+  async GET_PART_BY_BRAND ({ commit, rootState, state }, { brand }) {
+    this.$axios.defaults.baseURL = this.$env.CATALOG_API_URL
+    const url = `api/lg/${brand}`
+
+    const { data: oems } = await this.$axios.get(url)
+    commit('SET_SEARCH_OEMS', oems)
+
+    this.$axios.defaults.baseURL = this.$env.BASE_API_URL
+    const {
+      data: {
+        data: products,
+        meta
+      }
+    } = await this.$axios.post(`/api/v2/products?page=${state.search_page}`, {
+      country: 1,
+      currency: 'AZN',
+      ...state.search_oems
     })
+
+    commit('SET_LAST_PAGE', meta.last_page)
+
+    commit('SET_SEARCH_PARTS', products)
+    commit('SET_LOADING', false)
   },
 
   async GET_MOTOR_TYPES ({ commit }, { car }) {
@@ -532,55 +549,54 @@ const actions = {
   },
   async SEARCH_ASSEMBLY ({ commit, rootGetters }, { term }) {
     this.$axios.defaults.baseURL = this.$env.CATALOG_API_URL
-    if (term.length === 17) {
-      this.$axios.defaults.baseURL = this.$env.BASE_API_URL
-      if (!rootGetters.isAuthenticated) {
-        Vue.$swal.fire({
-          icon: 'warning',
-          width: 300,
-          title: this.$i18n.t('vin.auth'),
-          showConfirmButton: false,
-          timer: 5000,
-          customClass: 'custom_sweetalert'
-        })
-      } else {
-        const carByVin = []
-        const lang = this.$i18n.locales.find(el => el.code === this.$i18n.locale).iso.replace('-', '_')
-        await this.$axios.post('/api/auto/vin', { vin: term, language: lang })
-          .then(res => {
-            const data = res.data
-            carByVin.cars = []
-            carByVin.product = []
-            carByVin.carByVin = false
-            if (data['@attributes']) {
-              carByVin.carByVin = {
-                name: data['@attributes'].name,
-                ssd: data['@attributes'].ssd,
-                vehicleId: data['@attributes'].vehicleid,
-                catalog: data['@attributes'].catalog,
-                brand: data['@attributes'].brand,
-                lang: lang
-              }
-            }
-
-            commit('SET_SEARCH_RESULTS', carByVin)
-          })
-          .catch(err => {
-            Vue.$swal.fire({
-              icon: 'warning',
-              width: 300,
-              title: err?.response?.data?.error ?? this.$i18n.t('system_error'),
-              showConfirmButton: false,
-              timer: 5000,
-              customClass: 'custom_sweetalert'
-            })
-          })
-      }
-      return
-    }
-
     const { data } = await this.$axios.get(`/api/search/${term}`)
     commit('SET_SEARCH_RESULTS', data)
+  },
+  async SEARCH_VIN ({ commit, rootGetters }, { term }) {
+    if (term.length !== 17) return
+    this.$axios.defaults.baseURL = this.$env.BASE_API_URL
+    if (!rootGetters.isAuthenticated) {
+      Vue.$swal.fire({
+        icon: 'warning',
+        width: 300,
+        title: this.$i18n.t('vin.auth'),
+        showConfirmButton: false,
+        timer: 5000,
+        customClass: 'custom_sweetalert'
+      })
+    } else {
+      const carByVin = []
+      const lang = this.$i18n.locales.find(el => el.code === this.$i18n.locale).iso.replace('-', '_')
+      await this.$axios.post('/api/auto/vin', { vin: term, language: lang })
+        .then(res => {
+          const data = res.data
+          carByVin.cars = []
+          carByVin.product = []
+          carByVin.carByVin = false
+          if (data['@attributes']) {
+            carByVin.carByVin = {
+              name: data['@attributes'].name,
+              ssd: data['@attributes'].ssd,
+              vehicleId: data['@attributes'].vehicleid,
+              catalog: data['@attributes'].catalog,
+              brand: data['@attributes'].brand,
+              lang: lang
+            }
+          }
+
+          commit('SET_SEARCH_RESULTS', carByVin)
+        })
+        .catch(err => {
+          Vue.$swal.fire({
+            icon: 'warning',
+            width: 300,
+            title: err?.response?.data?.error ?? this.$i18n.t('system_error'),
+            showConfirmButton: false,
+            timer: 5000,
+            customClass: 'custom_sweetalert'
+          })
+        })
+    }
   },
   async GET_DISMANTLES ({ commit, rootState }, { page }) {
     this.$axios.defaults.baseURL = this.$env.BASE_API_URL

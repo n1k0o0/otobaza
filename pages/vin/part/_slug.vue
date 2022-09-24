@@ -1,7 +1,7 @@
 <template lang="pug">
   div
     template(v-if="$fetchState.pending")
-      PartsPlaceholder
+      SearchPlaceholder(:filter="false")
     template(v-else-if="$fetchState.error")
       .container
         .mcontainer.mh60vh
@@ -11,23 +11,26 @@
               h4.rmtt {{ $t('not_found') }}
               p.rmtxt {{ $fetchState.error }}
     template(v-else)
-      Parts(isPart)
+      .container
+        .search_wrap.d-flex.flex-column
+          SearchResults( :loading="false")
 </template>
 <script>
 import Parts from '@/components/Catalog/Parts'
+import SearchPlaceholder from '@/components/Search/SearchPlaceholder'
+import SearchResults from '@/components/Search/ResultParts'
 import PartsPlaceholder from '@/components/Placeholders/PartsPlaceholder'
-import { getUrlSlug } from '@/utils'
 import { mapActions, mapGetters } from 'vuex'
 
 export default {
   name: 'Assembly',
   watchQuery: true,
-  components: { PartsPlaceholder, Parts },
+  components: { PartsPlaceholder, Parts, SearchPlaceholder, SearchResults },
   layout: 'pages',
   scrollToTop: true,
   async fetch () {
     const param = this.$route.params.slug.split('-')
-    let page = param[1]
+    const page = param[1]
     const oem = param[0]
     if (oem && page) {
       await this.GET_PARTS_BY_VIN({
@@ -39,7 +42,8 @@ export default {
   },
   computed: {
     ...mapGetters({
-      geo: 'UI/geo'
+      geo: 'UI/geo',
+      parts: 'Catalog/search_parts'
     }),
     meta () {
       return [
@@ -77,7 +81,7 @@ export default {
   },
   async validate ({ params, error, app }) {
     const param = params.slug.split('-')
-    let page = param[1]
+    const page = param[1]
     const oem = param[0]
 
     if (!(page && oem)) {
@@ -94,5 +98,15 @@ export default {
   margin-bottom: 60px;
   border-radius: 3px;
   background-color: #fff;
+}
+
+.search_wrap {
+  background-color: #fff;
+  gap: 15px;
+  margin: 20px auto;
+  padding: 20px 0;
+  //min-height: calc(100vh - 20px - 62px - 95px - 241px);
+  min-height: calc(100vh - 123px - 41px - 36px - 360px);
+  border-radius: 16px;
 }
 </style>

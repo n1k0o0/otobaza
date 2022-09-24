@@ -1,64 +1,64 @@
 <template lang="pug">
   .banners
     n-link(:to="localePath({\
-                    name: 'search',\
-                    query: {\
-                    sparePart: '100200',\
-                    brand: 5\
+                    name: 'lp-brand-slug',\
+                    params: {\
+                    slug: 'Audi',\
+                    brand:'5'\
                     }\
                     })").banners_banner
       img(v-lazy="`img/banners/audi.png`")
       span Audi
     n-link(:to="localePath({\
-                    name: 'search',\
-                    query: {\
-                    sparePart: '100200',\
-                    brand: 5\
+                    name: 'lp-brand-slug',\
+                    params: {\
+                    slug: 'BMW',\
+                    brand: 16\
                     }\
                     })").banners_banner
       img(v-lazy="`img/banners/bmw.png`")
       span BMW
     n-link(:to="localePath({\
-                      name: 'search',\
-                      query: {\
-                      sparePart: '100200',\
-                      brand: 5\
+                      name: 'lp-brand-slug',\
+                      params: {\
+                      slug: 'Citroen',\
+                      brand: 21\
                       }\
                       })").banners_banner
       img(v-lazy="`img/banners/citroen.png`")
       span Citroen
     n-link(:to="localePath({\
-                      name: 'search',\
-                      query: {\
-                      sparePart: '100200',\
-                      brand: 5\
+                      name: 'lp-brand-slug',\
+                      params: {\
+                      slug: 'Chevrolet',\
+                      brand: 138\
                       }\
                       })").banners_banner
       img(v-lazy="`img/banners/chevrolet.png`")
       span Chevrolet
     n-link(:to="localePath({\
-                      name: 'search',\
-                      query: {\
-                      sparePart: '100200',\
-                      brand: 5\
+                      name: 'lp-brand-slug',\
+                      params: {\
+                      slug: 'Fiat',\
+                      brand: 35\
                       }\
                       })").banners_banner
       img(v-lazy="`img/banners/fiat.png`")
       span Fiat
     n-link(:to="localePath({\
-                      name: 'search',\
+                      name: 'lp-brand-slug',\
                       query: {\
-                      sparePart: '100200',\
+                      slug: 'Geely',\
                       brand: 5\
                       }\
                       })").banners_banner
       img(v-lazy="`img/banners/geely.png`")
       span Geely
     n-link(:to="localePath({\
-                      name: 'search',\
+                      name: 'lp-brand-slug',\
                       query: {\
-                      sparePart: '100200',\
-                      brand: 5\
+                      slug: 'Ford',\
+                      brand: 36\
                       }\
                       })").banners_banner
       img(v-lazy="`img/banners/ford.png`")

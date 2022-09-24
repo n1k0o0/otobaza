@@ -1,5 +1,6 @@
 import { Slugify } from '@/filters'
 import Vue from 'vue'
+
 const sleep = m => new Promise(resolve => setTimeout(resolve, m))
 const getUrlParams = (search) => {
   const hashes = search.slice(search.indexOf('?') + 1).split('&')
@@ -67,38 +68,43 @@ const getUrlSlug = (...arg) => {
     matches
   }
   switch (type) {
-    case 'assembly': ret = {
-      ...ret,
-      ...{
-        p: 'p',
-        page: matches?.[2] || 1,
-        model: +matches?.[3] || undefined,
-        car: +matches?.[4] || undefined,
-        assembly: +matches?.[5] || undefined,
-        name: matches?.[6] || undefined
+    case 'assembly':
+      ret = {
+        ...ret,
+        ...{
+          p: 'p',
+          page: matches?.[2] || 1,
+          model: +matches?.[3] || undefined,
+          car: +matches?.[4] || undefined,
+          assembly: +matches?.[5] || undefined,
+          name: matches?.[6] || undefined
+        }
       }
-    }; break
+      break
     case 'brand':
       ret = {
         ...ret,
         ...{
           manufacturer: matches?.[0]
         }
-      }; break
+      }
+      break
     case 'model':
       ret = {
         ...ret,
         ...{
           model: matches?.[0]
         }
-      }; break
+      }
+      break
     case 'car':
       ret = {
         ...ret,
         ...{
           car: matches?.[0]
         }
-      }; break
+      }
+      break
     case 'part':
       ret = {
         ...ret,
@@ -109,7 +115,8 @@ const getUrlSlug = (...arg) => {
           mfrid: matches?.[4],
           assemblyGroupNodeid: matches?.[5]
         }
-      }; break
+      }
+      break
     case 'dismantles':
       ret = {
         ...ret,
@@ -117,7 +124,8 @@ const getUrlSlug = (...arg) => {
           p: 'p',
           page: matches?.[2] || 1
         }
-      }; break
+      }
+      break
   }
   return ret
 }
@@ -166,6 +174,16 @@ const setNuxtLink = (...arg) => {
         slug
       },
       query: query
+    })
+  }
+  if (type === 'lp-brand-slug') {
+    const data = arg[2]
+    return _this.localePath({
+      name: 'lp-brand-slug',
+      params: {
+        slug: data?.manuName,
+        brand: data?.manuId
+      }
     })
   }
 }

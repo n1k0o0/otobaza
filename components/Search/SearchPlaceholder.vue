@@ -1,28 +1,29 @@
 <template lang="pug">
   .container
     .search_wrap.d-flex.flex-column
-      .hr-wrap
+      template(v-if="filter")
+        .hr-wrap
         h1.title.hr-text.rmtxt Ehtiyyat hisseler
-      .filter.row.mt-4
-        .filter_item.col-md-4.col-lg-3.col-xl-3.col-sm-12
-          input.border-0.rmtt
-        .filter_item.col-md-4.col-lg-3.col-xl-3.col-sm-12
-          input.border-0.rmtt
-        .filter_item.col-md-4.col-lg-3.col-xl-3.col-sm-12
-          input.border-0.rmtt
-        .filter_item.col-md-4.col-lg-3.col-xl-2
-          input.border-0.rmtt
+        .filter.row.mt-4
+          .filter_item.col-md-4.col-lg-3.col-xl-3.col-sm-12
+            input.border-0.rmtt
+          .filter_item.col-md-4.col-lg-3.col-xl-3.col-sm-12
+            input.border-0.rmtt
+          .filter_item.col-md-4.col-lg-3.col-xl-3.col-sm-12
+            input.border-0.rmtt
+          .filter_item.col-md-4.col-lg-3.col-xl-2
+            input.border-0.rmtt
 
-      .vin_search.d-flex.justify-content-center.mt-4
-        div.w-50.position-relative
-          input.form-control.border-0.rmtt
-      .sort_wrap.text-right
-        span.rmtxt
-          | Qiymet
-          img(src="")
-        span.rmtxt
-          | Yeni
-          img(src="")
+        .vin_search.d-flex.justify-content-center.mt-4
+          div.w-50.position-relative
+            input.form-control.border-0.rmtt
+        .sort_wrap.text-right
+          span.rmtxt
+            | Qiymet
+            img(src="")
+          span.rmtxt
+            | Yeni
+            img(src="")
       .search_results
         .title_wrapper.hr-wrap.my-4
           h5.hr-text.font-weight-bold.rmtxt Axtaris Uzre netice verdi
@@ -46,7 +47,13 @@
 </template>
 <script>
 export default {
-  name: 'SearchPlaceholder'
+  name: 'SearchPlaceholder',
+  props: {
+    filter: {
+      type: Boolean,
+      default: true
+    }
+  }
 }
 </script>
 <style lang="scss" scoped>

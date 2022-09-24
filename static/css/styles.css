@@ -6087,6 +6087,7 @@ img {
   background-color: #3A7299;
 }
 
-.disabled {
+button:disabled, .disabled {
   cursor: not-allowed;
+  opacity: 0.6;
 }

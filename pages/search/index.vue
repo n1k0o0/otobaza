@@ -18,24 +18,24 @@
             h1.title.hr-text {{$t('home_search.spare-parts')}}
           .filter.row
             .filter_item.col-md-4.col-lg-3.col-xl-3.col-sm-12
-              el-select(v-model='search.sparePart', filterable='', :loading='loading && !spareParts.length', :loading-text="$t('loading')", :no-data-text="$t('no_results_found')", :no-match-text="$t('no_results_found')", :placeholder="$t('home_search.spare-parts')", @change="search.brand='';search.model='';search.type=''", @input='GET_BRANDS(search.sparePart)', clearable)
+              el-select(v-model='search.sparePart', filterable='', :loading='loading && !spareParts.length', :loading-text="$t('loading')", :no-data-text="$t('no_results_found')", :no-match-text="$t('no_results_found')", :placeholder="$t('home_search.spare-parts')", @change="search.brand='';search.model='';search.type='';search.sparePart?GET_BRANDS(search.sparePart):false", clearable)
                 el-option(v-for='item in spareParts', :key='item.assemblyGroupNodeId', :label='item.assemblyGroupName', :value='item.assemblyGroupNodeId')
 
             .filter_item.col-md-4.col-lg-3.col-xl-3.col-sm-12
-              el-select(v-model='search.brand', :disabled='!search.sparePart', filterable='', :loading='loading && !brands.length', :loading-text="$t('loading')", :no-data-text="$t('no_results_found')", :no-match-text="$t('no_results_found')", :placeholder="$t('brand')", @change="search.model='';search.type=''", @input='GET_MODELS(search)', clearable)
+              el-select(v-model='search.brand', :disabled='!search.sparePart', filterable='', :loading='loading && !brands.length', :loading-text="$t('loading')", :no-data-text="$t('no_results_found')", :no-match-text="$t('no_results_found')", :placeholder="$t('brand')", @change="search.model='';search.type='';search.brand?GET_MODELS(search):false", clearable)
                 el-option(v-for='item in brands', :key='item.manuId', :label='item.manuName', :value='item.manuId')
 
             .filter_item.col-md-4.col-lg-3.col-xl-3.col-sm-12
-              el-select(v-model='search.model', :disabled='!search.brand && !models.length', filterable='', :loading='loading', :loading-text="$t('loading')", :no-data-text="$t('no_results_found')", :no-match-text="$t('no_results_found')", :placeholder="$t('model')", @change="search.type=''", @input='GET_TYPES(search)', clearable)
+              el-select(v-model='search.model', :disabled='!search.brand', filterable, :loading='loading', :loading-text="$t('loading')", :no-data-text="$t('no_results_found')", :no-match-text="$t('no_results_found')", :placeholder="$t('model')", @change="search.type='';search.model?GET_TYPES(search):false", clearable)
                 el-option(v-for='item in models', :key='item.modId', :label='item.modelName', :value='item.modId')
 
             .filter_item.col-md-4.col-lg-3.col-xl-2
-              el-select(v-model='search.type', :disabled='!search.model', filterable='', :loading='loading', :loading-text="$t('loading')", :no-data-text="$t('no_results_found')", :no-match-text="$t('no_results_found')", :placeholder="$t('type')", @input='GET_TYPES(search)', clearable)
+              el-select(v-model='search.type', :disabled='!search.model', filterable='', :loading='loading', :loading-text="$t('loading')", :no-data-text="$t('no_results_found')", :no-match-text="$t('no_results_found')", :placeholder="$t('type')", clearable)
                 el-option(v-for='item in types', :key='item.carId', :label="item.carName +' ('+ item.yearOfConstrFrom +'-'+item.yearOfConstrTo+')'", :value='item.carId')
                   span(style='float: left') {{ item.carName }} ({{ item.yearOfConstrFrom }}-{{ item.yearOfConstrTo }})
 
             .filter_item.col-md-4.col-lg-3.col-xl-1.w-100.h-100
-              button.btn-new.btn-primary.search_parts_button.h-100(@click="searchMethod") {{$t('search')}}
+              button.btn-new(@click="searchMethod", :disabled="!search.brand") {{$t('search')}}
 
           .sort_wrap.text-right(v-show="search.sparePart")
             span(@click.prevent="GET_SEARCH_PARTS({...search,priceSort:1})")

@@ -4,7 +4,7 @@
     :class="{opened: isSearchVisible}"
   >
     <!-- search tag example -->
-    <div v-if="isSearchVisible" class="SearchTags">
+    <div v-if="isSearchVisible && vin" class="SearchTags">
       <div class="search-tags">
         <a
           v-for="(tab,index) in search_tabs"
@@ -19,10 +19,10 @@
     <div class="ms-relative main-search-input">
       <input
         ref="searchInput"
-        class="form-control main_search"
-        :placeholder="$t('search_placeholder')"
-        type="text"
         v-model="searchTerm"
+        class="form-control main_search"
+        :placeholder="vin?$t('home_search.by_vin'):$t('home_search.by_detail_code')"
+        type="text"
         @focus="onFocus"
         @input="onSearch"
       />
@@ -36,20 +36,26 @@
         <i class="fa fa-close"></i>
       </button>
     </div>
-    <SearchContent v-if="isSearchVisible && !searchTerm"/>
-    <Searchresults @selectVin="selectVin" v-if="isSearchVisible && searchTerm"/>
+    <SearchContent v-if="isSearchVisible && !searchTerm" />
+    <Searchresults v-if="isSearchVisible && searchTerm" @selectVin="selectVin" />
     <div class="main-search-overlay" @click="closeSearch"></div>
   </div>
 </template>
 <script>
 import SearchContent from '@/components/Search/SearchContent'
 import Searchresults from '@/components/Search/Searchresults'
-import { mapGetters, mapMutations, mapActions } from 'vuex'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 import debounce from 'lodash.debounce'
 
 export default {
   name: 'HomeSearch',
   components: { Searchresults, SearchContent },
+  props: {
+    vin: {
+      type: Boolean,
+      default: false
+    }
+  },
   data () {
     return {
       searchTerm: '',
@@ -76,7 +82,8 @@ export default {
   },
   methods: {
     ...mapActions({
-      SEARCH_ASSEMBLY: 'Catalog/SEARCH_ASSEMBLY'
+      SEARCH_ASSEMBLY: 'Catalog/SEARCH_ASSEMBLY',
+      SEARCH_VIN: 'Catalog/SEARCH_VIN'
     }),
     ...mapMutations({
       TOGGLE_SEARCH: 'UI/TOGGLE_SEARCH',
@@ -87,11 +94,19 @@ export default {
       // this.searchTerm = e.target.value
       if (this.searchTerm) {
         this.searching = true
-        await this.SEARCH_ASSEMBLY({
-          term: this.searchTerm
-        }).finally(() => {
-          this.searching = false
-        })
+        if (this.vin) {
+          await this.SEARCH_VIN({
+            term: this.searchTerm
+          }).finally(() => {
+            this.searching = false
+          })
+        } else {
+          await this.SEARCH_ASSEMBLY({
+            term: this.searchTerm
+          }).finally(() => {
+            this.searching = false
+          })
+        }
       }
     }, 800),
     onRemove (index) {
