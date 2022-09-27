@@ -90,94 +90,97 @@
               <div class="filter_search_group_wrapper">
                 <div class="filter_search_group">
                   <div class="filter_search_group_item">
-                    <el-select
+                    <v-select
                       v-model="search.sparePart"
-                      clearable
-                      filterable
-                      :loading="loading && !spareParts.length"
-                      :loading-text="$t('loading')"
-                      :no-data-text="$t('no_results_found')"
-                      :no-match-text="$t('no_results_found')"
-                      :placeholder="$t('home_search.spare-parts')"
-                      @change="search.brand='';search.model='';search.type='';search.sparePart?GET_BRANDS(search.sparePart):false"
-                    >
-                      <el-option
-                        v-for="item in spareParts"
-                        :key="item.assemblyGroupNodeId"
-                        :label="item.assemblyGroupName"
-                        :value="item.assemblyGroupNodeId"
-                      />
-                    </el-select>
-                  </div>
-                  <div class="filter_search_group_item">
-                    <el-select
-                      v-model="search.brand"
-                      clearable
-                      :disabled="!search.sparePart"
-                      filterable
-                      :loading="loading && !brands.length"
-                      :loading-text="$t('loading')"
-                      :no-data-text="$t('no_results_found')"
-                      :no-match-text="$t('no_results_found')"
-                      :placeholder="$t('brand')"
-                      @change="search.model='';search.type='';search.brand?GET_MODELS(search):false"
-                    >
-                      <el-option
-                        v-for="item in brands"
-                        :key="item.manuId"
-                        :label="item.manuName"
-                        :value="item.manuId"
-                      />
-                    </el-select>
-                  </div>
-                  <div class="filter_search_group_item">
-                    <el-select
-                      v-model="search.model"
-                      clearable
-                      :disabled="!search.brand"
-                      filterable
+                      label="assemblyGroupName"
                       :loading="loading"
-                      :loading-text="$t('loading')"
-                      :no-data-text="$t('no_results_found')"
-                      :no-match-text="$t('no_results_found')"
-                      :placeholder="$t('model')"
-                      @change="search.type='';search.brand?GET_TYPES(search):false"
+                      :options="spareParts"
+                      :placeholder="$t('home_search.spare-parts')"
+                      :reduce="part => part.assemblyGroupNodeId"
+                      @input="GET_BRANDS(search.sparePart)"
                     >
-                      <el-option
-                        v-for="item in models"
-                        :key="item.modId"
-                        :label="item.modelName"
-                        :value="item.modId"
-                      />
-                    </el-select>
+                      <template v-slot:selected-option="option">
+                        <span :class="option.icon"></span>
+                        {{
+                          option.assemblyGroupName.length <= 9 ? option.assemblyGroupName : (option.assemblyGroupName.substring(0, 7) + '...')
+                        }}
+                      </template>
+                      <template v-slot:option="option">
+                        <span :class="option.icon"></span>
+                        {{ option.assemblyGroupName }}
+                      </template>
+                    </v-select>
                   </div>
                   <div class="filter_search_group_item">
-                    <el-select
+                    <v-select
+                      v-model="search.brand"
+                      :disabled="!search.sparePart"
+                      label="manuName"
+                      :loading="loading"
+                      :options="brands"
+                      :placeholder="$t('brand')"
+                      :reduce="brand => brand.manuId"
+                      :reset-on-options-change="true"
+                      @input="GET_MODELS(search)"
+                    >
+                      <template v-slot:selected-option="option">
+                        <span :class="option.icon"></span>
+                        {{ option.manuName.length <= 9 ? option.manuName : (option.manuName.substring(0, 7) + '...') }}
+                      </template>
+                      <template v-slot:option="option">
+                        <span :class="option.icon"></span>
+                        {{ option.manuName }}
+                      </template>
+                    </v-select>
+                  </div>
+                  <div class="filter_search_group_item">
+                    <v-select
+                      v-model="search.model"
+                      :disabled="!search.brand"
+                      label="modelName"
+                      :loading="loading"
+                      :options="models"
+                      :placeholder="$t('model')"
+                      :reduce="part => part.modId"
+                      :reset-on-options-change="true"
+                      @input="GET_TYPES(search)"
+                    >
+                      <template v-slot:selected-option="option">
+                        <span :class="option.icon"></span>
+                        {{
+                          option.modelName.length < 10 ? option.modelName : (option.modelName.substring(0, 7) + '...')
+                        }}
+                      </template>
+                      <template v-slot:option="option">
+                        <span :class="option.icon"></span>
+                        {{ option.modelName }}
+                      </template>
+                    </v-select>
+                  </div>
+                  <div class="filter_search_group_item">
+                    <v-select
                       v-model="search.type"
                       :disabled="!search.model"
-                      filterable
                       :loading="loading"
-                      :loading-text="$t('loading')"
-                      :no-data-text="$t('no_results_found')"
-                      :no-match-text="$t('no_results_found')"
+                      :options="types"
                       :placeholder="$t('type')"
+                      :reduce="part => part.carId"
+                      :reset-on-options-change="true"
                     >
-                      <el-option
-                        v-for="item in types"
-                        :key="item.carId"
-                        :label="item.carName +' ('+ item.yearOfConstrFrom +'-'+item.yearOfConstrTo+')'"
-                        :value="item.carId"
-                      >
-                        <span style="float: left">{{ item.carName }} ({{ item.yearOfConstrFrom }}-{{
-                          item.yearOfConstrTo
-                        }})</span>
-                      </el-option>
-                    </el-select>
+                      <template slot="selected-option" slot-scope="option">
+                        {{
+                          (option.carName + '(' + option.yearOfConstrFrom + '-' + option.yearOfConstrTo + ')').substring(0, 9)
+                        }}...
+                      </template>
+                      <template slot="option" slot-scope="option">
+                        {{ option.carName + ' (' + option.yearOfConstrFrom + '-' + option.yearOfConstrTo + ')' }}
+                      </template>
+                    </v-select>
                   </div>
                   <div class="filter_search_group_item">
                     <button
                       class="btn h-100"
-                      :disabled="!search.brand"
+                      :disabled="!search.model"
                       type="submit"
                       @click="$router.push(localePath({ name: 'search', query: { sparePart: search.sparePart,brand: search.brand, model: search.model,type:search.type}}));"
                     >
@@ -244,7 +247,6 @@
 </template>
 
 <script>
-import { Option, Select } from 'element-ui'
 import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
 import 'swiper/css/swiper.css'
 
@@ -258,8 +260,6 @@ export default {
     Banners,
     Swiper,
     SwiperSlide,
-    'el-select': Select,
-    'el-option': Option,
     SearchVin
   },
   async fetch () {

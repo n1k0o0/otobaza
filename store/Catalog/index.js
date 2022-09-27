@@ -548,11 +548,13 @@ const actions = {
     return data
   },
   async SEARCH_ASSEMBLY ({ commit, rootGetters }, { term }) {
+    commit('SET_SEARCH_RESULTS', [])
     this.$axios.defaults.baseURL = this.$env.CATALOG_API_URL
     const { data } = await this.$axios.get(`/api/search/${term}`)
     commit('SET_SEARCH_RESULTS', data)
   },
   async SEARCH_VIN ({ commit, rootGetters }, { term }) {
+    commit('SET_SEARCH_RESULTS', [])
     if (term.length !== 17) return
     this.$axios.defaults.baseURL = this.$env.BASE_API_URL
     if (!rootGetters.isAuthenticated) {
@@ -654,23 +656,24 @@ const actions = {
   }) {
     commit('SET_LOADING', true)
 
+    commit('SET_SEARCH_PRICE_SORT', priceSort)
+    commit('SET_SEARCH_NEW_SORT', isNewSort)
     if (page) {
       commit('SET_SEARCH_PAGE', ++state.search_page)
-      commit('SET_SEARCH_PRICE_SORT', priceSort)
-      commit('SET_SEARCH_NEW_SORT', isNewSort)
     } else {
-      this.$axios.defaults.baseURL = this.$env.CATALOG_API_URL
-      const { data: oems } = await this.$axios.post('api/ehisse/search', {
-        assemblyGroupNodeId: sparePart,
-        manuId: brand,
-        modId: model,
-        carId: type
-      })
-      commit('SET_SEARCH_OEMS', oems)
-
-      commit('SET_SEARCH_PAGE', 1)
-      commit('SET_SEARCH_PRICE_SORT', 0)
-      commit('SET_SEARCH_NEW_SORT', 0)
+      if (!priceSort && !isNewSort) {
+        this.$axios.defaults.baseURL = this.$env.CATALOG_API_URL
+        const { data: oems } = await this.$axios.post('api/ehisse/search', {
+          assemblyGroupNodeId: sparePart,
+          manuId: brand,
+          modId: model,
+          carId: type
+        })
+        commit('SET_SEARCH_OEMS', oems)
+        commit('SET_SEARCH_PAGE', 1)
+        commit('SET_SEARCH_PRICE_SORT', 0)
+        commit('SET_SEARCH_NEW_SORT', 0)
+      }
     }
 
     this.$axios.defaults.baseURL = this.$env.BASE_API_URL

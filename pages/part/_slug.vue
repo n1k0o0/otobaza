@@ -13,6 +13,18 @@
     template(v-else)
       .container
         .search_wrap.d-flex.flex-column
+          .hr-wrap
+            h1.title.hr-text {{$t('home_search.spare-parts')}}
+          .filter.row.justify-content-center
+            .filter_item.col-12.col-lg-6
+              SearchModal(:vin="!$route.query.vin || false")
+          .sort_wrap.text-right(v-show="parts.length")
+            span(@click.prevent="GET_SEARCH_PARTS({...search,priceSort:1})", :class="{'active':search_price_sort}")
+              | {{$t('price')}}
+              img(src="img/search/sort_arrow.svg")
+            span(@click.prevent="GET_SEARCH_PARTS({...search,isNewSort:1})", :class="{'active':search_new_sort}")
+              | {{$t('new')}}
+              img(src="img/search/sort_arrow.svg")
           SearchResults(:search="{}" :loading="false")
 </template>
 <script>
@@ -20,13 +32,13 @@ import Parts from '@/components/Catalog/Parts'
 import PartsPlaceholder from '@/components/Placeholders/PartsPlaceholder'
 import SearchPlaceholder from '@/components/Search/SearchPlaceholder'
 import SearchResults from '@/components/Search/ResultParts'
-import SearchVin from '@/components/Common/Index/HeaderSearch'
+import SearchModal from '@/components/Common/Index/HeaderSearch'
 import { mapActions, mapGetters } from 'vuex'
 
 export default {
   name: 'SearchPart',
   watchQuery: true,
-  components: { PartsPlaceholder, Parts, SearchResults, SearchPlaceholder, SearchVin },
+  components: { PartsPlaceholder, Parts, SearchResults, SearchPlaceholder, SearchModal },
   layout: 'pages',
   scrollToTop: true,
   async fetch () {
@@ -42,10 +54,22 @@ export default {
       })
     }
   },
+  data () {
+    return {
+      search: {
+        sparePart: '',
+        model: '',
+        brand: '',
+        type: ''
+      }
+    }
+  },
   computed: {
     ...mapGetters({
       geo: 'UI/geo',
-      parts: 'Catalog/search_parts'
+      parts: 'Catalog/search_parts',
+      search_new_sort: 'Catalog/search_new_sort',
+      search_price_sort: 'Catalog/search_price_sort'
     }),
     meta () {
       return [
@@ -77,7 +101,8 @@ export default {
   },
   methods: {
     ...mapActions({
-      GET_PART: 'Catalog/GET_PART'
+      GET_PART: 'Catalog/GET_PART',
+      GET_SEARCH_PARTS: 'Catalog/GET_SEARCH_PARTS'
     })
   }
 }
@@ -98,5 +123,42 @@ export default {
   //min-height: calc(100vh - 20px - 62px - 95px - 241px);
   min-height: calc(100vh - 123px - 41px - 36px - 360px);
   border-radius: 16px;
+}
+
+.sort_wrap {
+  color: #98A2B3;
+
+  span {
+    cursor: pointer;
+
+    img {
+      margin-left: 5px;
+    }
+
+    margin-right: 10px;
+
+    &.active, &:hover {
+      color: #344054;
+    }
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .search_wrap {
+    padding: 50px 20px;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .search_wrap {
+    padding: 50px 30px;
+  }
+}
+</style>
+
+<style>
+.form-control {
+  box-shadow: none !important;
+  border: 1px solid #dcdfe6 !important;
 }
 </style>

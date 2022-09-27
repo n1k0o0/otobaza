@@ -2,9 +2,9 @@
   .ms-content
     .Searchresults
       ul
-        template(v-if="cars.length")
-          li(v-for="(car,i) in cars" :key="i" @click.prevent="goToCar(car)")
-            em {{car.manuName}}, {{car.modelName}} ({{car.First}}{{car.Second ? '-'+car.Second:''}})
+        //template(v-if="cars.length")
+        //  li(v-for="(car,i) in cars" :key="i" @click.prevent="goToCar(car)")
+        //    em {{car.manuName}}, {{car.modelName}} ({{car.First}}{{car.Second ? '-'+car.Second:''}})
         template(v-if="products.length")
           li(v-for="(product,i) in products" :key="i"  @click.prevent="goToPart(product)")
             span {{product.articleNumber}}
@@ -53,6 +53,9 @@ export default {
         name: 'part-slug',
         params: {
           slug: `p-1-${product.legacyarticleId}-${product.mfrid}-${product.assemblyGroupNodeid}`
+        },
+        query: {
+          vin: 0
         }
       })
     },

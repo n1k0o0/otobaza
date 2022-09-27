@@ -1,11 +1,11 @@
 <template>
   <div class="ms-content">
-    <PageCatalogLogo
-      v-if="search_tabs.length === 0"
-      is-search
-      @selected="onLogoSelected"
-    />
-    <template v-else>
+    <!--    <PageCatalogLogo-->
+    <!--      v-if="search_tabs.length === 0"-->
+    <!--      is-search-->
+    <!--      @selected="onLogoSelected"-->
+    <!--    />-->
+    <template v-if="search_tabs.length">
       <!--      <Manufacturer
         v-if="lastTab.type === 'manufacturer'"
         is-search
@@ -16,11 +16,11 @@
         is-search
         :slug="lastTab.slug"
       />-->
-      <Car
-        v-if="lastTab.type === 'car'"
-        is-search
-        :slug="lastTab.slug"
-      />
+      <!--      <Car-->
+      <!--        v-if="lastTab.type === 'car'"-->
+      <!--        is-search-->
+      <!--        :slug="lastTab.slug"-->
+      <!--      />-->
       <Vin
         v-if="lastTab.type === 'vin'"
         is-search

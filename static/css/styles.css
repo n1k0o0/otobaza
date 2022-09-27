@@ -6004,14 +6004,17 @@ img {
 }
 
 .v-select .vs__dropdown-toggle {
-  /*height: inherit;*/
+  height: inherit;
   background-color: #fff;
-
 }
 
 .v-select .vs__dropdown-menu {
-  /*min-width: auto;*/
+  min-width: 100%;
   color: #344054;
+}
+
+.vs__search, .vs__search:focus {
+  color: #344054 !important;
 }
 
 .text-sm {
