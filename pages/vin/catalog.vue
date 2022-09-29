@@ -76,19 +76,19 @@ export default {
       required: true
     }
   },
-  data () {
-    return {
-      component: 'AssemblyTree',
-    }
-  },
   async fetch () {
-    let slug = this.slug
+    const slug = this.slug
     const data = slug.split('____')
     const catalog = data[0]
     const vehicleId = data[1]
     const ssd = data[2]
 
     await this.GET_VIN_ASSEMBLIES({ catalog, vehicleId, ssd })
+  },
+  data () {
+    return {
+      component: 'AssemblyTree'
+    }
   },
   async validate ({ params, error, app }) {
     const { regex } = getUrlSlug(params.slug, 'car')
@@ -108,7 +108,7 @@ export default {
   methods: {
     ...mapActions({
       GET_VIN_ASSEMBLIES: 'Catalog/GET_VIN_ASSEMBLIES'
-    }),
+    })
   }
 }
 </script>

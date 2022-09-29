@@ -111,12 +111,13 @@ export default {
       })
     },
     goToParts (oem) {
-      window.location.href = this.localePath({
+      const url = this.localePath({
         name: 'vin-part-slug',
         params: {
           slug: `${oem}-1`
         }
       })
+      window.open(url, '_blank').focus()
     }
   }
 }
