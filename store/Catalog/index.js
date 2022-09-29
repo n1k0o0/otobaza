@@ -420,7 +420,7 @@ const actions = {
     }
     commit('SET_LOADING', false)
   },
-  async GET_PARTS_BY_VIN ({ commit, rootState }, { oem, page, priceSort, isNewSort }) {
+  async GET_PARTS_BY_VIN ({ commit, rootState, state }, { oem, page }) {
     this.$axios.defaults.baseURL = this.$env.CATALOG_API_URL
 
     const { data: oems } = await this.$axios.get(`api/laximooem/${oem}`)

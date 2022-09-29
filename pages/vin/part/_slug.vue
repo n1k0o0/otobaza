@@ -13,7 +13,16 @@
     template(v-else)
       .container
         .search_wrap.d-flex.flex-column
-          SearchResults( :loading="false")
+          .hr-wrap
+            h1.title.hr-text {{$t('home_search.spare-parts')}}
+          .sort_wrap.text-right(v-show="search_parts.length")
+            span(@click.prevent="GET_SEARCH_PARTS({...search,priceSort:1})", :class="{'active':search_price_sort}")
+              | {{$t('price')}}
+              img(src="img/search/sort_arrow.svg")
+            span(@click.prevent="GET_SEARCH_PARTS({...search,isNewSort:1})", :class="{'active':search_new_sort}")
+              | {{$t('new')}}
+              img(src="img/search/sort_arrow.svg")
+          SearchResults(:search={}, :loading="false")
 </template>
 <script>
 import Parts from '@/components/Catalog/Parts'
@@ -35,15 +44,27 @@ export default {
     if (oem && page) {
       await this.GET_PARTS_BY_VIN({
         oem,
-        filter: this.$route.query?.filter || 'nearest',
         page
       })
+    }
+  },
+  data () {
+    return {
+      search: {
+        sparePart: '',
+        model: '',
+        brand: '',
+        type: ''
+      }
     }
   },
   computed: {
     ...mapGetters({
       geo: 'UI/geo',
-      parts: 'Catalog/search_parts'
+      parts: 'Catalog/search_parts',
+      search_new_sort: 'Catalog/search_new_sort',
+      search_price_sort: 'Catalog/search_price_sort',
+      search_parts: 'Catalog/search_parts'
     }),
     meta () {
       return [
@@ -71,7 +92,8 @@ export default {
   },
   methods: {
     ...mapActions({
-      GET_PARTS_BY_VIN: 'Catalog/GET_PARTS_BY_VIN'
+      GET_PARTS_BY_VIN: 'Catalog/GET_PARTS_BY_VIN',
+      GET_SEARCH_PARTS: 'Catalog/GET_SEARCH_PARTS'
     })
   },
   head () {
@@ -108,5 +130,23 @@ export default {
   //min-height: calc(100vh - 20px - 62px - 95px - 241px);
   min-height: calc(100vh - 123px - 41px - 36px - 360px);
   border-radius: 16px;
+}
+
+.sort_wrap {
+  color: #98A2B3;
+
+  span {
+    cursor: pointer;
+
+    img {
+      margin-left: 5px;
+    }
+
+    margin-right: 10px;
+
+    &.active, &:hover {
+      color: #344054;
+    }
+  }
 }
 </style>
