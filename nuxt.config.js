@@ -7,11 +7,11 @@ module.exports = {
   ...(!isDev && {
     modern: 'client'
   }),
-  env: {
+  /* env: {
     BASE_API_URL: 'https://test-api.otobaza.com',
     CATALOG_API_URL: 'https://kataloq.otobaza.com',
     FRONT_URL: 'https://staging.otobaza.com/'
-  },
+  }, */
   head: {
     htmlAttrs: {
       lang: 'az'
@@ -83,8 +83,8 @@ module.exports = {
       'nuxt-env',
       {
         keys: [
-          /* 'BASE_API_URL',
-          'CATALOG_API_URL' */
+          'BASE_API_URL',
+          'CATALOG_API_URL'
         ]
       }
     ],
