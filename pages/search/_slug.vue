@@ -212,7 +212,19 @@ export default {
         'https://cdn.hswstatic.com/gif/car-engine-new1.jpg'
       ],
       modalVisibility: false,
-      showPhone: false
+      showPhone: false,
+      title: {
+        az: '{name} Avtomobil ehtiyat hissələrinin satışı',
+        ru: '{name} Продажа автозапчастей',
+        en: '{name} Sale of auto spare parts',
+        tr: '{name} Oto yedek parça satışı'
+      },
+      description: {
+        az: '{name} birinci və ikinci əl ehtiyat hissəsini əldə etmək ucun Otobaza saytina daxil ola bilərsiniz',
+        ru: '{name} Вы можете посетить веб-сайт Autobaza, чтобы купить оригинальные и подержанные запчасти',
+        en: 'You can visit Autobaza website to buy {name} first and second hand spare parts',
+        tr: '{name} birinci ve ikinci el yedek parça satın almak için Autobaza web sitesini ziyaret edebilirsiniz.'
+      }
     }
   },
   computed: {
@@ -240,6 +252,21 @@ export default {
       } else {
         this.imgIndex -= 1
       }
+    }
+  },
+  head () {
+    const title = this.title[this.$i18n.locale].replace('{name}', this.product.description)
+    const description = this.description[this.$i18n.locale].replace('{name}', this.product.description)
+
+    return {
+      title: `${title} `,
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: `${description}`
+        }
+      ]
     }
   }
 }
