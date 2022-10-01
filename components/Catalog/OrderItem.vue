@@ -6,7 +6,7 @@
         td
           .car_details_row
             p {{ $t('store') }}
-            span {{order.store?.store}}
+            span {{order.store.store}}
         td
           .car_details_row
             p {{ $t('price') }}
