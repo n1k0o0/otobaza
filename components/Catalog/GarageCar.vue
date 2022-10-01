@@ -68,7 +68,7 @@ export default {
     },
     goToCar (car) {
       this.$router.push(this.localePath({
-        name: 'lp-brand-slugs',
+        name: 'lp-brand-slug',
         params: {
           brand: car.manu_id,
           slug: car.manu_name
