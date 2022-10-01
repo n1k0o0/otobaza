@@ -56,12 +56,12 @@
               button.btn-new(@click="searchMethod", :disabled="!search.model") {{$t('search')}}
 
           .sort_wrap.text-right(v-show="search_parts.length")
-            span(@click.prevent="GET_SEARCH_PARTS({...search,priceSort:1})", :class="{'active':search_price_sort}")
+            span(@click.prevent="FILTER_PARTS('price')", :class="{'active':search_sort_by==='price'}")
               | {{$t('price')}}
-              img(src="img/search/sort_arrow.svg")
-            span(@click.prevent="GET_SEARCH_PARTS({...search,isNewSort:1})", :class="{'active':search_new_sort}")
+              img(src="/img/search/sort_arrow.svg")
+            span(@click.prevent="FILTER_PARTS('state')", :class="{'active':search_sort_by==='state'}")
               | {{$t('new')}}
-              img(src="img/search/sort_arrow.svg")
+              img(src="/img/search/sort_arrow.svg")
           SearchResults(:search="search", :loading="loadingResults")
 
 </template>
@@ -170,8 +170,7 @@ export default {
       loading: 'Catalog/loading',
       search_lang: 'Catalog/search_lang',
       search_parts: 'Catalog/search_parts',
-      search_new_sort: 'Catalog/search_new_sort',
-      search_price_sort: 'Catalog/search_price_sort'
+      search_sort_by: 'Catalog/search_sort_by'
     })
   },
   methods: {
@@ -180,7 +179,8 @@ export default {
       GET_BRANDS: 'Catalog/GET_BRANDS',
       GET_MODELS: 'Catalog/GET_MODELS',
       GET_TYPES: 'Catalog/GET_TYPES',
-      GET_SEARCH_PARTS: 'Catalog/GET_SEARCH_PARTS'
+      GET_SEARCH_PARTS: 'Catalog/GET_SEARCH_PARTS',
+      FILTER_PARTS: 'Catalog/FILTER_PARTS'
     }),
     scrollTop () {
       window.scrollTo({ top: 0, behavior: 'smooth' })

@@ -71,8 +71,8 @@ const state = () => ({
   search_lang: '',
   search_page: 1,
   last_page: 1,
-  search_price_sort: 0,
-  search_new_sort: 0
+  search_sort_by: 'price',
+  search_sort_order: 'desc'
 })
 
 const getters = {
@@ -107,8 +107,8 @@ const getters = {
   search_lang (state) { return state.search_lang },
   search_page (state) { return state.search_page },
   last_page (state) { return state.last_page },
-  search_price_sort (state) { return state.search_price_sort },
-  search_new_sort (state) { return state.search_new_sort }
+  search_sort_by (state) { return state.search_sort_by },
+  search_sort_order (state) { return state.search_sort_order }
 }
 
 const mutations = {
@@ -212,11 +212,11 @@ const mutations = {
   SET_LAST_PAGE (state, payload) {
     state.last_page = payload
   },
-  SET_SEARCH_NEW_SORT (state, payload) {
-    state.search_new_sort = payload
+  SET_SEARCH_SORT_BY (state, payload) {
+    state.search_sort_by = payload
   },
-  SET_SEARCH_PRICE_SORT (state, payload) {
-    state.search_price_sort = payload
+  SET_SEARCH_SORT_ORDER (state, payload) {
+    state.search_sort_order = payload
   }
 }
 
@@ -392,7 +392,7 @@ const actions = {
     commit('SET_VIN_PARTS', { ...parts })
   },
 
-  async GET_PART ({ commit, rootState, state }, { article, page, manufacturer, assembly, filter }) {
+  async GET_PART ({ commit, rootState, state }, { article, page, manufacturer, assembly }) {
     this.$axios.defaults.baseURL = this.$env.CATALOG_API_URL
     const url = `api/search/articlenumber/${article}/${manufacturer}/${assembly}`
 
@@ -405,7 +405,7 @@ const actions = {
         data: products,
         meta
       }
-    } = await this.$axios.post(`/api/v2/products?page=${state.search_page}`, {
+    } = await this.$axios.post(`/api/v2/products?page=${state.search_page}&orderBy=${state.search_sort_by}&sort=${state.search_sort_order}`, {
       country: 1,
       currency: 'AZN',
       ...state.search_oems
@@ -432,7 +432,7 @@ const actions = {
         data: products,
         meta
       }
-    } = await this.$axios.post(`/api/v2/products?page=${state.search_page}`, {
+    } = await this.$axios.post(`/api/v2/products?page=${state.search_page}&orderBy=${state.search_sort_by}&sort=${state.search_sort_order}`, {
       country: 1,
       currency: 'AZN',
       ...state.search_oems
@@ -460,7 +460,7 @@ const actions = {
         data: products,
         meta
       }
-    } = await this.$axios.post(`/api/v2/products?page=${state.search_page}`, {
+    } = await this.$axios.post(`/api/v2/products?page=${state.search_page}&orderBy=${state.search_sort_by}&sort=${state.search_sort_order}`, {
       country: 1,
       currency: 'AZN',
       ...state.search_oems
@@ -650,18 +650,18 @@ const actions = {
     brand = null,
     model = null,
     type = null,
-    priceSort = 0,
-    isNewSort = 0,
+    sortBy = null,
+    sortOrder = 'desc',
     page = false
   }) {
     commit('SET_LOADING', true)
 
-    commit('SET_SEARCH_PRICE_SORT', priceSort)
-    commit('SET_SEARCH_NEW_SORT', isNewSort)
+    commit('SET_SEARCH_SORT_BY', sortBy ?? 'price')
+    commit('SET_SEARCH_SORT_ORDER', sortOrder)
     if (page) {
       commit('SET_SEARCH_PAGE', ++state.search_page)
     } else {
-      if (!priceSort && !isNewSort) {
+      if (!sortBy) {
         this.$axios.defaults.baseURL = this.$env.CATALOG_API_URL
         const { data: oems } = await this.$axios.post('api/ehisse/search', {
           assemblyGroupNodeId: sparePart,
@@ -671,8 +671,6 @@ const actions = {
         })
         commit('SET_SEARCH_OEMS', oems)
         commit('SET_SEARCH_PAGE', 1)
-        commit('SET_SEARCH_PRICE_SORT', 0)
-        commit('SET_SEARCH_NEW_SORT', 0)
       }
     }
 
@@ -682,11 +680,9 @@ const actions = {
         data: products,
         meta
       }
-    } = await this.$axios.post(`/api/v2/products?page=${state.search_page}`, {
+    } = await this.$axios.post(`/api/v2/products?page=${state.search_page}&orderBy=${state.search_sort_by}&sort=${state.search_sort_order}`, {
       country: 1,
       currency: 'AZN',
-      price: priceSort || state.search_price_sort,
-      isNew: isNewSort || state.search_new_sort,
       ...state.search_oems
     })
 
@@ -699,6 +695,29 @@ const actions = {
     }
     commit('SET_LOADING', false)
   },
+
+  async FILTER_PARTS ({ commit, state }, by) {
+    commit('SET_LOADING', true)
+    commit('SET_SEARCH_SORT_BY', by)
+    commit('SET_SEARCH_SORT_ORDER', state.search_sort_order === 'desc' ? 'asc' : 'desc')
+
+    this.$axios.defaults.baseURL = this.$env.BASE_API_URL
+    const {
+      data: {
+        data: products,
+        meta
+      }
+    } = await this.$axios.post(`/api/v2/products?page=${state.search_page}&orderBy=${state.search_sort_by}&sort=${state.search_sort_order}`, {
+      country: 1,
+      currency: 'AZN',
+      ...state.search_oems
+    })
+
+    commit('SET_LAST_PAGE', meta.last_page)
+    commit('SET_SEARCH_PARTS', products)
+    commit('SET_LOADING', false)
+  },
+
   async GET_SEARCH_PRODUCT ({ commit }, payload) {
     this.$axios.defaults.baseURL = this.$env.BASE_API_URL
     const { data: { data: part } } = await this.$axios.post('/api/v2/product',
@@ -706,7 +725,6 @@ const actions = {
         id: payload,
         currency: 'AZN'
       })
-    // const { data: { data: part } } = await this.$axios.get(`https://62d45369cd960e45d456a36d.mockapi.io/api/v2/product/${payload}`)
     commit('SET_SEARCH_PART', part)
   }
 }

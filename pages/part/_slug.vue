@@ -19,12 +19,12 @@
             .filter_item.col-12.col-lg-6
               SearchModal(:vin="!$route.query.vin || false")
           .sort_wrap.text-right(v-show="parts.length")
-            span(@click.prevent="GET_SEARCH_PARTS({...search,priceSort:1})", :class="{'active':search_price_sort}")
+            span(@click.prevent="FILTER_PARTS('price')", :class="{'active':search_sort_by==='price'}")
               | {{$t('price')}}
-              img(src="img/search/sort_arrow.svg")
-            span(@click.prevent="GET_SEARCH_PARTS({...search,isNewSort:1})", :class="{'active':search_new_sort}")
+              img(src="/img/search/sort_arrow.svg")
+            span(@click.prevent="FILTER_PARTS('state')", :class="{'active':search_sort_by==='state'}")
               | {{$t('new')}}
-              img(src="img/search/sort_arrow.svg")
+              img(src="/img/search/sort_arrow.svg")
           SearchResults(:search="{}" :loading="false")
 </template>
 <script>
@@ -49,8 +49,7 @@ export default {
         article: matches?.[3],
         page: matches?.[2] || 1,
         manufacturer: matches?.[4],
-        assembly: matches?.[5],
-        filter: this.$route?.query?.filter
+        assembly: matches?.[5]
       })
     }
   },
@@ -68,8 +67,7 @@ export default {
     ...mapGetters({
       geo: 'UI/geo',
       parts: 'Catalog/search_parts',
-      search_new_sort: 'Catalog/search_new_sort',
-      search_price_sort: 'Catalog/search_price_sort'
+      search_sort_by: 'Catalog/search_sort_by'
     }),
     meta () {
       return [
@@ -78,7 +76,11 @@ export default {
           name: 'viewport',
           content: 'width=device-width, initial-scale=1, maximum-scale=1 shrink-to-fit=no'
         },
-        { hid: 'description', name: 'description', content: this.$store.getters['Catalog/parts']?.brand?.meta_desc || '' },
+        {
+          hid: 'description',
+          name: 'description',
+          content: this.$store.getters['Catalog/parts']?.brand?.meta_desc || ''
+        },
         { hid: 'og:title', name: 'og:title', content: this.$store.getters['Catalog/parts']?.brand?.meta_title || '' }
       ]
     }
@@ -102,7 +104,8 @@ export default {
   methods: {
     ...mapActions({
       GET_PART: 'Catalog/GET_PART',
-      GET_SEARCH_PARTS: 'Catalog/GET_SEARCH_PARTS'
+      GET_SEARCH_PARTS: 'Catalog/GET_SEARCH_PARTS',
+      FILTER_PARTS: 'Catalog/FILTER_PARTS'
     })
   }
 }
