@@ -36,8 +36,8 @@
 </template>
 <script>
 import AddCar from '@/components/Garage/AddCar'
-import { Slugify } from '@/filters'
 import { mapActions } from 'vuex'
+
 export default {
   name: 'GarageCar',
   components: { AddCar },
@@ -70,7 +70,8 @@ export default {
       this.$router.push(this.localePath({
         name: 'car-slug',
         params: {
-          slug: `${car.car_id}-${Slugify(car.car_name)}-avtomobil-hisseleri`
+          brand: car.manu_id,
+          slug: car.manu_name
         }
       }))
     },
@@ -123,25 +124,28 @@ export default {
   position: relative;
   opacity: 0.8;
   transition: all 0.1s linear;
-  .cars-image,.cars-details {
+
+  .cars-image, .cars-details {
     user-select: none;
   }
-  .cars-image *,.cars-details * {
+
+  .cars-image *, .cars-details * {
     user-select: none;
     pointer-events: none;
   }
+
   .loading {
-    background: rgba(255,255,255,0.5);
+    background: rgba(255, 255, 255, 0.5);
     position: absolute;
-    left:0;
-    right:0;
-    bottom:0;
-    top:0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 50px;
-    color:#4DA6FF;
+    color: #4DA6FF;
     filter: none;
     -webkit-filter: none;
   }

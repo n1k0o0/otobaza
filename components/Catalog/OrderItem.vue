@@ -16,14 +16,6 @@
             p {{ $t('quantity') }}
             span {{order.quantity}} {{ $t('quantity').toLowerCase() }}
         td
-          button.confirm-order.mr-2(
-            type='button'
-            :disabled="isConfirming"
-            @click.prevent="confirmOrder(order)"
-          )
-            i.fa.fa-spin.fa-spinner(v-if="isConfirming")
-            |
-            | {{ $t('confirm_order') }}
           button.buy-see-more.buy-see-more-js(
             type='button'
             @click.prevent="isShowMore = !isShowMore"
