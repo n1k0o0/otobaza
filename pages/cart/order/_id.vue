@@ -44,7 +44,7 @@
                         FormInputElement(
                           v-model="form.delivery_address"
                           name="address"
-                          rules="required"
+                          :rules="form.delivery_id===1?'required':null"
                           required
                           :label="$t('delivery_address')"
                         )
