@@ -68,7 +68,7 @@ export default {
   },
   data () {
     return {
-      isConfirming: false,
+      isConfirming: true,
       isShowMore: false
     }
   },
