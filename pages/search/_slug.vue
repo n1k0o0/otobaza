@@ -404,6 +404,10 @@ export default {
               font-size: 20px;
               color: #ff0000;
             }
+
+            @media only screen and (max-width: 575px) {
+              flex-direction: column;
+            }
           }
         }
       }
