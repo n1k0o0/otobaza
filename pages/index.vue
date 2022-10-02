@@ -105,16 +105,12 @@
 
 <script>
 import HomeSearch from '@/components/Search/HomeSearch'
-import Banners from '@/components/Common/Index/Banners'
-import Faq from '@/components/Common/Faq'
 
 export default {
   layout: 'main',
   name: 'Home',
   components: {
-    HomeSearch,
-    Banners,
-    Faq
+    HomeSearch
   },
   data () {
     return {
@@ -123,14 +119,28 @@ export default {
         ru: 'Otobaza.com - Запчасти здесь',
         en: 'Otobaza.com - Spare parts here',
         tr: 'Otobaza.com - Yedek parçalar burada'
+      },
+      description: {
+        az: 'Birinci və ikinci əl ehtiyat hissəsini əldə etmək ucun Otobaza saytina daxil ola bilərsiniz',
+        ru: 'Вы можете посетить веб-сайт Autobaza, чтобы купить оригинальные и подержанные запчасти',
+        en: 'You can visit Autobaza website to buy first and second hand spare parts',
+        tr: 'Birinci ve ikinci el yedek parça satın almak için Autobaza web sitesini ziyaret edebilirsiniz.'
       }
     }
   },
   head () {
     const title = this.title[this.$i18n.locale]
+    const description = this.description[this.$i18n.locale]
 
     return {
-      title: `${title} `
+      title: title,
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: description
+        }
+      ]
     }
   }
 }
