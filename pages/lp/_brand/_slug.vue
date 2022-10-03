@@ -10,7 +10,6 @@
             .rminfo
               h4.rmtt {{ $t('not_found') }}
               p.rmtxt {{ $t('not_found_info') }}
-              p.rmtxt {{ $fetchState.error }}
     template(v-else)
       .container
         .search_wrap.d-flex.flex-column
