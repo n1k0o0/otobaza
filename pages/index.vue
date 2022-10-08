@@ -121,7 +121,7 @@ export default {
         tr: 'Otobaza.com - Yedek parçalar burada'
       },
       description: {
-        az: 'Birinci və ikinci əl ehtiyat hissəsini əldə etmək ucun Otobaza saytina daxil ola bilərsiniz',
+        az: 'Birinci və ikinci əl ehtiyat hissesini əldə etmək ucun Otobaza saytina daxil ola bilərsiniz',
         ru: 'Вы можете посетить веб-сайт Autobaza, чтобы купить оригинальные и подержанные запчасти',
         en: 'You can visit Autobaza website to buy first and second hand spare parts',
         tr: 'Birinci ve ikinci el yedek parça satın almak için Autobaza web sitesini ziyaret edebilirsiniz.'

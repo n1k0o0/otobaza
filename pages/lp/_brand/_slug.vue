@@ -110,7 +110,7 @@ export default {
         tr: '{name} Oto yedek parça satışı'
       },
       description: {
-        az: '{name} birinci və ikinci əl ehtiyat hissəsini əldə etmək ucun Otobaza saytina daxil ola bilərsiniz',
+        az: '{name} birinci və ikinci əl ehtiyat hissesini əldə etmək ucun Otobaza saytina daxil ola bilərsiniz',
         ru: '{name} Вы можете посетить веб-сайт Autobaza, чтобы купить оригинальные и подержанные запчасти',
         en: 'You can visit Autobaza website to buy {name} first and second hand spare parts',
         tr: '{name} birinci ve ikinci el yedek parça satın almak için Autobaza web sitesini ziyaret edebilirsiniz.'

@@ -9,7 +9,7 @@
             .mkub.mkubfail
             .rminfo
               h4.rmtt {{ $t('not_found') }}
-              p.rmtxt {{ $t('not_found_info') }}
+              p.rmtxt {{$fetchState.error}}
     template(v-else)
       .container
         .search_wrap.d-flex.flex-column
@@ -86,12 +86,7 @@ export default {
     }
   },
   async validate ({ params, error, app }) {
-    const regex = /^(p)-([0-9]+)-([0-9]+)-([0-9]+)-([a-zA-Z0-9]+)/
-    if (!(regex.test(params.slug))) {
-      return error({ statusCode: 500, message: app.i18n.t('not_found') })
-    } else {
-      return true
-    }
+    return true
   },
   watch: {
     geo: {
