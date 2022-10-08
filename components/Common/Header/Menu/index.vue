@@ -50,6 +50,14 @@
               </div>
 
               <div class="mobile_menu">
+                <a href="https://seller.otobaza.com/#/login" target="_blank">
+                  <button
+                    v-if="!$auth.loggedIn"
+                    class="btn-new login-btn"
+                  >
+                    {{ $t('create_store') }}
+                  </button>
+                </a>
                 <button
                   v-if="!$auth.loggedIn"
                   class="btn-new login-btn"
