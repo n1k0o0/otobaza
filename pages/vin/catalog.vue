@@ -3,9 +3,13 @@
     template(v-if="$fetchState.pending")
       AssembliesPlaceholder
     template(v-else-if="$fetchState.error")
-      .error-message.mt-4
-        i.fa.fa-info-circle
-        span {{$fetchState.error}}
+      .container
+        .mcontainer.mh60vh
+          .response-message
+            .mkub.mkubfail
+            .rminfo
+              h4.rmtt {{ $t('not_found') }}
+              p.rmtxt {{ $t('not_found_info') }}
     template(v-else)
       .container
         .mcontainer.mh60vh
@@ -45,7 +49,7 @@
           .row.cclass-description.mcclass-description
             .col-12.col-sm-12
               keep-alive
-                component(:is="component" :is-search="isSearch" :slug="slug")
+                AssemblyTree
 
 </template>
 <script>
@@ -53,27 +57,23 @@ import AssembliesPlaceholder from '@/components/Placeholders/AssembliesPlacehold
 import AssemblyList from '@/components/Catalog/AssemblyList'
 import AssemblyTree from '@/components/Vin/AssemblyTree'
 import { mapActions, mapGetters } from 'vuex'
-import { getUrlSlug } from '~/utils'
 
 export default {
-  name: 'Assemblies',
+  name: 'VinCatalog',
   components: { AssemblyList, AssemblyTree, AssembliesPlaceholder },
+  watchQuery: true,
+  layout: 'pages',
+  scrollToTop: true,
   props: {
     isSearch: {
       type: Boolean,
       default: false
-    },
-    slug: {
-      type: String,
-      required: true
     }
   },
   async fetch () {
-    const slug = this.slug
-    const data = slug.split('____')
-    const catalog = data[0]
-    const vehicleId = data[1]
-    const ssd = data[2]
+    const catalog = this.$route.query.catalog
+    const vehicleId = this.$route.query.vehicleId
+    const ssd = this.$route.query.ssd
 
     await this.GET_VIN_ASSEMBLIES({ catalog, vehicleId, ssd })
   },
@@ -82,9 +82,11 @@ export default {
       component: 'AssemblyTree'
     }
   },
-  async validate ({ params, error, app }) {
-    const { regex } = getUrlSlug(params.slug, 'car')
-    if (!(regex.test(params.slug))) {
+  async validate ({ query, error, app }) {
+    const catalog = query.catalog ?? false
+    const vehicleId = query.vehicleId ?? false
+    const ssd = query.ssd ?? false
+    if (!catalog || !vehicleId || !ssd) {
       return error({ statusCode: 500, message: app.i18n.t('not_found') })
     } else {
       return true

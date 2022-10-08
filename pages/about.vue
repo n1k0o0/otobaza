@@ -6,8 +6,7 @@
         .rminfo
           h2.rmtt
             | {{ $t('about') }}
-          p.about-txt
-            | {{ $t('about_description') }}
+          p.about-txt(v-html="$t('about_description')")
       .about-section
         .row
           .col-12.col-sm-12.col-md-5.text-center

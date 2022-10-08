@@ -60,11 +60,15 @@ export default {
       })
     },
     async goToCarByVin () {
-      this.ADD_SEARCH_TAB({
-        type: 'vin',
-        name: this.carByVin.name,
-        slug: this.carByVin.catalog + '____' + this.carByVin.vehicleId + '____' + this.carByVin.ssd
+      window.location.href = this.localePath({
+        name: 'vin-catalog',
+        query: {
+          catalog: this.carByVin.catalog,
+          vehicleId: this.carByVin.vehicleId,
+          ssd: this.carByVin.ssd
+        }
       })
+
       this.$emit('selectVin')
     }
   }

@@ -23,9 +23,9 @@
                   template(v-if="product.url.length>1")
                     .before.pointer(@click="previousImage")
                     .after.pointer(@click="nextImage")
-                .product_info_img_slider(v-if="product.url.length")
+                .product_info_img_slider
                   VueSlickCarousel(v-bind="slideShowSettings")
-                    .product_info_img_slider_slide(v-for="(image,index) in product.url")
+                    .product_info_img_slider_slide(v-for="(image,index) in (product.url.length?product.url:['/img/search/big-part.png'])")
                       div(:class="{'selected':imgIndex===index}")
                         img.pointer(:src='image', @click="imgIndex=index", :alt="product.description")
               .product_info_details
@@ -119,7 +119,7 @@ export default {
   },
   data () {
     return {
-      domain: process.env.FRONT_URL,
+      domain: 'otobaza.com',
       settings: {
         dots: false,
         infinite: false,

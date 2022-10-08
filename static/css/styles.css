@@ -1132,8 +1132,8 @@ input:disabled::-ms-input-placeholder {
 }
 
 .slidecontainer {
-  padding-left: 72px;
-  padding-right: 72px;
+  /*padding-left: 72px;*/
+  /*padding-right: 72px;*/
 }
 
 .price-output {
