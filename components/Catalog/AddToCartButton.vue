@@ -53,6 +53,9 @@ export default {
           position: 'top',
           toast: true,
           timer: 5000,
+          customClass: {
+            container: 'swal-80'
+          },
           timerProgressBar: true
         })
       } else {

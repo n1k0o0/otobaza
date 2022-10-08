@@ -4966,6 +4966,10 @@ input:disabled::-ms-input-placeholder {
 }
 
 @media screen and (max-width: 576px) {
+  .swal-80 {
+    width: 80%;
+  }
+
   .footer-bottom .flex {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
