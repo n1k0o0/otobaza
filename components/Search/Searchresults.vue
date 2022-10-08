@@ -9,11 +9,11 @@
           li(v-for="(product,i) in products" :key="i"  @click.prevent="goToPart(product)")
             span {{product.articleNumber}}
             em {{product.mfrName ? product.mfrName+' - ' : ''}}{{product.assemblyGroupName}}
-        template(v-if="carByVin")
+        template(v-else-if="carByVin")
           li(@click.prevent="goToCarByVin()")
             //nuxt-link( :to="localePath('vin-catalog')")
             span {{carByVin.name}}
-        template(v-if="!cars.length && !products.length && !carByVin")
+        template(v-else)
           span.NotFound {{ $t('no_results_found') }}
 </template>
 <script>

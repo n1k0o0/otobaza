@@ -1,11 +1,11 @@
 <template>
-  <div class="ms-content">
+  <div v-if="search_tabs.length" class="ms-content">
     <!--    <PageCatalogLogo-->
     <!--      v-if="search_tabs.length === 0"-->
     <!--      is-search-->
     <!--      @selected="onLogoSelected"-->
     <!--    />-->
-    <template v-if="search_tabs.length">
+    <template>
       <!--      <Manufacturer
         v-if="lastTab.type === 'manufacturer'"
         is-search
