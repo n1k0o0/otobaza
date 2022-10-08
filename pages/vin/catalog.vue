@@ -46,14 +46,6 @@
             .col-12.col-sm-12
               keep-alive
                 component(:is="component" :is-search="isSearch" :slug="slug")
-            .col-12.col-sm-12
-              .step2-ctg-link
-                a(href="#" @click.prevent="component = 'AssemblyList'")
-                  i.fa.fa-list
-                  |  {{ $t('list') }}
-                a.show-ctg(href='#' @click.prevent="component = 'AssemblyTree'")
-                  i.fa.fa-book
-                  |  {{ $t('catalog') }}
 
 </template>
 <script>
