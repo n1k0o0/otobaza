@@ -120,7 +120,7 @@
                       :options="brands"
                       :placeholder="$t('brand')"
                       :reduce="brand => brand.manuId"
-                      :reset-on-options-change="true"
+                      :reset-on-options-change="!!search.brand"
                       @input="GET_MODELS(search)"
                     >
                       <template v-slot:selected-option="option">
@@ -142,7 +142,7 @@
                       :options="models"
                       :placeholder="$t('model')"
                       :reduce="part => part.modId"
-                      :reset-on-options-change="true"
+                      :reset-on-options-change="!!search.model"
                       @input="GET_TYPES(search)"
                     >
                       <template v-slot:selected-option="option">
@@ -165,7 +165,7 @@
                       :options="types"
                       :placeholder="$t('type')"
                       :reduce="part => part.carId"
-                      :reset-on-options-change="true"
+                      :reset-on-options-change="!!search.type"
                     >
                       <template slot="selected-option" slot-scope="option">
                         {{

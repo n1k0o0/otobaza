@@ -17,23 +17,43 @@
             h1.title.hr-text {{$t('home_search.spare-parts')}}
           .filter.row
             .filter_item.col-md-4.col-lg-3.col-xl-3.col-sm-12
-              v-select(v-model='search.sparePart', :loading="loading", label='assemblyGroupName', :options='spareParts', :reduce='part => part.assemblyGroupNodeId', @input='GET_BRANDS(search.sparePart)',:placeholder="$t('home_search.spare-parts')")
+              v-select(v-model='search.sparePart', :loading="loading", label='assemblyGroupName', :options='spareParts', :reduce='part => part.assemblyGroupNodeId', @input="GET_BRANDS(search.sparePart)", :placeholder="$t('home_search.spare-parts')")
+                template(v-slot:selected-option='option')
+                  span(:class='option.icon')
+                  | {{ option.assemblyGroupName.length < 15 ? option.assemblyGroupName : (option.assemblyGroupName.substring(0, 12) + '...') }}
+                template(v-slot:option='option')
+                  span(:class='option.icon')
+                  | {{ option.assemblyGroupName }}
+
             .filter_item.col-md-4.col-lg-3.col-xl-3.col-sm-12
-              v-select(v-model='search.brand', :loading="loading", :disabled='!search.sparePart', label='manuName', :options='brands', :reduce='brand => brand.manuId', @input='GET_MODELS(search)', :placeholder="$t('brand')", :reset-on-options-change="true")
+
+              v-select(v-model='search.brand', :loading="loading", :disabled='!search.sparePart', label='manuName', :options='brands', :reduce='brand => brand.manuId', @input='GET_MODELS(search)', :placeholder="$t('brand')", :reset-on-options-change="!!search.brand")
+                template(v-slot:selected-option='option')
+                  span(:class='option.icon')
+                  | {{ option.manuName.length < 15 ? option.manuName : (option.manuName.substring(0, 12) + '...') }}
+                template(v-slot:option='option')
+                  span(:class='option.icon')
+                  | {{ option.manuName }}
+
             .filter_item.col-md-4.col-lg-3.col-xl-3.col-sm-12
-              v-select(v-model='search.model', :loading="loading", :disabled='!search.brand', label='modelName', :options='models', :reduce='part => part.modId', @input='GET_TYPES(search)', :placeholder="$t('model')", :reset-on-options-change="true")
+              v-select(v-model='search.model', :loading="loading", :disabled='!search.brand', label='modelName', :options='models', :reduce='part => part.modId', @input="GET_TYPES(search)", :placeholder="$t('model')", :reset-on-options-change="!!search.model")
+                template(v-slot:selected-option='option')
+                  span(:class='option.icon')
+                  | {{ option.modelName.length < 15 ? option.modelName : (option.modelName.substring(0, 12) + '...') }}
+                template(v-slot:option='option')
+                  span(:class='option.icon')
+                  | {{ option.modelName }}
+
             .filter_item.col-md-4.col-lg-3.col-xl-2
-              v-select(v-model='search.type', :disabled='!search.model', :loading="loading", :options='types', :reduce='part => part.carId', :placeholder="$t('type')", :reset-on-options-change="true")
+              v-select(v-model='search.type', :disabled='!search.model', :loading="loading", :options='types', :reduce='part => part.carId', :placeholder="$t('type')", :reset-on-options-change="!!search.type")
                 template(slot='selected-option' slot-scope='option')
-                  | {{ option.carName +'('+ option.yearOfConstrFrom + '-'+option.yearOfConstrTo +')' }}
+                  | {{ (option.carName + '(' + option.yearOfConstrFrom + '-' + option.yearOfConstrTo + ')').substring(0, 8) }}...
                 template(slot='option' slot-scope='option')
-                  | {{ option.carName +' ('+ option.yearOfConstrFrom + '-'+option.yearOfConstrTo +')' }}
-            .filter_item.col-md-4.col-lg-3.col-xl-1.w-100
-              button.btn.btn-primary.w-100(@click="GET_SEARCH_PARTS(search)") {{$t('search')}}
-          .vin_search.d-flex.justify-content-center
-            div.w-50.position-relative
-              input.form-control(:placeholder="$t('search_placeholder')")
-              .fa.fa-search.fa-lg.fa-fw
+                  | {{ option.carName + ' (' + option.yearOfConstrFrom + '-' + option.yearOfConstrTo + ')' }}
+
+            .filter_item.col-md-4.col-lg-3.col-xl-1.w-100.h-100
+              button.btn-new(@click="searchMethod", :disabled="!search.model") {{$t('search')}}
+
           .sort_wrap.text-right(v-show="search.sparePart")
             span(@click.prevent="FILTER_PARTS('price')", :class="{'active':search_sort_by==='price'}")
               | {{$t('price')}}
@@ -67,26 +87,17 @@ export default {
   },
   async fetch () {
     const brand = +this.$route.params.brand
-    const catalog = +this.$route.params.catalog
 
-    if (!this.spareParts?.length) {
+    await this.GET_PART_BY_BRAND({ brand })
+
+    const isNotCurrentLang = this.$i18n.locale !== this.search_lang
+    if (!this.spareParts?.length || isNotCurrentLang) {
       await this.GET_SPARE_PARTS()
-    }
-    const sparePartSlugPart = this.spareParts.find(sparePart => sparePart.assemblyGroupNodeId === catalog)
-    if (sparePartSlugPart) {
-      this.search.sparePart = +sparePartSlugPart.assemblyGroupNodeId
-    }
-
-    if (this.search.sparePart && !this.brands?.length) {
-      await this.GET_BRANDS(this.search.sparePart)
-    }
-    const brandSlug = this.brands.find(el => el.manuId === brand)
-    if (brandSlug) {
-      this.search.brand = +brandSlug.manuId
     }
   },
   data () {
     return {
+      loadingResults: false,
       search: {
         sparePart: '',
         model: '',
@@ -125,10 +136,16 @@ export default {
       GET_MODELS: 'Catalog/GET_MODELS',
       GET_TYPES: 'Catalog/GET_TYPES',
       GET_SEARCH_PARTS: 'Catalog/GET_SEARCH_PARTS',
-      FILTER_PARTS: 'Catalog/FILTER_PARTS'
+      FILTER_PARTS: 'Catalog/FILTER_PARTS',
+      GET_PART_BY_BRAND: 'Catalog/GET_PART_BY_BRAND'
     }),
     scrollTop () {
       window.scrollTo({ top: 0, behavior: 'smooth' })
+    },
+    async searchMethod () {
+      this.loadingResults = true
+      await this.GET_SEARCH_PARTS(this.search)
+      this.loadingResults = false
     }
   },
   head () {
@@ -172,7 +189,7 @@ export default {
   }
 
   .sort_wrap {
-    color: #4a8ee9;
+    color: #98A2B3;
 
     span {
       cursor: pointer;
@@ -182,6 +199,10 @@ export default {
       }
 
       margin-right: 10px;
+
+      &.active, &:hover {
+        color: #344054;
+      }
     }
   }
 

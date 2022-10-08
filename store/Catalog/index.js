@@ -615,6 +615,8 @@ const actions = {
   async GET_SPARE_PARTS ({ commit }) {
     commit('SET_LOADING', true)
     commit('SET_SPARE_PARTS', [])
+    commit('SET_BRANDS', [])
+    commit('SET_MODELS', [])
     this.$axios.defaults.baseURL = this.$env.CATALOG_API_URL
     const { data: parts } = await this.$axios.get('api/ehisse')
     commit('SET_SPARE_PARTS', parts)
@@ -624,6 +626,11 @@ const actions = {
   async GET_BRANDS ({ commit }, payload) {
     commit('SET_LOADING', true)
     commit('SET_BRANDS', [])
+    commit('SET_MODELS', [])
+    if (!payload) {
+      commit('SET_LOADING', false)
+      return
+    }
     this.$axios.defaults.baseURL = this.$env.CATALOG_API_URL
     const { data: brands } = await this.$axios.get(`api/ehisse/${payload}`)
     commit('SET_BRANDS', brands)
@@ -632,6 +639,10 @@ const actions = {
   async GET_MODELS ({ commit }, { sparePart, brand }) {
     commit('SET_LOADING', true)
     commit('SET_MODELS', [])
+    if (!brand) {
+      commit('SET_LOADING', false)
+      return
+    }
     this.$axios.defaults.baseURL = this.$env.CATALOG_API_URL
     const { data: models } = await this.$axios.get(`api/ehisse/${sparePart}/${brand}`)
     commit('SET_MODELS', models)
@@ -640,6 +651,10 @@ const actions = {
   async GET_TYPES ({ commit }, { sparePart, brand, model }) {
     commit('SET_LOADING', true)
     commit('SET_TYPES', [])
+    if (!model) {
+      commit('SET_LOADING', false)
+      return
+    }
     this.$axios.defaults.baseURL = this.$env.CATALOG_API_URL
     const { data: types } = await this.$axios.get(`api/ehisse/${sparePart}/${brand}/${model}`)
     commit('SET_TYPES', types)
