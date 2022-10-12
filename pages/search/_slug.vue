@@ -318,12 +318,13 @@ export default {
     margin-top: 20px;
 
     &_info {
-      display: flex;
-      flex-wrap: nowrap;
+      display: grid;
+      grid-template-columns:1fr 1fr;
       justify-content: space-around;
       grid-gap: 10px;
       @media screen and (max-width: 991px) {
-        flex-direction: column;
+        grid-template-columns:1fr;
+
         &_img {
           max-width: 100% !important;
           width: 100% !important;
@@ -343,7 +344,6 @@ export default {
 
       &_img {
         align-self: center;
-        max-width: 45%;
 
         &_big {
           height: 400px;
@@ -363,6 +363,8 @@ export default {
               border-radius: 5px;
               margin: 5px;
               padding: 5px;
+              display: flex;
+              justify-content: center;
             }
           }
         }
