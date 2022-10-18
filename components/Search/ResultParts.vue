@@ -1,7 +1,7 @@
 <template lang="pug">
   .search_results
     .title_wrapper.hr-wrap.my-4
-      h5.hr-text.font-weight-bold {{ $t('result_count',{count:parts.length}) }}
+      h5.hr-text.font-weight-bold {{ $t('result_count',{count:meta.total}) }}
     template(v-if="loading")
       p.search_results_loading {{ $t('loading') }} ...
     template(v-else)
@@ -16,9 +16,11 @@
             img(v-lazy="card.url[0]?card.url[0].link:'/img/search/default-parts.png'", :alt="card.description")
             hr
             div
-              h5 {{card.manufacturer}}
+              h5 {{card.store_name}}
               h5.short_description {{card.part_number}}
-              h6.short_description {{card.description}}
+              h6.short_description
+                strong {{card.manufacturer}} -
+                | {{card.description}}
             div.text-right
               span.font-weight-bold {{card.price.price}} {{card.price.currency_symbol}}
             div
@@ -59,7 +61,8 @@ export default {
       parts: 'Catalog/search_parts',
       search_page: 'Catalog/search_page',
       last_page: 'Catalog/last_page',
-      loadingMore: 'Catalog/loading'
+      loadingMore: 'Catalog/loading',
+      meta: 'Catalog/meta'
     })
   },
   methods: {
@@ -127,6 +130,10 @@ export default {
         white-space: nowrap;
         overflow: hidden;
         color: #98A2B3;
+
+        strong {
+          color: #344054;
+        }
       }
 
       &:hover {

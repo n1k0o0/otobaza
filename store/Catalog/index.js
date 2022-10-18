@@ -71,6 +71,7 @@ const state = () => ({
   search_lang: '',
   search_page: 1,
   last_page: 1,
+  meta: {},
   search_sort_by: 'price',
   search_sort_order: 'desc'
 })
@@ -107,6 +108,7 @@ const getters = {
   search_lang (state) { return state.search_lang },
   search_page (state) { return state.search_page },
   last_page (state) { return state.last_page },
+  meta (state) { return state.meta },
   search_sort_by (state) { return state.search_sort_by },
   search_sort_order (state) { return state.search_sort_order }
 }
@@ -211,6 +213,9 @@ const mutations = {
   },
   SET_LAST_PAGE (state, payload) {
     state.last_page = payload
+  },
+  SET_META (state, payload) {
+    state.meta = payload
   },
   SET_SEARCH_SORT_BY (state, payload) {
     state.search_sort_by = payload
@@ -412,6 +417,7 @@ const actions = {
     })
 
     commit('SET_LAST_PAGE', meta.last_page)
+    commit('SET_META', meta)
 
     if (page > 1) {
       commit('SET_SEARCH_PARTS', [...state.search_parts, ...products])
@@ -439,6 +445,7 @@ const actions = {
     })
 
     commit('SET_LAST_PAGE', meta.last_page)
+    commit('SET_META', meta)
 
     if (page > 1) {
       commit('SET_SEARCH_PARTS', [...state.search_parts, ...products])
@@ -467,6 +474,7 @@ const actions = {
     })
 
     commit('SET_LAST_PAGE', meta.last_page)
+    commit('SET_META', meta)
 
     commit('SET_SEARCH_PARTS', products)
     commit('SET_LOADING', false)
@@ -702,6 +710,7 @@ const actions = {
     })
 
     commit('SET_LAST_PAGE', meta.last_page)
+    commit('SET_META', meta)
 
     if (page) {
       commit('SET_SEARCH_PARTS', [...state.search_parts, ...products])
@@ -729,6 +738,7 @@ const actions = {
     })
 
     commit('SET_LAST_PAGE', meta.last_page)
+    commit('SET_META', meta)
     commit('SET_SEARCH_PARTS', products)
     commit('SET_LOADING', false)
   },
