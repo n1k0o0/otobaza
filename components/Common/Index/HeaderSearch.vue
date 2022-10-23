@@ -1,10 +1,9 @@
 <template>
   <div
     class="main-search"
-    :class="{opened: isSearchVisible}"
   >
     <!-- search tag example -->
-    <div v-if="isSearchVisible && vin" class="SearchTags">
+    <!--    <div v-if="isSearchVisible && vin" class="SearchTags">
       <div class="search-tags">
         <a
           v-for="(tab,index) in search_tabs"
@@ -14,7 +13,7 @@
           <i class="fa fa-close" @click.prevent.self="onRemove(index)"></i>
         </a>
       </div>
-    </div>
+    </div>-->
 
     <div class="ms-relative main-search-input">
       <input
@@ -24,21 +23,22 @@
         :placeholder="vin?$t('home_search.by_vin'):$t('home_search.by_detail_code')"
         type="text"
         @focus="onFocus"
+        @focusout="closeSearch"
         @input="onSearch"
       />
       <i :class="searching ? 'fa fa-spin fa-spinner': 'fa fa-search'"></i>
-      <button
+      <!--      <button
         v-if="isSearchVisible"
         class="search-close-btn"
         type="button"
         @click.prevent="closeSearch"
       >
         <i class="fa fa-close"></i>
-      </button>
+      </button>-->
     </div>
-    <SearchContent v-if="isSearchVisible && !searchTerm" />
+    <!--    <SearchContent v-if="isSearchVisible && !searchTerm" />-->
     <Searchresults v-if="isSearchVisible && searchTerm" @selectVin="selectVin" />
-    <div class="main-search-overlay" @click="closeSearch"></div>
+    <!--    <div class="main-search-overlay" @click="closeSearch"></div>-->
   </div>
 </template>
 <script>
@@ -74,9 +74,9 @@ export default {
         setTimeout(() => {
           this.$refs.searchInput.focus()
         }, 10)
-        document.querySelector('body').classList.add('overflow-hidden')
+        // document.querySelector('body').classList.add('overflow-hidden')
       } else {
-        document.querySelector('body').classList.remove('overflow-hidden')
+        // document.querySelector('body').classList.remove('overflow-hidden')
       }
     }
   },
@@ -116,11 +116,10 @@ export default {
       this.SHOW_SEARCH()
     },
     closeSearch () {
-      if (this.searchTerm) {
+      setTimeout(() => {
         this.searchTerm = ''
-      } else {
         this.TOGGLE_SEARCH()
-      }
+      }, 300)
     },
     selectVin () {
       this.searchTerm = ''
@@ -168,36 +167,38 @@ export default {
   }
 
   &.opened {
-    position: fixed !important;
-    top: 0 !important;
-    bottom: 0;
-    right: 0;
-    left: 0;
+    //position: fixed !important;
+    //top: 0 !important;
+    //bottom: 0;
+    //right: 0;
+    //left: 0;
     z-index: 999;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    padding: 40px 55px;
-    align-items: center;
+    //overflow: hidden;
+    //display: flex;
+    //flex-direction: column;
+    //padding: 40px 55px;
+    //align-items: center;
 
     .SearchTags {
       z-index: 100;
-      max-width: 1110px;
-      width: 100%;
+      //max-width: 1110px;
+      //width: 100%;
     }
 
     .main-search-input {
       z-index: 100;
-      transition: top 0.2s ease-in;
-      max-width: 1110px;
-      width: 100%;
+      //transition: top 0.2s ease-in;
+      //max-width: 1110px;
+      //width: 100%;
     }
 
     .main-search-overlay {
       opacity: 1;
+      visibility: 0.2;
       pointer-events: auto;
     }
 
+    /*
     .ms-content {
       z-index: 100;
       max-width: 1110px;
@@ -207,6 +208,7 @@ export default {
       background: #fff;
       border-radius: 3px;
     }
+    */
   }
 
   &-overlay {
@@ -216,7 +218,7 @@ export default {
     bottom: 0;
     right: 0;
     left: 0;
-    background-color: rgba(77, 166, 255, 0.97);
+    background-color: rgba(77, 166, 255, 0.17);
     z-index: 99;
     overflow: hidden;
     pointer-events: none;

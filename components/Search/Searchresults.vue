@@ -79,6 +79,9 @@ export default {
   padding: 0;
   background: none !important;
   z-index: 1000;
+  position: absolute;
+  width: 100%;
+  border: 1px solid #cbd0d8;
 }
 
 .Searchresults {
