@@ -1080,6 +1080,7 @@ input:disabled::-ms-input-placeholder {
 
 .range-control {
   position: relative;
+  margin: 0 60px;
 }
 
 .rate-price input[type=range] {
@@ -4059,6 +4060,11 @@ input:disabled::-ms-input-placeholder {
 }
 
 @media screen and (max-width: 992px) {
+  .range-control {
+    margin: 0 20px;
+  }
+
+
   .mbw12 {
     -webkit-box-flex: 0;
     -webkit-flex: 0 0 100%;
