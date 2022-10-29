@@ -117,7 +117,6 @@ export default {
     },
     closeSearch () {
       setTimeout(() => {
-        this.searchTerm = ''
         this.TOGGLE_SEARCH()
       }, 300)
     },
