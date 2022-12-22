@@ -5,6 +5,61 @@
       <nuxt :key="$route.fullPath" />
     </transition>
     <Footer />
+
+    <template v-if="isDownload() && showDownload">
+      <div class="download_wrap">
+        <div class="downloadApp">
+          <div class="downloadApp_header">
+            <h4>{{ $t('mobile_app') }}</h4>
+            <span @click="close">
+              <svg
+                fill="none"
+                height="16"
+                viewBox="0 0 16 16"
+                width="16"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M1.25 1.25L8 8M8 8L1.25 14.75M8 8L14.75 14.75M8 8L14.75 1.25"
+                  stroke="white"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                />
+              </svg>
+            </span>
+          </div>
+          <div class="downloadApp_content text-center">
+            <h2>{{ $t('download_app_title') }}</h2>
+            <p class="mb-4">
+              {{ $t('download_app_text') }}
+            </p>
+            <a
+              class="btn-new-light
+            w-100"
+              :href="link"
+            >
+              {{ $t('download_app') }}
+              <svg
+                fill="none"
+                height="14"
+                viewBox="0 0 14 14"
+                width="14"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M1.16699 6.99984H12.8337M12.8337 6.99984L7.00033 1.1665M12.8337 6.99984L7.00033 12.8332"
+                  stroke="#344054"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1.67"
+                />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </template>
   </div>
 </template>
 <script>

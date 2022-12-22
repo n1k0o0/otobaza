@@ -37,6 +37,7 @@
     "querystring": "^0.2.0",
     "sass-loader": "^8.0.2",
     "swiper": "^5.4.0",
+    "ua-parser-js": "^1.0.32",
     "v-click-outside": "^3.0.1",
     "v-mask": "^2.1.0",
     "vee-validate": "^3.3.0",
@@ -51,6 +52,7 @@
     "vue-sweetalert2": "^3.0.5"
   },
   "devDependencies": {
+    "@nuxtjs/device": "2.1.0",
     "@nuxtjs/eslint-config": "3.0.0",
     "babel-eslint": "10",
     "eslint": "^7.3.1",
