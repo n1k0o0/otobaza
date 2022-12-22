@@ -94,7 +94,7 @@ export default {
       setTimeout(() => {
         this.$cookies.set('download-app', '1', {
           path: '/',
-          maxAge: 20
+          maxAge: 60 * 60
         })
       }, 300)
     }
