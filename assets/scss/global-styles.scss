@@ -1528,6 +1528,16 @@ footer {
 
         color: #98A2B3;
       }
+
+      a {
+        span {
+          text-transform: uppercase;
+          font-weight: 600;
+          font-size: 16px;
+          line-height: 24px;
+          color: #D92D20;
+        }
+      }
     }
   }
 }

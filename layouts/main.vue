@@ -40,7 +40,7 @@
             w-100"
               :href="link"
             >
-              {{ $t('download_app') }}
+              <span>{{ $t('free') }}</span> {{ $t('download') }}
               <svg
                 fill="none"
                 height="14"
