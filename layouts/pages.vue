@@ -9,8 +9,9 @@
     <template v-if="isDownload() && showDownload">
       <div class="download_wrap">
         <div class="downloadApp">
+          <img alt="" src="img/mobile.png" />
           <div class="downloadApp_header">
-            <h4>{{ $t('mobile_app') }}</h4>
+            <h6>{{ $t('mobile_app') }}</h6>
             <span @click="close">
               <svg
                 fill="none"
