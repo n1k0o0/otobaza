@@ -8,7 +8,7 @@
           </n-link>
         </div>
 
-        <div class="col-8 col-sm-8 pl-0">
+        <div class="col-8 col-sm-8 pl-0 ms-unset">
           <div class="hbflex">
             <div class="position-relative mr-2">
               <div class="dropdown langdrop">
@@ -50,21 +50,8 @@
               </div>
 
               <div class="mobile_menu">
-                <a href="https://seller.otobaza.com/#/login" target="_blank">
-                  <button
-                    v-if="!$auth.loggedIn"
-                    class="btn-new login-btn"
-                  >
-                    {{ $t('create_store') }}
-                  </button>
-                </a>
-                <button
-                  v-if="!$auth.loggedIn"
-                  class="btn-new login-btn"
-                  @click.prevent="$router.push(localePath({ name: 'registration'}))"
-                >
-                  {{ $t('registration') }}
-                </button>
+                <Register v-if="!$auth.loggedIn" />
+
                 <Login v-if="!$auth.loggedIn" />
 
                 <LoggedIn v-else />
@@ -95,11 +82,12 @@ import CartLink from '@/components/Catalog/CartLink'
 // import Currency from '@/components/Common/Header/Menu/Currency'
 import LoggedIn from '@/components/Common/Header/Menu/LoggedIn'
 import Login from '@/components/Common/Header/Menu/Login'
+import Register from '@/components/Common/Header/Menu/Register'
 import { mapGetters, mapMutations } from 'vuex'
 
 export default {
   name: 'HeaderMenu',
-  components: { CartLink, LoggedIn, Login },
+  components: { CartLink, LoggedIn, Login, Register },
   props: {
     settings: {
       type: Object,

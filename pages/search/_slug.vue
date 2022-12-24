@@ -13,8 +13,13 @@
     template(v-else)
       div
         .container
-          .hr-wrap
-            h1.title.hr-text {{$t('home_search.spare-part')}}
+          ol.breadcrumb-custom
+            li.breadcrumb-item
+              a(href='/') Home
+            li.breadcrumb-item
+              a(href='/search') {{$t('home_search.spare-parts')}}
+            li.breadcrumb-item.active(aria-current='page')
+              | {{product.description}}
           .product
             .product_info
               .product_info_img
@@ -31,54 +36,42 @@
               .product_info_details
                 h1.product_info_details_title.font-weight-bold
                   | {{product.description}}
-                .product_info_details_text
-                  table.table.table-striped
-                    tbody
-                      tr
-                        td {{$t('manufacturer')}}
-                        td {{product.manufacturer}}
-                      tr
-                        td {{$t('manufacturer_code')}}
-                        td {{product.part_number}}
-                      tr
-                        td {{$t('oem')}}
-                        td {{product.oem}}
-                      tr
-                        td {{$t('new_or_used')}}
-                        td {{product.product_type}}
-                      tr
-                        td {{$t('store')}}
-                        td {{product.seller.store_name}}
-                      tr
-                        td {{$t('phone_number')}}
-                        td(v-show="!showPhone" @click="showPhone=true").pointer.phone {{product.seller.phone.slice(0, 9).padEnd(13,'X')}}
-                        td(v-show="showPhone").phone {{product.seller.phone}}
-                      tr
-                        td {{$t('address')}}
-                        td {{product.seller.address}}
-                .product_info_details_actions
-                  .product_info_details_actions_wrapper
-                    .product_info_details_actions_wrapper_price
-                      p.font-weight-bold.p-0.m-0 {{product.price.price}} {{product.price.currency_symbol}}
-                    .product_info_details_actions_wrapper_cart
-                      AddToCartButton(:id="product.id")
-                        | {{$t('add_to_cart')}}
-                    .product_info_details_action_wrapper_order
-                      AddToCartButton(:id="product.id" :order="true")
-                        | {{ $t('do_order') }}
-                    .product_info_details_actions_wrapper_share
-                      ShareNetwork(network="facebook"
-                        :url="domain+this.$route.fullPath",
-                        :title="product.description",
-                        :description="product.description_catalog",
-                        :quote="product.description",
-                        hashtags="otobazacom")
-                        button.btn-new.share
-                          <i class="fa fa-share-alt" aria-hidden="true"></i>
+                .row
+                  .product_info_details_text.col-6
+                    .product_info_details_text_item
+                      .product_info_details_text_item_title {{$t('manufacturer')}}:
+                      .product_info_details_text_item_value {{product.manufacturer}}
+                    .product_info_details_text_item
+                      .product_info_details_text_item_title {{$t('manufacturer_code')}}:
+                      .product_info_details_text_item_value {{product.part_number}}
+                    .product_info_details_text_item
+                      .product_info_details_text_item_title {{$t('oem')}}:
+                      .product_info_details_text_item_value {{product.oem}}
+                    .product_info_details_text_item
+                      .product_info_details_text_item_title {{$t('new_or_used')}}:
+                      .product_info_details_text_item_value {{product.product_type}}
+                    .product_info_details_text_item
+                      .product_info_details_text_item_title {{$t('store')}}:
+                      .product_info_details_text_item_value {{product.seller.store_name}}
+                    .product_info_details_text_item
+                      .product_info_details_text_item_title {{$t('phone_number')}}:
+                      .product_info_details_text_item_value(v-show="!showPhone" @click="showPhone=true").pointer.phone {{product.seller.phone.slice(0, 9).padEnd(13,'X')}}
+                      .product_info_details_text_item_value(v-show="showPhone").phone {{product.seller.phone}}
+                    .product_info_details_text_item
+                      .product_info_details_text_item_title {{$t('address')}}:
+                      .product_info_details_text_item_value {{product.seller.address}}
+                  .product_info_details_price.col-6
+                    p.font-weight-bold.p-0.m-0 {{product.price.price}} {{product.price.currency_symbol}}
+                .product_info_details_actions.row
+                  .product_info_details_actions_wrapper_cart.col-6
+                    AddToCartButton(:id="product.id" :hideIcon="true")
+                      | {{$t('add_to_cart')}}
+                  .product_info_details_action_wrapper_order.col-6
+                    AddToCartButton(:id="product.id" :order="true" :hideIcon="true" theme="dark")
+                      | {{ $t('do_order') }}
             .product_description
-              .hr-wrap
-                h3.hr-text.mb-3.font-weight-bold {{$t('content')}}
-              p {{product.description_catalog}}
+              h3 {{$t('content')}}
+            p {{product.description_catalog}}
           .modal-image.pointer(v-if='modalVisibility' @click="modalVisibility=false")
             .modal-image_wrap
               img(alt='action', :src="product.url[imgIndex]?product.url[imgIndex]:'/img/search/big-part.png'")
@@ -273,10 +266,7 @@ export default {
 
 <style lang="scss" scoped>
 .container {
-  background-color: #fff;
   gap: 15px;
-  margin: 10px auto;
-  padding: 50px 30px;
 
   .hr-wrap {
     display: block;
@@ -349,7 +339,10 @@ export default {
           height: 400px;
           position: relative;
           display: flex;
-
+          justify-content: center;
+          margin-bottom: 24px;
+          border-radius: 16px;
+          background-color: #fff;
         }
 
         &_slider {
@@ -371,13 +364,14 @@ export default {
       }
 
       &_details {
-        padding: 30px 50px;
+        padding-left: 32px;
 
         &_title {
+          font-weight: 500;
           font-size: 30px;
-          padding-bottom: 10px;
-          margin-bottom: 20px;
-          border-bottom: 1px solid #e3e3e3;
+          line-height: 38px;
+          color: #000000;
+          margin-bottom: 32px;
         }
 
         &_text {
@@ -385,36 +379,72 @@ export default {
           .phone {
             color: #98A2B3;
           }
+
+          &_item {
+            margin-bottom: 8px;
+
+            &_title {
+              font-weight: 400;
+              font-size: 14px;
+              line-height: 20px;
+              color: #98A2B3;
+              display: inline-block;
+              margin-right: 4px;
+            }
+
+            &_value {
+              font-weight: 500;
+              font-size: 14px;
+              line-height: 20px;
+              color: #344054;
+              display: inline-block;
+            }
+          }
+
+        }
+
+        &_price {
+          place-content: center;
+          place-items: center;
+          display: flex;
+          font-weight: 400;
+          font-size: 48px;
+          line-height: 60px;
+          letter-spacing: -0.02em;
+          color: #0086C9;
         }
 
         &_actions {
           display: flex;
           justify-content: center;
           align-items: center;
+          margin-top: 37px;
 
-          &_wrapper {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-            align-items: center;
-            border: 1px solid #cbcbcb;
-            padding: 15px;
-            border-radius: 5px;
-
-            &_price {
-              font-size: 20px;
-              color: #ff0000;
-            }
-
-            @media only screen and (max-width: 575px) {
-              flex-direction: column;
-            }
+          @media only screen and (max-width: 575px) {
+            flex-direction: column;
           }
+
+          button {
+            font-weight: 600;
+            font-size: 16px;
+            line-height: 24px;
+            height: 44px;
+            border: 1px solid #0086C9;
+          }
+
         }
       }
     }
 
     &_description {
+      h3 {
+        margin-top: 48px;
+        font-weight: 400;
+        font-size: 20px;
+        line-height: 24px;
+
+        color: #98A2B3;
+      }
     }
   }
 

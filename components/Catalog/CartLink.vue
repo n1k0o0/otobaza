@@ -1,7 +1,7 @@
 <template lang="pug">
   span(@click="cartLink").wishlist-btn
     i
-      img(src="/css/icons/cart.png")
+      img(src="/css/icons/cart.svg")
     sup(v-show="cart.length") {{cart.length}}
 </template>
 <script>
