@@ -4,7 +4,7 @@
       p.search_results_loading {{ $t('loading') }} ...
     template(v-else)
       template(v-if="parts.length")
-        .search_results_items.d-flex.flex-raw.flex-wrap.justify-content-between
+        .search_results_items.d-flex.flex-raw.flex-wrap
           n-link(:to="localePath({\
                       name: 'search-slug',\
                       params: {\
@@ -81,7 +81,7 @@ export default {
 
 .search_results {
   &_items {
-    gap: 12px;
+    gap: 24px;
 
     &_item {
       background-color: #fff;
