@@ -36,8 +36,7 @@
               {{ $t('download_app_text') }}
             </p>
             <a
-              class="btn-new-light
-            w-100"
+              class="btn-new-light w-100"
               :href="link"
             >
               <span>{{ $t('free') }}</span> {{ $t('download') }}
@@ -82,10 +81,11 @@ export default {
     link () {
       if (!this.$device.isMobile) return ''
 
-      return this.$device.isIos ? 'https://play.google.com/store/apps/details?id=com.otobaza.app&hl=az' : 'https://play.google.com/store/apps/details?id=com.otobaza.app&hl=az'
+      return this.$device.isIos ? 'https://apps.apple.com/us/app/facebook/id1528493953' : 'https://play.google.com/store/apps/details?id=com.otobaza.app&hl=az'
     }
   },
   mounted () {
+    console.log(4444, this.$device)
     if (!this.$device.isMobile) return false
 
     if (!this.$cookies.get('download-app')) {

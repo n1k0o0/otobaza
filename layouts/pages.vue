@@ -82,7 +82,7 @@ export default {
     link () {
       if (!this.$device.isMobile) return ''
 
-      return this.$device.isIos ? 'https://play.google.com/store/apps/details?id=com.otobaza.app&hl=az' : 'https://play.google.com/store/apps/details?id=com.otobaza.app&hl=az'
+      return this.$device.isIos ? 'https://apps.apple.com/us/app/facebook/id1528493953' : 'https://play.google.com/store/apps/details?id=com.otobaza.app&hl=az'
     }
   },
   mounted () {
