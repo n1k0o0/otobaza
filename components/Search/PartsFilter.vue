@@ -1,6 +1,6 @@
 <template lang="pug">
   .filter.row
-    .filter_item.col-md-4.col-lg-3.col-xl-2.col-sm-12
+    .filter_item
       v-select(v-model='search.sparePart', :loading="loading", label='assemblyGroupName', :options='spareParts', :reduce='part => part.assemblyGroupNodeId', @input="GET_BRANDS(search.sparePart)", :placeholder="$t('home_search.spare-parts')")
         template(v-slot:selected-option='option')
           span(:class='option.icon')
@@ -9,7 +9,7 @@
           span(:class='option.icon')
           | {{ option.assemblyGroupName }}
 
-    .filter_item.col-md-4.col-lg-3.col-xl-2.col-sm-12
+    .filter_item
       v-select(v-model='search.brand', :loading="loading", :disabled='!search.sparePart', label='manuName', :options='brands', :reduce='brand => brand.manuId', @input='GET_MODELS(search)', :placeholder="$t('brand')", :reset-on-options-change="!!search.brand")
         template(v-slot:selected-option='option')
           span(:class='option.icon')
@@ -18,7 +18,7 @@
           span(:class='option.icon')
           | {{ option.manuName }}
 
-    .filter_item.col-md-4.col-lg-3.col-xl-2.col-sm-12
+    .filter_item
       v-select(v-model='search.model', :loading="loading", :disabled='!search.brand', label='modelName', :options='models', :reduce='part => part.modId', @input="GET_TYPES(search)", :placeholder="$t('model')", :reset-on-options-change="!!search.model")
         template(v-slot:selected-option='option')
           span(:class='option.icon')
@@ -27,22 +27,24 @@
           span(:class='option.icon')
           | {{ option.modelName }}
 
-    .filter_item.col-md-4.col-lg-3.col-xl-2
+    .filter_item
       v-select(v-model='search.type', :disabled='!search.model', :loading="loading", :options='types', :reduce='part => part.carId', :placeholder="$t('type')", :reset-on-options-change="!!search.type")
         template(slot='selected-option' slot-scope='option')
           | {{ (option.carName + '(' + option.yearOfConstrFrom + '-' + option.yearOfConstrTo + ')').substring(0, 8) }}...
         template(slot='option' slot-scope='option')
           | {{ option.carName + ' (' + option.yearOfConstrFrom + '-' + option.yearOfConstrTo + ')' }}
 
-    .filter_item.col-md-4.col-lg-3.col-xl-2.w-100.h-100
+    .filter_item.w-100.h-100
       button.btn-new.w-100(@click="searchMethod", :disabled="!search.model") {{$t('search')}}
-    .filter_item.col-md-4.col-lg-3.col-xl-2.col-sm-12.filter_item_sort.sort_wrap
+    .filter_item.filter_item_sort.sort_wrap
       span(@click.prevent="FILTER_PARTS('price')", :class="{'active':search_sort_by==='price'}")
         | {{$t('price')}}
         img(src="/img/search/sort_arrow.svg")
       span(@click.prevent="FILTER_PARTS('state')", :class="{'active':search_sort_by==='state'}")
         | {{$t('new')}}
         img(src="/img/search/sort_arrow.svg")
+      span
+        | {{ search_parts.length }} {{ $t('product') }}
 
 </template>
 
@@ -108,12 +110,20 @@ export default {
 
 .filter {
   row-gap: 10px;
+  display: grid;
+  grid-gap: 32px;
 
   &_item {
     &_sort {
       display: flex;
       place-content: space-around;
       place-items: center;
+
+      position: absolute;
+      right: 0;
+      top: 104px;
+      padding: 24px;
+      font-size: 14px;
     }
   }
 }
@@ -138,5 +148,23 @@ export default {
 
 .btn-new {
   height: 44px;
+}
+
+@media screen and (min-width: 768px) {
+  .filter {
+    grid-template-columns: repeat(3, minmax(150px, 1fr));
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .filter {
+    grid-template-columns: repeat(4, minmax(150px, 1fr));
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .filter {
+    grid-template-columns: repeat(5, minmax(150px, 1fr));
+  }
 }
 </style>

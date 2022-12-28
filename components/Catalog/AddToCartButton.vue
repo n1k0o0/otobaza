@@ -1,6 +1,6 @@
 <template lang="pug">
   button(type='button' :disabled="loading" @click.prevent="addToCart" :class="{'btn-new': theme==='dark','btn-new-light':theme==='light'}" ).px-2.py-1.position-relative.w-100
-    span.pl-2
+    span.pl-2(v-if="$slots.default")
       slot
     i(v-if="!hideIcon")
       svg(width='21', height='20', viewBox='0 0 21 20', fill='none', xmlns='http://www.w3.org/2000/svg')

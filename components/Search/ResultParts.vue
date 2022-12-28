@@ -4,7 +4,7 @@
       p.search_results_loading {{ $t('loading') }} ...
     template(v-else)
       template(v-if="parts.length")
-        .search_results_items.d-flex.flex-raw.flex-wrap
+        .search_results_items
           n-link(:to="localePath({\
                       name: 'search-slug',\
                       params: {\
@@ -12,7 +12,8 @@
                       }\
                       })").search_results_items_item(v-for="(card,index) in parts", :key="index")
             img(v-lazy="card.url[0]?card.url[0].link:'/img/search/default-parts.png'", :alt="card.description")
-            hr
+            .search_results_items_item_price
+              span.font-weight-bold {{card.price.price}} {{card.price.currency_symbol}}
             div
               p.search_results_items_item_store {{card.store_name}}
               p.search_results_items_item_store {{card.part_number}}
@@ -20,11 +21,9 @@
                 | {{card.description}}
               p.search_results_items_item_store
                 | {{card.manufacturer}}
-            .search_results_items_item_price
-              span.font-weight-bold {{card.price.price}} {{card.price.currency_symbol}}
-            div
+
+            div.search_results_items_item_button_cart
               AddToCartButton(:id="card.id")
-                | {{$t('add_to_cart')}}
 
         .search_results_more(v-show="search_page!==last_page" )
           button.btn-new.px-4.py-2(@click="GET_SEARCH_PARTS({...search,page:true})", :disabled="loadingMore") {{ loadingMore?$t('loading'): $t('more_products')}}
@@ -81,20 +80,22 @@ export default {
 
 .search_results {
   &_items {
-    gap: 24px;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(150px, 1fr));
+    gap: 14px;
+    justify-content: space-between;
 
     &_item {
+      position: relative;
       background-color: #fff;
       border: 1px solid #EAECF0;
       border-radius: 16px;
       padding: 16px;
-      width: 220px;
       display: flex;
       flex-direction: column;
       justify-content: space-around;
       color: #344054;
       @media screen and (max-width: 480px) {
-        width: 48%;
         padding: 10px;
         h5 {
           font-size: 1rem;
@@ -102,9 +103,6 @@ export default {
         h6 {
           font-size: 0.725rem;
         }
-      }
-      @media screen and (max-width: 329px) {
-        width: 47%;
       }
 
       p {
@@ -114,7 +112,7 @@ export default {
       img {
         width: 130px;
         height: 130px;
-        margin: auto;
+        margin: 0 auto;
       }
 
       button {
@@ -123,11 +121,13 @@ export default {
 
       .short_description {
         text-overflow: ellipsis;
-        white-space: nowrap;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        display: -webkit-box;
         overflow: hidden;
         font-weight: 400;
-        font-size: 20px;
-        line-height: 30px;
+        font-size: 14px;
+        line-height: 20px;
 
         color: #344054;
       }
@@ -144,7 +144,13 @@ export default {
         font-size: 24px;
         line-height: 32px;
         color: #0086C9;
-        margin: 16px 0;
+        margin: 8px 0;
+      }
+
+      &_button_cart {
+        position: absolute;
+        right: 0;
+        top: 8px;
       }
 
       &:hover {
@@ -196,10 +202,31 @@ export default {
 
 @media screen and (min-width: 768px) {
   .search_results {
+    &_items {
+      grid-template-columns: repeat(3, minmax(150px, 1fr));
+    }
+
     &_not-found {
       font-size: 20px;
       padding-left: 75px;
     }
   }
 }
+
+@media screen and (min-width: 992px) {
+  .search_results {
+    &_items {
+      grid-template-columns: repeat(4, minmax(150px, 1fr));
+    }
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .search_results {
+    &_items {
+      grid-template-columns: repeat(5, minmax(150px, 1fr));
+    }
+  }
+}
+
 </style>

@@ -410,6 +410,7 @@ export default {
           color: #2C5573;
           width: 100%;
           text-align: center;
+          border-radius: 8px;
         }
       }
     }

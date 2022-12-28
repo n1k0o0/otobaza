@@ -183,7 +183,7 @@ body {
   display: -ms-grid;
   display: grid;
   justify-items: center;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-template-columns: repeat(2, minmax(150px, 1fr));
 
   -webkit-box-pack: center;
   -webkit-justify-content: center;
@@ -254,7 +254,7 @@ body {
 }
 
 .fnavitem a:hover {
-  color: #E05353;
+  color: #98A2B3;
 }
 
 .header-top {
@@ -370,14 +370,6 @@ body {
   color: #FFFFFF;
   width: 96px;
   height: 40px;
-}
-
-.login-btn:hover {
-  color: #fff;
-  background-color: #3A7299;
-  -webkit-transition: all .4s ease;
-  -o-transition: all .4s ease;
-  transition: all .4s ease;
 }
 
 .login-btn:after {
@@ -502,7 +494,7 @@ body {
 }
 
 .droplogin .overlay {
-  position: absolute;
+  position: fixed;
   left: 0;
   top: 0;
   width: 100%;
@@ -521,6 +513,7 @@ body {
   border-radius: 24px;
   -webkit-box-shadow: 0px 4px 14px -5px #b0b0b0;
   box-shadow: 0px 4px 14px -5px #b0b0b0;
+  position: fixed;
 }
 
 .login-form {
@@ -686,7 +679,6 @@ body {
 .drop_register .dropdown-menu .log-items {
   display: flex;
   padding: 16px 24px;
-  gap: 80px;
   text-align: center;
 }
 
@@ -698,10 +690,23 @@ body {
   padding: 32px 64px;
   cursor: pointer;
   transition: background-color .3s linear;
+  background-color: #fff;
 }
 
-.drop_register .image_wrap:hover {
-  background-color: #0086C9;
+.drop_register .register_store, .drop_register .register_user {
+  padding: 20px;
+}
+
+.drop_register .register_store:hover {
+  transition: background .3s linear;
+  background: radial-gradient(51.82% 59.17% at 30.91% 80.86%, #AFDEFF 0%, #FFFFFF 100%);
+  border-radius: 0px 0px 24px 10px;
+}
+
+.drop_register .register_user:hover {
+  transition: background .3s linear;
+  background: radial-gradient(54.96% 62.05% at 70.4% 79.49%, #AFDEFF 0%, #FFFFFF 100%);
+  border-radius: 0px 0px 24px 10px;
 }
 
 .drop_register .log-items h3 {
@@ -4166,9 +4171,6 @@ input:disabled::-ms-input-placeholder {
     display: block;
   }
 
-  .header-menu {
-    padding-top: 20px;
-  }
 
   .flogo, .flogo img {
     width: 132px;
@@ -6123,8 +6125,15 @@ img {
 }
 
 .btn-new:hover {
-  background-color: #3a7eae;
-  border: 1px solid #498EBF;
+  background-color: #026AA2;
+  border: 1px solid #026AA2;
+}
+
+.btn-new:disabled {
+  background: #B9E6FE;
+  border: 1px solid #B9E6FE;
+  box-shadow: 0 1px 2px rgba(16, 24, 40, 0.05);
+  color: #FFFFFF;
 }
 
 .btn-new-light {
@@ -6141,11 +6150,15 @@ img {
   border: 1px solid #EFF8FF;
   box-shadow: 0 1px 2px rgba(16, 24, 40, 0.05);
   border-radius: 8px;
-  background: #EFF8FF;
+  background: #F0F9FF;
 }
 
 .btn-new-light:disabled {
   cursor: not-allowed;
+  background: #F5FBFF;
+  border: 1px solid #F5FBFF;
+  box-shadow: 0 1px 2px rgba(16, 24, 40, 0.05);
+  color: #7CD4FD;
 }
 
 .btn-new-light:disabled:hover {
@@ -6154,13 +6167,12 @@ img {
 }
 
 .btn-new-light:hover {
-  background-color: #3A7299;
-  color: #fff;
-  border: 1px solid #3A7299;
+  background-color: #E0F2FE;
+  border: 1px solid #E0F2FE;
 }
 
 .btn-new-light:hover svg path {
-  stroke: #EFF8FF;
+  /*stroke: #EFF8FF;*/
 }
 
 .bg-new-light {
