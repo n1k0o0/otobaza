@@ -16,7 +16,7 @@
                   id="droplang"
                   aria-expanded="false"
                   aria-haspopup="true"
-                  class="btn dropdown-toggle"
+                  class="btn dropdown-toggle lang_btn"
                   data-toggle="dropdown"
                   type="button"
                 >
