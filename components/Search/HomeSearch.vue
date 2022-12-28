@@ -525,6 +525,8 @@ export default {
       letter-spacing: 0em;
       text-align: left;
       color: #344054;
+      padding: 0 8px;
+      border-bottom: 2px solid #0BA5EC;
     }
   }
 
