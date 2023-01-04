@@ -507,7 +507,7 @@ button.lang_btn:focus {
   z-index: 9;
 }
 
-.droplogin .dropdown-menu {
+.droplogin .dropdown-menu, .dropotp .dropdown-menu {
   min-width: 310px;
   left: 50% !important;
   top: 50% !important;
@@ -680,7 +680,7 @@ button.lang_btn:focus {
   margin-left: 4px;
 }
 
-.drop_register .dropdown-menu .log-items {
+.drop_register .dropdown-menu .log-items:not(.user_register) {
   display: flex;
   padding: 16px 24px;
   text-align: center;
@@ -2620,7 +2620,8 @@ input:disabled::-ms-input-placeholder {
 }
 
 .modal-backdrop {
-  background-color: #344054;
+  backdrop-filter: blur(6px);
+  background: transparent;
 }
 
 .modal-backdrop.show {
@@ -4002,6 +4003,16 @@ input:disabled::-ms-input-placeholder {
   display: none;
 }
 
+#verificationModal form {
+  display: grid;
+  grid-gap: 4px;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+#verificationModal form .submit {
+  grid-column: 1/-1;
+}
+
 #verificationModal .modal-dialog {
   margin-top: 180px;
 }
@@ -4046,9 +4057,22 @@ input:disabled::-ms-input-placeholder {
   background-color: #FDFDFD;
   font: 12px "Roboto-Regular";
   color: #000;
-  height: 35px;
+  height: 45px;
   margin-top: 26px;
   margin-bottom: 20px;
+  width: 75px;
+  font-size: 48px;
+}
+
+#verificationModal input::-webkit-outer-spin-button,
+#verificationModal input::-webkit-inner-spin-button {
+  /* display: none; <- Crashes Chrome on hover */
+  -webkit-appearance: none;
+  margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+#verificationModal input[type=number] {
+  -moz-appearance: textfield; /* Firefox */
 }
 
 .registration-form .contact-btn:focus {

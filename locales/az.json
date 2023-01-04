@@ -102,7 +102,7 @@
     }
   },
   "verification_txt": "Sonu {code} ilə bitən nömrəyə sms göndərilmişdir.",
-  "enter_verification": "Verifikasiya kodunu daxil edin",
+  "enter_verification": "Verifikasiya kodunu",
   "verificationSmsNotReceived": "SMS hələ də almamısınız?",
   "resend_otp": "Yenidən göndər",
   "for_resend_please_wait": "Yenidən göndərmək üçün {time} saniyə gözləyin.",

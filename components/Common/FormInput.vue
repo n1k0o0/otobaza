@@ -4,7 +4,7 @@
       | {{ $attrs.label }}
       |
       span.text-danger(v-if='isRequired') *
-    input.form-control(v-bind='$attrs', :class="{'is-invalid': invalid, 'is-valid': !invalid && value && isRequired}", :type='type', :value='value', @input="$emit('input',$event.target.value)")
+    input.form-control(v-bind='$attrs', :maxlength="limit", :class="{'is-invalid': invalid, 'is-valid': !invalid && value && isRequired}", :type='type', :value='value', @input="$emit('input',$event.target.value)")
     slot
 </template>
 <script>
@@ -26,6 +26,10 @@ export default {
     isRequired: {
       type: Boolean,
       default: false
+    },
+    limit: {
+      type: Number,
+      default: null
     }
   }
 }

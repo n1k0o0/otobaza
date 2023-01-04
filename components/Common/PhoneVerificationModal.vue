@@ -1,4 +1,3 @@
-import Swal from "sweetalert2"
 <template>
   <div
     tabindex="0"
@@ -8,71 +7,136 @@ import Swal from "sweetalert2"
       id="verificationModal"
       :aria-hidden="!isOpened"
       aria-labelledby="verificationModalLabel"
-      class="modal fade"
+      class="modal fade dropotp"
       :class="{'show': isOpened}"
       role="dialog"
       style="display:block"
       tabindex="-1"
     >
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 id="verificationModalLabel" class="modal-title">
-              {{ $t('enter_verification') }}
-            </h5>
-            <button
-              aria-label="Close"
-              class="close"
-              data-dismiss="modal"
-              type="button"
-              @click.prevent="closeModal"
+      <div class="dropdown-menu show">
+        <div class="log-items-header">
+          <h3 class="d-inline-block">
+            {{ $t('enter_verification') }}
+          </h3>
+
+          <div class=" float-right">
+            <svg
+              fill="none"
+              height="24"
+              viewBox="0 0 24 24"
+              width="24"
+              xmlns="http://www.w3.org/2000/svg"
+              @click="closeModal"
             >
-              <span aria-hidden="true">&times;</span>
-            </button>
+              <path
+                d="M5.25 5.25L12 12M12 12L5.25 18.75M12 12L18.75 18.75M12 12L18.75 5.25"
+                stroke="#98A2B3"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+              />
+            </svg>
           </div>
-          <div class="modal-body">
+        </div>
+        <hr class="m-0" />
+
+        <div class="log-items user_register">
+          <div class="login-form">
+            <h3 class="text-center">
+              OTP
+            </h3>
             <div class="verification-txt">
-              {{ $t('verification_txt', {code: phoneNumber}) }}
+              {{ $t('verification_txt', { code: phoneNumber }) }}
             </div>
+            <div v-if="!showTimer" class="no-receive">
+              {{ $t('verificationSmsNotReceived') }}? <a href="#" @click.prevent="resendOtp">{{ $t('resend_otp') }}.</a>
+            </div>
+            <div v-else class="no-receive">
+              <CountDownTimer
+                v-if="showTimer"
+                :show.sync="showTimer"
+                :time-limit="timerLimit"
+              >
+                <template slot-scope="{ time }">
+                  {{ $t('for_resend_please_wait', { time }) }}
+                </template>
+              </CountDownTimer>
+            </div>
+
             <ClientOnly>
               <ValidationObserver
                 v-slot="{ invalid,handleSubmit }"
                 tag="div"
               >
-                <form @submit.prevent="handleSubmit(sendOtp)">
+                <form class="mt-4" @submit.prevent="handleSubmit(sendOtp)">
                   <ValidationProvider
                     v-slot="{errors}"
-                    name="otp"
+                    name="otp1"
                     rules="required|otp"
                   >
                     <FormInput
                       id="otp"
-                      v-model="otp"
+                      v-model="otpParts.first"
                       :invalid="!!errors[0]"
-                      :placeholder="$t('enter_verification')"
+                      :limit="1"
+                      placeholder="0"
                       title
-                      type="number"
                     >
                       <span class="invalid-feedback">{{ errors[0] }}</span>
                     </FormInput>
                   </ValidationProvider>
-                  <div v-if="!showTimer" class="no-receive">
-                    {{ $t('verificationSmsNotReceived') }}? <a href="#" @click.prevent="resendOtp">{{ $t('resend_otp') }}.</a>
-                  </div>
-                  <div v-else class="no-receive">
-                    <CountDownTimer
-                      v-if="showTimer"
-                      :show.sync="showTimer"
-                      :time-limit="timerLimit"
+                  <ValidationProvider
+                    v-slot="{errors}"
+                    name="otp2"
+                    rules="required|otp"
+                  >
+                    <FormInput
+                      id="otp"
+                      v-model="otpParts.second"
+                      :invalid="!!errors[0]"
+                      :limit="1"
+                      placeholder="0"
+                      title
                     >
-                      <template slot-scope="{ time }">
-                        {{ $t('for_resend_please_wait', {time}) }}
-                      </template>
-                    </CountDownTimer>
-                  </div>
-                  <div class="text-center">
+                      <span class="invalid-feedback">{{ errors[0] }}</span>
+                    </FormInput>
+                  </ValidationProvider>
+                  <ValidationProvider
+                    v-slot="{errors}"
+                    name="otp3"
+                    rules="required|otp"
+                  >
+                    <FormInput
+                      id="otp"
+                      v-model="otpParts.third"
+                      :invalid="!!errors[0]"
+                      :limit="1"
+                      placeholder="0"
+                      title
+                    >
+                      <span class="invalid-feedback">{{ errors[0] }}</span>
+                    </FormInput>
+                  </ValidationProvider>
+                  <ValidationProvider
+                    v-slot="{errors}"
+                    name="otp4"
+                    rules="required|otp"
+                  >
+                    <FormInput
+                      id="otp"
+                      v-model="otpParts.fourth"
+                      :invalid="!!errors[0]"
+                      :limit="1"
+                      placeholder="0"
+                      title
+                    >
+                      <span class="invalid-feedback">{{ errors[0] }}</span>
+                    </FormInput>
+                  </ValidationProvider>
+
+                  <div class="text-center submit">
                     <button
-                      class="verification-sign"
+                      class="btn-new w-100 mt-4"
                       :disabled="invalid"
                       type="submit"
                     >
@@ -93,7 +157,8 @@ import Swal from "sweetalert2"
 import FormInput from '@/components/Common/FormInput'
 import CountDownTimer from '@/components/CountDownTimer'
 
-import { mapMutations, mapActions } from 'vuex'
+import { mapActions, mapMutations } from 'vuex'
+
 export default {
   name: 'PhoneVerificationModal',
   components: { CountDownTimer, FormInput },
@@ -115,14 +180,22 @@ export default {
     return {
       showTimer: false,
       timerLimit: 120,
-      otp: '',
-      loading: false
+      loading: false,
+      otpParts: {
+        first: '',
+        second: '',
+        third: '',
+        fourth: ''
+      }
     }
   },
   computed: {
     phoneNumber () {
       const str = this.phone
       return str.replace(str.substring(0, 9), '***')
+    },
+    otp () {
+      return (Object.values(this.otpParts)).join('')
     }
   },
   watch: {
