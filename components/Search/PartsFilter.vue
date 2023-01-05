@@ -1,5 +1,5 @@
 <template lang="pug">
-  .filter.row
+  .filter
     .filter_item
       v-select(v-model='search.sparePart', :loading="loading", label='assemblyGroupName', :options='spareParts', :reduce='part => part.assemblyGroupNodeId', @input="GET_BRANDS(search.sparePart)", :placeholder="$t('home_search.spare-parts')")
         template(v-slot:selected-option='option')
@@ -95,7 +95,10 @@ export default {
       FILTER_PARTS: 'Catalog/FILTER_PARTS'
     }),
     scrollTop () {
-      window.scrollTo({ top: 0, behavior: 'smooth' })
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      })
     },
     async searchMethod () {
       this.loadingResults = true

@@ -23,7 +23,7 @@
         .buy_flex
           p.buy_p_name {{ $t('sum') }}:
           span.buy-p-name {{totalSum}} {{order.price.currency}}
-    button.btn.contact-btn.buy-now-btn(type='submit' :disabled='loading')
+    button.btn.contact-btn.buy-now-btn.btn-new(type='submit' :disabled='loading')
       i.fa.fa-spinner.fa-spin(v-if='loading')
       span {{ $t('do_order') }}
 </template>

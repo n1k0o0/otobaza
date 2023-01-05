@@ -34,7 +34,7 @@
 }
 
 .buy-now-details {
-  border: 1px solid #344054;
+  border: 1px solid #98A2B3;
   min-height: 276px;
   border-radius: 3px;
   margin-top: 72px;
@@ -66,7 +66,7 @@
 }
 
 .buy-p-name {
-  color: #000;
+  color: #344054;
   font-size: 13px;
   font-weight: 600;
 }
@@ -394,26 +394,19 @@ a.p_code:hover {
 .quantity__minus,
 .quantity__plus {
   display: block;
-  width: 22px;
-  height: 30px;
+  width: 20px;
+  height: 20px;
   margin: 0;
-  background: #344054;
+  background: #F9FAFB;
   text-decoration: none;
   text-align: center;
   line-height: 31px;
-}
-
-.quantity__minus {
-  border-radius: 3px 0 0 3px;
-}
-
-.quantity__plus {
-  border-radius: 0 3px 3px 0;
+  border-radius: 16px;
 }
 
 .quantity__minus span, .quantity__plus span {
   position: relative;
-  top: -2px;
+  top: -6px;
 }
 
 .quantity__input {
@@ -422,16 +415,17 @@ a.p_code:hover {
   margin: 0;
   padding: 0;
   text-align: center;
-  border: 2px solid #344054;
   background: #fff;
-  color: #344054;
-  font: 12px "Roboto-Bold";
-  padding-top: 2px;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  border: none;
+  color: #0086C9;
 }
 
 .quantity__minus:link,
 .quantity__plus:link {
-  color: #fff;
+  color: #98A2B3;
 }
 
 .quantity__minus:visited,
@@ -921,11 +915,6 @@ footer {
   margin-bottom: 0;
 }
 
-.cart_fix_table tr td:nth-child(2) {
-  width: 240px;
-  padding-left: 24px;
-  padding-right: 20px;
-}
 
 .cart_fix_table tr td:nth-child(3) {
   width: 100px;
@@ -1026,9 +1015,6 @@ footer {
     margin-left: 8px;
     margin-right: 8px;
   }
-  .cart_fix_table tr td:first-child {
-    width: 150px;
-  }
   .fixes_details tr td:first-child {
     width: 132px;
   }
@@ -1122,19 +1108,13 @@ footer {
   .Dismantle .car_details_item tr td:last-child {
     padding-right: 16px;
   }
-  .cart_fix_table tr td:nth-child(2) {
+  .cart_fix_table tr td {
     padding-left: 15px;
     padding-right: 15px;
   }
   .cart_fix_table .cart-buy {
     margin-left: 0;
     margin-right: 0;
-  }
-  .cart_fix_table tr td:nth-child(3), .cart_fix_table tr td:nth-child(4) {
-    padding-right: 15px;
-  }
-  .cart_fix_table tr td:nth-child(5) {
-    padding-right: 15px;
   }
   .fixes_details .car-add-sale {
     min-width: 100px;
@@ -1580,4 +1560,16 @@ footer {
   padding-right: 0.5rem;
   color: #6c757d;
   content: ">";
+}
+
+.cart {
+  &-header {
+    h2 {
+      font-weight: 500;
+      font-size: 36px;
+      line-height: 44px;
+      letter-spacing: -0.02em;
+      color: #0086C9;
+    }
+  }
 }
