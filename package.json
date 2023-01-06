@@ -2,7 +2,7 @@
   "name": "otobaza",
   "version": "1.0.0",
   "private": true,
-  "author": "Chingiz Mammadov",
+  "author": "N1ko",
   "scripts": {
     "analyze": "nuxt build --analyze",
     "build": "nuxt build",
@@ -49,7 +49,8 @@
     "vue-slick-carousel": "^1.0.6",
     "vue-social-sharing": "^3.0.9",
     "vue-svg-loader": "0.16.0",
-    "vue-sweetalert2": "^3.0.5"
+    "vue-sweetalert2": "^3.0.5",
+    "vue2-google-maps": "^0.10.7"
   },
   "devDependencies": {
     "@nuxtjs/device": "2.1.0",

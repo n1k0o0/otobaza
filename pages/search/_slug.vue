@@ -57,9 +57,7 @@
                       .product_info_details_text_item_title {{$t('phone_number')}}:
                       .product_info_details_text_item_value(v-show="!showPhone" @click="showPhone=true").pointer.phone {{product.seller.phone.slice(0, 9).padEnd(13,'X')}}
                       .product_info_details_text_item_value(v-show="showPhone").phone {{product.seller.phone}}
-                    .product_info_details_text_item
-                      .product_info_details_text_item_title {{$t('address')}}:
-                      .product_info_details_text_item_value {{product.seller.address}}
+
                   .product_info_details_price.col-6
                     p.font-weight-bold.p-0.m-0 {{product.price.price}} {{product.price.currency_symbol}}
                 .product_info_details_actions.row
@@ -69,6 +67,13 @@
                   .product_info_details_action_wrapper_order.col-6
                     AddToCartButton(:id="product.id" :order="true" :hideIcon="true" theme="dark")
                       | {{ $t('do_order') }}
+                .product_info_address.mt-4
+                  .product_info_details_text_item
+                    .product_info_details_text_item_title {{$t('address')}}:
+                    .product_info_details_text_item_value {{product.seller.address}}
+                  template(v-if="product.seller.lat && product.seller.lng")
+                    GmapMap(:center='{ lat: +product.seller.lat, lng: +product.seller.lng }', :zoom='18', style='width:100%;  height: 150px;')
+                      GmapMarker(:position='{ lat: +product.seller.lat, lng: +product.seller.lng }')
             .product_description
               h3 {{$t('content')}}
             p {{product.description_catalog}}
