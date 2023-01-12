@@ -4,49 +4,13 @@
       <div class="search_menu">
         <swiper class="swiper" :options="swiperOption">
           <swiper-slide>
-            <h5 class="active_menu pointer" @click="showFilter(1)">
-              {{ $t('home_search.spare-parts') }}
-            </h5>
-          </swiper-slide>
-          <swiper-slide>
-            <h5 class="pointer disabled" @click="showFilter(2)">
-              {{ $t('home_search.accessory') }}
-            </h5>
-          </swiper-slide>
-          <swiper-slide>
             <h5 class="pointer disabled" @click="showFilter(3)">
               {{ $t('home_search.used') }}
             </h5>
           </swiper-slide>
           <swiper-slide>
-            <h5 class="pointer disabled" @click="showFilter(3)">
-              {{ $t('home_search.gasoline') }}
-            </h5>
-          </swiper-slide>
-
-          <swiper-slide>
-            <h5 class="pointer disabled" @click="showFilter(3)">
-              {{ $t('home_search.wheel') }}
-            </h5>
-          </swiper-slide>
-          <swiper-slide>
-            <h5 class="pointer disabled" @click="showFilter(3)">
-              {{ $t('home_search.battery') }}
-            </h5>
-          </swiper-slide>
-          <swiper-slide>
-            <h5 class="pointer disabled" @click="showFilter(3)">
-              {{ $t('home_search.windscreen') }}
-            </h5>
-          </swiper-slide>
-          <swiper-slide>
-            <h5 class="pointer disabled" @click="showFilter(3)">
-              {{ $t('home_search.radio') }}
-            </h5>
-          </swiper-slide>
-          <swiper-slide>
-            <h5 class="pointer disabled" @click="showFilter(3)">
-              {{ $t('home_search.auto-cosmetics') }}
+            <h5 class="active_menu pointer" @click="showFilter(1)">
+              {{ $t('home_search.spare-parts') }}
             </h5>
           </swiper-slide>
         </swiper>
@@ -499,7 +463,6 @@ export default {
   }
 
   .search_menu {
-    width: 100%;
     margin: 15px 30px;
     border-radius: 5px;
     overflow: hidden;
