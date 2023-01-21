@@ -329,7 +329,7 @@
     "spare-parts": "Ehtiyyat hissələri",
     "spare-part": "Ehtiyat hissə",
     "accessory": "Aksessuar",
-    "used": "Ölüxana",
+    "used": "Elan",
     "gasoline": "Yağ",
     "wheel": "Təkər/Disk",
     "battery": "Akkumlyator",
@@ -359,5 +359,11 @@
   "store_question": "Mağazanız var?",
   "store_answer": "O zaman saytımızda mağaza kimi qeydiyyatdan keçərək məhsullarınızı yükləyib geniş alıcı kütlələrini əldə edə bilərsiniz.",
   "question_question": "Sualınız var?",
-  "question_answer": "O zaman saytda mövcud olan canlı ÇAT-dan istifadə edə bilərsiniz."
+  "question_answer": "O zaman saytda mövcud olan canlı ÇAT-dan istifadə edə bilərsiniz.",
+  "add_to_favorite": "Seçilmişlərə əlavə et!",
+  "remove_from_favorite": "Seçilmişlərdən sil!",
+  "added_to_favorite": "Seçilmişlərə əlavə olundu!",
+  "failed_to_add_favorite": "Seçilmişlərə əlavə olunmadı!",
+  "removed_from_favorite": "Seçilmişlərdən silindi!",
+  "make_call": "Zəng et"
 }
