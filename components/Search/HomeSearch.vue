@@ -346,6 +346,7 @@ export default {
   },
   async fetch () {
     await this.GET_SPARE_PARTS()
+    await this.GET_CATALOG_MANUFACTURERS({ type: 'default' })
   },
   data () {
     return {
