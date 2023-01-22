@@ -325,6 +325,100 @@
         </div>
       </transition>
     </div>
+
+    <div class="mobile_add">
+      <img alt="" src="/img/banana/mobile.png" />
+    </div>
+
+    <div class="ad_wrapper ad_special">
+      <div class="ad_header">
+        <h2 class="">
+          {{ $t('used.special') }}
+        </h2>
+        <span @click="$router.push(localePath({ name: 'oluxana'}));">
+          {{ $t('see_all') }}
+          <svg
+            fill="none"
+            height="16"
+            viewBox="0 0 16 16"
+            width="16"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M3.3335 8.00001H12.6668M12.6668 8.00001L8.00016 3.33334M12.6668 8.00001L8.00016 12.6667"
+              stroke="#667085"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </span>
+      </div>
+      <swiper class="swiper" :options="swiperOptionAd">
+        <swiper-slide v-for="ad in ad_special">
+          <UsedPart :card="ad" />
+        </swiper-slide>
+      </swiper>
+    </div>
+
+    <div class="ad_wrapper">
+      <div class="ad_header">
+        <h2 class="">
+          {{ $t('used.vip') }}
+        </h2>
+        <span @click="$router.push(localePath({ name: 'oluxana'}));">
+          {{ $t('see_all') }}
+          <svg
+            fill="none"
+            height="16"
+            viewBox="0 0 16 16"
+            width="16"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M3.3335 8.00001H12.6668M12.6668 8.00001L8.00016 3.33334M12.6668 8.00001L8.00016 12.6667"
+              stroke="#667085"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </span>
+      </div>
+      <swiper class="swiper" :options="swiperOptionAd">
+        <swiper-slide v-for="ad in ad_special">
+          <UsedPart :card="ad" />
+        </swiper-slide>
+      </swiper>
+    </div>
+
+    <div class="ad_wrapper">
+      <div class="ad_header">
+        <h2 class="">
+          {{ $t('used.last') }}
+        </h2>
+        <span @click="$router.push(localePath({ name: 'oluxana'}));">
+          {{ $t('see_all') }}
+          <svg
+            fill="none"
+            height="16"
+            viewBox="0 0 16 16"
+            width="16"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M3.3335 8.00001H12.6668M12.6668 8.00001L8.00016 3.33334M12.6668 8.00001L8.00016 12.6667"
+              stroke="#667085"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </span>
+      </div>
+      <swiper class="swiper" :options="swiperOptionAd">
+        <swiper-slide v-for="ad in ad_special">
+          <UsedPart :card="ad" />
+        </swiper-slide>
+      </swiper>
+    </div>
   </div>
 </template>
 
@@ -335,10 +429,12 @@ import 'swiper/css/swiper.css'
 import { mapActions, mapGetters } from 'vuex'
 import Banners from '@/components/Common/Index/Banners'
 import SearchVin from '@/components/Common/Index/HeaderSearch'
+import UsedPart from '~/components/Used/UsedPart.vue'
 
 export default {
   name: 'HomeSearch',
   components: {
+    UsedPart,
     Banners,
     Swiper,
     SwiperSlide,
@@ -347,6 +443,7 @@ export default {
   async fetch () {
     await this.GET_SPARE_PARTS()
     await this.GET_CATALOG_MANUFACTURERS({ type: 'default' })
+    await this.GET_HOME_ADS()
   },
   data () {
     return {
@@ -381,6 +478,32 @@ export default {
           el: '.swiper-pagination',
           clickable: true
         }
+      },
+      swiperOptionAd: {
+        slidesPerView: 2,
+        slidesPerGroup: 2,
+        spaceBetween: 10,
+        pagination: {
+          el: '.swiper-pagination',
+          clickable: true
+        },
+        breakpoints: {
+          640: {
+            slidesPerView: 3,
+            slidesPerGroup: 3,
+            spaceBetween: 14
+          },
+          998: {
+            slidesPerView: 4,
+            slidesPerGroup: 4,
+            spaceBetween: 14
+          },
+          1200: {
+            slidesPerView: 5,
+            slidesPerGroup: 5,
+            spaceBetween: 14
+          }
+        }
       }
     }
   },
@@ -392,7 +515,10 @@ export default {
       types: 'Catalog/types',
       loading: 'Catalog/loading',
       manufacturers: 'Catalog/manufacturers',
-      manufacturer_models: 'Catalog/manufacturer_models'
+      manufacturer_models: 'Catalog/manufacturer_models',
+      ad_special: 'Used/ad_special',
+      ad_lasts: 'Used/ad_lasts',
+      ad_vip: 'Used/ad_vip'
     })
   },
   methods: {
@@ -402,7 +528,8 @@ export default {
       GET_MODELS: 'Catalog/GET_MODELS',
       GET_TYPES: 'Catalog/GET_TYPES',
       GET_CATALOG_MANUFACTURERS: 'Catalog/GET_CATALOG_MANUFACTURERS',
-      GET_MANUFACTURER_MODELS: 'Catalog/GET_MANUFACTURER_MODELS'
+      GET_MANUFACTURER_MODELS: 'Catalog/GET_MANUFACTURER_MODELS',
+      GET_HOME_ADS: 'Used/GET_HOME_ADS'
     }),
     showFilter (a) {
       // eslint-disable-next-line no-loops/no-loops
@@ -414,13 +541,7 @@ export default {
         this.filterShow[item] = false
       }
 
-      this.filterShow[a] = !this.filterShow[a]
-
-      if (a === 2) {
-        if (!this.manufacturers.length) {
-          this.GET_CATALOG_MANUFACTURERS({ type: 'alpha' })
-        }
-      }
+      this.filterShow[a] = true
     },
     chooseFilterType (i) {
       this.filterType = i
@@ -692,10 +813,10 @@ export default {
       text-align: left;
     }
   }
-}
 
-.swiper-slide {
-  width: auto !important;
+  .swiper-slide {
+    width: auto !important;
+  }
 }
 
 .swiper-container {
@@ -705,6 +826,59 @@ export default {
 
 .swiper-container, .swiper-wrapper, .swiper-slide {
   height: auto !important;
+}
+
+input {
+  width: inherit;
+  border: 1px solid #D0D5DD;
+  border-radius: 8px;
+  height: 44px;
+  padding: 10px 14px;
+
+  &:focus-visible {
+    outline: none;
+  }
+}
+
+.ad_wrapper {
+  width: 100%;
+  overflow: hidden;
+}
+
+.ad_header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin: 24px 0 24px 0;
+  padding: 0 24px;
+
+  h2 {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+
+    color: #0086C9;
+  }
+
+  span {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: #667085;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+}
+
+.mobile_add {
+  display: none;
+  margin-left: -15px;
+  margin-right: -15px;
+
+  img {
+    width: 100%;
+  }
 }
 
 @media screen and (max-width: 768px) {
@@ -717,9 +891,10 @@ export default {
 
 @media screen and (max-width: 576px) {
   .home_search_wrapper {
-    padding: 0;
-
     .home_search {
+      margin-left: -15px;
+      margin-right: -15px;
+
       .search_menu {
         h5 {
           padding-bottom: 5px;
@@ -736,17 +911,13 @@ export default {
     }
   }
 
-}
+  .ad_header {
+    padding: 0;
+    margin: 24px 0 8px 0;
+  }
 
-input {
-  width: inherit;
-  border: 1px solid #D0D5DD;
-  border-radius: 8px;
-  height: 44px;
-  padding: 10px 14px;
-
-  &:focus-visible {
-    outline: none;
+  .mobile_add {
+    display: block;
   }
 }
 </style>

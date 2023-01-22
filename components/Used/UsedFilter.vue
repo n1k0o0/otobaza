@@ -37,7 +37,7 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
-import AddToCartButton from '@/components/Catalog/AddToCartButton'
+import AddToCartButton from '~/components/Catalog/AddToCartButton.vue'
 
 export default {
   name: 'PartsFilter',
@@ -106,7 +106,7 @@ export default {
 
       position: absolute;
       right: 0;
-      top: 104px;
+      top: 0;
       padding: 24px;
       font-size: 14px;
     }
@@ -114,6 +114,7 @@ export default {
 }
 
 .sort_wrap {
+  display: none;
   color: #98A2B3;
 
   span {
@@ -133,6 +134,12 @@ export default {
 
 .btn-new {
   height: 44px;
+}
+
+@media screen and (min-width: 576px) {
+  .sort_wrap {
+    display: block;
+  }
 }
 
 @media screen and (min-width: 768px) {

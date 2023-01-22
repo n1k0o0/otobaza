@@ -9,7 +9,10 @@ const state = () => ({
   last_page: 1,
   meta: {},
   search_sort_by: 'price',
-  search_sort_order: 'desc'
+  search_sort_order: 'desc',
+  ad_special: [],
+  ad_vip: [],
+  ad_lasts: []
 })
 
 const getters = {
@@ -22,11 +25,13 @@ const getters = {
   last_page (state) { return state.last_page },
   meta (state) { return state.meta },
   sort_by (state) { return state.search_sort_by },
-  sort_order (state) { return state.search_sort_order }
+  sort_order (state) { return state.search_sort_order },
+  ad_special (state) { return state.ad_special },
+  ad_vip (state) { return state.ad_special },
+  ad_lasts (state) { return state.ad_lasts }
 }
 
 const mutations = {
-  // SEARCH - NEW DESIGN
   SET_PARTS (state, payload) {
     state.parts = payload
   },
@@ -53,6 +58,15 @@ const mutations = {
   },
   SET_SORT_ORDER (state, payload) {
     state.search_sort_order = payload
+  },
+  SET_AD_SPECIAL (state, payload) {
+    state.ad_special = payload
+  },
+  SET_AD_VIP (state, payload) {
+    state.ad_vip = payload
+  },
+  SET_AD_LASTS (state, payload) {
+    state.ad_lasts = payload
   }
 }
 
@@ -139,6 +153,19 @@ const actions = {
   async ADD_TO_FAVORITE ({ commit }, payload) {
     this.$axios.defaults.baseURL = this.$env.BASE_API_URL
     await this.$axios.post('/api/used-parts/wish-list/' + payload)
+  },
+
+  async GET_HOME_ADS ({ commit }) {
+    this.$axios.defaults.baseURL = this.$env.BASE_API_URL
+    const {
+      data: {
+        data: products
+      }
+    } = await this.$axios.get('https://62d45369cd960e45d456a36d.mockapi.io/api/v2/products')
+
+    commit('SET_AD_SPECIAL', products)
+    commit('SET_AD_VIP', products)
+    commit('SET_AD_LASTS', products)
   }
 }
 

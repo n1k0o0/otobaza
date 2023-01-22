@@ -11,7 +11,7 @@
               h4.rmtt {{ $t('not_found') }}`
               p.rmtxt {{ $fetchState.error }}
     template(v-else)
-      div.container
+      .container.position-relative
         ol.breadcrumb-custom
           li.breadcrumb-item
             a(href='/') Home
@@ -28,8 +28,8 @@
 <script>
 import Parts from '@/components/Catalog/Parts'
 import SearchPlaceholder from '@/components/Search/SearchPlaceholder'
-import UsedParts from '@/components/Search/UsedParts'
-import UsedFilter from '@/components/Search/UsedFilter'
+import UsedParts from '~/components/Used/UsedParts.vue'
+import UsedFilter from '~/components/Used/UsedFilter.vue'
 
 import { mapActions, mapGetters } from 'vuex'
 
@@ -68,7 +68,7 @@ export default {
     }
 
     this.loadingResults = true
-    // await this.GET_USED_PARTS(this.search)
+    await this.GET_PARTS(this.search)
     this.loadingResults = false
   },
   data () {
@@ -94,7 +94,8 @@ export default {
   methods: {
     ...mapActions({
       GET_SEARCH_PARTS: 'Catalog/GET_SEARCH_PARTS',
-      FILTER_PARTS: 'Catalog/FILTER_PARTS',
+      FILTER_PARTS: 'Used/FILTER_PARTS',
+      GET_PARTS: 'Used/GET_PARTS',
       GET_CATALOG_MANUFACTURERS: 'Catalog/GET_CATALOG_MANUFACTURERS',
       GET_MANUFACTURER_MODELS: 'Catalog/GET_MANUFACTURER_MODELS'
     }),

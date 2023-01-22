@@ -11,7 +11,7 @@
               h4.rmtt {{ $t('not_found') }}
               p.rmtxt {{ $t('not_found_info') }}
     template(v-else)
-      .container
+      .container.position-relative
         ol.breadcrumb-custom
           li.breadcrumb-item
             a(href='/') Home

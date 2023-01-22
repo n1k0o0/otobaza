@@ -2,7 +2,7 @@
   <div>
     <HomeSearch />
 
-    <div class="container mh60vh">
+    <div class="container mh60vh mt-5">
       <div class="home_blocks">
         <div class="home_blocks_text">
           <h5>{{ $t('search_difficulty_question') }}</h5>

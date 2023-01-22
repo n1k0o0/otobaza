@@ -124,7 +124,7 @@ export default {
 
       position: absolute;
       right: 0;
-      top: 104px;
+      top: 0;
       padding: 24px;
       font-size: 14px;
     }

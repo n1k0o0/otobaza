@@ -365,5 +365,10 @@
   "added_to_favorite": "Seçilmişlərə əlavə olundu!",
   "failed_to_add_favorite": "Seçilmişlərə əlavə olunmadı!",
   "removed_from_favorite": "Seçilmişlərdən silindi!",
-  "make_call": "Zəng et"
+  "make_call": "Zəng et",
+  "used": {
+    "vip": "VIP",
+    "special": "Özəl elanlar",
+    "last": "Son elanlar"
+  }
 }

@@ -359,5 +359,10 @@
   "store_question": "Do you have a store?",
   "store_answer": "Then you can register as a store on our website, upload your products and get a wide range of buyers.",
   "question_question": "Have a question?",
-  "question_answer": "Then you can use the Live CHAT available on the site."
+  "question_answer": "Then you can use the Live CHAT available on the site.",
+  "used": {
+    "vip": "VIP",
+    "special": "Special",
+    "last": "Latest"
+  }
 }
