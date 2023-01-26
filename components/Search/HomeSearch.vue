@@ -326,12 +326,12 @@
       </transition>
     </div>
 
-    <div class="mobile_add">
+    <div class="mobile_elan">
       <img alt="" src="/img/banana/mobile.png" />
     </div>
 
-    <div class="ad_wrapper ad_special">
-      <div class="ad_header">
+    <div class="elan_wrapper elan_special">
+      <div class="elan_header">
         <h2 class="">
           {{ $t('used.special') }}
         </h2>
@@ -360,8 +360,8 @@
       </swiper>
     </div>
 
-    <div class="ad_wrapper">
-      <div class="ad_header">
+    <div class="elan_wrapper">
+      <div class="elan_header">
         <h2 class="">
           {{ $t('used.vip') }}
         </h2>
@@ -390,8 +390,8 @@
       </swiper>
     </div>
 
-    <div class="ad_wrapper">
-      <div class="ad_header">
+    <div class="elan_wrapper">
+      <div class="elan_header">
         <h2 class="">
           {{ $t('used.last') }}
         </h2>
@@ -840,12 +840,12 @@ input {
   }
 }
 
-.ad_wrapper {
+.elan_wrapper {
   width: 100%;
   overflow: hidden;
 }
 
-.ad_header {
+.elan_header {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
@@ -871,7 +871,7 @@ input {
   }
 }
 
-.mobile_add {
+.mobile_elan {
   display: none;
   margin-left: -15px;
   margin-right: -15px;
@@ -911,12 +911,12 @@ input {
     }
   }
 
-  .ad_header {
+  .elan_header {
     padding: 0;
     margin: 24px 0 8px 0;
   }
 
-  .mobile_add {
+  .mobile_elan {
     display: block;
   }
 }
