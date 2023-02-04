@@ -1,6 +1,7 @@
 <template>
-  <div v-click-outside="onClickOutside" class="dropdown droplogin">
+  <div class="dropdown droplogin pointer">
     <button
+      v-if="!footer"
       id="droplogin"
       class="btn-new-light dropdown-toggle login-btn"
       :class="{'show':show}"
@@ -9,6 +10,9 @@
     >
       {{ $t('login') }}
     </button>
+    <span v-else @click="TOGGLE_MOBILE_MENU(!show)">
+      {{ $t('login') }}
+    </span>
     <transition mode="in-out" name="page-fade">
       <div v-if="show" class="dropdown-menu show">
         <form @submit.prevent="userLogin">
@@ -106,6 +110,12 @@ import { mapActions, mapGetters, mapMutations } from 'vuex'
 
 export default {
   name: 'Login',
+  props: {
+    footer: {
+      type: Boolean,
+      default: false
+    }
+  },
   data () {
     return {
       loading: false,

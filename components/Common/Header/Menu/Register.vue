@@ -1,15 +1,19 @@
 <template>
-  <div class="container">
-    <div v-click-outside="onClickOutside" class="dropdown droplogin drop_register">
+  <div class="pointer">
+    <div class="dropdown droplogin drop_register">
       <button
+        v-if="!footer"
         id="droplogin"
         class="btn-new dropdown-toggle login-btn"
         :class="{'show':show}"
         type="button"
-        @click="show=true"
+        @click="TOGGLE_REGISTER(!show)"
       >
         {{ $t('registration') }}
       </button>
+      <span v-else @click="TOGGLE_REGISTER(!show)">
+        {{ $t('registration') }}
+      </span>
       <transition mode="in-out" name="page-fade">
         <div v-if="show && !userRegisterShow" class="dropdown-menu show">
           <div class="log-items-header">
@@ -39,7 +43,7 @@
           <hr class="m-0" />
 
           <div class="log-items">
-            <div class="register_user pointer" @click="userRegisterShow=true">
+            <div class="register_user pointer" @click="TOGGLE_USER_REGISTER(true)">
               <h3>{{ $t('driver') }}</h3>
               <p>Müştəri kimi qeydiyyatdan keç</p>
               <div class="image_wrap">
@@ -182,6 +186,12 @@ import PhoneVerificationModal from '~/components/Common/PhoneVerificationModal.v
 export default {
   name: 'Register',
   components: { PhoneVerificationModal },
+  props: {
+    footer: {
+      type: Boolean,
+      default: false
+    }
+  },
   data () {
     return {
       registrationResponse: null,
@@ -189,8 +199,6 @@ export default {
       passwordType: 'password',
       eyeClass: 'fa-eye-slash',
       errorMessage: '',
-      show: false,
-      userRegisterShow: false,
       otpShow: false,
       register: {
         phone: '+994',
@@ -211,7 +219,9 @@ export default {
   },
   computed: {
     ...mapGetters({
-      isOtpCodeReceived: 'UI/isOtpVerificationModalOpened'
+      isOtpCodeReceived: 'UI/isOtpVerificationModalOpened',
+      show: 'User/showRegister',
+      userRegisterShow: 'User/userRegisterShow'
     })
   },
   methods: {
@@ -220,12 +230,16 @@ export default {
       REGISTER_BUYER: 'User/REGISTER_BUYER'
     }),
     ...mapMutations({
-      SHOW_OTP_VERIFICATION_MODAL: 'UI/SHOW_OTP_VERIFICATION_MODAL'
+      SHOW_OTP_VERIFICATION_MODAL: 'UI/SHOW_OTP_VERIFICATION_MODAL',
+      TOGGLE_REGISTER: 'User/TOGGLE_REGISTER',
+      TOGGLE_USER_REGISTER: 'User/TOGGLE_USER_REGISTER'
     }),
     onClickOutside () {
-      this.show = false
+      if (this.show === true) {
+        this.TOGGLE_REGISTER(false)
+      }
       this.otpShow = false
-      this.userRegisterShow = false
+      this.TOGGLE_USER_REGISTER(false)
     },
     showPassword () {
       this.passwordType = this.passwordType === 'password' ? 'text' : 'password'

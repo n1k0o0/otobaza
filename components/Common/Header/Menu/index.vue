@@ -36,7 +36,7 @@
               </div>
             </div>
 
-            <div class="position-relative mr-2 mr-md-4">
+            <div class="position-relative mr-2 mr-md-4 cart-header-menur">
               <CartLink />
             </div>
 
@@ -59,24 +59,91 @@
 
               <!--              <MenuItems />-->
             </div>
-
-            <div
-              id="mobile-menu"
-              class="menu-toggle1"
-              :class="{'open': isMobileMenuShow}"
-              @click.prevent="toggleMobileMenu"
-            >
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
-            </div>
           </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mobile_footer_menu">
+      <div class="mobile_footer_menu_wrapper">
+        <nuxt-link class="mobile_menu_item" :to="localePath('index')">
+          <svg
+            fill="none"
+            height="24"
+            viewBox="0 0 24 24"
+            width="24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M13.9931 3.19968L13.9934 3.19986L19.7533 7.2298C19.7533 7.22982 19.7533 7.22984 19.7534 7.22986C20.2226 7.55833 20.6668 8.0969 20.9943 8.72408C21.3217 9.35129 21.51 10.0244 21.51 10.6002V17.3802C21.51 19.654 19.6639 21.5002 17.39 21.5002H6.61C4.33755 21.5002 2.49 19.6454 2.49 17.3702V10.4702C2.49 9.93574 2.66039 9.29667 2.95858 8.69105C3.25663 8.0857 3.66107 7.55706 4.08752 7.22443L4.08763 7.22435L9.09625 3.31542C9.09647 3.31525 9.09668 3.31508 9.0969 3.31491C10.4337 2.27962 12.6028 2.22559 13.9931 3.19968Z"
+              fill="#0086C9"
+              opacity="0.4"
+              stroke="#0086C9"
+            />
+            <path
+              d="M12 18.25C11.8661 18.25 11.75 18.1339 11.75 18V15C11.75 14.8661 11.8661 14.75 12 14.75C12.1339 14.75 12.25 14.8661 12.25 15V18C12.25 18.1339 12.1339 18.25 12 18.25Z"
+              fill="#0086C9"
+              stroke="#0086C9"
+            />
+          </svg>
+          {{ $t('home') }}
+        </nuxt-link>
+        <nuxt-link class="mobile_menu_item" :to="localePath('cart')">
+          <CartLink :header="false" />
+          {{ $t('my_cart') }}
+        </nuxt-link>
+        <nuxt-link class="mobile_menu_item" :to="localePath('cart')">
+          <svg
+            fill="none"
+            height="24"
+            viewBox="0 0 24 24"
+            width="24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M12.62 20.8101C12.28 20.9301 11.72 20.9301 11.38 20.8101C8.48 19.8201 2 15.6901 2 8.6901C2 5.6001 4.49 3.1001 7.56 3.1001C9.38 3.1001 10.99 3.9801 12 5.3401C13.01 3.9801 14.63 3.1001 16.44 3.1001C19.51 3.1001 22 5.6001 22 8.6901C22 15.6901 15.52 19.8201 12.62 20.8101Z"
+              stroke="#98A2B3"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5"
+            />
+          </svg>
+          {{ $t('favorites') }}
+        </nuxt-link>
+        <div class="mobile_menu_item">
+          <template v-if="!$auth.loggedIn">
+            <div class="user-profile">
+              <div
+                id="profile-dropdown"
+                aria-expanded="false"
+                aria-haspopup="true"
+                class="user-profile-name"
+                data-toggle="dropdown"
+              >
+                <div class="user-profile-img">
+                  <img alt="user-profile" src="/css/icons/profile-circle.svg" />
+                </div>
+                <span>{{ $t('profile') }}</span>
+              </div>
+              <div aria-labelledby="profile-dropdown" class="dropdown-menu">
+                <div class="d-flex flex-column">
+                  <span class="py-2 px-4" @click="TOGGLE_MOBILE_MENU(true)">
+                    {{ $t('login') }}
+                  </span>
+                  <span class="py-2 px-4" @click="TOGGLE_REGISTER(true)">
+                    {{ $t('registration') }}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </template>
+          <LoggedIn v-else />
         </div>
       </div>
     </div>
   </div>
 </template>
+
 <script>
 import CartLink from '@/components/Catalog/CartLink'
 // import Currency from '@/components/Common/Header/Menu/Currency'
@@ -109,7 +176,8 @@ export default {
   },
   methods: {
     ...mapMutations({
-      TOGGLE_MOBILE_MENU: 'UI/TOGGLE_MOBILE_MENU'
+      TOGGLE_MOBILE_MENU: 'User/TOGGLE_LOGIN',
+      TOGGLE_REGISTER: 'User/TOGGLE_REGISTER'
     }),
     toggleMobileMenu () {
       this.TOGGLE_MOBILE_MENU()
@@ -120,3 +188,38 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+.mobile_footer_menu {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 64px;
+  background-color: #fff;
+  z-index: 99;
+  display: none;
+
+  &_wrapper {
+    display: grid;
+    height: 100%;
+    grid-template-columns: repeat(4, 1fr);
+    justify-content: center;
+    justify-items: center;
+    align-content: center;
+  }
+
+  .mobile_menu_item {
+    display: grid;
+    justify-items: center;
+    font-family: 'SF Pro Display', serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 9px;
+    line-height: 12px;
+    text-align: center;
+
+    color: #98A2B3;
+  }
+}
+</style>
