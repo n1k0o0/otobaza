@@ -6,7 +6,7 @@
                       }\
                       })")
     .search_results_items_item
-      img(v-lazy="card.images[0]?card.images[0]:'/img/search/default-parts.png'", :alt="card.description")
+      img(v-lazy="card.images[0]?card.images[0].link:'/img/search/default-parts.png'", :alt="card.description")
       .search_results_items_item_price
         span.font-weight-bold {{card.price.price}} {{card.price.currency_symbol}}
       div
