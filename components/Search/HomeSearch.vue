@@ -291,7 +291,7 @@
                     class="btn h-100"
                     :disabled="!(used.model || used.brand || used.title)"
                     type="submit"
-                    @click="$router.push(localePath({ name: 'oluxana', query: { title: used.title,brand: used.brand, model: used.model}}));"
+                    @click="$router.push(localePath({ name: 'elanlar', query: { title: used.title,brand: used.brand, model: used.model}}));"
                   >
                     {{ $t('search') }}
                     <svg
@@ -335,7 +335,7 @@
         <h2 class="">
           {{ $t('used.special') }}
         </h2>
-        <span @click="$router.push(localePath({ name: 'oluxana'}));">
+        <span @click="$router.push(localePath({ name: 'elanlar'}));">
           {{ $t('see_all') }}
           <svg
             fill="none"
@@ -365,7 +365,7 @@
         <h2 class="">
           {{ $t('used.vip') }}
         </h2>
-        <span @click="$router.push(localePath({ name: 'oluxana'}));">
+        <span @click="$router.push(localePath({ name: 'elanlar'}));">
           {{ $t('see_all') }}
           <svg
             fill="none"
@@ -395,7 +395,7 @@
         <h2 class="">
           {{ $t('used.last') }}
         </h2>
-        <span @click="$router.push(localePath({ name: 'oluxana'}));">
+        <span @click="$router.push(localePath({ name: 'elanlar'}));">
           {{ $t('see_all') }}
           <svg
             fill="none"

@@ -17,7 +17,7 @@
             li.breadcrumb-item
               a(href='/') Home
             li.breadcrumb-item
-              a(href='/oluxana') {{$t('home_search.used')}}
+              a(href='/elanlar') {{$t('home_search.used')}}
             li.breadcrumb-item.active(aria-current='page')
               | {{product.description}}
           .product
