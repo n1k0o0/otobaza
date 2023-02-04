@@ -6285,3 +6285,7 @@ button:disabled, .disabled {
 .custom-exact-active-link svg {
   fill: #abcfeb;
 }
+
+.long-text-wrap {
+  overflow-wrap: anywhere;
+}

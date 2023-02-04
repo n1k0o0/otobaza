@@ -5,15 +5,9 @@
     template(v-else)
       template(v-if="parts.length")
         .search_results_items
-          n-link(:to="localePath({\
-                      name: 'oluxana-slug',\
-                      params: {\
-                      slug: card.id\
-                      }\
-                      })")(v-for="(card,index) in parts", :key="index")
-            UsedPart(:card="card")
+            UsedPart(:card="card", v-for="(card,index) in parts", :key="index")
         .search_results_more(v-show="search_page!==last_page" )
-          button.btn-new.px-4.py-2(@click="GET_SEARCH_PARTS({...search,page:true})", :disabled="loadingMore") {{ loadingMore?$t('loading'): $t('more_products')}}
+          button.btn-new.px-4.py-2(@click="getMore", :disabled="loadingMore") {{ loadingMore?$t('loading'): $t('more_products')}}
       .search_results_not-found(v-else)
         p {{$t('not_found_products')}}
         button.btn.light-blue(@click="$router.push(localePath({ name: 'contact'}))") {{$t('contact_us')}}
@@ -37,23 +31,43 @@ export default {
     search: {
       type: Object,
       default: () => []
+    },
+    isFavorite: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {
     ...mapGetters({
-      parts: 'Used/parts',
+      usedParts: 'Used/parts',
+      favorites: 'Used/favorites',
       search_page: 'Used/search_page',
       last_page: 'Used/last_page',
       loadingMore: 'Used/loading',
       meta: 'Used/meta'
-    })
+    }),
+    parts () {
+      if (this.isFavorite) {
+        return this.favorites
+      } else {
+        return this.usedParts
+      }
+    }
   },
   methods: {
     ...mapActions({
-      GET_SEARCH_PARTS: 'Used/GET_PARTS'
+      GET_SEARCH_PARTS: 'Used/GET_PARTS',
+      GET_FAVORITES: 'Used/GET_FAVORITES'
     }),
     scrollTop () {
       window.scrollTo({ top: 0, behavior: 'smooth' })
+    },
+    getMore () {
+      if (this.favorites) {
+        this.GET_FAVORITES({ page: true })
+      } else {
+        this.GET_SEARCH_PARTS({ ...this.search, page: true })
+      }
     }
   }
 }

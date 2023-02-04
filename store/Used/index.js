@@ -12,7 +12,9 @@ const state = () => ({
   search_sort_order: 'desc',
   ad_special: [],
   ad_vip: [],
-  ad_lasts: []
+  ad_lasts: [],
+
+  favorites: []
 })
 
 const getters = {
@@ -28,7 +30,8 @@ const getters = {
   sort_order (state) { return state.search_sort_order },
   ad_special (state) { return state.ad_special },
   ad_vip (state) { return state.ad_special },
-  ad_lasts (state) { return state.ad_lasts }
+  ad_lasts (state) { return state.ad_lasts },
+  favorites (state) { return state.favorites }
 }
 
 const mutations = {
@@ -67,6 +70,9 @@ const mutations = {
   },
   SET_AD_LASTS (state, payload) {
     state.ad_lasts = payload
+  },
+  SET_FAVORITES (state, payload) {
+    state.favorites = payload
   }
 }
 
@@ -88,10 +94,9 @@ const actions = {
     commit('SET_LOADING', false)
   },
   async GET_PARTS ({ commit, state }, {
-    sparePart,
     brand = null,
     model = null,
-    type = null,
+    title = null,
     sortBy = null,
     sortOrder = 'desc',
     page = false
@@ -110,7 +115,14 @@ const actions = {
         data: products,
         meta
       }
-    } = await this.$axios.get(`https://62d45369cd960e45d456a36d.mockapi.io/api/v2/products?page=${state.search_page}&orderBy=${state.search_sort_by}&sort=${state.search_sort_order}`)
+    } = await this.$axios.get(`api/used-parts/search?page=${state.search_page}&orderBy=${state.search_sort_by}&sort=${state.search_sort_order}`,
+      {
+        params: {
+          manu_id: brand,
+          mod_id: model,
+          keyword: title
+        }
+      })
 
     commit('SET_LAST_PAGE', meta.last_page)
     commit('SET_META', meta)
@@ -123,9 +135,15 @@ const actions = {
     commit('SET_LOADING', false)
   },
 
-  async FILTER_PARTS ({ commit, state }, by) {
+  async FILTER_PARTS ({ commit, state }, {
+    brand = null,
+    model = null,
+    title = null,
+    sortBy = 'price'
+  }) {
     commit('SET_LOADING', true)
-    commit('SET_SORT_BY', by)
+    commit('SET_SORT_BY', sortBy)
+    commit('SET_SEARCH_PAGE', 1)
     commit('SET_SORT_ORDER', state.search_sort_order === 'desc' ? 'asc' : 'desc')
 
     this.$axios.defaults.baseURL = this.$env.BASE_API_URL
@@ -134,9 +152,14 @@ const actions = {
         data: products,
         meta
       }
-    } = await this.$axios.post(`/api/used-parts?page=${state.search_page}&orderBy=${state.search_sort_by}&sort=${state.search_sort_order}`, {
-      country: 1
-    })
+    } = await this.$axios.get(`api/used-parts/search?page=${state.search_page}&orderBy=${state.search_sort_by}&sort=${state.search_sort_order}`,
+      {
+        params: {
+          manu_id: brand,
+          mod_id: model,
+          keyword: title
+        }
+      })
 
     commit('SET_LAST_PAGE', meta.last_page)
     commit('SET_META', meta)
@@ -146,13 +169,13 @@ const actions = {
 
   async GET_PART ({ commit }, payload) {
     this.$axios.defaults.baseURL = this.$env.BASE_API_URL
-    const { data: { data: part } } = await this.$axios.get('https://62d45369cd960e45d456a36d.mockapi.io/api/v2/product/' + payload)
+    const { data: { data: part } } = await this.$axios.get('api/used-parts/' + payload)
     commit('SET_PART', part)
   },
 
   async ADD_TO_FAVORITE ({ commit }, payload) {
     this.$axios.defaults.baseURL = this.$env.BASE_API_URL
-    await this.$axios.post('/api/used-parts/wish-list/' + payload)
+    await this.$axios.patch('api/wish-list/used-part/' + payload)
   },
 
   async GET_HOME_ADS ({ commit }) {
@@ -166,6 +189,41 @@ const actions = {
     commit('SET_AD_SPECIAL', products)
     commit('SET_AD_VIP', products)
     commit('SET_AD_LASTS', products)
+  },
+
+  async GET_FAVORITES ({ commit, state }, {
+    page = false
+  }) {
+    commit('SET_LOADING', true)
+
+    if (page) {
+      commit('SET_SEARCH_PAGE', ++state.search_page)
+    }
+
+    this.$axios.defaults.baseURL = this.$env.BASE_API_URL
+    const {
+      data: {
+        data: products,
+        meta
+      }
+    } = await this.$axios.get(`api/wish-list/used-part?page=${state.search_page}`)
+
+    commit('SET_LAST_PAGE', meta.last_page)
+    commit('SET_META', meta)
+
+    if (page) {
+      commit('SET_FAVORITES', [...state.favorites, ...products])
+    } else {
+      commit('SET_FAVORITES', products)
+    }
+    commit('SET_LOADING', false)
+  },
+
+  async CLEAR_FAVORITES ({ commit }) {
+    // this.$axios.defaults.baseURL = this.$env.BASE_API_URL
+    // const {} = await this.$axios.patch('api/wish-list/used-part')
+
+    commit('SET_FAVORITES', [])
   }
 }
 

@@ -74,7 +74,7 @@ export default {
         try {
           this.loading = true
 
-          // await this.ADD_TO_FAVORITE(this.id)
+          await this.ADD_TO_FAVORITE(this.id)
 
           this.isFavorite = !this.isFavorite
 

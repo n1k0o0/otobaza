@@ -24,10 +24,10 @@
     .filter_item.w-100.h-100
       button.btn-new.w-100(@click="searchMethod", :disabled="!(search.brand || search.model || search.title)") {{$t('search')}}
     .filter_item.filter_item_sort.sort_wrap
-      span(@click.prevent="FILTER_PARTS('price')", :class="{'active':search_sort_by==='price'}")
+      span(@click.prevent="filter('price')", :class="{'active':search_sort_by==='price'}")
         | {{$t('price')}}
         img(src="/img/search/sort_arrow.svg")
-      span(@click.prevent="FILTER_PARTS('state')", :class="{'active':search_sort_by==='state'}")
+      span(@click.prevent="filter('updated_at')", :class="{'active':search_sort_by==='updated_at'}")
         | {{$t('new')}}
         img(src="/img/search/sort_arrow.svg")
       span
@@ -86,6 +86,9 @@ export default {
       this.loadingResults = true
       await this.GET_PARTS(this.search)
       this.loadingResults = false
+    },
+    filter (by) {
+      this.FILTER_PARTS({ ...this.search, sortBy: by })
     }
   }
 }

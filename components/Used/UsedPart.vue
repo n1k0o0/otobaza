@@ -1,18 +1,24 @@
 <template lang="pug">
-  .search_results_items_item
-    img(v-lazy="card.images[0]?card.images[0]:'/img/search/default-parts.png'", :alt="card.description")
-    .search_results_items_item_price
-      span.font-weight-bold {{card.price.price}} {{card.price.currency_symbol}}
-    div
-      p.search_results_items_item_store {{card.store_name}}
-      p.search_results_items_item_store {{card.part_number}}
-      p.short_description
-        | {{card.description}}
-      p.search_results_items_item_store.pt-2
-        | {{card.created_at}}
+  n-link(:to="localePath({\
+                      name: 'elanlar-slug',\
+                      params: {\
+                      slug: card.id\
+                      }\
+                      })")
+    .search_results_items_item
+      img(v-lazy="card.images[0]?card.images[0]:'/img/search/default-parts.png'", :alt="card.description")
+      .search_results_items_item_price
+        span.font-weight-bold {{card.price.price}} {{card.price.currency_symbol}}
+      div
+        p.search_results_items_item_store {{card.store_name}}
+        p.search_results_items_item_store {{card.part_number}}
+        p.short_description
+          | {{card.description}}
+        p.search_results_items_item_store.pt-2
+          | {{card.created_at}}
 
-    div.search_results_items_item_button_cart
-      AddToFavoriteButton(:id="card.id", :favorite="card.is_favorite || false")
+      div.search_results_items_item_button_cart
+        AddToFavoriteButton(:id="card.id", :favorite="card.wishlisted || false")
 
 </template>
 

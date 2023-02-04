@@ -24,7 +24,7 @@
             .product_info
               .product_info_img
                 .product_info_img_big.pointer
-                  img(:src="product.images[imgIndex]?product.images[imgIndex]:'/img/search/big-part.png'", :alt="product.description")(@click="modalVisibility=true")
+                  img(:src="product.images[imgIndex]?product.images[imgIndex].link:'/img/search/big-part.png'", :alt="product.description")(@click="modalVisibility=true")
                   template(v-if="product.images.length>1")
                     .before.pointer(@click="previousImage")
                     .after.pointer(@click="nextImage")
@@ -32,25 +32,22 @@
                   VueSlickCarousel(v-bind="slideShowSettings")
                     .product_info_img_slider_slide(v-for="(image,index) in (product.images.length?product.images:['/img/search/big-part.png'])")
                       div(:class="{'selected':imgIndex===index}")
-                        img.pointer(:src='image', @click="imgIndex=index", :alt="product.description")
+                        img.pointer(:src='image.link', @click="imgIndex=index", :alt="product.description")
               .product_info_details
-                h1.product_info_details_title.font-weight-bold
+                h1.product_info_details_title.font-weight-bold.long-text-wrap
                   | {{product.description}}
                 .row
                   .product_info_details_text.col-6
                     .product_info_details_text_item
-                      .product_info_details_text_item_title {{$t('manufacturer')}}:
-                      .product_info_details_text_item_value {{product.car_manu_name}}
-                    .product_info_details_text_item
-                      .product_info_details_text_item_title {{$t('model')}}:
-                      .product_info_details_text_item_value {{product.car_mod_name}}
+                      .product_info_details_text_item_title {{$t('store')}}:
+                      .product_info_details_text_item_value {{product.seller.name}}
 
                     .product_info_details_text_item
-                      .product_info_details_text_item_title {{$t('new_or_used')}}:
-                      .product_info_details_text_item_value {{product.product_type}}
+                      .product_info_details_text_item_title {{$t('brand')}}:
+                      .product_info_details_text_item_value {{product.manu_name}}
                     .product_info_details_text_item
-                      .product_info_details_text_item_title {{$t('store')}}:
-                      .product_info_details_text_item_value {{product.seller.store_name}}
+                      .product_info_details_text_item_title {{$t('model')}}:
+                      .product_info_details_text_item_value {{product.mod_name}}
 
                   .product_info_details_price.col-6
                     p.font-weight-bold.p-0.m-0 {{product.price.price}} {{product.price.currency_symbol}}
@@ -62,7 +59,7 @@
                       | {{ this.showPhone?product.seller.phone:$t('make_call') }}
                   .product_info_details_action_wrapper_order.col-6
                     AddToFavoriteButton(:id="product.id" :order="true" :hideIcon="true" theme="dark")
-                      | {{ product.is_vaforite? $t('add_to_favorite'): $t('remove_from_favorite') }}
+                      | {{ product.wishlisted? $t('add_to_favorite'): $t('remove_from_favorite') }}
                 .product_info_address.mt-4
                   .product_info_details_text_item
                     .product_info_details_text_item_title {{$t('address')}}:

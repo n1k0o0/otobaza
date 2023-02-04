@@ -39,6 +39,9 @@
             <div class="position-relative mr-2 mr-md-4 cart-header-menur">
               <CartLink />
             </div>
+            <div class="position-relative mr-2 mr-md-4 cart-header-menur">
+              <FavoriteLink />
+            </div>
 
             <div class="mmenu mmenu_hide" :class="{transform00:isMobileMenuShow}">
               <div
@@ -92,22 +95,8 @@
           <CartLink :header="false" />
           {{ $t('my_cart') }}
         </nuxt-link>
-        <nuxt-link class="mobile_menu_item" :to="localePath('cart')">
-          <svg
-            fill="none"
-            height="24"
-            viewBox="0 0 24 24"
-            width="24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M12.62 20.8101C12.28 20.9301 11.72 20.9301 11.38 20.8101C8.48 19.8201 2 15.6901 2 8.6901C2 5.6001 4.49 3.1001 7.56 3.1001C9.38 3.1001 10.99 3.9801 12 5.3401C13.01 3.9801 14.63 3.1001 16.44 3.1001C19.51 3.1001 22 5.6001 22 8.6901C22 15.6901 15.52 19.8201 12.62 20.8101Z"
-              stroke="#98A2B3"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="1.5"
-            />
-          </svg>
+        <nuxt-link class="mobile_menu_item" :to="localePath('favorites')">
+          <FavoriteLink :header="false" />
           {{ $t('favorites') }}
         </nuxt-link>
         <div class="mobile_menu_item">
@@ -146,6 +135,7 @@
 
 <script>
 import CartLink from '@/components/Catalog/CartLink'
+import FavoriteLink from '@/components/Used/FavoriteLink'
 // import Currency from '@/components/Common/Header/Menu/Currency'
 import LoggedIn from '@/components/Common/Header/Menu/LoggedIn'
 import Login from '@/components/Common/Header/Menu/Login'
@@ -154,7 +144,7 @@ import { mapGetters, mapMutations } from 'vuex'
 
 export default {
   name: 'HeaderMenu',
-  components: { CartLink, LoggedIn, Login, Register },
+  components: { CartLink, LoggedIn, Login, Register, FavoriteLink },
   props: {
     settings: {
       type: Object,
