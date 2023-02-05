@@ -6,7 +6,7 @@
       template(v-if="parts.length")
         .search_results_items
             UsedPart(:card="card", v-for="(card,index) in parts", :key="index")
-        .search_results_more(v-show="search_page!==last_page" )
+        .search_results_more(v-show="search_page!==last_page && !isHome" )
           button.btn-new.px-4.py-2(@click="getMore", :disabled="loadingMore") {{ loadingMore?$t('loading'): $t('more_products')}}
       .search_results_not-found(v-else)
         p {{$t('not_found_products')}}
@@ -30,11 +30,11 @@ export default {
     },
     search: {
       type: Object,
-      default: () => []
+      default: () => {}
     },
-    isFavorite: {
-      type: Boolean,
-      default: false
+    type: {
+      type: String,
+      default: 'default'
     }
   },
   computed: {
@@ -44,10 +44,19 @@ export default {
       search_page: 'Used/search_page',
       last_page: 'Used/last_page',
       loadingMore: 'Used/loading',
-      meta: 'Used/meta'
+      meta: 'Used/meta',
+      ad_lasts: 'Used/ad_lasts'
     }),
+    isFavorite () {
+      return this.type === 'favorites'
+    },
+    isHome () {
+      return this.type === 'home'
+    },
     parts () {
-      if (this.isFavorite) {
+      if (this.isHome) {
+        return this.ad_lasts
+      } else if (this.isFavorite) {
         return this.favorites
       } else {
         return this.usedParts
@@ -63,7 +72,7 @@ export default {
       window.scrollTo({ top: 0, behavior: 'smooth' })
     },
     getMore () {
-      if (this.favorites) {
+      if (this.isFavorite) {
         this.GET_FAVORITES({ page: true })
       } else {
         this.GET_SEARCH_PARTS({ ...this.search, page: true })

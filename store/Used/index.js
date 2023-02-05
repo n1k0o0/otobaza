@@ -184,10 +184,8 @@ const actions = {
       data: {
         data: products
       }
-    } = await this.$axios.get('https://62d45369cd960e45d456a36d.mockapi.io/api/v2/products')
+    } = await this.$axios.get('api/used-parts?perPage=20&orderBy=price&sort=desc')
 
-    commit('SET_AD_SPECIAL', products)
-    commit('SET_AD_VIP', products)
     commit('SET_AD_LASTS', products)
   },
 

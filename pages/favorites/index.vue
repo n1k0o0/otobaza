@@ -10,7 +10,7 @@
         h2(class="mb-4")
           | {{ $t('favorites') }}
       template(v-if="favorites.length")
-        UsedParts(:is-favorite="true")
+        UsedParts(type="favorites")
       template(v-else)
         div(style="margin:30px;")
           .container-fluid

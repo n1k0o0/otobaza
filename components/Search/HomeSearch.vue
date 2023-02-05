@@ -330,7 +330,7 @@
       <img alt="" src="/img/banana/mobile.png" />
     </div>
 
-    <div class="elan_wrapper elan_special">
+    <div v-if="ad_special.length" class="elan_wrapper elan_special">
       <div class="elan_header">
         <h2 class="">
           {{ $t('used.special') }}
@@ -354,13 +354,13 @@
         </span>
       </div>
       <swiper class="swiper" :options="swiperOptionAd">
-        <swiper-slide v-for="ad in ad_special">
+        <swiper-slide v-for="(ad,i) in ad_special" :key="i">
           <UsedPart :card="ad" />
         </swiper-slide>
       </swiper>
     </div>
 
-    <div class="elan_wrapper">
+    <div v-if="ad_vip.length" class="elan_wrapper">
       <div class="elan_header">
         <h2 class="">
           {{ $t('used.vip') }}
@@ -384,17 +384,20 @@
         </span>
       </div>
       <swiper class="swiper" :options="swiperOptionAd">
-        <swiper-slide v-for="ad in ad_special">
+        <swiper-slide v-for="(ad,i) in ad_special" :key="i">
           <UsedPart :card="ad" />
         </swiper-slide>
       </swiper>
     </div>
 
-    <div class="elan_wrapper">
+    <div v-if="ad_lasts.length" class="elan_wrapper">
       <div class="elan_header">
         <h2 class="">
           {{ $t('used.last') }}
         </h2>
+        <div class="elan_line">
+          <span></span>
+        </div>
         <span @click="$router.push(localePath({ name: 'elanlar'}));">
           {{ $t('see_all') }}
           <svg
@@ -413,11 +416,7 @@
           </svg>
         </span>
       </div>
-      <swiper class="swiper" :options="swiperOptionAd">
-        <swiper-slide v-for="ad in ad_special">
-          <UsedPart :card="ad" />
-        </swiper-slide>
-      </swiper>
+      <UsedParts type="home" />
     </div>
   </div>
 </template>
@@ -430,10 +429,12 @@ import { mapActions, mapGetters } from 'vuex'
 import Banners from '@/components/Common/Index/Banners'
 import SearchVin from '@/components/Common/Index/HeaderSearch'
 import UsedPart from '~/components/Used/UsedPart.vue'
+import UsedParts from '~/components/Used/UsedParts.vue'
 
 export default {
   name: 'HomeSearch',
   components: {
+    UsedParts,
     UsedPart,
     Banners,
     Swiper,
@@ -733,12 +734,11 @@ export default {
     }
 
     h5.active_menu {
-      //styleName: Text md/Semibold;
-      font-family: SF Pro Display;
+      font-family: SF Pro Display, serif;
       font-size: 16px;
       font-weight: 600;
       line-height: 24px;
-      letter-spacing: 0em;
+      letter-spacing: 0;
       text-align: left;
       color: #344054;
       padding: 0 8px;
@@ -843,11 +843,15 @@ input {
 .elan_wrapper {
   width: 100%;
   overflow: hidden;
+
+  h2 {
+    margin: 0;
+  }
 }
 
 .elan_header {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   justify-content: space-between;
   margin: 24px 0 24px 0;
   padding: 0 24px;
@@ -878,6 +882,15 @@ input {
 
   img {
     width: 100%;
+  }
+}
+
+.elan_line {
+  width: calc(100% - 250px);
+
+  span {
+    height: 2px;
+    background: #F2F4F7;
   }
 }
 
