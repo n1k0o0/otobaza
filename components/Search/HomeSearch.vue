@@ -767,7 +767,7 @@ export default {
     flex-wrap: wrap;
     column-gap: 43px;
     row-gap: 24px;
-    align-items: end;
+    align-items: flex-end;
 
     h5 {
       font-family: SF Pro Display, sans-serif;

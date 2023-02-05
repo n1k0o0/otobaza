@@ -174,7 +174,7 @@ export default {
 
   &_top {
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
   }
 
   &_not-found {

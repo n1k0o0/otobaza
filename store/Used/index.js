@@ -73,6 +73,9 @@ const mutations = {
   },
   SET_FAVORITES (state, payload) {
     state.favorites = payload
+  },
+  CLEAR_FAVORITES (state) {
+    state.favorites = []
   }
 }
 
@@ -191,7 +194,7 @@ const actions = {
 
   async GET_FAVORITES ({ commit, state }, {
     page = false
-  }) {
+  } = { page: false }) {
     commit('SET_LOADING', true)
 
     if (page) {
@@ -215,13 +218,6 @@ const actions = {
       commit('SET_FAVORITES', products)
     }
     commit('SET_LOADING', false)
-  },
-
-  async CLEAR_FAVORITES ({ commit }) {
-    // this.$axios.defaults.baseURL = this.$env.BASE_API_URL
-    // const {} = await this.$axios.patch('api/wish-list/used-part')
-
-    commit('SET_FAVORITES', [])
   }
 }
 

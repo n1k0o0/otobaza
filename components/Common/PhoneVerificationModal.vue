@@ -91,7 +91,7 @@
                     rules="required|otp"
                   >
                     <FormInput
-                      id="otp"
+                      id="otp2"
                       v-model="otpParts.second"
                       :invalid="!!errors[0]"
                       :limit="1"
@@ -107,7 +107,7 @@
                     rules="required|otp"
                   >
                     <FormInput
-                      id="otp"
+                      id="otp3"
                       v-model="otpParts.third"
                       :invalid="!!errors[0]"
                       :limit="1"
@@ -123,7 +123,7 @@
                     rules="required|otp"
                   >
                     <FormInput
-                      id="otp"
+                      id="otp4"
                       v-model="otpParts.fourth"
                       :invalid="!!errors[0]"
                       :limit="1"
