@@ -72,7 +72,7 @@
             p {{product.description}}
           .modal-image.pointer(v-if='modalVisibility' @click="modalVisibility=false")
             .modal-image_wrap
-              img(alt='action', :src="product.images[imgIndex]?product.images[imgIndex]:'/img/search/big-part.png'")
+              img(alt='action', :src="product.images[imgIndex]?product.images[imgIndex].link:'/img/search/big-part.png'")
               template(v-if="product.images.length>1")
                 .before.pointer(@click.stop="previousImage")
                 .after.pointer(@click.stop="nextImage")
