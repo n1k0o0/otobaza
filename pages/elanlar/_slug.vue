@@ -59,7 +59,7 @@
                       | {{ this.showPhone?product.seller.phone:$t('make_call') }}
                   .product_info_details_action_wrapper_order.col-6
                     AddToFavoriteButton(:id="product.id" :order="true" :hideIcon="true" theme="dark")
-                      | {{ product.wishlisted? $t('add_to_favorite'): $t('remove_from_favorite') }}
+                      | {{ product.wishlisted? $t('remove_from_favorite'): $t('add_to_favorite') }}
                 .product_info_address.mt-4
                   .product_info_details_text_item
                     .product_info_details_text_item_title {{$t('address')}}:
