@@ -30,7 +30,7 @@
                     .after.pointer(@click="nextImage")
                 .product_info_img_slider
                   VueSlickCarousel(v-bind="slideShowSettings")
-                    .product_info_img_slider_slide(v-for="(image,index) in (product.images.length?product.images:['/img/search/big-part.png'])")
+                    .product_info_img_slider_slide(v-for="(image,index) in (product.images.length?product.images:[{link:'/img/search/big-part.png'}])")
                       div(:class="{'selected':imgIndex===index}")
                         img.pointer(:src='image.link', @click="imgIndex=index", :alt="product.description")
               .product_info_details
