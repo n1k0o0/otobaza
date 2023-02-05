@@ -230,7 +230,7 @@ export default {
       this.imgUrl = url
     },
     nextImage () {
-      if (this.imgIndex === this.product.url.length - 1) {
+      if (this.imgIndex === this.product.images.length - 1) {
         this.imgIndex = 0
       } else {
         this.imgIndex += 1
@@ -238,7 +238,7 @@ export default {
     },
     previousImage () {
       if (this.imgIndex === 0) {
-        this.imgIndex = this.product.url.length - 1
+        this.imgIndex = this.product.images.length - 1
       } else {
         this.imgIndex -= 1
       }
