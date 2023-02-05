@@ -442,8 +442,16 @@ export default {
     SearchVin
   },
   async fetch () {
-    await this.GET_SPARE_PARTS()
-    await this.GET_CATALOG_MANUFACTURERS({ type: 'default' })
+    const isNotCurrentLang = this.$i18n.locale !== this.search_lang
+
+    if (!this.manufacturers.length || isNotCurrentLang) {
+      await this.GET_CATALOG_MANUFACTURERS({ type: 'default' })
+    }
+
+    if (!this.spareParts?.length || isNotCurrentLang) {
+      await this.GET_SPARE_PARTS()
+    }
+
     await this.GET_HOME_ADS()
   },
   data () {
@@ -511,6 +519,7 @@ export default {
   computed: {
     ...mapGetters({
       spareParts: 'Catalog/spare_parts',
+      search_lang: 'Catalog/search_lang',
       brands: 'Catalog/brands',
       models: 'Catalog/models',
       types: 'Catalog/types',
