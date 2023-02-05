@@ -48,7 +48,7 @@ export default {
         this.$swal.fire({
           title: '',
           icon: 'info',
-          html: this.$t('for_add_to_cart_register_or_login'),
+          html: this.$t('for_add_to_favorite_register_or_login'),
           showCloseButton: false,
           showCancelButton: false
         })
