@@ -51,7 +51,9 @@ export default {
     }
 
     if (this.$route.query.brand) {
-      await this.GET_MANUFACTURER_MODELS({ manufacturer: this.$route.query.brand })
+      if (!this.manufacturer_models.length || isNotCurrentLang) {
+        await this.GET_MANUFACTURER_MODELS({ manufacturer: this.$route.query.brand })
+      }
 
       const brand = this.manufacturers.find(manu => manu.manuId === +this.$route.query.brand)
 
@@ -84,7 +86,7 @@ export default {
   computed: {
     ...mapGetters({
       loading: 'Used/loading',
-      search_lang: 'Used/search_lang',
+      search_lang: 'Catalog/search_lang',
       parts: 'Used/parts',
       search_sort_by: 'Used/sort_by',
       manufacturers: 'Catalog/manufacturers',

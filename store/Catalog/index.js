@@ -247,6 +247,8 @@ const actions = {
     } else {
       commit('SET_MANUFACTURERS', data)
     }
+
+    commit('SET_SEARCH_LANG', this.$i18n.locale)
   },
   async GET_MANUFACTURER_MODELS ({ commit }, { manufacturer }) {
     this.$axios.defaults.baseURL = this.$env.CATALOG_API_URL
