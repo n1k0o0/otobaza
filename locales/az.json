@@ -373,5 +373,7 @@
     "vip": "VIP",
     "special": "Özəl elanlar",
     "last": "Son elanlar"
-  }
+  },
+  "phone_tooltip": "Zəng edərkən və ya yaxınlaşarkən Otobaza adından müraciət edin endirim ola bilər!",
+  "discount": "Endirim"
 }

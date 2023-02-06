@@ -367,5 +367,7 @@
     "vip": "VIP",
     "special": "Özel",
     "last": "Son eklenenler"
-  }
+  },
+  "phone_tooltip": "Aradığınızda veya yaklaşırken Otobaza adına başvuru yapın, indirim kazanın!",
+  "discount": "İndirim"
 }

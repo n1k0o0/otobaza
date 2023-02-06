@@ -53,10 +53,15 @@
                     p.font-weight-bold.p-0.m-0 {{product.price}} {{product.price_type.currency_symbol}}
                 .product_info_details_actions.row
                   .product_info_details_actions_wrapper_cart.col-6
-                    button(type='button' @click.prevent="showPhone=true" class="btn-new-light" ).px-2.py-1.position-relative.w-100.product_info_details_actions_phone
-                      svg(width='8', height='8', viewBox='0 0 8 8', fill='none', xmlns='http://www.w3.org/2000/svg')
-                        circle(cx='4', cy='4', r='4', fill='#D92D20')
-                      | {{ this.showPhone?product.seller.phone:$t('make_call') }}
+                    VDropdown
+                      button(type='button' @click.prevent="showPhone=true" class="btn-new-light" ).px-2.py-1.position-relative.w-100.product_info_details_actions_phone
+                        svg(width='8', height='8', viewBox='0 0 8 8', fill='none', xmlns='http://www.w3.org/2000/svg')
+                          circle(cx='4', cy='4', r='4', fill='#D92D20')
+                        | {{ this.showPhone?product.seller.phone:$t('make_call') }}
+                      template(#popper)
+                        div(class="price_tooltip")
+                          span {{ $t('discount') }}:
+                          p {{$t('phone_tooltip')}}
                   .product_info_details_action_wrapper_order.col-6
                     AddToFavoriteButton(:id="product.id" :order="true" :hideIcon="true" theme="dark")
                       | {{ product.wishlisted? $t('remove_from_favorite'): $t('add_to_favorite') }}
@@ -517,6 +522,15 @@ export default {
       font-size: 20px;
       font-weight: 100;
     }
+  }
+}
+
+.price_tooltip {
+  max-width: 250px;
+  padding: 5px;
+
+  span {
+    color: grey;
   }
 }
 

@@ -367,5 +367,7 @@
     "vip": "VIP",
     "special": "Special",
     "last": "Latest"
-  }
+  },
+  "phone_tooltip": "Apply on behalf of Otobaza when calling or approaching, you can get a discount!",
+  "discount": "Discount"
 }
