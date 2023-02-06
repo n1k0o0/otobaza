@@ -101,12 +101,12 @@ const actions = {
     model = null,
     title = null,
     sortBy = null,
-    sortOrder = 'desc',
+    sortOrder = 'asc',
     page = false
   }) {
     commit('SET_LOADING', true)
 
-    commit('SET_SORT_BY', sortBy ?? 'price')
+    commit('SET_SORT_BY', sortBy ?? 'updated_at')
     commit('SET_SORT_ORDER', sortOrder)
     if (page) {
       commit('SET_SEARCH_PAGE', ++state.search_page)
@@ -142,7 +142,7 @@ const actions = {
     brand = null,
     model = null,
     title = null,
-    sortBy = 'price'
+    sortBy = 'updated_at'
   }) {
     commit('SET_LOADING', true)
     commit('SET_SORT_BY', sortBy)
@@ -187,7 +187,7 @@ const actions = {
       data: {
         data: products
       }
-    } = await this.$axios.get('api/used-parts?perPage=20&orderBy=price&sort=desc')
+    } = await this.$axios.get('api/used-parts?perPage=20&orderBy=updated_at&sort=asc')
 
     commit('SET_AD_LASTS', products)
   },

@@ -19,7 +19,7 @@
             li.breadcrumb-item
               a(href='/elanlar') {{$t('home_search.used')}}
             li.breadcrumb-item.active(aria-current='page')
-              | {{product.description}}
+              | {{product.title}}
           .product
             .product_info
               .product_info_img
@@ -32,10 +32,10 @@
                   VueSlickCarousel(v-bind="slideShowSettings")
                     .product_info_img_slider_slide(v-for="(image,index) in (product.images.length?product.images:[{link:'/img/search/big-part.png'}])")
                       div(:class="{'selected':imgIndex===index}")
-                        img.pointer(:src='image.link', @click="imgIndex=index", :alt="product.description")
+                        img.pointer(:src='image.link', @click="imgIndex=index", :alt="product.title")
               .product_info_details
                 h1.product_info_details_title.font-weight-bold.long-text-wrap
-                  | {{product.description}}
+                  | {{product.title}}
                 .row
                   .product_info_details_text.col-6
                     .product_info_details_text_item
@@ -50,7 +50,7 @@
                       .product_info_details_text_item_value {{product.mod_name}}
 
                   .product_info_details_price.col-6
-                    p.font-weight-bold.p-0.m-0 {{product.price.price}} {{product.price.currency_symbol}}
+                    p.font-weight-bold.p-0.m-0 {{product.price}} {{product.price_type.currency_symbol}}
                 .product_info_details_actions.row
                   .product_info_details_actions_wrapper_cart.col-6
                     button(type='button' @click.prevent="showPhone=true" class="btn-new-light" ).px-2.py-1.position-relative.w-100.product_info_details_actions_phone

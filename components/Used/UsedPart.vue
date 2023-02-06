@@ -6,14 +6,14 @@
                       }\
                       })")
     .search_results_items_item
-      img(v-lazy="card.images[0]?card.images[0].link:'/img/search/default-parts.png'", :alt="card.description")
+      img(v-lazy="card.images[0]?card.images[0].link:'/img/search/default-parts.png'", :alt="card.title")
       .search_results_items_item_price
-        span.font-weight-bold {{card.price.price}} {{card.price.currency_symbol}}
+        span.font-weight-bold {{card.price}} {{card.price_type.currency_symbol}}
       div
         p.search_results_items_item_store {{card.store_name}}
         p.search_results_items_item_store {{card.part_number}}
         p.short_description
-          | {{card.description}}
+          | {{card.title}}
         p.search_results_items_item_store.pt-2
           | {{card.created_at}}
 
