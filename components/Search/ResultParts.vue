@@ -13,7 +13,7 @@
                       })").search_results_items_item(v-for="(card,index) in parts", :key="index")
             img(v-lazy="card.url[0]?card.url[0].link:'/img/search/default-parts.png'", :alt="card.description")
             .search_results_items_item_price
-              span.font-weight-bold {{card.price}} {{card.price.currency_symbol}}
+              span.font-weight-bold {{card.price.price}} {{card.price.currency_symbol}}
             div
               p.search_results_items_item_store {{card.store_name}}
               p.search_results_items_item_store {{card.part_number}}

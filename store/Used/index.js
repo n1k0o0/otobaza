@@ -1,3 +1,5 @@
+import $swal from 'sweetalert2'
+
 const strict = false
 
 const state = () => ({
@@ -14,7 +16,8 @@ const state = () => ({
   ad_vip: [],
   ad_lasts: [],
 
-  favorites: []
+  favorites: [],
+  favorites_count: 0
 })
 
 const getters = {
@@ -31,7 +34,8 @@ const getters = {
   ad_special (state) { return state.ad_special },
   ad_vip (state) { return state.ad_special },
   ad_lasts (state) { return state.ad_lasts },
-  favorites (state) { return state.favorites }
+  favorites (state) { return state.favorites },
+  favorites_count (state) { return state.favorites_count }
 }
 
 const mutations = {
@@ -74,6 +78,9 @@ const mutations = {
   SET_FAVORITES (state, payload) {
     state.favorites = payload
   },
+  SET_FAVORITES_COUNT (state, payload) {
+    state.favorites_count = payload
+  },
   CLEAR_FAVORITES (state) {
     state.favorites = []
   }
@@ -99,13 +106,24 @@ const actions = {
   async GET_PARTS ({ commit, state }, {
     brand = null,
     model = null,
-    title = null,
+    keyword = null,
     sortBy = null,
-    sortOrder = 'asc',
+    sortOrder = 'desc',
     page = false
   }) {
-    commit('SET_LOADING', true)
+    if (keyword.length > 0 && keyword.length < 4) {
+      await $swal.fire({
+        title: this.$i18n.t('keyword_limit_error'),
+        position: 'top',
+        toast: true,
+        timer: 2000,
+        timerProgressBar: true,
+        icon: 'error'
+      })
+      return
+    }
 
+    commit('SET_LOADING', true)
     commit('SET_SORT_BY', sortBy ?? 'created_at')
     commit('SET_SORT_ORDER', sortOrder)
     if (page) {
@@ -123,7 +141,7 @@ const actions = {
         params: {
           manu_id: brand,
           mod_id: model,
-          keyword: title
+          keyword: keyword
         }
       })
 
@@ -141,9 +159,21 @@ const actions = {
   async FILTER_PARTS ({ commit, state }, {
     brand = null,
     model = null,
-    title = null,
+    keyword = null,
     sortBy = 'created_at'
   }) {
+    if (keyword.length > 0 && keyword.length < 4) {
+      await $swal.fire({
+        title: this.$i18n.t('keyword_limit_error'),
+        position: 'top',
+        toast: true,
+        timer: 2000,
+        timerProgressBar: true,
+        icon: 'error'
+      })
+      return
+    }
+
     commit('SET_LOADING', true)
     commit('SET_SORT_BY', sortBy)
     commit('SET_SEARCH_PAGE', 1)
@@ -160,7 +190,7 @@ const actions = {
         params: {
           manu_id: brand,
           mod_id: model,
-          keyword: title
+          keyword: keyword
         }
       })
 
@@ -176,9 +206,11 @@ const actions = {
     commit('SET_PART', part)
   },
 
-  async ADD_TO_FAVORITE ({ commit }, payload) {
+  async ADD_TO_FAVORITE ({ commit, dispatch, state }, payload) {
     this.$axios.defaults.baseURL = this.$env.BASE_API_URL
-    await this.$axios.patch('api/wish-list/used-part/' + payload)
+    const { data } = await this.$axios.patch('api/wish-list/used-part/' + payload)
+    state.part.wishlisted = data.wishlisted
+    dispatch('GET_FAVORITES')
   },
 
   async GET_HOME_ADS ({ commit }) {
@@ -187,7 +219,7 @@ const actions = {
       data: {
         data: products
       }
-    } = await this.$axios.get('api/used-parts?perPage=20&orderBy=created_at&sort=asc')
+    } = await this.$axios.get('api/used-parts?perPage=20&orderBy=created_at&sort=desc')
 
     commit('SET_AD_LASTS', products)
   },
@@ -211,6 +243,7 @@ const actions = {
 
     commit('SET_LAST_PAGE', meta.last_page)
     commit('SET_META', meta)
+    commit('SET_FAVORITES_COUNT', meta.total)
 
     if (page) {
       commit('SET_FAVORITES', [...state.favorites, ...products])

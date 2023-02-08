@@ -19,10 +19,10 @@
           | {{ option.ModelName }}
 
     .filter_item
-      input( v-model="search.title", :placeholder="$t('search')",  )
+      input( v-model="search.keyword", :placeholder="$t('search')", @keyup.enter="searchMethod" )
 
     .filter_item.w-100.h-100
-      button.btn-new.w-100(@click="searchMethod", :disabled="!(search.brand || search.model || search.title)") {{$t('search')}}
+      button.btn-new.w-100(@click="searchMethod", :disabled="!(search.brand || search.model || search.keyword)") {{$t('search')}}
     .filter_item.filter_item_sort.sort_wrap
       span(@click.prevent="filter('price')", :class="{'active':search_sort_by==='price'}")
         | {{$t('price')}}

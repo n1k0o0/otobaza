@@ -282,8 +282,10 @@
                 <div class="col-12 col-md-4 col-xl-6 mb-4">
                   <input
                     v-model="used.title"
+                    min="4"
                     :placeholder="$t('search')"
                     type="text"
+                    @keyup.enter="$router.push(localePath({ name: 'elanlar', query: { keyword: used.title,brand: used.brand, model: used.model}}));"
                   />
                 </div>
                 <div class="col-12 col-md-4 col-xl-2 mb-4">
@@ -291,7 +293,7 @@
                     class="btn h-100"
                     :disabled="!(used.model || used.brand || used.title)"
                     type="submit"
-                    @click="$router.push(localePath({ name: 'elanlar', query: { title: used.title,brand: used.brand, model: used.model}}));"
+                    @click="$router.push(localePath({ name: 'elanlar', query: { keyword: used.title,brand: used.brand, model: used.model}}));"
                   >
                     {{ $t('search') }}
                     <svg

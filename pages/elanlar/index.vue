@@ -69,6 +69,10 @@ export default {
       }
     }
 
+    if (this.$route.query.keyword) {
+      this.search.keyword = this.$route.query.keyword
+    }
+
     this.loadingResults = true
     await this.GET_PARTS(this.search)
     this.loadingResults = false
@@ -77,7 +81,7 @@ export default {
     return {
       loadingResults: false,
       search: {
-        title: '',
+        keyword: '',
         model: '',
         brand: ''
       }

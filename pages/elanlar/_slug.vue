@@ -52,6 +52,7 @@
                   .product_info_details_price.col-6
                     p.font-weight-bold.p-0.m-0 {{product.price}} {{product.price_type.currency_symbol}}
                 .product_info_details_actions.row
+                  .price_mobile.col-4.font-weight-bold.m-0 {{product.price}} {{product.price_type.currency_symbol}}
                   .product_info_details_actions_wrapper_cart.col-6
                     VDropdown
                       button(type='button' @click.prevent="showPhone=true" class="btn-new-light" ).px-2.py-1.position-relative.w-100.product_info_details_actions_phone
@@ -62,9 +63,12 @@
                         div(class="price_tooltip")
                           span {{ $t('discount') }}:
                           p {{$t('phone_tooltip')}}
-                  .product_info_details_action_wrapper_order.col-6
-                    AddToFavoriteButton(:id="product.id" :order="true" :hideIcon="true" theme="dark")
-                      | {{ product.wishlisted? $t('remove_from_favorite'): $t('add_to_favorite') }}
+                  .product_info_details_action_wrapper_order.col-2.col-lg-6
+                    .desktop_favorite
+                      AddToFavoriteButton(:id="product.id" :hideIcon="true" theme="dark")
+                        span.favorite_text {{ product.wishlisted? $t('remove_from_favorite'): $t('add_to_favorite') }}
+                    .mobile_favorite
+                      AddToFavoriteButton(:id="product.id")
                 .product_info_address.mt-4
                   .product_info_details_text_item
                     .product_info_details_text_item_title {{$t('address')}}:
@@ -186,14 +190,6 @@ export default {
             settings: {
               slidesToShow: 3,
               slidesToScroll: 1
-            }
-          },
-          {
-            breakpoint: 576,
-            settings: {
-              slidesToShow: 1,
-              slidesToScroll: 1,
-              dots: true
             }
           }
         ]
@@ -323,14 +319,15 @@ export default {
           width: 100% !important;
 
           &_big {
-            display: none !important;
+            //display: none !important;
+            height: 250px !important;
           }
         }
       }
       @media screen and (max-width: 576px) {
         &_img {
           img {
-            height: 300px;
+            //height: 300px;
           }
         }
       }
@@ -423,8 +420,16 @@ export default {
           align-items: center;
           margin-top: 37px;
 
-          @media only screen and (max-width: 575px) {
-            flex-direction: column;
+          @media only screen and (max-width: 991px) {
+            position: fixed;
+            left: 0;
+            width: 100%;
+            bottom: 64px;
+            z-index: 99;
+            flex-direction: row;
+            margin: 0;
+            height: 64px;
+            background-color: #fff;
           }
 
           button {
@@ -504,13 +509,13 @@ export default {
   }
 
   .before {
-    left: -20px;
+    left: 0;
     transform: rotate(135deg);
     -webkit-transform: rotate(135deg);
   }
 
   .after {
-    right: -20px;
+    right: 0;
     transform: rotate(-45deg);
     -webkit-transform: rotate(-45deg);
   }
@@ -531,6 +536,30 @@ export default {
 
   span {
     color: grey;
+  }
+}
+
+.price_mobile {
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 32px;
+  color: #0086C9;
+  padding: 0 0 0 15px;
+}
+
+.desktop_favorite, .product_info_details_price {
+  display: none !important;
+}
+
+@media only screen and (min-width: 992px) {
+  .desktop_favorite, {
+    display: block !important;
+  }
+  .product_info_details_price {
+    display: flex !important;
+  }
+  .mobile_favorite, .price_mobile {
+    display: none;
   }
 }
 

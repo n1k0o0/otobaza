@@ -18,7 +18,7 @@
           | {{card.created_at}}
 
       div.search_results_items_item_button_cart
-        AddToFavoriteButton(:id="card.id", :favorite="card.wishlisted || false")
+        AddToFavoriteButton(:id="card.id")
 
 </template>
 

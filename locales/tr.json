@@ -369,5 +369,6 @@
     "last": "Son eklenenler"
   },
   "phone_tooltip": "Aradığınızda veya yaklaşırken Otobaza adına başvuru yapın, indirim kazanın!",
-  "discount": "İndirim"
+  "discount": "İndirim",
+  "keyword_limit_error": "Arama metni 3 karakterden uzun olmalıdır"
 }

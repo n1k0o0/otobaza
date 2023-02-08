@@ -369,5 +369,6 @@
     "last": "Latest"
   },
   "phone_tooltip": "Apply on behalf of Otobaza when calling or approaching, you can get a discount!",
-  "discount": "Discount"
+  "discount": "Discount",
+  "keyword_limit_error": "Search text must be more than 3 characters"
 }
