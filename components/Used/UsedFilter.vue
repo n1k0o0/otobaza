@@ -27,7 +27,7 @@
       span(@click.prevent="filter('price')", :class="{'active':search_sort_by==='price'}")
         | {{$t('price')}}
         img(src="/img/search/sort_arrow.svg")
-      span(@click.prevent="filter('updated_at')", :class="{'active':search_sort_by==='updated_at'}")
+      span(@click.prevent="filter('created_at')", :class="{'active':search_sort_by==='created_at'}")
         | {{$t('new')}}
         img(src="/img/search/sort_arrow.svg")
       span
