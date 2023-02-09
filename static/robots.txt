@@ -1,23 +1,20 @@
 User-agent: *
 Disallow:
 
-Disallow: https://otobaza.com/ru/car/
-Disallow: https://otobaza.com/en/car/
-Disallow: https://otobaza.com/car/
-Disallow: https://otobaza.com/tr/car/
-Disallow: https://otobaza.com/ru/car/
-Disallow: https://otobaza.com/assembly/
-Disallow: https://otobaza.com/az/assembly/
-Disallow: https://otobaza.com/en/assembly/
-Disallow: https://otobaza.com/ru/assembly/
-Disallow: https://otobaza.com/brand/
-Disallow: https://otobaza.com/en/brand/
-Disallow: https://otobaza.com/tr/brand/
-Disallow: https://otobaza.com/ru/brand/
-Disallow: https://otobaza.com/ru/model/
-Disallow: https://otobaza.com/en/model/
-Disallow: https://otobaza.com/tr/model/
-
-
-
+Disallow: /ru/car/
+Disallow: /en/car/
+Disallow: /car/
+Disallow: /tr/car/
+Disallow: /ru/car/
+Disallow: /assembly/
+Disallow: /az/assembly/
+Disallow: /en/assembly/
+Disallow: /ru/assembly/
+Disallow: /brand/
+Disallow: /en/brand/
+Disallow: /tr/brand/
+Disallow: /ru/brand/
+Disallow: /ru/model/
+Disallow: /en/model/
+Disallow: /tr/model/
 
