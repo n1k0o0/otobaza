@@ -37,7 +37,7 @@
                 h1.product_info_details_title.font-weight-bold.long-text-wrap
                   | {{product.title}}
                 .row
-                  .product_info_details_text.col-6
+                  .product_info_details_text.col-12.col-md-6
                     .product_info_details_text_item
                       .product_info_details_text_item_title {{$t('store')}}:
                       .product_info_details_text_item_value {{product.seller.name}}
@@ -54,11 +54,15 @@
                 .product_info_details_actions.row
                   .price_mobile.col-4.font-weight-bold.m-0 {{product.price}} {{product.price_type.currency_symbol}}
                   .product_info_details_actions_wrapper_cart.col-6
-                    VDropdown
-                      button(type='button' @click.prevent="showPhone=true" class="btn-new-light" ).px-2.py-1.position-relative.w-100.product_info_details_actions_phone
+                    button(v-if="!this.showPhone" @click.prevent="showPhone=true" class="btn-new-light" ).px-2.py-1.position-relative.w-100.product_info_details_actions_phone
+                      svg(width='8', height='8', viewBox='0 0 8 8', fill='none', xmlns='http://www.w3.org/2000/svg')
+                        circle(cx='4', cy='4', r='4', fill='#D92D20')
+                      | {{ $t('make_call') }}
+                    VDropdown(v-else)
+                      a(:href="'tel:'+product.seller.phone" class="btn-new-light" ).px-2.py-1.position-relative.w-100.product_info_details_actions_phone
                         svg(width='8', height='8', viewBox='0 0 8 8', fill='none', xmlns='http://www.w3.org/2000/svg')
                           circle(cx='4', cy='4', r='4', fill='#D92D20')
-                        | {{ this.showPhone?product.seller.phone:$t('make_call') }}
+                        | {{ product.seller.phone }}
                       template(#popper)
                         div(class="price_tooltip")
                           span {{ $t('discount') }}:
@@ -70,12 +74,13 @@
                     .mobile_favorite
                       AddToFavoriteButton(:id="product.id")
                 .product_info_address.mt-4
-                  .product_info_details_text_item
+                  .product_info_details_text_item(@click="showMap=true" class="pointer")
                     .product_info_details_text_item_title {{$t('address')}}:
                     .product_info_details_text_item_value {{product.seller.address}}
-                  template(v-if="product.seller.lat && product.seller.lng")
-                    GmapMap(:center='{ lat: +product.seller.lat, lng: +product.seller.lng }', :zoom='18', style='width:100%;  height: 150px;')
-                      GmapMarker(:position='{ lat: +product.seller.lat, lng: +product.seller.lng }')
+                  .map(:class="{'d-block':showMap}")
+                    template(v-if="product.seller.lat && product.seller.lng")
+                      GmapMap(:center='{ lat: +product.seller.lat, lng: +product.seller.lng }', :zoom='18', style='width:100%;  height: 150px;')
+                        GmapMarker(:position='{ lat: +product.seller.lat, lng: +product.seller.lng }')
             .product_description
               h3 {{$t('content')}}
             p {{product.description}}
@@ -195,6 +200,7 @@ export default {
         ]
       },
       imgUrl: '',
+      showMap: false,
       imgIndex: 0,
       images: [
         'https://www.autocar.co.uk/sites/autocar.co.uk/files/slideshow_image/1-ferrari-355-engine.jpg',
@@ -323,6 +329,16 @@ export default {
             height: 250px !important;
           }
         }
+
+        &_address {
+          .map {
+            display: none;
+          }
+        }
+
+        &_details {
+          padding-left: 0 !important;
+        }
       }
       @media screen and (max-width: 576px) {
         &_img {
@@ -432,7 +448,7 @@ export default {
             background-color: #fff;
           }
 
-          button {
+          button, .btn-new-light {
             font-weight: 600;
             font-size: 16px;
             line-height: 24px;
@@ -441,6 +457,8 @@ export default {
           }
 
           &_phone {
+            color: #026aa2;
+
             svg {
               position: absolute;
               right: 8px;
@@ -450,6 +468,7 @@ export default {
 
         }
       }
+
     }
 
     &_description {
