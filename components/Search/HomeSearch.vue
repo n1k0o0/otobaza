@@ -851,60 +851,6 @@ input {
   }
 }
 
-.elan_wrapper {
-  width: 100%;
-  overflow: hidden;
-
-  h2 {
-    margin: 0;
-  }
-}
-
-.elan_header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin: 24px 0 24px 0;
-  padding: 0 24px;
-
-  h2 {
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 24px;
-
-    color: #0086C9;
-  }
-
-  span {
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 24px;
-    color: #667085;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-  }
-}
-
-.mobile_elan {
-  display: none;
-  margin-left: -15px;
-  margin-right: -15px;
-
-  img {
-    width: 100%;
-  }
-}
-
-.elan_line {
-  width: calc(100% - 250px);
-
-  span {
-    height: 2px;
-    background: #F2F4F7;
-  }
-}
-
 @media screen and (max-width: 768px) {
   .home_search {
     .search_menu {

@@ -15,7 +15,7 @@ const state = () => ({
   ad_special: [],
   ad_vip: [],
   ad_lasts: [],
-
+  similar_parts: [],
   favorites: [],
   favorites_count: 0
 })
@@ -35,7 +35,8 @@ const getters = {
   ad_vip (state) { return state.ad_special },
   ad_lasts (state) { return state.ad_lasts },
   favorites (state) { return state.favorites },
-  favorites_count (state) { return state.favorites_count }
+  favorites_count (state) { return state.favorites_count },
+  similar_parts (state) { return state.similar_parts }
 }
 
 const mutations = {
@@ -83,6 +84,9 @@ const mutations = {
   },
   CLEAR_FAVORITES (state) {
     state.favorites = []
+  },
+  SET_SIMILAR_PARTS (state, payload) {
+    state.similar_parts = payload
   }
 }
 
@@ -111,7 +115,7 @@ const actions = {
     sortOrder = 'desc',
     page = false
   }) {
-    if (keyword.length > 0 && keyword.length < 4) {
+    if (keyword.length > 0 && keyword.length < 3) {
       await $swal.fire({
         title: this.$i18n.t('keyword_limit_error'),
         position: 'top',
@@ -126,9 +130,8 @@ const actions = {
     commit('SET_LOADING', true)
     commit('SET_SORT_BY', sortBy ?? 'created_at')
     commit('SET_SORT_ORDER', sortOrder)
-    if (page) {
-      commit('SET_SEARCH_PAGE', ++state.search_page)
-    }
+
+    commit('SET_SEARCH_PAGE', page ? ++state.search_page : 1)
 
     this.$axios.defaults.baseURL = this.$env.BASE_API_URL
     const {
@@ -160,7 +163,7 @@ const actions = {
     keyword = null,
     sortBy = 'created_at'
   }) {
-    if (keyword.length > 0 && keyword.length < 4) {
+    if (keyword.length > 0 && keyword.length < 3) {
       await $swal.fire({
         title: this.$i18n.t('keyword_limit_error'),
         position: 'top',
@@ -196,10 +199,12 @@ const actions = {
     commit('SET_LOADING', false)
   },
 
-  async GET_PART ({ commit }, payload) {
+  async GET_PART ({ commit, dispatch }, payload) {
     this.$axios.defaults.baseURL = this.$env.BASE_API_URL
     const { data: { data: part } } = await this.$axios.get('api/used-parts/' + payload)
     commit('SET_PART', part)
+
+    dispatch('GET_SIMILAR_PARTS', payload)
   },
 
   async ADD_TO_FAVORITE ({ commit, dispatch, state }, payload) {
@@ -247,6 +252,11 @@ const actions = {
       commit('SET_FAVORITES', products)
     }
     commit('SET_LOADING', false)
+  },
+
+  async GET_SIMILAR_PARTS ({ commit, dispatch, state }, payload) {
+    const { data: { data: relatives } } = await this.$axios.get('/api/used-parts/similar/' + payload + '?perPage=20')
+    commit('SET_SIMILAR_PARTS', relatives)
   }
 }
 

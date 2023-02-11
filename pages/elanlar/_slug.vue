@@ -90,6 +90,19 @@
               template(v-if="product.images.length>1")
                 .before.pointer(@click.stop="previousImage")
                 .after.pointer(@click.stop="nextImage")
+          .elan_wrapper.elan_special(v-if='similar_parts.length')
+            .elan_header
+              h2
+                | {{ $t('used.similar') }}
+              .elan_line
+                span
+              span(@click="$router.push(localePath({ name: 'elanlar', query: { keyword: product.title } }))")
+                | {{ $t('see_all') }}
+                svg(fill='none', height='16', viewbox='0 0 16 16', width='16', xmlns='http://www.w3.org/2000/svg')
+                  path(d='M3.3335 8.00001H12.6668M12.6668 8.00001L8.00016 3.33334M12.6668 8.00001L8.00016 12.6667', stroke='#667085', stroke-linecap='round', stroke-linejoin='round')
+            swiper.swiper(:options='swiperOptionAd')
+              swiper-slide(v-for='(ad,i) in similar_parts', :key='i')
+                UsedPart(:card='ad')
 
 </template>
 
@@ -99,6 +112,10 @@ import 'vue-slick-carousel/dist/vue-slick-carousel.css'
 // optional style for arrows & dots
 import 'vue-slick-carousel/dist/vue-slick-carousel-theme.css'
 import PartsPlaceholder from '@/components/Placeholders/PartsPlaceholder'
+import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
+import UsedPart from '~/components/Used/UsedPart.vue'
+
+import 'swiper/css/swiper.css'
 
 import AddToFavoriteButton from '@/components/Used/AddToFavoriteButton'
 
@@ -106,7 +123,14 @@ import { mapActions, mapGetters } from 'vuex'
 
 export default {
   name: 'SearchParts',
-  components: { VueSlickCarousel, AddToFavoriteButton, PartsPlaceholder },
+  components: {
+    VueSlickCarousel,
+    AddToFavoriteButton,
+    PartsPlaceholder,
+    Swiper,
+    UsedPart,
+    SwiperSlide
+  },
   watchQuery: true,
   layout: 'pages',
   scrollToTop: true,
@@ -124,6 +148,32 @@ export default {
   },
   data () {
     return {
+      swiperOptionAd: {
+        slidesPerView: 2,
+        slidesPerGroup: 2,
+        spaceBetween: 10,
+        pagination: {
+          el: '.swiper-pagination',
+          clickable: true
+        },
+        breakpoints: {
+          640: {
+            slidesPerView: 3,
+            slidesPerGroup: 3,
+            spaceBetween: 14
+          },
+          998: {
+            slidesPerView: 4,
+            slidesPerGroup: 4,
+            spaceBetween: 14
+          },
+          1200: {
+            slidesPerView: 5,
+            slidesPerGroup: 5,
+            spaceBetween: 14
+          }
+        }
+      },
       domain: 'otobaza.com',
       settings: {
         dots: false,
@@ -226,7 +276,8 @@ export default {
   },
   computed: {
     ...mapGetters({
-      product: 'Used/part'
+      product: 'Used/part',
+      similar_parts: 'Used/similar_parts'
     })
   },
   methods: {
@@ -547,6 +598,28 @@ export default {
       font-weight: 100;
     }
   }
+
+  .elan_wrapper {
+    margin-bottom: 100px;
+
+    .elan_header {
+      padding: 0;
+
+      h2 {
+        font-family: 'Inter', serif;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 30px;
+        color: #344054;
+      }
+
+      .elan_line {
+        width: calc(100% - 320px);
+      }
+    }
+  }
+
 }
 
 .price_tooltip {
