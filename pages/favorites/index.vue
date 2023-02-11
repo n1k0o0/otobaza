@@ -4,7 +4,7 @@
       li.breadcrumb-item
         a(href='/') Home
       li.breadcrumb-item.active(aria-current='page')
-        | {{$t('favorites')}}
+        a {{$t('favorites')}}
     .cart.pb-5
       .about-title.cart-header
         h2(class="mb-4")

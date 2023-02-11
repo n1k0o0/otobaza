@@ -1533,6 +1533,8 @@ footer {
   font-size: 14px;
 
   .breadcrumb-item {
+    display: flex;
+
     a {
       font-weight: 400;
       font-size: 14px;
@@ -1552,9 +1554,9 @@ footer {
 
 .breadcrumb-item + .breadcrumb-item::before {
   display: inline-block;
-  padding-right: 0.5rem;
+  padding-right: 13px;
   color: #6c757d;
-  content: ">";
+  content: url("~assets/svg/Vector.svg");
 }
 
 .cart {
@@ -1568,3 +1570,29 @@ footer {
     }
   }
 }
+
+.slick-track {
+  display: flex !important;
+
+  .slick-slide {
+    display: flex !important;
+    height: auto !important;
+    margin: 0;
+    padding: 5px;
+
+    .product_info_img_slider_slide {
+      height: 100% !important;
+
+      & > div {
+        height: 100%;
+      }
+    }
+
+    img {
+      height: 100% !important;
+      object-fit: cover !important;
+      object-position: center !important;
+    }
+  }
+}
+

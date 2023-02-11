@@ -19,7 +19,7 @@
             li.breadcrumb-item
               a(href='/elanlar') {{$t('home_search.used')}}
             li.breadcrumb-item.active(aria-current='page')
-              | {{product.title}}
+              a {{product.title}}
           .product
             .product_info
               .product_info_img
@@ -528,13 +528,13 @@ export default {
   }
 
   .before {
-    left: 0;
+    left: 4px;
     transform: rotate(135deg);
     -webkit-transform: rotate(135deg);
   }
 
   .after {
-    right: 0;
+    right: 4px;
     transform: rotate(-45deg);
     -webkit-transform: rotate(-45deg);
   }

@@ -105,11 +105,16 @@ export default {
 
   &_button_cart {
     position: absolute;
-    right: 0;
+    right: 11px;
     top: 8px;
     border-radius: 50%;
     width: 36px;
     height: 36px;
+
+    button {
+      border-radius: 50%;
+      padding: 5px 1px !important;
+    }
   }
 
   &:hover {

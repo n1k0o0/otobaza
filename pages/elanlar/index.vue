@@ -16,7 +16,7 @@
           li.breadcrumb-item
             a(href='/') Home
           li.breadcrumb-item.active(aria-current='page')
-            | {{$t('home_search.used')}}
+            a {{$t('home_search.used')}}
         .search_wrap.d-flex.flex-column
           .hr-wrap
             h1.title.hr-text {{$t('search')}}

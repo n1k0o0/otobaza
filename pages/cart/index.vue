@@ -4,7 +4,7 @@
       li.breadcrumb-item
         a(href='/') Home
       li.breadcrumb-item.active(aria-current='page')
-        | {{$t('my_cart')}}
+        a {{$t('my_cart')}}
     .cart
       CartHeader
       template(v-if="cart.length")

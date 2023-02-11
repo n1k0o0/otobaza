@@ -19,7 +19,7 @@
             li.breadcrumb-item
               a(href='/search') {{$t('home_search.spare-parts')}}
             li.breadcrumb-item.active(aria-current='page')
-              | {{product.description}}
+              a {{product.description}}
           .product
             .product_info
               .product_info_img
@@ -37,7 +37,7 @@
                 h1.product_info_details_title.font-weight-bold
                   | {{product.description}}
                 .row
-                  .product_info_details_text.col-6
+                  .product_info_details_text.col-12.col-md-6
                     .product_info_details_text_item
                       .product_info_details_text_item_title {{$t('manufacturer')}}:
                       .product_info_details_text_item_value {{product.manufacturer}}
@@ -61,19 +61,21 @@
                   .product_info_details_price.col-6
                     p.font-weight-bold.p-0.m-0 {{product.price.price}} {{product.price.currency_symbol}}
                 .product_info_details_actions.row
-                  .product_info_details_actions_wrapper_cart.col-6
+                  .price_mobile.col-4.font-weight-bold.m-0 {{product.price.price}} {{product.price.currency_symbol}}
+                  .product_info_details_actions_wrapper_cart.col-4.col-lg-6
                     AddToCartButton(:id="product.id" :hideIcon="true")
                       | {{$t('add_to_cart')}}
-                  .product_info_details_action_wrapper_order.col-6
+                  .product_info_details_action_wrapper_order.col-4.col-lg-6
                     AddToCartButton(:id="product.id" :order="true" :hideIcon="true" theme="dark")
                       | {{ $t('do_order') }}
                 .product_info_address.mt-4
-                  .product_info_details_text_item
+                  .product_info_details_text_item(@click="showMap=true" class="pointer")
                     .product_info_details_text_item_title {{$t('address')}}:
                     .product_info_details_text_item_value {{product.seller.address}}
-                  template(v-if="product.seller.lat && product.seller.lng")
-                    GmapMap(:center='{ lat: +product.seller.lat, lng: +product.seller.lng }', :zoom='18', style='width:100%;  height: 150px;')
-                      GmapMarker(:position='{ lat: +product.seller.lat, lng: +product.seller.lng }')
+                  .map(:class="{'d-block':showMap}")
+                    template(v-if="product.seller.lat && product.seller.lng")
+                      GmapMap(:center='{ lat: +product.seller.lat, lng: +product.seller.lng }', :zoom='18', style='width:100%;  height: 150px;')
+                        GmapMarker(:position='{ lat: +product.seller.lat, lng: +product.seller.lng }')
             .product_description
               h3 {{$t('content')}}
             p {{product.description_catalog}}
@@ -118,6 +120,7 @@ export default {
   data () {
     return {
       domain: 'otobaza.com',
+      showMap: false,
       settings: {
         dots: false,
         infinite: false,
@@ -188,14 +191,6 @@ export default {
             settings: {
               slidesToShow: 3,
               slidesToScroll: 1
-            }
-          },
-          {
-            breakpoint: 576,
-            settings: {
-              slidesToShow: 1,
-              slidesToScroll: 1,
-              dots: true
             }
           }
         ]
@@ -325,14 +320,25 @@ export default {
           width: 100% !important;
 
           &_big {
-            display: none !important;
+            //display: none !important;
+            height: 250px !important;
           }
+        }
+
+        &_address {
+          .map {
+            display: none;
+          }
+        }
+
+        &_details {
+          padding-left: 0 !important;
         }
       }
       @media screen and (max-width: 576px) {
         &_img {
           img {
-            height: 300px;
+            //height: 300px;
           }
         }
       }
@@ -425,11 +431,19 @@ export default {
           align-items: center;
           margin-top: 37px;
 
-          @media only screen and (max-width: 575px) {
-            flex-direction: column;
+          @media only screen and (max-width: 991px) {
+            position: fixed;
+            left: 0;
+            width: 100%;
+            bottom: 64px;
+            z-index: 99;
+            flex-direction: row;
+            margin: 0;
+            height: 64px;
+            background-color: #fff;
           }
 
-          button {
+          button, .btn-new-light {
             font-weight: 600;
             font-size: 16px;
             line-height: 24px;
@@ -498,13 +512,13 @@ export default {
   }
 
   .before {
-    left: -20px;
+    left: 4px;
     transform: rotate(135deg);
     -webkit-transform: rotate(135deg);
   }
 
   .after {
-    right: -20px;
+    right: 4px;
     transform: rotate(-45deg);
     -webkit-transform: rotate(-45deg);
   }
@@ -516,6 +530,30 @@ export default {
       font-size: 20px;
       font-weight: 100;
     }
+  }
+}
+
+.price_mobile {
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 32px;
+  color: #0086C9;
+  padding: 0 0 0 15px;
+}
+
+.desktop_favorite, .product_info_details_price {
+  display: none !important;
+}
+
+@media only screen and (min-width: 992px) {
+  .desktop_favorite, {
+    display: block !important;
+  }
+  .product_info_details_price {
+    display: flex !important;
+  }
+  .mobile_favorite, .price_mobile {
+    display: none;
   }
 }
 

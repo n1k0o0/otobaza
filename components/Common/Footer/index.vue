@@ -10,14 +10,14 @@
                   img(alt='logo' src='/css/icons/logo-light.png')
                 .socials.justify-content-center.justify-content-lg-start
                   a(href='https://www.facebook.com/otobazacom/' target='_blank')
-                    img(alt='logo' src='/css/icons/fb.png')
+                    img(alt='logo' src='/css/icons/fb.svg')
                   a(href='https://instagram.com/otobaza' target='_blank')
-                    img(alt='logo' src='/css/icons/instagram.png')
+                    img(alt='logo' src='/css/icons/instagram.svg')
                   a(href='https://www.linkedin.com/company/otobaza' target='_blank')
-                    img(alt='logo' src='/css/icons/linkedin.png')
+                    img(alt='logo' src='/css/icons/linkedin.svg')
 
                 p.email
-                  img(alt='logo' src='/css/icons/email.png')
+                  img(alt='logo' src='/css/icons/sms.svg')
                   | info@otobaza.com
               .col-12.col-md-6
                 FooterMenu

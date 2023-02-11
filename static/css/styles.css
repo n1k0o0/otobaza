@@ -513,7 +513,7 @@ button.lang_btn:focus {
 }
 
 .droplogin .dropdown-menu, .dropotp .dropdown-menu {
-  min-width: 310px;
+  min-width: 370px;
   left: 50% !important;
   top: 50% !important;
   transform: translate(-50%, -50%);
@@ -5911,6 +5911,10 @@ input:disabled::-ms-input-placeholder {
   .mobile_ww {
     margin-top: -36px;
   }
+
+  .droplogin .dropdown-menu, .dropotp .dropdown-menu {
+    min-width: 310px;
+  }
 }
 
 @media screen and (max-width: 400px) {
@@ -6289,3 +6293,10 @@ button:disabled, .disabled {
 .long-text-wrap {
   overflow-wrap: anywhere;
 }
+
+.vue-map {
+  border: 1px solid #EAECF0;
+  border-radius: 4px;
+}
+
+

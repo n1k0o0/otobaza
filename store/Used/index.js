@@ -136,13 +136,11 @@ const actions = {
         data: products,
         meta
       }
-    } = await this.$axios.get(`api/used-parts/search?page=${state.search_page}&orderBy=${state.search_sort_by}&sort=${state.search_sort_order}`,
+    } = await this.$axios.post(`api/used-parts/search?page=${state.search_page}&orderBy=${state.search_sort_by}&sort=${state.search_sort_order}`,
       {
-        params: {
-          manu_id: brand,
-          mod_id: model,
-          keyword: keyword
-        }
+        manu_id: brand,
+        mod_id: model,
+        keyword: keyword
       })
 
     commit('SET_LAST_PAGE', meta.last_page)
@@ -185,13 +183,11 @@ const actions = {
         data: products,
         meta
       }
-    } = await this.$axios.get(`api/used-parts/search?page=${state.search_page}&orderBy=${state.search_sort_by}&sort=${state.search_sort_order}`,
+    } = await this.$axios.post(`api/used-parts/search?page=${state.search_page}&orderBy=${state.search_sort_by}&sort=${state.search_sort_order}`,
       {
-        params: {
-          manu_id: brand,
-          mod_id: model,
-          keyword: keyword
-        }
+        manu_id: brand,
+        mod_id: model,
+        keyword: keyword
       })
 
     commit('SET_LAST_PAGE', meta.last_page)
