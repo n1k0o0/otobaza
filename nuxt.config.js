@@ -214,7 +214,7 @@ module.exports = {
    ** Axios module configuration
    */
   axios: {
-    baseURL: 'https://serv1.otobaza.com'
+    baseURL: 'https://test-api.otobaza.com'
   },
   render: {
     resourceHints: false
