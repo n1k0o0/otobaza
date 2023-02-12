@@ -3,9 +3,9 @@
     template(v-if="loading")
       p.search_results_loading {{ $t('loading') }} ...
     template(v-else)
-      template(v-if="parts.length")
+      div(v-if="parts.length" v-infinite-scroll="getMore" infinite-scroll-disabled="busy" infinite-scroll-distance="10")
         .search_results_items
-            UsedPart(:card="card", v-for="(card,index) in parts", :key="index")
+          UsedPart(:card="card", v-for="(card,index) in parts", :key="index")
         .search_results_more(v-show="search_page!==last_page && !isHome" )
           button.btn-new.px-4.py-2(@click="getMore", :disabled="loadingMore") {{ loadingMore?$t('loading'): $t('more_products')}}
       .search_results_not-found(v-else)
@@ -41,10 +41,13 @@ export default {
     ...mapGetters({
       usedParts: 'Used/parts',
       favorites: 'Used/favorites',
-      search_page: 'Used/search_page',
-      last_page: 'Used/last_page',
+      search_page_parts: 'Used/search_page',
+      search_page_favorite: 'Used/search_page_favorite',
+      last_page_parts: 'Used/last_page',
+      last_page_favorite: 'Used/last_page_favorite',
       loadingMore: 'Used/loading',
-      meta: 'Used/meta',
+      meta_parts: 'Used/meta',
+      meta_favorite: 'Used/meta_favorite',
       ad_lasts: 'Used/ad_lasts'
     }),
     isFavorite () {
@@ -61,6 +64,30 @@ export default {
       } else {
         return this.usedParts
       }
+    },
+    meta () {
+      if (this.isFavorite) {
+        return this.meta_favorite
+      } else {
+        return this.meta_parts
+      }
+    },
+    search_page () {
+      if (this.isFavorite) {
+        return this.search_page_favorite
+      } else {
+        return this.search_page_parts
+      }
+    },
+    last_page () {
+      if (this.isFavorite) {
+        return this.last_page_favorite
+      } else {
+        return this.last_page_parts
+      }
+    },
+    busy () {
+      return this.loadingMore || this.last_page === this.search_page
     }
   },
   methods: {
@@ -72,6 +99,7 @@ export default {
       window.scrollTo({ top: 0, behavior: 'smooth' })
     },
     getMore () {
+      console.log(5)
       if (this.isFavorite) {
         this.GET_FAVORITES({ page: true })
       } else {

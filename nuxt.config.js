@@ -69,6 +69,7 @@ module.exports = {
     { src: '~~/plugins/tooltip.js', mode: 'client' },
     { src: '~~/plugins/vue-select.js', mode: 'client' },
     { src: '~/plugins/lazyload', mode: 'client' },
+    { src: '~/plugins/infinite-scroll', mode: 'client' },
     { src: '~/plugins/vue2-google-maps', mode: 'client' }
   ],
   modules: [

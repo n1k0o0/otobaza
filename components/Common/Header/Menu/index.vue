@@ -3,9 +3,9 @@
     <div class="container">
       <div class="row ">
         <div class="col-4 col-sm-4 pr-0">
-          <n-link class="" :to="localePath('index')">
+          <nuxt-link class="" :to="localePath('index')">
             <img alt="logo" src="/css/icons/logo.svg" />
-          </n-link>
+          </nuxt-link>
         </div>
 
         <div class="col-8 col-sm-8 pl-0 ms-unset">

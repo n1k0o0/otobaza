@@ -8,9 +8,12 @@ const state = () => ({
   loading: false,
   search_lang: '',
   search_page: 1,
+  search_page_favorite: 1,
   last_page: 1,
+  last_page_favorite: 1,
   meta: {},
-  search_sort_by: 'price',
+  meta_favorite: {},
+  search_sort_by: 'created_at',
   search_sort_order: 'desc',
   ad_special: [],
   ad_vip: [],
@@ -27,8 +30,11 @@ const getters = {
   part (state) { return state.part },
   search_lang (state) { return state.search_lang },
   search_page (state) { return state.search_page },
+  search_page_favorite (state) { return state.search_page_favorite },
   last_page (state) { return state.last_page },
+  last_page_favorite (state) { return state.last_page_favorite },
   meta (state) { return state.meta },
+  meta_favorite (state) { return state.meta_favorite },
   sort_by (state) { return state.search_sort_by },
   sort_order (state) { return state.search_sort_order },
   ad_special (state) { return state.ad_special },
@@ -55,11 +61,20 @@ const mutations = {
   SET_SEARCH_PAGE (state, payload) {
     state.search_page = payload
   },
+  SET_SEARCH_PAGE_FAVORITE (state, payload) {
+    state.search_page_favorite = payload
+  },
   SET_LAST_PAGE (state, payload) {
     state.last_page = payload
   },
+  SET_LAST_PAGE_FAVORITE (state, payload) {
+    state.last_page_favorite = payload
+  },
   SET_META (state, payload) {
     state.meta = payload
+  },
+  SET_META_FAVORITE (state, payload) {
+    state.meta_favorite = payload
   },
   SET_SORT_BY (state, payload) {
     state.search_sort_by = payload
@@ -112,10 +127,10 @@ const actions = {
     model = null,
     keyword = null,
     sortBy = null,
-    sortOrder = 'desc',
+    sortOrder = null,
     page = false
   }) {
-    if (keyword.length > 0 && keyword.length < 3) {
+    if (keyword && keyword.length > 0 && keyword.length < 3) {
       await $swal.fire({
         title: this.$i18n.t('keyword_limit_error'),
         position: 'top',
@@ -128,8 +143,8 @@ const actions = {
     }
 
     commit('SET_LOADING', true)
-    commit('SET_SORT_BY', sortBy ?? 'created_at')
-    commit('SET_SORT_ORDER', sortOrder)
+    commit('SET_SORT_BY', sortBy ?? state.search_sort_by)
+    commit('SET_SORT_ORDER', sortOrder ?? state.search_sort_order)
 
     commit('SET_SEARCH_PAGE', page ? ++state.search_page : 1)
 
@@ -139,7 +154,7 @@ const actions = {
         data: products,
         meta
       }
-    } = await this.$axios.post(`api/used-parts/search?page=${state.search_page}&orderBy=${state.search_sort_by}&sort=${state.search_sort_order}`,
+    } = await this.$axios.post(`api/used-parts/search?page=${state.search_page}&orderBy=${state.search_sort_by}&sort=${state.search_sort_order}&perPage=20`,
       {
         manu_id: brand,
         mod_id: model,
@@ -163,7 +178,7 @@ const actions = {
     keyword = null,
     sortBy = 'created_at'
   }) {
-    if (keyword.length > 0 && keyword.length < 3) {
+    if (keyword && keyword.length > 0 && keyword.length < 3) {
       await $swal.fire({
         title: this.$i18n.t('keyword_limit_error'),
         position: 'top',
@@ -186,7 +201,7 @@ const actions = {
         data: products,
         meta
       }
-    } = await this.$axios.post(`api/used-parts/search?page=${state.search_page}&orderBy=${state.search_sort_by}&sort=${state.search_sort_order}`,
+    } = await this.$axios.post(`api/used-parts/search?page=${state.search_page}&orderBy=${state.search_sort_by}&sort=${state.search_sort_order}&perPage=20`,
       {
         manu_id: brand,
         mod_id: model,
@@ -218,10 +233,12 @@ const actions = {
     this.$axios.defaults.baseURL = this.$env.BASE_API_URL
     const {
       data: {
-        data: products
+        data: products,
+        meta
       }
     } = await this.$axios.get('api/used-parts?perPage=20&orderBy=created_at&sort=desc')
 
+    commit('SET_META', meta)
     commit('SET_AD_LASTS', products)
   },
 
@@ -230,9 +247,7 @@ const actions = {
   } = { page: false }) {
     commit('SET_LOADING', true)
 
-    if (page) {
-      commit('SET_SEARCH_PAGE', ++state.search_page)
-    }
+    commit('SET_SEARCH_PAGE_FAVORITE', page ? ++state.search_page : 1)
 
     this.$axios.defaults.baseURL = this.$env.BASE_API_URL
     const {
@@ -242,8 +257,8 @@ const actions = {
       }
     } = await this.$axios.get(`api/wish-list/used-part?page=${state.search_page}`)
 
-    commit('SET_LAST_PAGE', meta.last_page)
-    commit('SET_META', meta)
+    commit('SET_LAST_PAGE_FAVORITE', meta.last_page)
+    commit('SET_META_FAVORITE', meta)
     commit('SET_FAVORITES_COUNT', meta.total)
 
     if (page) {

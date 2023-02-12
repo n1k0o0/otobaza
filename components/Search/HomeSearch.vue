@@ -392,7 +392,7 @@
       </swiper>
     </div>
 
-    <div v-if="ad_lasts.length" class="elan_wrapper">
+    <div v-if="parts.length" class="elan_wrapper">
       <div class="elan_header">
         <h2 class="">
           {{ $t('used.last') }}
@@ -418,7 +418,7 @@
           </svg>
         </span>
       </div>
-      <UsedParts type="home" />
+      <UsedParts />
     </div>
   </div>
 </template>
@@ -454,7 +454,7 @@ export default {
       await this.GET_SPARE_PARTS()
     }
 
-    await this.GET_HOME_ADS()
+    await this.GET_PARTS({})
   },
   data () {
     return {
@@ -530,6 +530,7 @@ export default {
       manufacturer_models: 'Catalog/manufacturer_models',
       ad_special: 'Used/ad_special',
       ad_lasts: 'Used/ad_lasts',
+      parts: 'Used/parts',
       ad_vip: 'Used/ad_vip'
     })
   },
@@ -541,7 +542,8 @@ export default {
       GET_TYPES: 'Catalog/GET_TYPES',
       GET_CATALOG_MANUFACTURERS: 'Catalog/GET_CATALOG_MANUFACTURERS',
       GET_MANUFACTURER_MODELS: 'Catalog/GET_MANUFACTURER_MODELS',
-      GET_HOME_ADS: 'Used/GET_HOME_ADS'
+      GET_HOME_ADS: 'Used/GET_HOME_ADS',
+      GET_PARTS: 'Used/GET_PARTS'
     }),
     showFilter (a) {
       // eslint-disable-next-line no-loops/no-loops
