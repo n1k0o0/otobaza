@@ -6299,4 +6299,8 @@ button:disabled, .disabled {
   border-radius: 4px;
 }
 
+.d-grid {
+  display: grid !important;
+}
+
 

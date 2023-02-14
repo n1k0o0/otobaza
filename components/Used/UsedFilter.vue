@@ -1,37 +1,38 @@
 <template lang="pug">
-  .filter
-    .filter_item
-      v-select(v-model='search.brand', :loading="loading", label='manuName', :options='manufacturers', :reduce='brand => brand.manuId', @input='GET_MANUFACTURER_MODELS({manufacturer:search.brand})', :placeholder="$t('brand')", :reset-on-options-change="!!search.brand")
-        template(v-slot:selected-option='option')
-          span(:class='option.icon')
-          | {{ option.manuName.length < 15 ? option.manuName : (option.manuName.substring(0, 12) + '...') }}
-        template(v-slot:option='option')
-          span(:class='option.icon')
-          | {{ option.manuName }}
+  .d-grid
+    .filter
+      .filter_item
+        v-select(v-model='search.brand', :loading="loading", label='manuName', :options='manufacturers', :reduce='brand => brand.manuId', @input='GET_MANUFACTURER_MODELS({manufacturer:search.brand})', :placeholder="$t('brand')", :reset-on-options-change="!!search.brand")
+          template(v-slot:selected-option='option')
+            span(:class='option.icon')
+            | {{ option.manuName.length < 15 ? option.manuName : (option.manuName.substring(0, 12) + '...') }}
+          template(v-slot:option='option')
+            span(:class='option.icon')
+            | {{ option.manuName }}
 
-    .filter_item
-      v-select(v-model='search.model', :loading="loading", :disabled='!search.brand', label='ModelName', :options='manufacturer_models', :reduce='part => part.modId', :placeholder="$t('model')", :reset-on-options-change="!!search.model")
-        template(v-slot:selected-option='option')
-          span(:class='option.icon')
-          | {{ option.ModelName.length < 15 ? option.ModelName : (option.ModelName.substring(0, 12) + '...') }}
-        template(v-slot:option='option')
-          span(:class='option.icon')
-          | {{ option.ModelName }}
+      .filter_item
+        v-select(v-model='search.model', :loading="loading", :disabled='!search.brand', label='ModelName', :options='manufacturer_models', :reduce='part => part.modId', :placeholder="$t('model')", :reset-on-options-change="!!search.model")
+          template(v-slot:selected-option='option')
+            span(:class='option.icon')
+            | {{ option.ModelName.length < 15 ? option.ModelName : (option.ModelName.substring(0, 12) + '...') }}
+          template(v-slot:option='option')
+            span(:class='option.icon')
+            | {{ option.ModelName }}
 
-    .filter_item
-      input( v-model="search.keyword", :placeholder="$t('search')", @keyup.enter="searchMethod" )
+      .filter_item
+        input( v-model="search.keyword", :placeholder="$t('search')", @keyup.enter="searchMethod" )
 
-    .filter_item.w-100.h-100
-      button.btn-new.w-100(@click="searchMethod", :disabled="!(search.brand || search.model || search.keyword)") {{$t('search')}}
-    .filter_item.filter_item_sort.sort_wrap
-      span(@click.prevent="filter('price')", :class="{'active':search_sort_by==='price'}")
-        | {{$t('price')}}
-        img(src="/img/search/sort_arrow.svg")
-      span(@click.prevent="filter('created_at')", :class="{'active':search_sort_by==='created_at'}")
-        | {{$t('new')}}
-        img(src="/img/search/sort_arrow.svg")
-      span
-        | {{ parts.length }} {{ $t('product') }}
+      .filter_item.w-100.h-100
+        button.btn-new.w-100(@click="searchMethod", :disabled="!(search.brand || search.model || search.keyword)") {{$t('search')}}
+      .filter_item.filter_item_sort.sort_wrap
+        span(@click.prevent="filter('price')", :class="{'active':search_sort_by==='price'}")
+          | {{$t('price')}}
+          img(src="/img/search/sort_arrow.svg")
+        span(@click.prevent="filter('created_at')", :class="{'active':search_sort_by==='created_at'}")
+          | {{$t('new')}}
+          img(src="/img/search/sort_arrow.svg")
+        span
+          | {{ parts.length }} {{ $t('product') }}
 
 </template>
 
