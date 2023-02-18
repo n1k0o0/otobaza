@@ -2,7 +2,7 @@
   n-link(:to="localePath({\
                       name: 'elanlar-slug',\
                       params: {\
-                      slug: card.id\
+                      slug: card.id + '-' + $slugify(card.title)\
                       }\
                       })")
     .search_results_items_item

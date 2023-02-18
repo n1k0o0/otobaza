@@ -139,7 +139,8 @@ export default {
     await this.GET_PRODUCT(param)
   },
   async validate ({ params, error, app }) {
-    const param = params.slug
+    const param = params.slug.split('-')[0]
+
     if (isNaN(param)) {
       return error({ statusCode: 500, message: app.i18n.t('not_found') })
     } else {

@@ -143,6 +143,7 @@ module.exports = {
       }
     ],
     'vue-social-sharing/nuxt',
+    '@nuxtclub/slugify',
     '@nuxtjs/device'
   ],
   auth: {
@@ -205,6 +206,11 @@ module.exports = {
     redirect: {
       logout: '/',
       home: false
+    }
+  },
+  slugify: {
+    globals: {
+      lower: true
     }
   },
   styleResources: {
