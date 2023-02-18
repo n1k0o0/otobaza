@@ -113,6 +113,8 @@ export default {
         width: 130px;
         height: 130px;
         margin: 0 auto;
+        object-fit: cover;
+        object-position: center;
       }
 
       button {
