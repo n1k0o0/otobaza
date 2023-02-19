@@ -29,9 +29,9 @@
                     .before.pointer(@click="previousImage")
                     .after.pointer(@click="nextImage")
                 .product_info_img_slider
-                  VueSlickCarousel(v-bind="slideShowSettings")
-                    .product_info_img_slider_slide(v-for="(image,index) in (product.images.length?product.images:[{link:'/img/search/big-part.png'}])")
-                      div(:class="{'selected':imgIndex===index}")
+                  swiper.swiper(:options='swiperOptionMain')
+                    swiper-slide(v-for="(image,index) in (product.images.length?product.images:[{link:'/img/search/big-part.png'}])" )
+                      div(:class="{'selected':imgIndex===index}" class="part_img_slide")
                         img.pointer(:src='image.link', @click="imgIndex=index", :alt="product.title")
               .product_info_details
                 h1.product_info_details_title.font-weight-bold.long-text-wrap
@@ -107,10 +107,7 @@
 </template>
 
 <script>
-import VueSlickCarousel from 'vue-slick-carousel'
-import 'vue-slick-carousel/dist/vue-slick-carousel.css'
 // optional style for arrows & dots
-import 'vue-slick-carousel/dist/vue-slick-carousel-theme.css'
 import PartsPlaceholder from '@/components/Placeholders/PartsPlaceholder'
 import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
 import UsedPart from '~/components/Used/UsedPart.vue'
@@ -124,7 +121,6 @@ import { mapActions, mapGetters } from 'vuex'
 export default {
   name: 'SearchParts',
   components: {
-    VueSlickCarousel,
     AddToFavoriteButton,
     PartsPlaceholder,
     Swiper,
@@ -151,6 +147,32 @@ export default {
     return {
       swiperOptionAd: {
         slidesPerView: 2,
+        slidesPerGroup: 2,
+        spaceBetween: 10,
+        pagination: {
+          el: '.swiper-pagination',
+          clickable: true
+        },
+        breakpoints: {
+          640: {
+            slidesPerView: 3,
+            slidesPerGroup: 3,
+            spaceBetween: 14
+          },
+          998: {
+            slidesPerView: 4,
+            slidesPerGroup: 4,
+            spaceBetween: 14
+          },
+          1200: {
+            slidesPerView: 5,
+            slidesPerGroup: 5,
+            spaceBetween: 14
+          }
+        }
+      },
+      swiperOptionMain: {
+        slidesPerView: 3,
         slidesPerGroup: 2,
         spaceBetween: 10,
         pagination: {
@@ -375,11 +397,25 @@ export default {
         &_img {
           max-width: 100% !important;
           width: 100% !important;
+          overflow: hidden;
 
           &_big {
             //display: none !important;
             height: 250px !important;
           }
+
+          .swiper {
+            .swiper-slide {
+              height: unset !important;
+            }
+
+            img {
+              height: 65px;
+              width: 100%;
+              object-fit: cover;
+            }
+          }
+
         }
 
         &_address {
@@ -411,23 +447,6 @@ export default {
           margin-bottom: 24px;
           border-radius: 16px;
           background-color: #fff;
-        }
-
-        &_slider {
-          &_slide {
-            & > div {
-              &.selected {
-                border-color: black;
-              }
-
-              border: 1px solid #ebebeb;
-              border-radius: 5px;
-              margin: 5px;
-              padding: 5px;
-              display: flex;
-              justify-content: center;
-            }
-          }
         }
       }
 
