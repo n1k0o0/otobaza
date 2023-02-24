@@ -81,7 +81,7 @@
               <a
                 class="log-fpassword"
                 href="#"
-                @click.prevent="forgotPassword"
+                @mousedown.prevent="forgotPassword"
               >{{ $t('forget-password') }}</a>
               <button
                 class="btn-new w-100"

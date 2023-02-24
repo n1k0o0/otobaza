@@ -49,7 +49,7 @@
               {{ $t('store_answer') }}
             </p>
           </div>
-          <a href="https://seller.otobaza.com/#/login" target="_blank">
+          <a href="https://seller.otobaza.com/#/register" target="_blank">
             <button class="btn-new">
               {{ $t('registration') }}
               <svg
