@@ -2,8 +2,8 @@
   <div class="container home_search_wrapper">
     <div class="home_search">
       <div class="search_menu">
-        <swiper class="swiper" :options="swiperOption">
-          <swiper-slide>
+        <div>
+          <div class="d-inline-block">
             <h5
               class="pointer"
               :class="{'active_menu':filterShow[2]}"
@@ -11,8 +11,8 @@
             >
               {{ $t('home_search.used') }}
             </h5>
-          </swiper-slide>
-          <swiper-slide>
+          </div>
+          <div class="d-inline-block ml-4">
             <h5
               class="pointer"
               :class="{'active_menu':filterShow[1]}"
@@ -20,8 +20,8 @@
             >
               {{ $t('home_search.spare-parts') }}
             </h5>
-          </swiper-slide>
-        </swiper>
+          </div>
+        </div>
       </div>
       <transition
         mode="out-in"

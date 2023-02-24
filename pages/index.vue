@@ -147,11 +147,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.container {
-  align-items: center !important;
-  display: grid !important;
-}
-
 .home_blocks {
   display: flex;
   //grid-auto-flow: column;
