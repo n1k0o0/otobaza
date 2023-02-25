@@ -457,7 +457,7 @@ export default {
             left: 0;
             width: 100%;
             bottom: 64px;
-            z-index: 99;
+            z-index: 98;
             flex-direction: row;
             margin: 0;
             height: 64px;
