@@ -556,7 +556,7 @@ export default {
 
 .price_mobile {
   font-weight: 500;
-  font-size: 24px;
+  font-size: 20px;
   line-height: 32px;
   color: #0086C9;
   padding: 0 0 0 15px;

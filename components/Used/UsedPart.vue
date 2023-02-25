@@ -51,16 +51,6 @@ export default {
   height: 100%;
   text-align: left;
 
-  @media screen and (max-width: 480px) {
-    padding: 10px;
-    h5 {
-      font-size: 1rem;
-    }
-    h6 {
-      font-size: 0.725rem;
-    }
-  }
-
   p {
     margin: 0;
   }
@@ -126,6 +116,21 @@ export default {
 
     .btn {
       background-color: #498EBF;
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    padding: 10px;
+    h5 {
+      font-size: 1rem;
+    }
+    h6 {
+      font-size: 0.725rem;
+    }
+
+    &_price {
+      font-size: 18px;
+      line-height: 24px;
     }
   }
 
