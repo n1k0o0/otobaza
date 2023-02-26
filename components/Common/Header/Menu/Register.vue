@@ -246,7 +246,7 @@ export default {
       this.eyeClass = this.passwordType === 'password' ? 'fa-eye-slash' : 'fa-eye'
     },
     goToSeller () {
-      window.location.href = 'https://staging-seller.otobaza.com/#/login'
+      window.location.href = 'https://staging-seller.otobaza.com/#/register'
     },
     userRegister () {
       this.REGISTER_BUYER({
