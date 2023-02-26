@@ -2,7 +2,7 @@
   <div>
     <HomeSearch />
 
-    <div class="container mh60vh">
+    <div class="container mh60vh mt-5">
       <div class="home_blocks">
         <div class="home_blocks_text">
           <h5>{{ $t('search_difficulty_question') }}</h5>
@@ -49,7 +49,7 @@
               {{ $t('store_answer') }}
             </p>
           </div>
-          <a href="https://seller.otobaza.com/#/login" target="_blank">
+          <a href="https://seller.otobaza.com/#/register" target="_blank">
             <button class="btn-new">
               {{ $t('registration') }}
               <svg
@@ -147,11 +147,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.container {
-  align-items: center !important;
-  display: grid !important;
-}
-
 .home_blocks {
   display: flex;
   //grid-auto-flow: column;
@@ -178,6 +173,12 @@ export default {
     img {
       width: 296px !important;
       align-self: center;
+    }
+  }
+
+  .home_blocks_buttons {
+    button {
+      width: 130px;
     }
   }
 

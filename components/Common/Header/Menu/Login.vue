@@ -1,6 +1,7 @@
 <template>
-  <div v-click-outside="onClickOutside" class="dropdown droplogin">
+  <div class="dropdown droplogin pointer">
     <button
+      v-if="!footer"
       id="droplogin"
       class="btn-new-light dropdown-toggle login-btn"
       :class="{'show':show}"
@@ -9,21 +10,56 @@
     >
       {{ $t('login') }}
     </button>
+    <span v-else @click="TOGGLE_MOBILE_MENU(!show)">
+      {{ $t('login') }}
+    </span>
     <transition mode="in-out" name="page-fade">
       <div v-if="show" class="dropdown-menu show">
         <form @submit.prevent="userLogin">
           <div class="log-items">
+            <div class="log-items-header">
+              <h3 class="d-inline-block">
+                {{ $t('login') }}
+              </h3>
+
+              <div class="close float-right">
+                <svg
+                  fill="none"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  width="24"
+                  xmlns="http://www.w3.org/2000/svg"
+                  @click="onClickOutside"
+                >
+                  <path
+                    d="M5.25 5.25L12 12M12 12L5.25 18.75M12 12L18.75 18.75M12 12L18.75 5.25"
+                    stroke="#98A2B3"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                  />
+                </svg>
+              </div>
+            </div>
+            <hr class="m-0" />
             <div class="login-form">
-              <input
-                ref="login"
-                v-model="login.phone"
-                v-mask="'+994#########'"
-                class="form-control"
-                :placeholder="$t('username')"
-                type="text"
-              />
-              <fieldset class="password-eye">
+              <fieldset class="mb-3">
+                <label for="phone">{{ $t('validation.names.phone') }}</label>
                 <input
+                  id="phone"
+                  ref="login"
+                  v-model="login.phone"
+                  v-mask="'+994#########'"
+                  class="form-control"
+                  :placeholder="$t('username')"
+                  type="text"
+                />
+              </fieldset>
+
+              <fieldset class="password-eye">
+                <label for="password">{{ $t('validation.names.password') }}</label>
+                <input
+                  id="password"
                   v-model="login.password"
                   class="form-control"
                   :placeholder="$t('password')"
@@ -45,10 +81,10 @@
               <a
                 class="log-fpassword"
                 href="#"
-                @click.prevent="forgotPassword"
+                @mousedown.prevent="forgotPassword"
               >{{ $t('forget-password') }}</a>
               <button
-                class="log-btn log_btn"
+                class="btn-new w-100"
                 :disabled="loading || !(login.phone && login.password)"
                 type="submit"
                 @click.prevent="userLogin"
@@ -60,14 +96,26 @@
         </form>
       </div>
     </transition>
+    <div
+      v-if="show"
+      class="overlay"
+      @click="onClickOutside"
+    ></div>
   </div>
 </template>
+
 <script>
 
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 
 export default {
   name: 'Login',
+  props: {
+    footer: {
+      type: Boolean,
+      default: false
+    }
+  },
   data () {
     return {
       loading: false,

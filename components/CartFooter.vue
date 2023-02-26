@@ -1,13 +1,14 @@
 <template lang="pug">
   .row.wishlist-footer
     .col-12
-      h4.rmtt
+      p
         | {{ $t('total_sum') }}:
         |
-        span(style="color:#7C7C7C") {{cartTotal}} {{currency}}
+      h4(class="wishlist-footer-price float-right") {{cartTotal}} {{currency}}
 </template>
 <script>
 import { mapGetters } from 'vuex'
+
 export default {
   name: 'CartFooter',
   computed: {

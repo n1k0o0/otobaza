@@ -1,6 +1,11 @@
 <template lang="pug">
   .container
-    .mcontainer.mh60vh
+    ol.breadcrumb-custom
+      li.breadcrumb-item
+        a(href='/') Home
+      li.breadcrumb-item.active(aria-current='page')
+        a {{$t('my_cart')}}
+    .cart
       CartHeader
       template(v-if="cart.length")
         CartItems
@@ -18,22 +23,37 @@
 import CartFooter from '@/components/CartFooter'
 import CartHeader from '@/components/Catalog/CartHeader'
 import CartItems from '@/components/Catalog/CartItems'
-import { mapGetters, mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
+
 export default {
   name: 'Cart',
-  components: { CartFooter, CartItems, CartHeader },
+  components: {
+    CartFooter,
+    CartItems,
+    CartHeader
+  },
   layout: 'pages',
   scrollToTop: true,
   middleware: 'authorized',
-  async asyncData ({ store, error, query }) {
+  async asyncData ({
+    store,
+    error,
+    query
+  }) {
     const hasItems = store.getters['Catalog/cart']?.length
     if (Number(hasItems) === 0) {
       await store.dispatch('Catalog/GET_CART').catch(e => {
-        error({ statusCode: e?.response?.status || 404, message: e?.response?.data?.message || 'error' })
+        error({
+          statusCode: e?.response?.status || 404,
+          message: e?.response?.data?.message || 'error'
+        })
       })
     } else if (query.reload) {
       await store.dispatch('Catalog/GET_CART').catch(e => {
-        error({ statusCode: e?.response?.status || 404, message: e?.response?.data?.message || 'error' })
+        error({
+          statusCode: e?.response?.status || 404,
+          message: e?.response?.data?.message || 'error'
+        })
       })
     }
   },
@@ -53,7 +73,10 @@ export default {
     },
     'geo.currency' () {
       this.GET_CART().catch(e => {
-        this.$nuxt.error({ statusCode: e?.response?.status || 404, message: e?.response?.data?.message || 'error' })
+        this.$nuxt.error({
+          statusCode: e?.response?.status || 404,
+          message: e?.response?.data?.message || 'error'
+        })
       })
     }
   },

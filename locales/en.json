@@ -2,6 +2,9 @@
   "home": "Home page",
   "profile": "Profile",
   "blog": "Blog",
+  "favorites": "Favorites",
+  "empty_favorites": "There are no products in the favorites!",
+  "for_add_to_favorite_register_or_login": "Login or Register to add to favorites!",
   "header_top_info": "All spare parts in one place",
   "download": "Download",
   "download_app": "Download for FREE",
@@ -359,5 +362,14 @@
   "store_question": "Do you have a store?",
   "store_answer": "Then you can register as a store on our website, upload your products and get a wide range of buyers.",
   "question_question": "Have a question?",
-  "question_answer": "Then you can use the Live CHAT available on the site."
+  "question_answer": "Then you can use the Live CHAT available on the site.",
+  "used": {
+    "vip": "VIP",
+    "special": "Special",
+    "last": "Latest",
+    "similar": "Similar parts"
+  },
+  "phone_tooltip": "Apply on behalf of Otobaza when calling or approaching, you can get a discount!",
+  "discount": "Discount",
+  "keyword_limit_error": "Search text must be more than 2 characters"
 }

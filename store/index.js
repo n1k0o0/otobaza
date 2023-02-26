@@ -5,6 +5,7 @@ import getters from './getters'
 import UI from './UI'
 import User from './User'
 import Catalog from './Catalog'
+import Used from './Used'
 
 export default {
   state: () => ({
@@ -22,6 +23,7 @@ export default {
   modules: {
     UI,
     User,
-    Catalog
+    Catalog,
+    Used
   }
 }

@@ -2,6 +2,9 @@
   "home": "Ana Sayfa",
   "profile": "Profil",
   "blog": "Blog",
+  "favorites": "Favoriler",
+  "empty_favorites": "Favorilerde ürün yok!",
+  "for_add_to_favorite_register_or_login": "Favorilere eklemek için Giriş veya Kayıt olun",
   "header_top_info": "Tüm yedek parçalar tek adreste",
   "download": "Indir",
   "download_app": "ÜCRETSİZ indirin",
@@ -359,5 +362,14 @@
   "store_question": "Bir dükkanınız var mı?",
   "store_answer": "Daha sonra web sitemizde bir dükkan olarak kaydolabilir, ürünlerinizi yükleyebilir ve geniş bir alıcı kitlesi elde edebilirsiniz.",
   "question_question": "Bir sorunuz mu var?",
-  "question_answer": "Sitede bulunan Canlı SOHBET'i kullanabilirsiniz."
+  "question_answer": "Sitede bulunan Canlı SOHBET'i kullanabilirsiniz.",
+  "used": {
+    "vip": "VIP",
+    "special": "Özel",
+    "last": "Son eklenenler",
+    "similar": "Benzer ilanlar"
+  },
+  "phone_tooltip": "Aradığınızda veya yaklaşırken Otobaza adına başvuru yapın, indirim kazanın!",
+  "discount": "İndirim",
+  "keyword_limit_error": "Arama metni 2 karakterden uzun olmalıdır"
 }

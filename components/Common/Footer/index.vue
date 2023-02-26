@@ -3,35 +3,35 @@
     .container
       .footer-details
         .row
-          .col-12.col-lg-6
+          .col-12.col-lg-8.col-xl-6
             .row
               .col-12.col-md-6.text-center.text-lg-left
                 n-link(to='/')
                   img(alt='logo' src='/css/icons/logo-light.png')
                 .socials.justify-content-center.justify-content-lg-start
                   a(href='https://www.facebook.com/otobazacom/' target='_blank')
-                    img(alt='logo' src='/css/icons/fb.png')
+                    img(alt='logo' src='/css/icons/fb.svg')
                   a(href='https://instagram.com/otobaza' target='_blank')
-                    img(alt='logo' src='/css/icons/instagram.png')
+                    img(alt='logo' src='/css/icons/instagram.svg')
                   a(href='https://www.linkedin.com/company/otobaza' target='_blank')
-                    img(alt='logo' src='/css/icons/linkedin.png')
+                    img(alt='logo' src='/css/icons/linkedin.svg')
 
                 p.email
-                  img(alt='logo' src='/css/icons/email.png')
+                  img(alt='logo' src='/css/icons/sms.svg')
                   | info@otobaza.com
               .col-12.col-md-6
                 FooterMenu
 
-          .col-12.col-lg-6.footer_right
+          .col-12.col-lg-4.col-xl-6.footer_right
             .footer_app
               h6 {{$t('download_app')}}
               p {{$t('header_top_info')}}.
 
               .app_icons
                 a(href="https://apps.apple.com/us/app/facebook/id1528493953" class='' target="_blank")
-                  img(alt='ios' src='/css/icons/app_store.png')
+                  img(alt='ios' src='/css/icons/app_store.svg')
                 a(:href='androidLink' target="_blank")
-                  img(alt='android' src='/css/icons/google_play.png')
+                  img(alt='android' src='/css/icons/google_play.svg')
 
             NewsLetter
 

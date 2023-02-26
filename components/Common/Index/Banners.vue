@@ -70,7 +70,7 @@
       img(v-lazy="`img/banners/hyundai.png`")
       span Hyundai
 
-    div(@click="otherShow=true", v-show="!otherShow" ).banners_banner
+    div(@click="otherShow=true", v-show="!otherShow" ).banners_banner.banners_banner_all
       span.all_brands
         | Hamısına bax
         svg(width='16', height='16', viewBox='0 0 16 16', fill='none', xmlns='http://www.w3.org/2000/svg')
@@ -261,6 +261,16 @@ export default {
     height: 80px;
     position: relative;
 
+    &_all {
+      background-color: rgba(255, 255, 255, 0.32);
+      border: 1px solid #FFFFFF;
+
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.4);
+        border: 2px solid #FFFFFF;
+      }
+    }
+
     span {
       //styleName: Text xl/Medium;
       font-family: SF Pro Display, serif;
@@ -276,10 +286,15 @@ export default {
         right: 21px;
         top: 50%;
         transform: translateY(-50%);
+
+        path {
+          stroke: #fff;
+        }
       }
 
       &.all_brands {
         font-size: 18px;
+        color: #fff;
       }
     }
 

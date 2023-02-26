@@ -44,6 +44,7 @@ module.exports = {
   router: {
     middleware: ['beforeRouteChange'],
     prefetchLinks: false,
+    linkExactActiveClass: 'custom-exact-active-link',
     scrollBehavior: function (to, from, savedPosition) {
       return { x: 0, y: 0 }
     }
@@ -67,7 +68,9 @@ module.exports = {
     { src: '~~/plugins/inputmask.js', mode: 'client' },
     { src: '~~/plugins/tooltip.js', mode: 'client' },
     { src: '~~/plugins/vue-select.js', mode: 'client' },
-    { src: '~/plugins/lazyload', mode: 'client' }
+    { src: '~/plugins/lazyload', mode: 'client' },
+    { src: '~/plugins/infinite-scroll', mode: 'client' },
+    { src: '~/plugins/vue2-google-maps', mode: 'client' }
   ],
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
@@ -140,6 +143,7 @@ module.exports = {
       }
     ],
     'vue-social-sharing/nuxt',
+    '@nuxtclub/slugify',
     '@nuxtjs/device'
   ],
   auth: {
@@ -202,6 +206,11 @@ module.exports = {
     redirect: {
       logout: '/',
       home: false
+    }
+  },
+  slugify: {
+    globals: {
+      lower: true
     }
   },
   styleResources: {

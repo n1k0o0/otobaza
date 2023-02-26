@@ -1,12 +1,10 @@
 <template lang="pug">
   .search_results
-    .title_wrapper.hr-wrap.my-4
-      h5.hr-text.font-weight-bold {{ $t('result_count',{count:meta.total}) }}
     template(v-if="loading")
       p.search_results_loading {{ $t('loading') }} ...
     template(v-else)
       template(v-if="parts.length")
-        .search_results_items.d-flex.flex-raw.flex-wrap.justify-content-center
+        .search_results_items
           n-link(:to="localePath({\
                       name: 'search-slug',\
                       params: {\
@@ -14,24 +12,21 @@
                       }\
                       })").search_results_items_item(v-for="(card,index) in parts", :key="index")
             img(v-lazy="card.url[0]?card.url[0].link:'/img/search/default-parts.png'", :alt="card.description")
-            hr
-            div
-              h5 {{card.store_name}}
-              h5.short_description {{card.part_number}}
-              h6.short_description
-                strong {{card.manufacturer}} -
-                | {{card.description}}
-            div.text-right
+            .search_results_items_item_price
               span.font-weight-bold {{card.price.price}} {{card.price.currency_symbol}}
             div
+              p.search_results_items_item_store {{card.store_name}}
+              p.search_results_items_item_store {{card.part_number}}
+              p.short_description
+                | {{card.description}}
+              p.search_results_items_item_store
+                | {{card.manufacturer}}
+
+            div.search_results_items_item_button_cart
               AddToCartButton(:id="card.id")
-                | {{$t('add_to_cart')}}
 
         .search_results_more(v-show="search_page!==last_page" )
-          button.btn-new-light.px-4.py-2(@click="GET_SEARCH_PARTS({...search,page:true})", :disabled="loadingMore") {{ loadingMore?$t('loading'): $t('more_products')}}
-        .search_results_top
-          button.btn(@click="scrollTop")
-            <i class="fa fa-2x fa-angle-up" aria-hidden="true"></i>
+          button.btn-new.px-4.py-2(@click="GET_SEARCH_PARTS({...search,page:true})", :disabled="loadingMore") {{ loadingMore?$t('loading'): $t('more_products')}}
       .search_results_not-found(v-else)
         p {{$t('not_found_products')}}
         button.btn.light-blue(@click="$router.push(localePath({ name: 'contact'}))") {{$t('contact_us')}}
@@ -85,19 +80,22 @@ export default {
 
 .search_results {
   &_items {
-    gap: 12px;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(150px, 1fr));
+    gap: 14px;
+    justify-content: space-between;
 
     &_item {
-      border: 1px solid #ebebeb;
-      border-radius: 5px;
-      padding: 25px;
-      width: 205px;
+      position: relative;
+      background-color: #fff;
+      border: 1px solid #EAECF0;
+      border-radius: 16px;
+      padding: 16px;
       display: flex;
       flex-direction: column;
       justify-content: space-around;
       color: #344054;
       @media screen and (max-width: 480px) {
-        width: 48%;
         padding: 10px;
         h5 {
           font-size: 1rem;
@@ -106,19 +104,17 @@ export default {
           font-size: 0.725rem;
         }
       }
-      @media screen and (max-width: 329px) {
-        width: 47%;
+
+      p {
+        margin: 0;
       }
 
       img {
         width: 130px;
         height: 130px;
-        margin: auto;
-      }
-
-      span {
-        font-size: 1.1rem;
-        color: red;
+        margin: 0 auto;
+        object-fit: cover;
+        object-position: center;
       }
 
       button {
@@ -127,13 +123,36 @@ export default {
 
       .short_description {
         text-overflow: ellipsis;
-        white-space: nowrap;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        display: -webkit-box;
         overflow: hidden;
-        color: #98A2B3;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 20px;
 
-        strong {
-          color: #344054;
-        }
+        color: #344054;
+      }
+
+      &_store {
+        color: #98A2B3;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 16px;
+      }
+
+      &_price {
+        font-weight: 500;
+        font-size: 24px;
+        line-height: 32px;
+        color: #0086C9;
+        margin: 8px 0;
+      }
+
+      &_button_cart {
+        position: absolute;
+        right: 0;
+        top: 8px;
       }
 
       &:hover {
@@ -152,12 +171,12 @@ export default {
   &_more {
     display: flex;
     justify-content: center;
-    margin-top: 50px;
+    margin-top: 34px;
   }
 
   &_top {
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
   }
 
   &_not-found {
@@ -185,10 +204,31 @@ export default {
 
 @media screen and (min-width: 768px) {
   .search_results {
+    &_items {
+      grid-template-columns: repeat(3, minmax(150px, 1fr));
+    }
+
     &_not-found {
       font-size: 20px;
       padding-left: 75px;
     }
   }
 }
+
+@media screen and (min-width: 992px) {
+  .search_results {
+    &_items {
+      grid-template-columns: repeat(4, minmax(150px, 1fr));
+    }
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .search_results {
+    &_items {
+      grid-template-columns: repeat(5, minmax(150px, 1fr));
+    }
+  }
+}
+
 </style>

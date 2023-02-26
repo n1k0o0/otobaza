@@ -41,9 +41,10 @@ function vinToTree (data) {
 }
 
 const state = () => ({
+  manufacturers: [],
   manufacturersByAlphabet: null,
   manufacturersByLogo: null,
-  manufacturer_models: null,
+  manufacturer_models: [],
   model_cars: null,
   car_assemblies: null,
   car_assemblies_brand: null,
@@ -77,6 +78,7 @@ const state = () => ({
 })
 
 const getters = {
+  manufacturers (state) { return state.manufacturers },
   manufacturersByAlphabet (state) { return state.manufacturersByAlphabet },
   manufacturersByLogo (state) { return state.manufacturersByLogo },
   manufacturer_models (state) { return state.manufacturer_models },
@@ -114,6 +116,9 @@ const getters = {
 }
 
 const mutations = {
+  SET_MANUFACTURERS (state, payload) {
+    state.manufacturers = payload
+  },
   SET_MANUFACTURERS_BY_ALPHABET (state, payload) {
     state.manufacturersByAlphabet = payload
   },
@@ -227,13 +232,11 @@ const mutations = {
 
 const actions = {
   async GET_CATALOG_MANUFACTURERS ({ commit }, { type }) {
+    this.$axios.defaults.baseURL = this.$env.CATALOG_API_URL
+    const { data } = await this.$axios.get('/api/avto')
     if (type === 'logo') {
-      this.$axios.defaults.baseURL = this.$env.CATALOG_API_URL
-      const { data } = await this.$axios.get('/api/avto')
       commit('SET_MANUFACTURERS_BY_LOGO', data)
-    } else {
-      this.$axios.defaults.baseURL = this.$env.CATALOG_API_URL
-      const { data } = await this.$axios.get('/api/avto')
+    } else if (type === 'alphabet') {
       const manufacturers = data.reduce((r, e) => {
         const char = e.manuName[0]
         if (!r[char]) r[char] = { char, items: [e] }
@@ -241,7 +244,11 @@ const actions = {
         return r
       }, {})
       commit('SET_MANUFACTURERS_BY_ALPHABET', Object.values(manufacturers))
+    } else {
+      commit('SET_MANUFACTURERS', data)
     }
+
+    commit('SET_SEARCH_LANG', this.$i18n.locale)
   },
   async GET_MANUFACTURER_MODELS ({ commit }, { manufacturer }) {
     this.$axios.defaults.baseURL = this.$env.CATALOG_API_URL
@@ -264,7 +271,7 @@ const actions = {
         brand_image: item.brand_image
       }
     })
-    commit('SET_MANUFACTURER_MODEL', filtered)
+    commit('SET_MANUFACTURER_MODEL', data)
     return filtered
   },
   async GET_MODEL_CARS ({ commit }, { model }) {

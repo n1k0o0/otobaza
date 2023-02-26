@@ -85,7 +85,6 @@ export default {
     }
   },
   mounted () {
-    console.log(4444, this.$device)
     if (!this.$device.isMobile) return false
 
     if (!this.$cookies.get('download-app')) {
