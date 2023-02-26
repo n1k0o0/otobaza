@@ -61,7 +61,8 @@
                   .product_info_details_price.col-6
                     p.font-weight-bold.p-0.m-0 {{product.price.price}} {{product.price.currency_symbol}}
                 .product_info_details_actions.row
-                  .price_mobile.col-4.font-weight-bold.m-0 {{product.price.price}} {{product.price.currency_symbol}}
+                  .price_mobile.col-4.font-weight-bold.m-0
+                    span  {{product.price.price}} {{product.price.currency_symbol}}
                   .product_info_details_actions_wrapper_cart.col-4.col-lg-6
                     AddToCartButton(:id="product.id" :hideIcon="true")
                       | {{$t('add_to_cart')}}
@@ -556,7 +557,7 @@ export default {
 
 .price_mobile {
   font-weight: 500;
-  font-size: 20px;
+  font-size: 4.5vw;
   line-height: 32px;
   color: #0086C9;
   padding: 0 0 0 15px;

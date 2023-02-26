@@ -52,7 +52,8 @@
                   .product_info_details_price.col-6
                     p.font-weight-bold.p-0.m-0 {{product.price}} {{product.price_type.currency_symbol}}
                 .product_info_details_actions.row
-                  .price_mobile.col-4.font-weight-bold.m-0 {{product.price}} {{product.price_type.currency_symbol}}
+                  .price_mobile.col-4.font-weight-bold.m-0
+                    span  {{product.price}} {{product.price_type.currency_symbol}}
                   .product_info_details_actions_wrapper_cart.col-6
                     button(v-if="!this.showPhone" @click.prevent="showPhone=true" class="btn-new-light" ).px-2.py-1.position-relative.w-100.product_info_details_actions_phone
                       svg(width='8', height='8', viewBox='0 0 8 8', fill='none', xmlns='http://www.w3.org/2000/svg')
@@ -653,7 +654,7 @@ export default {
 
 .price_mobile {
   font-weight: 500;
-  font-size: 20px;
+  font-size: 4.5vw;
   line-height: 32px;
   color: #0086C9;
   padding: 0 0 0 15px;
