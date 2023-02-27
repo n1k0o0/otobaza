@@ -377,5 +377,6 @@
   },
   "phone_tooltip": "Zəng edərkən və ya yaxınlaşarkən Otobaza adından müraciət edin endirim ola bilər!",
   "discount": "Endirim",
-  "keyword_limit_error": "Axtariş mətni 2 simvoldan çox olmalıdir"
+  "keyword_limit_error": "Axtariş mətni 2 simvoldan çox olmalıdir",
+  "banner_text": "Saytda mağazaya sahib ol!"
 }
