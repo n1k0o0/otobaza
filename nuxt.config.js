@@ -10,7 +10,8 @@ module.exports = {
   /* env: {
     BASE_API_URL: 'https://test-api.otobaza.com',
     CATALOG_API_URL: 'https://kataloq.otobaza.com',
-    FRONT_URL: 'https://staging.otobaza.com/'
+    FRONT_URL: 'https://staging.otobaza.com/',
+    SELLER_URL: 'https://staging-seller.otobaza.com'
   }, */
   head: {
     htmlAttrs: {

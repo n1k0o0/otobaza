@@ -329,7 +329,31 @@
     </div>
 
     <div class="mobile_elan">
-      <img alt="" src="/img/banana/mobile.png" />
+      <img alt="" src="/img/banana/register_banner.png" />
+      <div class="info">
+        <div class="text">
+          {{ $t('banner_text') }}
+        </div>
+        <div class="button">
+          <a class="btn-new-light" :href="this.$env.SELLER_URL+'/#/register'">
+            {{ $t('registration') }}
+            <svg
+              fill="none"
+              height="16"
+              viewBox="0 0 16 16"
+              width="16"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M3.3335 7.99967H12.6668M12.6668 7.99967L8.00016 3.33301M12.6668 7.99967L8.00016 12.6663"
+                stroke="#0086C9"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </a>
+        </div>
+      </div>
     </div>
 
     <div v-if="ad_special.length" class="elan_wrapper elan_special">
@@ -890,6 +914,26 @@ input {
 
   .mobile_elan {
     display: block;
+    position: relative;
+
+    .info {
+      color: #FFF;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      left: 24px;
+
+      .button {
+        margin-top: 16px;
+
+        a {
+          font-size: 12px;
+          background: #E0F2FE;
+          border-radius: 70px;
+          padding: 4px 8px;
+        }
+      }
+    }
   }
 }
 </style>

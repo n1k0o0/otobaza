@@ -371,5 +371,6 @@
   },
   "phone_tooltip": "Apply on behalf of Otobaza when calling or approaching, you can get a discount!",
   "discount": "Discount",
-  "keyword_limit_error": "Search text must be more than 2 characters"
+  "keyword_limit_error": "Search text must be more than 2 characters",
+  "banner_text": "Have a shop on the site!"
 }
