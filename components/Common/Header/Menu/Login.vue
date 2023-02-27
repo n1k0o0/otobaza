@@ -68,7 +68,7 @@
                 <span
                   class="fa "
                   :class="eyeClass"
-                  @click="showPassword"
+                  @mousedown="showPassword"
                 ></span>
                 <p
                   v-show="errorMessage"
