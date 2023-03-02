@@ -222,12 +222,24 @@ export default {
     if (!this.manufacturers.length || isNotCurrentLang) {
       await this.GET_CATALOG_MANUFACTURERS({ type: 'default' })
     }
+    const name = this.$router.currentRoute.path.split('/').slice(-1).pop().split('-')[0]
 
     if (!this.manufacturer_models.length || isNotCurrentLang) {
-      await this.GET_MANUFACTURER_MODELS({ manufacturer: this.$route.query.brand })
+      await this.GET_MANUFACTURER_MODELS({ manufacturer: this.brand_key(name) })
     }
 
-    this.search.brand = 842
+    this.search.brand = this.brand_key(name)
+
+    if (this.$route.query.model) {
+      const model = this.manufacturer_models.find(manu => manu.modelId === +this.$route.query.model)
+      if (model) {
+        this.search.model = +model.modelId
+      }
+    }
+
+    if (this.$route.query.keyword) {
+      this.search.keyword = this.$route.query.keyword
+    }
 
     this.loadingResults = true
     await this.GET_PARTS(this.search)
@@ -246,38 +258,33 @@ export default {
   computed: {
     ...mapGetters({
       loading: 'Used/loading',
-      search_lang: 'Catalog/search_lang',
+      search_lang: 'Used/search_lang',
       parts: 'Used/parts',
       search_sort_by: 'Used/sort_by',
-      manufacturers: 'Catalog/manufacturers',
-      manufacturer_models: 'Catalog/manufacturer_models'
+      manufacturers: 'Used/brands',
+      manufacturer_models: 'Used/models',
+      brand_key: 'Used/brand_key'
     })
   },
   methods: {
     ...mapActions({
-      GET_SEARCH_PARTS: 'Catalog/GET_SEARCH_PARTS',
       FILTER_PARTS: 'Used/FILTER_PARTS',
       GET_PARTS: 'Used/GET_PARTS',
-      GET_CATALOG_MANUFACTURERS: 'Catalog/GET_CATALOG_MANUFACTURERS',
-      GET_MANUFACTURER_MODELS: 'Catalog/GET_MANUFACTURER_MODELS'
+      GET_CATALOG_MANUFACTURERS: 'Used/GET_BRANDS',
+      GET_MANUFACTURER_MODELS: 'Used/GET_MODELS'
     }),
     scrollTop () {
       window.scrollTo({ top: 0, behavior: 'smooth' })
-    },
-    async searchMethod () {
-      this.loadingResults = true
-      await this.GET_SEARCH_PARTS(this.search)
-      this.loadingResults = false
     }
   },
   head () {
     return {
-      title: 'Lexus ehtiyat hissələri | Onlayn mağaza | Otobaza',
+      title: 'Audi ehtiyat hissələri | Onlayn mağaza | Otobaza',
       meta: [
         {
           hid: 'description',
           name: 'description',
-          content: 'Orijinal ehtiyat hissələrini Otobaza saytından və ya Lexus servis mərkəzlərindən əldə edə bilərsiniz.'
+          content: 'Orijinal ehtiyat hissələrini Otobaza saytından və Audi servis mərkəzlərindən əldə edə bilərsiniz.'
         }
       ]
     }

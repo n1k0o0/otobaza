@@ -63,9 +63,9 @@ export default {
     }
 
     if (this.$route.query.model) {
-      const model = this.manufacturer_models.find(manu => manu.modId === +this.$route.query.model)
+      const model = this.manufacturer_models.find(manu => manu.modelId === +this.$route.query.model)
       if (model) {
-        this.search.model = +model.modId
+        this.search.model = +model.modelId
       }
     }
 
@@ -90,28 +90,22 @@ export default {
   computed: {
     ...mapGetters({
       loading: 'Used/loading',
-      search_lang: 'Catalog/search_lang',
+      search_lang: 'Used/search_lang',
       parts: 'Used/parts',
       search_sort_by: 'Used/sort_by',
-      manufacturers: 'Catalog/manufacturers',
-      manufacturer_models: 'Catalog/manufacturer_models'
+      manufacturers: 'Used/brands',
+      manufacturer_models: 'Used/models'
     })
   },
   methods: {
     ...mapActions({
-      GET_SEARCH_PARTS: 'Catalog/GET_SEARCH_PARTS',
       FILTER_PARTS: 'Used/FILTER_PARTS',
       GET_PARTS: 'Used/GET_PARTS',
-      GET_CATALOG_MANUFACTURERS: 'Catalog/GET_CATALOG_MANUFACTURERS',
-      GET_MANUFACTURER_MODELS: 'Catalog/GET_MANUFACTURER_MODELS'
+      GET_CATALOG_MANUFACTURERS: 'Used/GET_BRANDS',
+      GET_MANUFACTURER_MODELS: 'Used/GET_MODELS'
     }),
     scrollTop () {
       window.scrollTo({ top: 0, behavior: 'smooth' })
-    },
-    async searchMethod () {
-      this.loadingResults = true
-      await this.GET_SEARCH_PARTS(this.search)
-      this.loadingResults = false
     }
   }
 }
