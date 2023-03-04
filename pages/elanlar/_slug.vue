@@ -295,7 +295,15 @@ export default {
         ru: '{name} Вы можете посетить веб-сайт Autobaza, чтобы купить оригинальные и подержанные запчасти',
         en: 'You can visit Autobaza website to buy {name} first and second hand spare parts',
         tr: '{name} birinci ve ikinci el yedek parça satın almak için Autobaza web sitesini ziyaret edebilirsiniz.'
-      }
+      },
+      organization:
+        {
+          '@context': 'http://schema.org',
+          '@type': 'Organization',
+          name: 'Otobaza',
+          url: 'https://otobaza.com',
+          logo: 'https://otobaza.com/css/icons/logo.svg'
+        }
     }
   },
   computed: {
@@ -373,10 +381,16 @@ export default {
           content: `${description}`
         }
       ],
-      script: [{
-        type: 'application/ld+json',
-        innerHTML: JSON.stringify(this.jsonld) // <- set jsonld object in data or wherever you want
-      }],
+      script: [
+        {
+          type: 'application/ld+json',
+          innerHTML: JSON.stringify(this.jsonld) // <- set jsonld object in data or wherever you want
+        },
+        {
+          type: 'application/ld+json',
+          innerHTML: JSON.stringify(this.organization) // <- set jsonld object in data or wherever you want
+        }
+      ],
       __dangerouslyDisableSanitizers: ['script']
     }
   }
