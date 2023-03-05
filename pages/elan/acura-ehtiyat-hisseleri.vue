@@ -140,7 +140,10 @@
                 <u><a href="https://otobaza.com/elan/mercedes-ehtiyat-hisseleri">Mercedes ehtiyat hissələrini buradan
                   əldə edə bilərsiniz</a></u>
               </li>
-              <li><u>KIA ehtiyat hissələrini buradan əldə edə bilərsiniz</u></li>
+              <li>
+                <u><a href="https://otobaza.com/elan/kia-ehtiyat-hisseleri">KİA ehtiyat hissələrini buradan əldə edə
+                  bilərsiniz</a></u>
+              </li>
               <li>
                 <u><a href="https://otobaza.com/elan/porsche-ehtiyat-hisseleri">Porsche ehtiyat hissələrini buradan
                   əldə edə bilərsiniz</a></u>

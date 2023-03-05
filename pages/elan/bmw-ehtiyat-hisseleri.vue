@@ -139,7 +139,7 @@
                   əldə edə bilərsiniz</a></u>
               </li>
               <li>
-                <u><a href="otobaza.com/elan/kia-ehtiyat-hisseleri">KİA ehtiyat hissələrini buradan əldə edə
+                <u><a href="https://otobaza.com/elan/kia-ehtiyat-hisseleri">KİA ehtiyat hissələrini buradan əldə edə
                   bilərsiniz</a></u>
               </li>
               <li>
