@@ -90,10 +90,17 @@ export default {
       const model = this.brand_name(this.search.brand)
 
       if (model !== this.$router.currentRoute.path.split('/').slice(-1).pop().split('-')[0]) {
-        await this.$router.push(this.localePath({
-          name: 'elan-' + model + '-ehtiyat-hisseleri',
-          query: { keyword: this.search.title, model: this.search.model }
-        }))
+        if (model) {
+          await this.$router.push(this.localePath({
+            name: 'elan-' + model + '-ehtiyat-hisseleri',
+            query: { keyword: this.search.title, model: this.search.model }
+          }))
+        } else {
+          await this.$router.push(this.localePath({
+            name: 'elanlar',
+            query: { brand: this.search.brand, keyword: this.search.title, model: this.search.model }
+          }))
+        }
       } else {
         await this.GET_PARTS(this.search)
       }
