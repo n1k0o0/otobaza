@@ -11,13 +11,13 @@
             | {{ option.manuName }}
 
       .filter_item
-        v-select(v-model='search.model', :loading="loading", :disabled='!search.brand', label='ModelName', :options='manufacturer_models', :reduce='part => part.modId', :placeholder="$t('model')", :reset-on-options-change="!!search.model")
+        v-select(v-model='search.model', :loading="loading", :disabled='!search.brand', label='modelname', :options='manufacturer_models', :reduce='part => part.modelId', :placeholder="$t('model')", :reset-on-options-change="!!search.model")
           template(v-slot:selected-option='option')
             span(:class='option.icon')
-            | {{ option.ModelName.length < 15 ? option.ModelName : (option.ModelName.substring(0, 12) + '...') }}
+            | {{ option.modelname.length < 15 ? option.modelname : (option.modelname.substring(0, 12) + '...') }}
           template(v-slot:option='option')
             span(:class='option.icon')
-            | {{ option.ModelName }}
+            | {{ option.modelname }}
 
       .filter_item
         input( v-model="search.keyword", :placeholder="$t('search')", @keyup.enter="searchMethod" )
@@ -67,13 +67,14 @@ export default {
       search_lang: 'Used/search_lang',
       parts: 'Used/parts',
       search_sort_by: 'Used/sort_by',
-      manufacturers: 'Catalog/manufacturers',
-      manufacturer_models: 'Catalog/manufacturer_models'
+      manufacturers: 'Used/brands',
+      manufacturer_models: 'Used/models',
+      brand_name: 'Used/brand_name'
     })
   },
   methods: {
     ...mapActions({
-      GET_MANUFACTURER_MODELS: 'Catalog/GET_MANUFACTURER_MODELS',
+      GET_MANUFACTURER_MODELS: 'Used/GET_MODELS',
       FILTER_PARTS: 'Used/FILTER_PARTS',
       GET_PARTS: 'Used/GET_PARTS'
     }),
@@ -85,7 +86,25 @@ export default {
     },
     async searchMethod () {
       this.loadingResults = true
-      await this.GET_PARTS(this.search)
+
+      const model = this.brand_name(this.search.brand)
+
+      if (model !== this.$router.currentRoute.path.split('/').slice(-1).pop().split('-')[0]) {
+        if (model) {
+          await this.$router.push(this.localePath({
+            name: 'elan-' + model + '-ehtiyat-hisseleri',
+            query: { keyword: this.search.title, model: this.search.model }
+          }))
+        } else {
+          await this.$router.push(this.localePath({
+            name: 'elanlar',
+            query: { brand: this.search.brand, keyword: this.search.title, model: this.search.model }
+          }))
+        }
+      } else {
+        await this.GET_PARTS(this.search)
+      }
+
       this.loadingResults = false
     },
     filter (by) {

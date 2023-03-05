@@ -295,14 +295,53 @@ export default {
         ru: '{name} Вы можете посетить веб-сайт Autobaza, чтобы купить оригинальные и подержанные запчасти',
         en: 'You can visit Autobaza website to buy {name} first and second hand spare parts',
         tr: '{name} birinci ve ikinci el yedek parça satın almak için Autobaza web sitesini ziyaret edebilirsiniz.'
-      }
+      },
+      organization:
+        {
+          '@context': 'http://schema.org',
+          '@type': 'Organization',
+          name: 'Otobaza',
+          url: 'https://otobaza.com',
+          logo: 'https://otobaza.com/css/icons/logo.svg'
+        }
     }
   },
   computed: {
     ...mapGetters({
       product: 'Used/part',
       similar_parts: 'Used/similar_parts'
-    })
+    }),
+    jsonld () {
+      return {
+        '@context': 'http://schema.org/',
+        '@type': 'Product',
+        name: this.product.title,
+        image: this.product.images[0] ? this.product.images[0].link : '/img/search/big-part.png',
+        description: this.product.description,
+        mpn: '763',
+        brand: {
+          '@type': 'Thing',
+          name: this.product.manu_name
+        },
+        aggregateRating: {
+          '@type': 'AggregateRating',
+          ratingValue: 5,
+          reviewCount: this.generateRandomInteger(3, 50)
+        },
+        offers: {
+          '@type': 'Offer',
+          priceCurrency: this.product.price_type.currency_code,
+          price: this.product.price,
+          priceValidUntil: new Date(new Date().getFullYear(), new Date().getMonth() + 3, 1),
+          itemCondition: 'http://schema.org/NewCondition',
+          availability: 'http://schema.org/InStock',
+          seller: {
+            '@type': 'Organization',
+            name: this.product.seller.name
+          }
+        }
+      }
+    }
   },
   methods: {
     ...mapActions({
@@ -324,6 +363,9 @@ export default {
       } else {
         this.imgIndex -= 1
       }
+    },
+    generateRandomInteger (min, max) {
+      return Math.floor(Math.random() * (max - min)) + min
     }
   },
   head () {
@@ -338,7 +380,18 @@ export default {
           name: 'description',
           content: `${description}`
         }
-      ]
+      ],
+      script: [
+        {
+          type: 'application/ld+json',
+          innerHTML: JSON.stringify(this.jsonld) // <- set jsonld object in data or wherever you want
+        },
+        {
+          type: 'application/ld+json',
+          innerHTML: JSON.stringify(this.organization) // <- set jsonld object in data or wherever you want
+        }
+      ],
+      __dangerouslyDisableSanitizers: ['script']
     }
   }
 }

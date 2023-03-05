@@ -3,6 +3,50 @@ import $swal from 'sweetalert2'
 const strict = false
 
 const state = () => ({
+  brandList: {
+    5: 'audi',
+    16: 'bmw',
+    184: 'kia',
+    183: 'hyundai',
+    842: 'lexus',
+    77: 'mitsubishi',
+    80: 'nissan',
+    106: 'skoda',
+    111: 'toyota',
+    121: 'volkswagen',
+    120: 'volvo',
+    107: 'subaru',
+    88: 'peugeot',
+    84: 'opel',
+    72: 'mazda',
+    5172: 'lifan',
+    1820: 'landrover',
+    64: 'lancia',
+    5173: 'qaz',
+    882: 'jeep',
+    56: 'jaguar',
+    54: 'isuzu',
+    1526: 'infiniti',
+    45: 'honda',
+    5174: 'haval',
+    5175: 'haima',
+    2903: 'greatwall',
+    2590: 'geely',
+    36: 'ford',
+    35: 'fiat',
+    3137: 'faw',
+    29: 'dodge',
+    185: 'daewoo',
+    139: 'dacia',
+    21: 'citroen',
+    138: 'chevrolet',
+    2887: 'chery',
+    5176: 'changan',
+    2: 'alfa romeo',
+    1505: 'acura'
+  },
+  brands: [],
+  models: [],
   parts: [],
   part: {},
   loading: false,
@@ -25,6 +69,7 @@ const state = () => ({
 
 const getters = {
   brands (state) { return state.brands },
+  models (state) { return state.models },
   loading (state) { return state.loading },
   parts (state) { return state.parts },
   part (state) { return state.part },
@@ -42,10 +87,26 @@ const getters = {
   ad_lasts (state) { return state.ad_lasts },
   favorites (state) { return state.favorites },
   favorites_count (state) { return state.favorites_count },
-  similar_parts (state) { return state.similar_parts }
+  similar_parts (state) { return state.similar_parts },
+  brand_name (state) {
+    return (id) => {
+      return state.brandList[id]
+    }
+  },
+  brand_key (state) {
+    return (value) => {
+      return +(Object.keys(state.brandList).find(key => state.brandList[key] === value) ?? 5)
+    }
+  }
 }
 
 const mutations = {
+  SET_BRANDS (state, payload) {
+    state.brands = payload
+  },
+  SET_MODELS (state, payload) {
+    state.models = payload
+  },
   SET_PARTS (state, payload) {
     state.parts = payload
   },
@@ -106,6 +167,21 @@ const mutations = {
 }
 
 const actions = {
+  async GET_BRANDS ({ commit }) {
+    this.$axios.defaults.baseURL = this.$env.CATALOG_API_URL
+    const { data } = await this.$axios.get('/api/marks')
+
+    commit('SET_SEARCH_LANG', this.$i18n.locale)
+    commit('SET_BRANDS', data)
+  },
+  async GET_MODELS ({ commit }, { manufacturer }) {
+    this.$axios.defaults.baseURL = this.$env.CATALOG_API_URL
+    const { data } = await this.$axios.get('/api/marks/' + manufacturer)
+
+    const ss = data.filter((v, i, a) => a.findIndex(v2 => (v2.modelId === v.modelId)) === i)
+    commit('SET_MODELS', ss)
+  },
+
   async GET_SEARCH_PARTS ({ commit }) {
     commit('SET_LOADING', true)
     commit('SET_PARTS', [])

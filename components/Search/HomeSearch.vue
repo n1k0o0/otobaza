@@ -115,7 +115,7 @@
                       <v-select
                         v-model="search.model"
                         :disabled="!search.brand"
-                        label="modelName"
+                        label="modelname"
                         :loading="loading"
                         :options="models"
                         :placeholder="$t('model')"
@@ -126,12 +126,12 @@
                         <template v-slot:selected-option="option">
                           <span :class="option.icon"></span>
                           {{
-                            option.modelName.length < 10 ? option.modelName : (option.modelName.substring(0, 7) + '...')
+                            option.modelname.length < 10 ? option.modelname : (option.modelname.substring(0, 7) + '...')
                           }}
                         </template>
                         <template v-slot:option="option">
                           <span :class="option.icon"></span>
-                          {{ option.modelName }}
+                          {{ option.modelname }}
                         </template>
                       </v-select>
                     </div>
@@ -260,22 +260,22 @@
                   <v-select
                     v-model="used.model"
                     :disabled="!used.brand"
-                    label="ModelName"
+                    label="modelname"
                     :loading="loading"
                     :options="manufacturer_models"
                     :placeholder="$t('model')"
-                    :reduce="part => part.modId"
+                    :reduce="part => part.modelId"
                     :reset-on-options-change="!!used.model"
                   >
                     <template v-slot:selected-option="option">
                       <span :class="option.icon"></span>
                       {{
-                        option.ModelName.length < 10 ? option.ModelName : (option.ModelName.substring(0, 7) + '...')
+                        option.modelname.length < 10 ? option.modelname : (option.modelname.substring(0, 7) + '...')
                       }}
                     </template>
                     <template v-slot:option="option">
                       <span :class="option.icon"></span>
-                      {{ option.ModelName }}
+                      {{ option.modelname }}
                     </template>
                   </v-select>
                 </div>
@@ -293,7 +293,7 @@
                     class="btn h-100"
                     :disabled="!(used.model || used.brand || used.title)"
                     type="submit"
-                    @click="$router.push(localePath({ name: 'elanlar', query: { keyword: used.title,brand: used.brand, model: used.model}}));"
+                    @click="searchUsed"
                   >
                     {{ $t('search') }}
                     <svg
@@ -550,12 +550,13 @@ export default {
       models: 'Catalog/models',
       types: 'Catalog/types',
       loading: 'Catalog/loading',
-      manufacturers: 'Catalog/manufacturers',
-      manufacturer_models: 'Catalog/manufacturer_models',
+      manufacturers: 'Used/brands',
+      manufacturer_models: 'Used/models',
       ad_special: 'Used/ad_special',
       ad_lasts: 'Used/ad_lasts',
       parts: 'Used/parts',
-      ad_vip: 'Used/ad_vip'
+      ad_vip: 'Used/ad_vip',
+      brand_name: 'Used/brand_name'
     })
   },
   methods: {
@@ -564,8 +565,8 @@ export default {
       GET_BRANDS: 'Catalog/GET_BRANDS',
       GET_MODELS: 'Catalog/GET_MODELS',
       GET_TYPES: 'Catalog/GET_TYPES',
-      GET_CATALOG_MANUFACTURERS: 'Catalog/GET_CATALOG_MANUFACTURERS',
-      GET_MANUFACTURER_MODELS: 'Catalog/GET_MANUFACTURER_MODELS',
+      GET_CATALOG_MANUFACTURERS: 'Used/GET_BRANDS',
+      GET_MANUFACTURER_MODELS: 'Used/GET_MODELS',
       GET_HOME_ADS: 'Used/GET_HOME_ADS',
       GET_PARTS: 'Used/GET_PARTS'
     }),
@@ -583,6 +584,13 @@ export default {
     },
     chooseFilterType (i) {
       this.filterType = i
+    },
+    async searchUsed () {
+      const model = this.brand_name(this.used.brand)
+      await this.$router.push(this.localePath({
+        name: 'elan-' + model + '-ehtiyat-hisseleri',
+        query: { keyword: this.used.title, model: this.used.model }
+      }))
     }
   }
 }
