@@ -126,12 +126,12 @@
                         <template v-slot:selected-option="option">
                           <span :class="option.icon"></span>
                           {{
-                            option.modelname.length < 10 ? option.modelname : (option.modelname.substring(0, 7) + '...')
+                            option.modelName.length < 10 ? option.modelName : (option.modelName.substring(0, 7) + '...')
                           }}
                         </template>
                         <template v-slot:option="option">
                           <span :class="option.icon"></span>
-                          {{ option.modelname }}
+                          {{ option.modelName }}
                         </template>
                       </v-select>
                     </div>
