@@ -92,13 +92,13 @@ export default {
       if (model !== this.$router.currentRoute.path.split('/').slice(-1).pop().split('-')[0]) {
         if (model) {
           await this.$router.push(this.localePath({
-            name: 'elan-' + model + '-ehtiyat-hisseleri',
-            query: { keyword: this.search.title, model: this.search.model }
+            name: 'elanlar-' + model + '-ehtiyat-hisseleri',
+            query: { model: this.search.model, keyword: this.search.keyword }
           }))
         } else {
           await this.$router.push(this.localePath({
             name: 'elanlar',
-            query: { brand: this.search.brand, keyword: this.search.title, model: this.search.model }
+            query: { brand: this.search.brand, keyword: this.search.keyword, model: this.search.model }
           }))
         }
       } else {
