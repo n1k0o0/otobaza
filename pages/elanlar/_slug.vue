@@ -285,10 +285,10 @@ export default {
       modalVisibility: false,
       showPhone: false,
       title: {
-        az: '{name} Avtomobil ehtiyat hissələrinin satışı',
+        az: '{name} ehtiyat hissələrinin satışı',
         ru: '{name} Продажа автозапчастей',
         en: '{name} Sale of auto spare parts',
-        tr: '{name} Oto yedek parça satışı'
+        tr: '{name} yedek parça satışı'
       },
       description: {
         az: '{name} birinci və ikinci əl ehtiyat hissesini əldə etmək ucun Otobaza saytina daxil ola bilərsiniz',
@@ -316,7 +316,7 @@ export default {
         '@context': 'http://schema.org/',
         '@type': 'Product',
         name: this.product.title,
-        image: this.product.images[0] ? this.product.images[0].link : '/img/search/big-part.png',
+        image: this.product.images && this.product.images[0] ? this.product.images[0].link : '/img/search/big-part.png',
         description: this.product.description,
         mpn: '763',
         brand: {
@@ -330,14 +330,14 @@ export default {
         },
         offers: {
           '@type': 'Offer',
-          priceCurrency: this.product.price_type.currency_code,
+          priceCurrency: this.product.price_type && this.product.price_type.currency_code,
           price: this.product.price,
           priceValidUntil: new Date(new Date().getFullYear(), new Date().getMonth() + 3, 1),
           itemCondition: 'http://schema.org/NewCondition',
           availability: 'http://schema.org/InStock',
           seller: {
             '@type': 'Organization',
-            name: this.product.seller.name
+            name: this.product.seller && this.product.seller.name
           }
         }
       }
@@ -369,8 +369,8 @@ export default {
     }
   },
   head () {
-    const title = this.title[this.$i18n.locale].replace('{name}', this.product.description)
-    const description = this.description[this.$i18n.locale].replace('{name}', this.product.description)
+    const title = this.title[this.$i18n.locale].replace('{name}', this.product.title + ' ' + this.product.manu_name)
+    const description = this.description[this.$i18n.locale].replace('{name}', this.product.title + ' ' + this.product.manu_name)
 
     return {
       title: `${title} `,

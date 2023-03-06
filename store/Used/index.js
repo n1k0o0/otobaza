@@ -42,7 +42,7 @@ const state = () => ({
     138: 'chevrolet',
     2887: 'chery',
     5176: 'changan',
-    2: 'alfa romeo',
+    2: 'alfaromeo',
     1505: 'acura'
   },
   brands: [],

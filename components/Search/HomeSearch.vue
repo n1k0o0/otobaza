@@ -588,7 +588,7 @@ export default {
     async searchUsed () {
       const model = this.brand_name(this.used.brand)
       await this.$router.push(this.localePath({
-        name: 'elan-' + model + '-ehtiyat-hisseleri',
+        name: 'elanlar-' + model + '-ehtiyat-hisseleri',
         query: { keyword: this.used.title, model: this.used.model }
       }))
     }
