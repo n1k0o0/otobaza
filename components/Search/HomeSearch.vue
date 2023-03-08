@@ -248,7 +248,7 @@
                   >
                     <template v-slot:selected-option="option">
                       <span :class="option.icon"></span>
-                      {{ option.manuName.length <= 9 ? option.manuName : (option.manuName.substring(0, 7) + '...') }}
+                      {{ option.manuName.length <= 4 ? option.manuName : (option.manuName.substring(0, 4) + '...') }}
                     </template>
                     <template v-slot:option="option">
                       <span :class="option.icon"></span>
@@ -270,7 +270,7 @@
                     <template v-slot:selected-option="option">
                       <span :class="option.icon"></span>
                       {{
-                        option.modelname.length < 10 ? option.modelname : (option.modelname.substring(0, 7) + '...')
+                        option.modelname.length < 6 ? option.modelname : (option.modelname.substring(0, 5) + '...')
                       }}
                     </template>
                     <template v-slot:option="option">
