@@ -5,35 +5,37 @@
         v-select(v-model='search.sparePart', :loading="loading", label='assemblyGroupName', :options='spareParts', :reduce='part => part.assemblyGroupNodeId', @input="GET_BRANDS(search.sparePart)", :placeholder="$t('home_search.spare-parts')")
           template(v-slot:selected-option='option')
             span(:class='option.icon')
-            | {{ option.assemblyGroupName.length < 15 ? option.assemblyGroupName : (option.assemblyGroupName.substring(0, 12) + '...') }}
+              | {{ option.assemblyGroupName }}
           template(v-slot:option='option')
             span(:class='option.icon')
-            | {{ option.assemblyGroupName }}
+              | {{ option.assemblyGroupName }}
 
       .filter_item
         v-select(v-model='search.brand', :loading="loading", :disabled='!search.sparePart', label='manuName', :options='brands', :reduce='brand => brand.manuId', @input='GET_MODELS(search)', :placeholder="$t('brand')", :reset-on-options-change="!!search.brand")
           template(v-slot:selected-option='option')
             span(:class='option.icon')
-            | {{ option.manuName.length < 15 ? option.manuName : (option.manuName.substring(0, 12) + '...') }}
+              | {{ option.manuName }}
           template(v-slot:option='option')
             span(:class='option.icon')
-            | {{ option.manuName }}
+              | {{ option.manuName }}
 
       .filter_item
         v-select(v-model='search.model', :loading="loading", :disabled='!search.brand', label='modelName', :options='models', :reduce='part => part.modId', @input="GET_TYPES(search)", :placeholder="$t('model')", :reset-on-options-change="!!search.model")
           template(v-slot:selected-option='option')
             span(:class='option.icon')
-            | {{ option.modelName.length < 15 ? option.modelName : (option.modelName.substring(0, 12) + '...') }}
+              | {{ option.modelName }}
           template(v-slot:option='option')
             span(:class='option.icon')
-            | {{ option.modelName }}
+              | {{ option.modelName }}
 
       .filter_item
         v-select(v-model='search.type', :disabled='!search.model', :loading="loading", :options='types', :reduce='part => part.carId', :placeholder="$t('type')", :reset-on-options-change="!!search.type")
           template(slot='selected-option' slot-scope='option')
-            | {{ (option.carName + '(' + option.yearOfConstrFrom + '-' + option.yearOfConstrTo + ')').substring(0, 8) }}...
+            span
+              | {{ option.carName + '(' + option.yearOfConstrFrom + '-' + option.yearOfConstrTo + ')' }}
           template(slot='option' slot-scope='option')
-            | {{ option.carName + ' (' + option.yearOfConstrFrom + '-' + option.yearOfConstrTo + ')' }}
+            span
+              | {{ option.carName + ' (' + option.yearOfConstrFrom + '-' + option.yearOfConstrTo + ')' }}
 
       .filter_item.w-100.h-100
         button.btn-new.w-100(@click="searchMethod", :disabled="!search.model") {{$t('search')}}
@@ -152,6 +154,12 @@ export default {
 
 .btn-new {
   height: 44px;
+}
+
+@media screen and (max-width: 500px) {
+  .filter_item_sort {
+    margin-top: 25px;
+  }
 }
 
 @media screen and (min-width: 768px) {

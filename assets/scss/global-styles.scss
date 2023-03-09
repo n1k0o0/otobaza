@@ -1661,3 +1661,28 @@ footer {
     background: #F2F4F7;
   }
 }
+
+.vs__dropdown-toggle {
+  .vs__selected-options {
+    width: 100%;
+
+    .vs__selected {
+      width: 100%;
+
+      span {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        margin-top: 5px;
+        width: calc(100% - 50px);
+      }
+    }
+  }
+
+  .vs__actions {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
