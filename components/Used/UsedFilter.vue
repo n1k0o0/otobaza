@@ -5,19 +5,19 @@
         v-select(v-model='search.brand', :loading="loading", label='manuName', :options='manufacturers', :reduce='brand => brand.manuId', @input='GET_MANUFACTURER_MODELS({manufacturer:search.brand})', :placeholder="$t('brand')", :reset-on-options-change="!!search.brand")
           template(v-slot:selected-option='option')
             span(:class='option.icon')
-            | {{ option.manuName.length < 15 ? option.manuName : (option.manuName.substring(0, 12) + '...') }}
+              | {{option.manuName}}
           template(v-slot:option='option')
             span(:class='option.icon')
-            | {{ option.manuName }}
+              | {{ option.manuName }}
 
       .filter_item
         v-select(v-model='search.model', :loading="loading", :disabled='!search.brand', label='modelname', :options='manufacturer_models', :reduce='part => part.modelId', :placeholder="$t('model')", :reset-on-options-change="!!search.model")
           template(v-slot:selected-option='option')
             span(:class='option.icon')
-            | {{ option.modelname.length < 15 ? option.modelname : (option.modelname.substring(0, 12) + '...') }}
+              | {{ option.modelname }}
           template(v-slot:option='option')
             span(:class='option.icon')
-            | {{ option.modelname }}
+              | {{ option.modelname }}
 
       .filter_item
         input( v-model="search.keyword", :placeholder="$t('search')", @keyup.enter="searchMethod" )

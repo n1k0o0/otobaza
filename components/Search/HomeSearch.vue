@@ -76,14 +76,10 @@
                         @input="GET_BRANDS(search.sparePart)"
                       >
                         <template v-slot:selected-option="option">
-                          <span :class="option.icon"></span>
-                          {{
-                            option.assemblyGroupName.length <= 9 ? option.assemblyGroupName : (option.assemblyGroupName.substring(0, 7) + '...')
-                          }}
+                          <span :class="option.icon">{{ option.assemblyGroupName }}</span>
                         </template>
                         <template v-slot:option="option">
-                          <span :class="option.icon"></span>
-                          {{ option.assemblyGroupName }}
+                          <span :class="option.icon">{{ option.assemblyGroupName }}</span>
                         </template>
                       </v-select>
                     </div>
@@ -100,14 +96,10 @@
                         @input="GET_MODELS(search)"
                       >
                         <template v-slot:selected-option="option">
-                          <span :class="option.icon"></span>
-                          {{
-                            option.manuName.length <= 9 ? option.manuName : (option.manuName.substring(0, 7) + '...')
-                          }}
+                          <span :class="option.icon">{{ option.manuName }}</span>
                         </template>
                         <template v-slot:option="option">
-                          <span :class="option.icon"></span>
-                          {{ option.manuName }}
+                          <span :class="option.icon">{{ option.manuName }}</span>
                         </template>
                       </v-select>
                     </div>
@@ -124,14 +116,10 @@
                         @input="GET_TYPES(search)"
                       >
                         <template v-slot:selected-option="option">
-                          <span :class="option.icon"></span>
-                          {{
-                            option.modelName.length < 10 ? option.modelName : (option.modelName.substring(0, 7) + '...')
-                          }}
+                          <span :class="option.icon">{{ option.modelName }}</span>
                         </template>
                         <template v-slot:option="option">
-                          <span :class="option.icon"></span>
-                          {{ option.modelName }}
+                          <span :class="option.icon">{{ option.modelName }}</span>
                         </template>
                       </v-select>
                     </div>
@@ -146,12 +134,14 @@
                         :reset-on-options-change="!!search.type"
                       >
                         <template slot="selected-option" slot-scope="option">
-                          {{
-                            (option.carName + '(' + option.yearOfConstrFrom + '-' + option.yearOfConstrTo + ')').substring(0, 9)
-                          }}...
+                          <span>{{
+                            option.carName + '(' + option.yearOfConstrFrom + '-' + option.yearOfConstrTo + ')'
+                          }}</span>
                         </template>
                         <template slot="option" slot-scope="option">
-                          {{ option.carName + ' (' + option.yearOfConstrFrom + '-' + option.yearOfConstrTo + ')' }}
+                          <span>{{
+                            option.carName + '(' + option.yearOfConstrFrom + '-' + option.yearOfConstrTo + ')'
+                          }}</span>
                         </template>
                       </v-select>
                     </div>
@@ -247,12 +237,10 @@
                     @input="GET_MANUFACTURER_MODELS({manufacturer:used.brand})"
                   >
                     <template v-slot:selected-option="option">
-                      <span :class="option.icon"></span>
-                      {{ option.manuName.length <= 4 ? option.manuName : (option.manuName.substring(0, 4) + '...') }}
+                      <span :class="option.icon">{{ option.manuName }}</span>
                     </template>
                     <template v-slot:option="option">
-                      <span :class="option.icon"></span>
-                      {{ option.manuName }}
+                      <span :class="option.icon"> {{ option.manuName }}</span>
                     </template>
                   </v-select>
                 </div>
@@ -268,14 +256,10 @@
                     :reset-on-options-change="!!used.model"
                   >
                     <template v-slot:selected-option="option">
-                      <span :class="option.icon"></span>
-                      {{
-                        option.modelname.length < 6 ? option.modelname : (option.modelname.substring(0, 5) + '...')
-                      }}
+                      <span :class="option.icon">{{ option.modelname }}</span>
                     </template>
                     <template v-slot:option="option">
-                      <span :class="option.icon"></span>
-                      {{ option.modelname }}
+                      <span :class="option.icon">{{ option.modelname }}</span>
                     </template>
                   </v-select>
                 </div>
