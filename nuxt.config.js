@@ -104,30 +104,30 @@ module.exports = {
       {
         seo: true,
         locales: [
-          {
-            code: 'ru',
-            iso: 'ru-RU',
-            file: 'ru.json',
-            name: 'Русский'
-          },
-          {
-            code: 'en',
-            iso: 'en-US',
-            file: 'en.json',
-            name: 'English'
-          },
+          // {
+          //   code: 'ru',
+          //   iso: 'ru-RU',
+          //   file: 'ru.json',
+          //   name: 'Русский'
+          // },
+          // {
+          //   code: 'en',
+          //   iso: 'en-US',
+          //   file: 'en.json',
+          //   name: 'English'
+          // },
           {
             code: 'az',
             iso: 'az-AZ',
             file: 'az.json',
             name: 'Azərbaycanca'
-          },
-          {
-            code: 'tr',
-            iso: 'tr-TR',
-            file: 'tr.json',
-            name: 'Türkçe'
           }
+          // {
+          //   code: 'tr',
+          //   iso: 'tr-TR',
+          //   file: 'tr.json',
+          //   name: 'Türkçe'
+          // }
         ],
         defaultLocale: 'az',
         loadLanguagesAsync: true,
@@ -140,7 +140,7 @@ module.exports = {
             setLocale: 'SET_LOCALE'
           }
         },
-        parsePages: true,
+        parsePages: false,
         detectBrowserLanguage: false
       }
     ],
