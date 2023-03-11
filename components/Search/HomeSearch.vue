@@ -571,10 +571,18 @@ export default {
     },
     async searchUsed () {
       const model = this.brand_name(this.used.brand)
-      await this.$router.push(this.localePath({
-        name: 'elan-' + model + '-ehtiyat-hisseleri',
-        query: { keyword: this.used.title, model: this.used.model }
-      }))
+
+      if (model) {
+        await this.$router.push(this.localePath({
+          name: 'elan-' + model + '-ehtiyat-hisseleri',
+          query: { keyword: this.used.title, model: this.used.model }
+        }))
+      } else {
+        await this.$router.push(this.localePath({
+          name: 'elanlar',
+          query: { brand: this.used.brand, keyword: this.used.title, model: this.used.model }
+        }))
+      }
     }
   }
 }
