@@ -370,7 +370,7 @@ export default {
   },
   head () {
     const title = this.title[this.$i18n.locale].replace('{name}', this.product.title + ' ' + this.product.manu_name)
-    const description = this.description[this.$i18n.locale].replace('{name}', this.product.title + ' ' + this.product.manu_name)
+    const description = this.product.description
 
     return {
       title: `${title} `,
