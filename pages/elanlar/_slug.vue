@@ -24,7 +24,7 @@
             .product_info
               .product_info_img
                 .product_info_img_big.pointer
-                  img(:src="product.images[imgIndex]?product.images[imgIndex].link:'/img/search/big-part.png'", :alt="product.description")(@click="modalVisibility=true")
+                  img(:src="product.images[imgIndex]?product.images[imgIndex].link:'/img/search/big-part.png'", :alt="product.title")(@click="modalVisibility=true")
                   template(v-if="product.images.length>1")
                     .before.pointer(@click="previousImage")
                     .after.pointer(@click="nextImage")
@@ -87,7 +87,7 @@
             p {{product.description}}
           .modal-image.pointer(v-if='modalVisibility' @click="modalVisibility=false")
             .modal-image_wrap
-              img(alt='action', :src="product.images[imgIndex]?product.images[imgIndex].link:'/img/search/big-part.png'")
+              img(alt='action', :src="product.images[imgIndex]?product.images[imgIndex].link:'/img/search/big-part.png'", :alt="product.title")
               template(v-if="product.images.length>1")
                 .before.pointer(@click.stop="previousImage")
                 .after.pointer(@click.stop="nextImage")
@@ -370,7 +370,7 @@ export default {
   },
   head () {
     const title = this.title[this.$i18n.locale].replace('{name}', this.product.title + ' ' + this.product.manu_name)
-    const description = this.product.description
+    const description = this.product.description.slice(0, 300)
 
     return {
       title: `${title} `,
