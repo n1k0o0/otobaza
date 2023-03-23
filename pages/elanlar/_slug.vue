@@ -38,6 +38,14 @@
                   | {{product.title}}
                 .row
                   .product_info_details_text.col-12.col-md-6
+                    .product_info_details_text_expired_product(v-if="product.is_expired")
+                      | {{ $t('used.expired') }}
+                      svg(width='13', height='12', viewBox='0 0 13 12', fill='none', xmlns='http://www.w3.org/2000/svg')
+                        g(clip-path='url(#clip0_2492_27885)')
+                          path(d='M6.15039 8V6M6.15039 4H6.15539M11.1504 6C11.1504 8.76142 8.91181 11 6.15039 11C3.38897 11 1.15039 8.76142 1.15039 6C1.15039 3.23858 3.38897 1 6.15039 1C8.91181 1 11.1504 3.23858 11.1504 6Z', stroke='#B42318', stroke-linecap='round', stroke-linejoin='round')
+                        defs
+                          clippath#clip0_2492_27885
+                            rect(width='12', height='12', fill='white', transform='translate(0.150391)')
                     .product_info_details_text_item
                       .product_info_details_text_item_title {{$t('store')}}:
                       .product_info_details_text_item_value {{product.seller.name}}
@@ -55,7 +63,7 @@
                   .price_mobile.col-4.font-weight-bold.m-0
                     span  {{product.price}} {{product.price_type.currency_symbol}}
                   .product_info_details_actions_wrapper_cart.col-6
-                    button(v-if="!this.showPhone" @click.prevent="showPhone=true" class="btn-new-light" ).px-2.py-1.position-relative.w-100.product_info_details_actions_phone
+                    button(v-if="!this.showPhone" :disabled="product.is_expired" @click.prevent="showPhone=true" class="btn-new-light" ).px-2.py-1.position-relative.w-100.product_info_details_actions_phone
                       svg(width='8', height='8', viewBox='0 0 8 8', fill='none', xmlns='http://www.w3.org/2000/svg')
                         circle(cx='4', cy='4', r='4', fill='#D92D20')
                       | {{ $t('make_call') }}
@@ -512,13 +520,30 @@ export default {
           font-size: 30px;
           line-height: 38px;
           color: #000000;
-          margin-bottom: 32px;
+          margin-bottom: 24px;
         }
 
         &_text {
           //margin:0 50px;
           .phone {
             color: #98A2B3;
+          }
+
+          &_expired_product {
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 20px;
+            text-align: center;
+            color: #B42318;
+
+            padding: 2px 8px 2px 10px;
+            background: #FEF3F2;
+            border-radius: 16px;
+            margin-bottom: 15px;
+
+            svg {
+              margin-left: 5px;
+            }
           }
 
           &_item {

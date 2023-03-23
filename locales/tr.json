@@ -367,7 +367,8 @@
     "vip": "VIP",
     "special": "Özel",
     "last": "Son eklenenler",
-    "similar": "Benzer ilanlar"
+    "similar": "Benzer ilanlar",
+    "expired": "Reklamın süresi doldu"
   },
   "phone_tooltip": "Aradığınızda veya yaklaşırken Otobaza adına başvuru yapın, indirim kazanın!",
   "discount": "İndirim",
