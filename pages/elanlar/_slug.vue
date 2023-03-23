@@ -722,12 +722,12 @@ export default {
 }
 
 .price_tooltip {
+  background-color: #ff6b00;
+  color: #fff;
+
   max-width: 250px;
   padding: 5px;
 
-  span {
-    color: grey;
-  }
 }
 
 .price_mobile {
