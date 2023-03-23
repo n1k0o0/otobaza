@@ -69,7 +69,7 @@
 
     <div class="mobile_footer_menu">
       <div class="mobile_footer_menu_wrapper">
-        <nuxt-link class="mobile_menu_item" :to="localePath('index')">
+        <span class="mobile_menu_item" @click="goToPage('index')">
           <svg
             fill="none"
             height="24"
@@ -90,15 +90,15 @@
             />
           </svg>
           {{ $t('home') }}
-        </nuxt-link>
-        <nuxt-link class="mobile_menu_item" :to="localePath('cart')">
+        </span>
+        <span class="mobile_menu_item" @click="goToPage('cart')">
           <CartLink :header="false" />
           {{ $t('my_cart') }}
-        </nuxt-link>
-        <nuxt-link class="mobile_menu_item" :to="localePath('favorites')">
+        </span>
+        <span class="mobile_menu_item" @click="goToPage('favorites')">
           <FavoriteLink :header="false" />
           {{ $t('favorites') }}
-        </nuxt-link>
+        </span>
         <div class="mobile_menu_item">
           <template v-if="!$auth.loggedIn">
             <div class="user-profile">
@@ -174,6 +174,15 @@ export default {
     },
     changeLanguage (lang) {
       return this.switchLocalePath(lang.toLowerCase())
+    },
+    async goToPage (page) {
+      const currentName = this.$router.currentRoute.name.split('__')[0]
+
+      if (page === currentName) {
+        window.scrollTo({ top: 0, behavior: 'smooth' })
+      } else {
+        await this.$router.push(this.localePath({ name: page }))
+      }
     }
   }
 }
