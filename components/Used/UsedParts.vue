@@ -99,7 +99,6 @@ export default {
       window.scrollTo({ top: 0, behavior: 'smooth' })
     },
     getMore () {
-      console.log(5)
       if (this.isFavorite) {
         this.GET_FAVORITES({ page: true })
       } else {

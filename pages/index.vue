@@ -11,7 +11,7 @@
           </p>
         </div>
         <div class="home_blocks_img">
-          <button class="btn-new" @click="$router.push(localePath({ name: 'search'}))">
+          <button class="btn-new" @click="goToAPP">
             {{ $t('create_request') }}
             <svg
               fill="none"
@@ -126,6 +126,17 @@ export default {
         en: 'You can visit Autobaza website to buy first and second hand spare parts',
         tr: 'Birinci ve ikinci el yedek parça satın almak için Autobaza web sitesini ziyaret edebilirsiniz.'
       }
+    }
+  },
+  methods: {
+    goToAPP () {
+      if (!this.$device.isMobile) {
+        return this.$router.push(this.localePath({ name: 'contact' }))
+      }
+
+      const url = this.$device.isIos ? 'https://apps.apple.com/us/app/facebook/id1528493953' : 'https://play.google.com/store/apps/details?id=com.otobaza.app&hl=az'
+
+      window.open(url)
     }
   },
   head () {
