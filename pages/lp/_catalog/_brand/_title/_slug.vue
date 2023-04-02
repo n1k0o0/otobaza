@@ -76,7 +76,6 @@ export default {
   layout: 'pages',
   scrollToTop: true,
   async validate ({ params, error, app }) {
-    console.log(params)
     const brand = params.brand
     const catalog = params.catalog
     if (isNaN(brand) || isNaN(catalog)) {

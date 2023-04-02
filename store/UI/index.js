@@ -80,7 +80,7 @@ const mutations = {
       state.search_tabs = []
     }
     state.search_tabs.push(tab)
-    console.log('010101', state.search_tabs)
+
     this.$auth.$storage.setUniversal('search_tabs', state.search_tabs)
   },
   REMOVE_SEARCH_TAB (state, index) {
