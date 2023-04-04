@@ -34,7 +34,7 @@ module.exports = {
     script: [
       {
         src:
-          'https://maps.googleapis.com/maps/api/js?key=AIzaSyAraptFbVXN4LZi66o7tDbrvEti1a8gVeo&libraries=places'
+          'https://maps.googleapis.com/maps/api/js?key=AIzaSyAlXPLkziiRHXj9NrexKEbtW9JmGzxTZ0o&libraries=places'
       }
     ]
   },
