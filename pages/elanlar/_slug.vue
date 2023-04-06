@@ -194,7 +194,7 @@ export default {
             slidesPerGroup: 3,
             spaceBetween: 14
           },
-          998: {
+          768: {
             slidesPerView: 4,
             slidesPerGroup: 4,
             spaceBetween: 14
@@ -453,50 +453,6 @@ export default {
       grid-template-columns:1fr 1fr;
       justify-content: space-around;
       grid-gap: 10px;
-      @media screen and (max-width: 991px) {
-        grid-template-columns:1fr;
-
-        &_img {
-          max-width: 100% !important;
-          width: 100% !important;
-          overflow: hidden;
-
-          &_big {
-            //display: none !important;
-            height: 250px !important;
-          }
-
-          .swiper {
-            .swiper-slide {
-              height: unset !important;
-            }
-
-            img {
-              height: 65px;
-              width: 100%;
-              object-fit: cover;
-            }
-          }
-
-        }
-
-        &_address {
-          .map {
-            display: none;
-          }
-        }
-
-        &_details {
-          padding-left: 0 !important;
-        }
-      }
-      @media screen and (max-width: 576px) {
-        &_img {
-          img {
-            //height: 300px;
-          }
-        }
-      }
 
       &_img {
         align-self: center;
@@ -510,6 +466,20 @@ export default {
           border-radius: 16px;
           background-color: #fff;
         }
+
+        .swiper {
+          .swiper-slide {
+            width: auto;
+
+            img {
+              height: 80px;
+              width: 100%;
+              object-fit: cover;
+            }
+
+          }
+        }
+
       }
 
       &_details {
@@ -616,6 +586,52 @@ export default {
             }
           }
 
+        }
+      }
+
+      @media screen and (max-width: 991px) {
+        grid-template-columns:1fr;
+
+        &_img {
+          max-width: 100% !important;
+          width: 100% !important;
+          overflow: hidden;
+
+          &_big {
+            //display: none !important;
+            height: 250px !important;
+          }
+
+          .swiper {
+            .swiper-slide {
+              height: unset !important;
+
+              img {
+                height: 65px;
+                width: 100%;
+                object-fit: cover;
+              }
+            }
+
+          }
+
+        }
+
+        &_address {
+          .map {
+            display: none;
+          }
+        }
+
+        &_details {
+          padding-left: 0 !important;
+        }
+      }
+      @media screen and (max-width: 576px) {
+        &_img {
+          img {
+            //height: 300px;
+          }
         }
       }
 
