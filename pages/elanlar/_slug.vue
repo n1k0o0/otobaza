@@ -733,6 +733,10 @@ export default {
         width: calc(100% - 320px);
       }
     }
+
+    .swiper-slide {
+      height: auto;
+    }
   }
 
 }
