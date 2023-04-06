@@ -133,7 +133,7 @@ export default {
             slidesPerGroup: 3,
             spaceBetween: 14
           },
-          998: {
+          768: {
             slidesPerView: 4,
             slidesPerGroup: 4,
             spaceBetween: 14
@@ -221,12 +221,6 @@ export default {
       },
       imgUrl: '',
       imgIndex: 0,
-      images: [
-        'https://www.autocar.co.uk/sites/autocar.co.uk/files/slideshow_image/1-ferrari-355-engine.jpg',
-        'https://www.howacarworks.com/illustration/1742/the-compression-igntion-engine.png',
-        'https://cdn.britannica.com/73/24073-004-639E15FC/Cross-section-V-type-engine.jpg',
-        'https://cdn.hswstatic.com/gif/car-engine-new1.jpg'
-      ],
       modalVisibility: false,
       showPhone: false,
       title: {
@@ -336,42 +330,9 @@ export default {
       grid-template-columns:1fr 1fr;
       justify-content: space-around;
       grid-gap: 10px;
-      @media screen and (max-width: 991px) {
-        grid-template-columns:1fr;
-
-        &_img {
-          max-width: 100% !important;
-          width: 100% !important;
-
-          &_big {
-            //display: none !important;
-            height: 250px !important;
-          }
-        }
-
-        &_address {
-          .map {
-            display: none;
-          }
-        }
-
-        &_details {
-          padding-left: 0 !important;
-        }
-      }
-      @media screen and (max-width: 576px) {
-        &_img {
-          img {
-            //height: 300px;
-          }
-        }
-      }
 
       &_img {
         align-self: center;
-        overflow: hidden;
-        max-width: 100% !important;
-        width: 100% !important;
 
         &_big {
           height: 400px;
@@ -385,15 +346,17 @@ export default {
 
         .swiper {
           .swiper-slide {
-            height: unset !important;
-          }
+            width: auto;
 
-          img {
-            height: 65px;
-            width: 100%;
-            object-fit: cover;
+            img {
+              height: 80px;
+              width: 100%;
+              object-fit: cover;
+            }
+
           }
         }
+
       }
 
       &_details {
@@ -473,8 +436,65 @@ export default {
             border: 1px solid #0086C9;
           }
 
+          &_phone {
+            color: #026aa2;
+
+            svg {
+              position: absolute;
+              right: 8px;
+              top: 8px;
+            }
+          }
+
         }
       }
+
+      @media screen and (max-width: 991px) {
+        grid-template-columns:1fr;
+
+        &_img {
+          max-width: 100% !important;
+          width: 100% !important;
+          overflow: hidden;
+
+          &_big {
+            //display: none !important;
+            height: 250px !important;
+          }
+
+          .swiper {
+            .swiper-slide {
+              height: unset !important;
+
+              img {
+                height: 65px;
+                width: 100%;
+                object-fit: cover;
+              }
+            }
+
+          }
+
+        }
+
+        &_address {
+          .map {
+            display: none;
+          }
+        }
+
+        &_details {
+          padding-left: 0 !important;
+        }
+      }
+      @media screen and (max-width: 576px) {
+        &_img {
+          img {
+            //height: 300px;
+          }
+        }
+      }
+
     }
 
     &_description {
