@@ -624,9 +624,7 @@ export default {
       padding: 20px 0;
       margin: 10px 5px;
     }
-    display: flex;
-    gap: 10px;
-    flex-direction: column;
+    display: block;
 
     .filter_search_group {
       align-items: center;
