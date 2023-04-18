@@ -62,7 +62,10 @@
                 .product_info_details_actions.row
                   .price_mobile.col-4.font-weight-bold.m-0
                     span  {{product.price}} {{product.price_type.currency_symbol}}
-                  .product_info_details_actions_wrapper_cart.col-6
+                  .product_info_details_actions_wrapper_wtsp.col-1.p-0
+                    a(:href="`https://wa.me/${product.seller.phone}?text=${$t('used.whatsapp_text')+$env.FRONT_URL+$route.fullPath}`")
+                      img(src="/img/whatsapp.svg", width="32px")
+                  .product_info_details_actions_wrapper_cart.col-5
                     button(v-if="!this.showPhone" :disabled="product.is_expired" @click.prevent="showPhone=true" class="btn-new-light" ).px-2.py-1.position-relative.w-100.product_info_details_actions_phone
                       svg(width='8', height='8', viewBox='0 0 8 8', fill='none', xmlns='http://www.w3.org/2000/svg')
                         circle(cx='4', cy='4', r='4', fill='#D92D20')
@@ -142,6 +145,9 @@ export default {
   async fetch () {
     const param = this.$route.params.slug
     await this.GET_PRODUCT(param)
+    console.log(this.$router.currentRoute)
+    console.log(this.$router)
+    console.log(this.$route)
   },
   async validate ({ params, error, app }) {
     const param = params.slug.split('-')[0]
