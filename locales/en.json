@@ -344,7 +344,8 @@
     "by_vin": "VIN code",
     "by_detail_code": "Detail code",
     "by_brand": "By brand",
-    "search_type": "Select a search type"
+    "search_type": "Select a search type",
+    "search": "Search: Word, Part code, OEM code"
   },
   "oem": "OEM code",
   "new_or_used": "New or used",

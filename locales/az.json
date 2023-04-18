@@ -344,7 +344,8 @@
     "by_vin": "Ban nömrə",
     "by_detail_code": "Detal kodu",
     "by_brand": "Marka üzrə",
-    "search_type": "Axtarış növünü seçin"
+    "search_type": "Axtarış növünü seçin",
+    "search": "Axtar: Söz, Detal kodu, OEM kodu"
   },
   "oem": "OEM kodu",
   "new_or_used": "Yeni və ya ikinci əl",

@@ -267,7 +267,7 @@
                   <input
                     v-model="used.title"
                     min="4"
-                    :placeholder="$t('search')"
+                    :placeholder="$t('home_search.search')"
                     type="text"
                     @keyup.enter="$router.push(localePath({ name: 'elanlar', query: { keyword: used.title,brand: used.brand, model: used.model}}));"
                   />
