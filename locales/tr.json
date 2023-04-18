@@ -344,7 +344,8 @@
     "by_vin": "VIN kodu",
     "by_detail_code": "Parça kodu",
     "by_brand": "Markaya göre",
-    "search_type": "Bir arama türü seçin"
+    "search_type": "Bir arama türü seçin",
+    "search": "Arama: Kelime, Parça Kodu, OEM Kodu"
   },
   "oem": "OEM kodu",
   "new_or_used": "Yeni veya kullanılmış",
