@@ -89,7 +89,8 @@ module.exports = {
         keys: [
           'BASE_API_URL',
           'CATALOG_API_URL',
-          'SELLER_URL'
+          'SELLER_URL',
+          'FRONT_URL'
         ]
       }
     ],
