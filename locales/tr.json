@@ -368,7 +368,8 @@
     "special": "Özel",
     "last": "Son eklenenler",
     "similar": "Benzer ilanlar",
-    "expired": "Reklamın süresi doldu"
+    "expired": "Reklamın süresi doldu",
+    "whatsapp_text": "Bu ürünü satın almak istiyorum. Link : "
   },
   "phone_tooltip": "Aradığınızda veya yaklaşırken Otobaza adına başvuru yapın, indirim kazanın!",
   "discount": "İndirim",
