@@ -65,20 +65,24 @@
                   .product_info_details_actions_wrapper_wtsp.col-1.p-0
                     a(:href="`https://wa.me/${product.seller.phone}?text=${$t('used.whatsapp_text')+$env.FRONT_URL+$route.fullPath}`")
                       img(src="/img/whatsapp.svg", width="32px")
+                      span(class="d-none") WhatsApp
                   .product_info_details_actions_wrapper_cart.col-5
-                    button(v-if="!this.showPhone" :disabled="product.is_expired" @click.prevent="showPhone=true" class="btn-new-light" ).px-2.py-1.position-relative.w-100.product_info_details_actions_phone
-                      svg(width='8', height='8', viewBox='0 0 8 8', fill='none', xmlns='http://www.w3.org/2000/svg')
-                        circle(cx='4', cy='4', r='4', fill='#D92D20')
-                      | {{ $t('make_call') }}
-                    VDropdown(v-else)
-                      a(:href="'tel:'+product.seller.phone" class="btn-new-light" ).px-2.py-1.position-relative.w-100.product_info_details_actions_phone
-                        svg(width='8', height='8', viewBox='0 0 8 8', fill='none', xmlns='http://www.w3.org/2000/svg')
-                          circle(cx='4', cy='4', r='4', fill='#D92D20')
-                        | {{ product.seller.phone }}
+                    VDropdown
                       template(#popper)
                         div(class="price_tooltip")
                           span {{ $t('discount') }}:
                           p {{$t('phone_tooltip')}}
+
+                      button(v-show="!this.showPhone" :disabled="product.is_expired" @click.prevent="showPhone=true" class="btn-new-light" ).px-2.py-1.position-relative.w-100.product_info_details_actions_phone
+                        svg(width='8', height='8', viewBox='0 0 8 8', fill='none', xmlns='http://www.w3.org/2000/svg')
+                          circle(cx='4', cy='4', r='4', fill='#D92D20')
+                        | {{ $t('make_call') }}
+
+                      a(v-show="this.showPhone" @click.prevent="whatsappMsg" id="whatsapp" :href="'tel:'+product.seller.phone" class="btn-new-light" ).px-2.py-1.position-relative.w-100.product_info_details_actions_phone
+                        svg(width='8', height='8', viewBox='0 0 8 8', fill='none', xmlns='http://www.w3.org/2000/svg')
+                          circle(cx='4', cy='4', r='4', fill='#D92D20')
+                        | {{ product.seller.phone }}
+
                   .product_info_details_action_wrapper_order.col-2.col-lg-6
                     .desktop_favorite
                       AddToFavoriteButton(:id="product.id" :hideIcon="true" theme="dark")
@@ -145,9 +149,6 @@ export default {
   async fetch () {
     const param = this.$route.params.slug
     await this.GET_PRODUCT(param)
-    console.log(this.$router.currentRoute)
-    console.log(this.$router)
-    console.log(this.$route)
   },
   async validate ({ params, error, app }) {
     const param = params.slug.split('-')[0]
@@ -310,14 +311,14 @@ export default {
         en: 'You can visit Autobaza website to buy {name} first and second hand spare parts',
         tr: '{name} birinci ve ikinci el yedek parça satın almak için Autobaza web sitesini ziyaret edebilirsiniz.'
       },
-      organization:
-        {
-          '@context': 'http://schema.org',
-          '@type': 'Organization',
-          name: 'Otobaza',
-          url: 'https://otobaza.com',
-          logo: 'https://otobaza.com/css/icons/logo.svg'
-        }
+      organization: {
+        '@context': 'http://schema.org',
+        '@type': 'Organization',
+        name: 'Otobaza',
+        url: 'https://otobaza.com',
+        logo: 'https://otobaza.com/css/icons/logo.svg'
+      },
+      phoneClick: 0
     }
   },
   computed: {
@@ -380,6 +381,12 @@ export default {
     },
     generateRandomInteger (min, max) {
       return Math.floor(Math.random() * (max - min)) + min
+    },
+    whatsappMsg () {
+      this.phoneClick += 1
+      if (this.phoneClick > 1) {
+        location.href = document.getElementById('whatsapp').getAttribute('href')
+      }
     }
   },
   head () {
