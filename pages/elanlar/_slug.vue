@@ -65,7 +65,7 @@
                   .product_info_details_actions_wrapper_wtsp.col-1.p-0
                     a(:href="`https://wa.me/${product.seller.phone}?text=${$t('used.whatsapp_text')+$env.FRONT_URL+$route.fullPath}`")
                       img(src="/img/whatsapp.svg", width="32px")
-                      span(class="d-none") WhatsApp
+                      span WhatsApp
                   .product_info_details_actions_wrapper_cart.col-5
                     VDropdown
                       template(#popper)
@@ -596,6 +596,20 @@ export default {
               position: absolute;
               right: 8px;
               top: 8px;
+            }
+          }
+
+          &_wrapper {
+            &_wtsp {
+              img {
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+              }
+
+              span {
+                visibility: hidden;
+              }
             }
           }
 
