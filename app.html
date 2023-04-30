@@ -1,108 +1,12 @@
 <!DOCTYPE html>
 <html {{ HTML_ATTRS }}>
 <head>
-  <!-- Google Tag Manager -->
-  <script>(function (w, d, s, l, i) {
-    w[l] = w[l] || []
-    w[l].push({
-      'gtm.start':
-        new Date().getTime(), event: 'gtm.js'
-    })
-    var f = d.getElementsByTagName(s)[0],
-      j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''
-    j.async = true
-    j.src =
-      'https://www.googletagmanager.com/gtm.js?id=' + i + dl
-    f.parentNode.insertBefore(j, f)
-  })(window, document, 'script', 'dataLayer', 'GTM-MXW2NK9')</script>
-  <!-- End Google Tag Manager -->
-
   {{ HEAD }}
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <!-- Yandex.Metrika counter -->
-  <script type="text/javascript">
-    (function (m, e, t, r, i, k, a) {
-      m[i] = m[i] || function () {(m[i].a = m[i].a || []).push(arguments)}
-      m[i].l = 1 * new Date()
-      k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(k, a)
-    })
-    (window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js', 'ym')
 
-    ym(65431984, 'init', {
-      clickmap: true,
-      trackLinks: true,
-      accurateTrackBounce: true,
-      webvisor: true
-    })
-  </script>
-  <noscript>
-    <div><img src="https://mc.yandex.ru/watch/65431984" style="position:absolute; left:-9999px;" alt=""/></div>
-  </noscript>
-  <!-- /Yandex.Metrika counter -->
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-165299525-3"></script>
-  <script>
-    window.dataLayer = window.dataLayer || []
-
-    function gtag () {dataLayer.push(arguments)}
-
-    gtag('js', new Date())
-
-    gtag('config', 'UA-165299525-3')
-  </script>
-
-  <!-- Global site tag (gtag.js) - Google Ads: 10810623038 -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-10810623038"></script>
-  <script>
-    window.dataLayer = window.dataLayer || []
-
-    function gtag () {dataLayer.push(arguments)}
-
-    gtag('js', new Date())
-
-    gtag('config', 'AW-10810623038')
-  </script>
-
-  <!-- Event snippet for Page view 2 conversion page -->
-  <script>
-    gtag('event', 'conversion', { 'send_to': 'AW-698392693/iA6mCJ2F1uoBEPXAgs0C' })
-  </script>
-
-  <!-- Facebook Pixel Code -->
-  <script>
-    !function (f, b, e, v, n, t, s) {
-      if (f.fbq) return
-      n = f.fbq = function () {
-        n.callMethod ?
-          n.callMethod.apply(n, arguments) : n.queue.push(arguments)
-      }
-      if (!f._fbq) f._fbq = n
-      n.push = n
-      n.loaded = !0
-      n.version = '2.0'
-      n.queue = []
-      t = b.createElement(e)
-      t.async = !0
-      t.src = v
-      s = b.getElementsByTagName(e)[0]
-      s.parentNode.insertBefore(t, s)
-    }(window, document, 'script',
-      'https://connect.facebook.net/en_US/fbevents.js')
-    fbq('init', '751320418935787')
-    fbq('track', 'PageView')
-  </script>
-  <noscript><img height="1" width="1" style="display:none"
-                 src="https://www.facebook.com/tr?id=751320418935787&ev=PageView&noscript=1"
-  /></noscript>
   <!-- End Facebook Pixel Code -->
 </head>
 <body {{ BODY_ATTRS }}>
-<!-- Google Tag Manager (noscript) -->
-<noscript>
-  <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MXW2NK9"
-          height="0" width="0" style="display:none;visibility:hidden"></iframe>
-</noscript>
-<!-- End Google Tag Manager (noscript) -->
 
 {{ APP }}
 <script src="/js/jquery.min.js"></script>
