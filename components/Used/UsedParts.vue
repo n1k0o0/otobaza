@@ -109,13 +109,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-.btn-light:disabled {
-  background-color: #e7eef4 !important;
-  border-color: #e4eaef !important;
-
-}
-
+<style lang="scss">
 .search_results {
   &_items {
     display: grid;
@@ -149,16 +143,6 @@ export default {
   }
 }
 
-.btn {
-  border-radius: 5px;
-  background-color: #3A7299;
-  color: #fff;
-
-  &:hover {
-    background-color: #498EBF;
-  }
-}
-
 @media screen and (min-width: 768px) {
   .search_results {
     &_items {
@@ -186,6 +170,25 @@ export default {
       grid-template-columns: repeat(5, minmax(150px, 1fr));
     }
   }
+}
+
+</style>
+
+<style lang="scss" scoped>
+.btn {
+  border-radius: 5px;
+  background-color: #3A7299;
+  color: #fff;
+
+  &:hover {
+    background-color: #498EBF;
+  }
+}
+
+.btn-light:disabled {
+  background-color: #e7eef4 !important;
+  border-color: #e4eaef !important;
+
 }
 
 </style>

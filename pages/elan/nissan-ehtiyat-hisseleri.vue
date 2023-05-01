@@ -24,7 +24,7 @@
       <div class="container position-relative">
         <ol class="breadcrumb-custom">
           <li class="breadcrumb-item">
-            <a href="/static">Home</a>
+            <a href="/">Home</a>
           </li>
           <li aria-current="page" class="breadcrumb-item active">
             <a>{{ $t('home_search.used') }}</a>
@@ -37,6 +37,24 @@
             </h1>
           </div>
           <UsedFilter :search="search" />
+          <div v-if="ad_vip.length" class="elan_wrapper">
+            <div class="elan_header">
+              <h2 class="">
+                {{ $t('used.vip') }}
+              </h2>
+              <!--     all-vip-->
+            </div>
+            <div class="search_results_items">
+              <UsedPart
+                v-for="(ad,i) in ad_vip"
+                :key="i"
+                :card="ad"
+              />
+            </div>
+          </div>
+          <div class="elan_header mb-0">
+            <h2>{{ $t('used.last') }}</h2>
+          </div>
           <UsedParts :loading="loadingResults" :search="search" />
           <div class="seo_content mt-5">
             <h1>
@@ -208,11 +226,13 @@ import UsedParts from '~/components/Used/UsedParts.vue'
 import UsedFilter from '~/components/Used/UsedFilter.vue'
 
 import { mapActions, mapGetters } from 'vuex'
+import UsedPart from '~/components/Used/UsedPart.vue'
 
 export default {
   name: 'Search',
   watchQuery: true,
   components: {
+    UsedPart,
     SearchPlaceholder,
     UsedParts,
     UsedFilter
@@ -245,6 +265,7 @@ export default {
 
     this.loadingResults = true
     await this.GET_PARTS(this.search)
+    await this.GET_HOME_ADS({})
     this.loadingResults = false
   },
   data () {
@@ -265,7 +286,8 @@ export default {
       search_sort_by: 'Used/sort_by',
       manufacturers: 'Used/brands',
       manufacturer_models: 'Used/models',
-      brand_key: 'Used/brand_key'
+      brand_key: 'Used/brand_key',
+      ad_vip: 'Used/ad_vip'
     })
   },
   methods: {
@@ -273,7 +295,8 @@ export default {
       FILTER_PARTS: 'Used/FILTER_PARTS',
       GET_PARTS: 'Used/GET_PARTS',
       GET_CATALOG_MANUFACTURERS: 'Used/GET_BRANDS',
-      GET_MANUFACTURER_MODELS: 'Used/GET_MODELS'
+      GET_MANUFACTURER_MODELS: 'Used/GET_MODELS',
+      GET_HOME_ADS: 'Used/GET_HOME_ADS'
     }),
     scrollTop () {
       window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -293,36 +316,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-.search_wrap {
-  gap: 24px;
-  //margin: 20px auto;
-  padding: 0 0 40px 0;
-  //min-height: calc(100vh - 20px - 62px - 95px - 241px);
-  min-height: calc(100vh - 123px - 41px - 36px - 360px);
-  border-radius: 16px;
-
-  .fa-search {
-    position: absolute;
-    top: 10px;
-    right: 5px;
-    color: #bababa;
-    cursor: pointer;
-  }
-
-}
-
-//
-//@media screen and (min-width: 768px) {
-//  .search_wrap {
-//    padding: 50px 20px;
-//  }
-//}
-//
-//@media screen and (min-width: 992px) {
-//  .search_wrap {
-//    padding: 50px 30px;
-//  }
-//}
-</style>

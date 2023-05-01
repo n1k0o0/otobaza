@@ -19,6 +19,8 @@
 
       div.search_results_items_item_button_cart
         AddToFavoriteButton(:id="card.id", :favorite="card.wishlisted")
+      .div.search_results_items_item_icon
+        img(v-if="card.is_vip" , src="/img/vip.svg")
 
 </template>
 
@@ -106,6 +108,17 @@ export default {
     button {
       border-radius: 50%;
       padding: 5px 1px !important;
+    }
+  }
+
+  &_icon {
+    position: absolute;
+    left: 8px;
+    top: 8px;
+
+    img {
+      width: 36px;
+      height: 36px;
     }
   }
 
