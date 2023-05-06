@@ -222,8 +222,6 @@ const actions = {
     }
 
     commit('SET_LOADING', true)
-    commit('SET_SORT_BY', sortBy ?? state.search_sort_by)
-    commit('SET_SORT_ORDER', sortOrder ?? state.search_sort_order)
 
     commit('SET_SEARCH_PAGE', page ? ++state.search_page : 1)
 
@@ -233,7 +231,7 @@ const actions = {
         data: products,
         meta
       }
-    } = await this.$axios.post(`api/used-parts/search?page=${state.search_page}&orderBy=${state.search_sort_by}&sort=${state.search_sort_order}&perPage=20`,
+    } = await this.$axios.post(`api/used-parts/search?page=${state.search_page}&perPage=20`,
       {
         manu_id: brand,
         mod_id: model,
@@ -316,8 +314,6 @@ const actions = {
         data: vips
       }
     } = await this.$axios.get('/api/used-parts/ads/vip/random')
-
-    console.log(5555, vips)
 
     commit('SET_AD_VIP', vips)
   },

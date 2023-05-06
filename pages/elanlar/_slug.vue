@@ -64,7 +64,7 @@
                     span  {{product.price}} {{product.price_type.currency_symbol}}
                   .product_info_details_actions_wrapper_wtsp.col-1.p-0
                     a(:href="`https://wa.me/${product.seller.phone}?text=${$t('used.whatsapp_text')+$env.FRONT_URL+$route.fullPath}`")
-                      img(src="/img/whatsapp.svg", width="32px")
+                      img(src="/img/whatsapp.svg", width="28px")
                       span WhatsApp
                   .product_info_details_actions_wrapper_cart.col-5
                     VDropdown
@@ -601,15 +601,17 @@ export default {
 
           &_wrapper {
             &_wtsp {
-              img {
-                position: absolute;
-                top: 50%;
-                transform: translateY(-50%);
+              a {
+                display: flex;
+                flex-direction: column;
+                place-items: center;
+
+                span {
+                  color: #5ffa79;
+                  font-size: 10px;
+                }
               }
 
-              span {
-                visibility: hidden;
-              }
             }
           }
 
