@@ -375,6 +375,9 @@
         <h2 class="">
           {{ $t('used.vip') }}
         </h2>
+        <div class="elan_line">
+          <span></span>
+        </div>
         <span @click="$router.push(localePath({ name: 'elanlar'}));">
           {{ $t('see_all') }}
           <svg
@@ -393,11 +396,13 @@
           </svg>
         </span>
       </div>
-      <swiper class="swiper" :options="swiperOptionAd">
-        <swiper-slide v-for="(ad,i) in ad_special" :key="i">
-          <UsedPart :card="ad" />
-        </swiper-slide>
-      </swiper>
+      <div class="search_results_items">
+        <UsedPart
+          v-for="(ad,i) in ad_vip"
+          :key="i"
+          :card="ad"
+        />
+      </div>
     </div>
 
     <div v-if="parts.length" class="elan_wrapper">
@@ -463,6 +468,7 @@ export default {
     }
 
     await this.GET_PARTS({})
+    await this.GET_HOME_ADS({})
   },
   data () {
     return {

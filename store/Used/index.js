@@ -86,7 +86,7 @@ const getters = {
   sort_by (state) { return state.search_sort_by },
   sort_order (state) { return state.search_sort_order },
   ad_special (state) { return state.ad_special },
-  ad_vip (state) { return state.ad_special },
+  ad_vip (state) { return state.ad_vip },
   ad_lasts (state) { return state.ad_lasts },
   favorites (state) { return state.favorites },
   favorites_count (state) { return state.favorites_count },
@@ -310,15 +310,16 @@ const actions = {
 
   async GET_HOME_ADS ({ commit }) {
     this.$axios.defaults.baseURL = this.$env.BASE_API_URL
+
     const {
       data: {
-        data: products,
-        meta
+        data: vips
       }
-    } = await this.$axios.get('api/used-parts?perPage=20&orderBy=created_at&sort=desc')
+    } = await this.$axios.get('/api/used-parts/ads/vip/random')
 
-    commit('SET_META', meta)
-    commit('SET_AD_LASTS', products)
+    console.log(5555, vips)
+
+    commit('SET_AD_VIP', vips)
   },
 
   async GET_FAVORITES ({ commit, state }, {

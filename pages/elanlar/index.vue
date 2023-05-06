@@ -21,24 +21,37 @@
           .hr-wrap
             h1.title.hr-text {{$t('search')}}
           UsedFilter(:search="search")
+          .elan_wrapper(v-if='ad_vip.length')
+            .elan_header
+              h2
+                | {{ $t('used.vip') }}
+              //span(@click="$router.push(localePath({ name: 'elanlar'}));")
+              //  | {{ $t("see_all") }}
+              //  svg(fill='none' height='16' viewbox='0 0 16 16' width='16' xmlns='http://www.w3.org/2000/svg')
+              //    path(d='M3.3335 8.00001H12.6668M12.6668 8.00001L8.00016 3.33334M12.6668 8.00001L8.00016 12.6667' stroke='#667085' stroke-linecap='round' stroke-linejoin='round')
+            .search_results_items
+              UsedPart(v-for='(ad,i) in ad_vip' :key='i' :card='ad')
+          .elan_header(class="mb-0")
+            h2
+              | {{ $t("used.last") }}
           UsedParts(:search="search", :loading="loadingResults")
 
 </template>
 
 <script>
-import Parts from '@/components/Catalog/Parts'
 import SearchPlaceholder from '@/components/Search/SearchPlaceholder'
 import UsedParts from '~/components/Used/UsedParts.vue'
 import UsedFilter from '~/components/Used/UsedFilter.vue'
 
 import { mapActions, mapGetters } from 'vuex'
+import UsedPart from '@/components/Used/UsedPart.vue'
 
 export default {
   name: 'Search',
   watchQuery: true,
   components: {
+    UsedPart,
     SearchPlaceholder,
-    Parts,
     UsedParts,
     UsedFilter
   },
@@ -75,6 +88,7 @@ export default {
 
     this.loadingResults = true
     await this.GET_PARTS(this.search)
+    await this.GET_HOME_ADS({})
     this.loadingResults = false
   },
   data () {
@@ -94,7 +108,8 @@ export default {
       parts: 'Used/parts',
       search_sort_by: 'Used/sort_by',
       manufacturers: 'Used/brands',
-      manufacturer_models: 'Used/models'
+      manufacturer_models: 'Used/models',
+      ad_vip: 'Used/ad_vip'
     })
   },
   methods: {
@@ -102,7 +117,8 @@ export default {
       FILTER_PARTS: 'Used/FILTER_PARTS',
       GET_PARTS: 'Used/GET_PARTS',
       GET_CATALOG_MANUFACTURERS: 'Used/GET_BRANDS',
-      GET_MANUFACTURER_MODELS: 'Used/GET_MODELS'
+      GET_MANUFACTURER_MODELS: 'Used/GET_MODELS',
+      GET_HOME_ADS: 'Used/GET_HOME_ADS'
     }),
     scrollTop () {
       window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -111,7 +127,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .search_wrap {
   gap: 24px;
   //margin: 20px auto;
