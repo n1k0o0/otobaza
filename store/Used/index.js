@@ -225,13 +225,19 @@ const actions = {
 
     commit('SET_SEARCH_PAGE', page ? ++state.search_page : 1)
 
+    let url = `api/used-parts/search?page=${state.search_page}&perPage=20`
+
+    if (sortBy) {
+      url += `&orderBy=${sortBy}&sort=${sortOrder ?? 'desc'}`
+    }
+
     this.$axios.defaults.baseURL = this.$env.BASE_API_URL
     const {
       data: {
         data: products,
         meta
       }
-    } = await this.$axios.post(`api/used-parts/search?page=${state.search_page}&perPage=20`,
+    } = await this.$axios.post(url,
       {
         manu_id: brand,
         mod_id: model,

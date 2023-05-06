@@ -467,7 +467,7 @@ export default {
       await this.GET_SPARE_PARTS()
     }
 
-    await this.GET_PARTS({})
+    await this.GET_PARTS({ sortBy: 'created_at', sortOrder: 'desc' })
     await this.GET_HOME_ADS({})
   },
   data () {
