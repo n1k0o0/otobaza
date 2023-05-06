@@ -375,6 +375,9 @@
         <h2 class="">
           {{ $t('used.vip') }}
         </h2>
+        <div class="elan_line">
+          <span></span>
+        </div>
         <span @click="$router.push(localePath({ name: 'elanlar'}));">
           {{ $t('see_all') }}
           <svg
