@@ -431,7 +431,7 @@
           </svg>
         </span>
       </div>
-      <UsedParts />
+      <UsedParts sort-by="created_at" />
     </div>
   </div>
 </template>

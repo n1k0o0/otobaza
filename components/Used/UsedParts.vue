@@ -35,6 +35,14 @@ export default {
     type: {
       type: String,
       default: 'default'
+    },
+    sortBy: {
+      type: String,
+      default: null
+    },
+    sortOrder: {
+      type: String,
+      default: 'desc'
     }
   },
   computed: {
@@ -102,7 +110,12 @@ export default {
       if (this.isFavorite) {
         this.GET_FAVORITES({ page: true })
       } else {
-        this.GET_SEARCH_PARTS({ ...this.search, page: true })
+        const data = { ...this.search, page: true }
+        if (this.sortBy) {
+          data.sortBy = this.sortBy
+          data.sortOrder = this.sortOrder
+        }
+        this.GET_SEARCH_PARTS(data)
       }
     }
   }

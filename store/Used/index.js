@@ -227,8 +227,11 @@ const actions = {
 
     let url = `api/used-parts/search?page=${state.search_page}&perPage=20`
 
-    if (sortBy) {
-      url += `&orderBy=${sortBy}&sort=${sortOrder ?? 'desc'}`
+    commit('SET_SORT_BY', sortBy ?? (!keyword ? 'created_at' : null))
+    commit('SET_SORT_ORDER', sortOrder ?? (!keyword ? 'desc' : null))
+
+    if (sortBy || !keyword) {
+      url += `&orderBy=${sortBy ?? 'created_at'}&sort=${sortOrder ?? 'desc'}`
     }
 
     this.$axios.defaults.baseURL = this.$env.BASE_API_URL
