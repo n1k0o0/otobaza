@@ -21,6 +21,7 @@
         AddToFavoriteButton(:id="card.id", :favorite="card.wishlisted")
       .div.search_results_items_item_icon
         img(v-if="card.is_vip" , src="/img/vip.svg")
+        img(v-if="card.is_private" , src="/img/special.svg")
 
 </template>
 

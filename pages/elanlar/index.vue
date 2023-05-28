@@ -21,6 +21,17 @@
           .hr-wrap
             h1.title.hr-text {{$t('search')}}
           UsedFilter(:search="search")
+
+          .elan_wrapper(v-if='ad_vip.length')
+            .elan_header
+              h2
+                | {{ $t('used.special') }}
+              //span(@click="$router.push(localePath({ name: 'elanlar'}));")
+              //  | {{ $t("see_all") }}
+              //  svg(fill='none' height='16' viewbox='0 0 16 16' width='16' xmlns='http://www.w3.org/2000/svg')
+              //    path(d='M3.3335 8.00001H12.6668M12.6668 8.00001L8.00016 3.33334M12.6668 8.00001L8.00016 12.6667' stroke='#667085' stroke-linecap='round' stroke-linejoin='round')
+            .search_results_items
+              UsedPart(v-for='(ad,i) in ad_special' :key='i' :card='ad')
           .elan_wrapper(v-if='ad_vip.length')
             .elan_header
               h2
@@ -31,6 +42,7 @@
               //    path(d='M3.3335 8.00001H12.6668M12.6668 8.00001L8.00016 3.33334M12.6668 8.00001L8.00016 12.6667' stroke='#667085' stroke-linecap='round' stroke-linejoin='round')
             .search_results_items
               UsedPart(v-for='(ad,i) in ad_vip' :key='i' :card='ad')
+
           .elan_header(class="mb-0")
             h2
               | {{ $t("used.last") }}
@@ -109,7 +121,8 @@ export default {
       search_sort_by: 'Used/sort_by',
       manufacturers: 'Used/brands',
       manufacturer_models: 'Used/models',
-      ad_vip: 'Used/ad_vip'
+      ad_vip: 'Used/ad_vip',
+      ad_special: 'Used/ad_special'
     })
   },
   methods: {
