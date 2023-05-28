@@ -47,7 +47,7 @@
             </div>
             <div class="search_results_items">
               <UsedPart
-                v-for="(ad,i) in ad_vip"
+                v-for="(ad,i) in ad_special"
                 :key="i"
                 :card="ad"
               />
