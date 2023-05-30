@@ -37,6 +37,21 @@
             </h1>
           </div>
           <UsedFilter :search="search" />
+          <div v-if="ad_special.length" class="elan_wrapper">
+            <div class="elan_header">
+              <h2 class="">
+                {{ $t('used.special') }}
+              </h2>
+              <!--     all-vip-->
+            </div>
+            <div class="search_results_items">
+              <UsedPart
+                v-for="(ad,i) in ad_special"
+                :key="i"
+                :card="ad"
+              />
+            </div>
+          </div>
           <div v-if="ad_vip.length" class="elan_wrapper">
             <div class="elan_header">
               <h2 class="">
@@ -269,7 +284,8 @@ export default {
       manufacturers: 'Used/brands',
       manufacturer_models: 'Used/models',
       brand_key: 'Used/brand_key',
-      ad_vip: 'Used/ad_vip'
+      ad_vip: 'Used/ad_vip',
+      ad_special: 'Used/ad_special'
     })
   },
   methods: {

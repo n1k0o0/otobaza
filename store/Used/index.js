@@ -324,7 +324,14 @@ const actions = {
       }
     } = await this.$axios.get('/api/used-parts/ads/vip/random')
 
+    const {
+      data: {
+        data: specials
+      }
+    } = await this.$axios.get('/api/used-parts/ads/private')
+
     commit('SET_AD_VIP', vips)
+    commit('SET_AD_SPECIAL', specials)
   },
 
   async GET_FAVORITES ({ commit, state }, {
